@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Skills;
+namespace GuildWars2.Hero.Builds.Skills;
 
 /// <summary>Information about a skill belonging to a profession mechanic.</summary>
 public sealed record ProfessionSkill : ActionSkill

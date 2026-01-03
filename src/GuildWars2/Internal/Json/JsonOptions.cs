@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Json;
+namespace GuildWars2.Json;
 
 internal static class JsonOptions
 {

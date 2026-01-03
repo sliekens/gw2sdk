@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.WizardsVault.Seasons;
+namespace GuildWars2.WizardsVault.Seasons;
 
 /// <summary>Information about a Wizard's Vault season.</summary>
 [DataTransferObject]

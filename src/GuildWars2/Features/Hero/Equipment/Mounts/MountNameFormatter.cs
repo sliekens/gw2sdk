@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Equipment.Mounts;
+namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>Formats mount names for use in API requests.</summary>
 public static class MountNameFormatter

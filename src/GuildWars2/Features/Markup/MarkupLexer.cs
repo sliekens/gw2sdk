@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Markup;
+namespace GuildWars2.Markup;
 
 /// <summary>Represents a lexer for tokenizing markup input.</summary>
 /// <remarks>Initializes a new instance of the <see cref="MarkupLexer"/> class.</remarks>

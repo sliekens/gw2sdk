@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Chat;
+namespace GuildWars2.Chat;
 
 /// <summary>Represents an item (stack) chat link.</summary>
 public sealed record ItemLink : Link

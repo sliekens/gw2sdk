@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pve.SuperAdventureBox;
+namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>Information about the Super Adventure Box progress of a character.</summary>
 [DataTransferObject]

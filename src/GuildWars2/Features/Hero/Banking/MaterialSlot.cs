@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Banking;
+namespace GuildWars2.Hero.Banking;
 
 /// <summary>Information about a material that can be stored in material storage.</summary>
 [DataTransferObject]

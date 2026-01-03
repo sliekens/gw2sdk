@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.MistChampions;
+namespace GuildWars2.Pvp.MistChampions;
 
 /// <summary>Information about a Mist Champion skin.</summary>
 [DataTransferObject]

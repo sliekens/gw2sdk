@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Bank;
+namespace GuildWars2.Guilds.Bank;
 
 /// <summary>Information about an item in the guild vault.</summary>
 [DataTransferObject]

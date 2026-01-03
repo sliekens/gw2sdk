@@ -1,4 +1,4 @@
-﻿// Removed unused reflection using after switching to generated metadata.
+// Removed unused reflection using after switching to generated metadata.
 
 using GuildWars2.Tests.Common;
 

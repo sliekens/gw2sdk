@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>Describes a number of something as referenced by the <see cref="Fact.Text" />.</summary>
 public sealed record Number : Fact

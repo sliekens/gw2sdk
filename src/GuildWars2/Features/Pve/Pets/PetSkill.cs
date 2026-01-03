@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pve.Pets;
+namespace GuildWars2.Pve.Pets;
 
 /// <summary>Information about a pet skill.</summary>
 [DataTransferObject]

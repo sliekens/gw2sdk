@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 using GuildWars2.Exploration.Maps;
 

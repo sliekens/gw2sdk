@@ -1,4 +1,4 @@
-﻿using GuildWars2.Chat;
+using GuildWars2.Chat;
 
 using Assert = TUnit.Assertions.Assert;
 

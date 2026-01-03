@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Chat;
+namespace GuildWars2.Chat;
 
 /// <summary>Information about the selected legends for a Revenant build.</summary>
 public sealed record Legends

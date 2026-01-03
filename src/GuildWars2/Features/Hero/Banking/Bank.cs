@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Inventories;
+using GuildWars2.Hero.Inventories;
 
 namespace GuildWars2.Hero.Banking;
 

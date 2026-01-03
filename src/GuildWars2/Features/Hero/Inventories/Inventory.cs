@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Inventories;
+namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Information about items in a bag or shared inventory.</summary>
 public sealed record Inventory

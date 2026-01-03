@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+namespace GuildWars2;
 
 /// <summary>Represents a hyperlink.</summary>
 /// <remarks>Not meant to be used directly. A hyperlink is usually obtained from an API response. For example, to link to

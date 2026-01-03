@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Metadata;
+namespace GuildWars2.Metadata;
 
 /// <summary>Information about a route in the API.</summary>
 [DataTransferObject]

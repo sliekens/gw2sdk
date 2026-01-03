@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds;
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>Modifiers for skills.</summary>
 public sealed record SkillFlags : Flags

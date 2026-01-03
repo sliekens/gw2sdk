@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Permissions;
+namespace GuildWars2.Guilds.Permissions;
 
 /// <summary>Information about a guild permission.</summary>
 [DataTransferObject]

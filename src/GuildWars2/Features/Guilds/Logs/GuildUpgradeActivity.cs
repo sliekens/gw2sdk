@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Logs;
+namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A guild upgrade log entry.</summary>
 [DataTransferObject]

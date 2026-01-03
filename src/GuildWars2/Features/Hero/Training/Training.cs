@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about a training track, which consists of a list of training objectives which can be completed by
 /// spending hero points.</summary>

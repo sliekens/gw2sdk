@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tests.Features.Pve.Dungeons;
+namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
 public static class ReferenceData
 {

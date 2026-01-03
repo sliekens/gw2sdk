@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Emotes;
+namespace GuildWars2.Hero.Emotes;
 
 /// <summary>Information about an emote.</summary>
 [DataTransferObject]

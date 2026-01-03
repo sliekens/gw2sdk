@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Http.WebLinks;
+namespace GuildWars2.Http.WebLinks;
 
 /// <summary>Represents a web link.</summary>
 public sealed class LinkValue

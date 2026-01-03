@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Logs;
+namespace GuildWars2.Guilds.Logs;
 
 /// <summary>An entry in the guild's log, used for audit purposes. This class is the base type for all log entries. Cast
 /// objects of this type to a more specific type to access more properties.</summary>

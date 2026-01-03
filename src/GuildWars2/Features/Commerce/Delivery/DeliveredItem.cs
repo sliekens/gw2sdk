@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Commerce.Delivery;
+namespace GuildWars2.Commerce.Delivery;
 
 /// <summary>An item in the delivery box.</summary>
 [DataTransferObject]

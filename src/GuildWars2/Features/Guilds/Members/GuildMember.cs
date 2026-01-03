@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Members;
+namespace GuildWars2.Guilds.Members;
 
 /// <summary>Information about a member of a guild.</summary>
 [DataTransferObject]

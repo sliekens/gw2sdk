@@ -1,4 +1,4 @@
-﻿using GuildWars2.Exploration.Maps;
+using GuildWars2.Exploration.Maps;
 
 namespace GuildWars2.Wvw.Matches.Scores;
 

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Skills;
+namespace GuildWars2.Hero.Builds.Skills;
 
 /// <summary>A weapon skill.</summary>
 public sealed record WeaponSkill : ActionSkill

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Masteries;
+namespace GuildWars2.Hero.Masteries;
 
 /// <summary>Information about a level of mastery within a mastery track, for example Gliding Basics.</summary>
 [DataTransferObject]

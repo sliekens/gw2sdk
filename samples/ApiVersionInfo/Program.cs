@@ -1,4 +1,4 @@
-﻿using ApiVersionInfo;
+using ApiVersionInfo;
 
 using GuildWars2;
 using GuildWars2.Metadata;

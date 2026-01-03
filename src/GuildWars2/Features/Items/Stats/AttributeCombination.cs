@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Items.Stats;
+namespace GuildWars2.Items.Stats;
 
 /// <summary>Information about an item attribute combination like Soldier.</summary>
 [DataTransferObject]

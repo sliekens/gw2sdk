@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Accounts;
+namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about purchased Fractal augmentations and luck on the account.</summary>
 public static class ProgressionKind

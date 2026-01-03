@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds;
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>An effect applied by the skill/trait.</summary>
 [Inheritable]

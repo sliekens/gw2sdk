@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 
 using GuildWars2;
 using GuildWars2.Hero.Equipment.Mounts;

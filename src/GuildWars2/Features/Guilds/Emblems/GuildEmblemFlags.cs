@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Emblems;
+namespace GuildWars2.Guilds.Emblems;
 
 /// <summary>Modifiers for guild emblems.</summary>
 public sealed record GuildEmblemFlags : Flags

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Teams;
+namespace GuildWars2.Guilds.Teams;
 
 /// <summary>Information about a guild team results in a PvP season.</summary>
 [DataTransferObject]

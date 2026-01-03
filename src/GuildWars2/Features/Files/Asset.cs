@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Files;
+namespace GuildWars2.Files;
 
 /// <summary>Information about a file.</summary>
 [DataTransferObject]

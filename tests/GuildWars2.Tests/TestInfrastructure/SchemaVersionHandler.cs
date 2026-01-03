@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 internal sealed class SchemaVersionHandler : DelegatingHandler
 {

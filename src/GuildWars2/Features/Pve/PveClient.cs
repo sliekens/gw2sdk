@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pve.Dungeons;
+using GuildWars2.Pve.Dungeons;
 using GuildWars2.Pve.Home;
 using GuildWars2.Pve.MapChests;
 using GuildWars2.Pve.Pets;

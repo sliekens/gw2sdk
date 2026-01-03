@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Banking;
+namespace GuildWars2.Hero.Banking;
 
 /// <summary>Information about the current account's material storage.</summary>
 public sealed record MaterialStorage

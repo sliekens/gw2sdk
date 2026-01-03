@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Ranks;
+namespace GuildWars2.Guilds.Ranks;
 
 /// <summary>Information about a guild rank.</summary>
 [DataTransferObject]

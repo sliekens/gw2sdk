@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Text.Json.Serialization;
 
 using GuildWars2.Chat;

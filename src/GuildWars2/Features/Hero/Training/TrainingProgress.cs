@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about the number of hero points spent in a training track.</summary>
 [DataTransferObject]

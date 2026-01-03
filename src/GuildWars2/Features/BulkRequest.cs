@@ -1,4 +1,4 @@
-﻿namespace GuildWars2;
+namespace GuildWars2;
 
 /// <summary>A method that takes a set of keys and retrieves the corresponding values.</summary>
 /// <typeparam name="TKey">The data type of the key.</typeparam>

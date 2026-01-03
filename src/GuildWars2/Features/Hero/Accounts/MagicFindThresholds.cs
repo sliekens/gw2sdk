@@ -1,4 +1,4 @@
-﻿using GuildWars2.Collections;
+using GuildWars2.Collections;
 
 namespace GuildWars2.Hero.Accounts;
 

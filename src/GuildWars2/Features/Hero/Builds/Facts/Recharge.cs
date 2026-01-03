@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The recharge time of the skill/trait.</summary>
 public sealed record Recharge : Fact

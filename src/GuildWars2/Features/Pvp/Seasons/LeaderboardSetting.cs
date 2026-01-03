@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Seasons;
+namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about how to rank players or teams on a leaderboard.</summary>
 [DataTransferObject]

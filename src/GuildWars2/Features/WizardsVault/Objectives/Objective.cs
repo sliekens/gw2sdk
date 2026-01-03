@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.WizardsVault.Objectives;
+namespace GuildWars2.WizardsVault.Objectives;
 
 /// <summary>Information about a Wizard's Vault objective.</summary>
 [DataTransferObject]

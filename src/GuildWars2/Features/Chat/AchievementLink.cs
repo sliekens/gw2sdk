@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Chat;
+namespace GuildWars2.Chat;
 
 /// <summary>Represents an achievement chat link.</summary>
 public sealed record AchievementLink : Link

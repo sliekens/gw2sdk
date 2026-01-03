@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Inventories;
+namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Information about bags equipped by a character on the account.</summary>
 [DataTransferObject]

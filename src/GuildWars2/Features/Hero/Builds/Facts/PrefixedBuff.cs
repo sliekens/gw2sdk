@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A boon, condition or effect with a precondition.</summary>
 public sealed record PrefixedBuff : Buff

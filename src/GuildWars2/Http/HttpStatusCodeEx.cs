@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Http;
+namespace GuildWars2.Http;
 
 // TODO: consider renaming this class to fix the CA1711 warning
 

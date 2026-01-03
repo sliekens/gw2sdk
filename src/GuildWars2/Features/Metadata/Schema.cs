@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Metadata;
+namespace GuildWars2.Metadata;
 
 /// <summary>Information about a schema version.</summary>
 [DataTransferObject]

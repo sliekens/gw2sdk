@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pve.Raids;
+namespace GuildWars2.Pve.Raids;
 
 /// <summary>Information about a wing of a raid.</summary>
 [DataTransferObject]

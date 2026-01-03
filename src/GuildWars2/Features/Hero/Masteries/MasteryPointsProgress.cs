@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Masteries;
+namespace GuildWars2.Hero.Masteries;
 
 /// <summary>Information about mastery points on the account.</summary>
 public sealed record MasteryPointsProgress

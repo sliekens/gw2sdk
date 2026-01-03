@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Abilities;
+namespace GuildWars2.Wvw.Abilities;
 
 /// <summary>A rank of an ability that can be trained in World vs. World by earning World Experience (WXP) and spending
 /// World Ability points.</summary>

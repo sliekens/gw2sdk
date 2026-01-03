@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training;
 
 /// <summary>Information about a weapon that can be trained.</summary>
 [DataTransferObject]

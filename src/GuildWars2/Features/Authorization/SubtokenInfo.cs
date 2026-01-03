@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Authorization;
+namespace GuildWars2.Authorization;
 
 /// <summary>Information about a subtoken.</summary>
 public sealed record SubtokenInfo : TokenInfo

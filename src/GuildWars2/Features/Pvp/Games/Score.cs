@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Games;
+namespace GuildWars2.Pvp.Games;
 
 /// <summary>Information about the score of a PvP game.</summary>
 [DataTransferObject]

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Objectives;
+namespace GuildWars2.Wvw.Objectives;
 
 /// <summary>Information about a keep in World vs. World.</summary>
 [DataTransferObject]

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Standings;
+namespace GuildWars2.Pvp.Standings;
 
 /// <summary>Information about the player's pips and skill rating in a PvP League season.</summary>
 [DataTransferObject]

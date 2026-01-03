@@ -1,4 +1,4 @@
-﻿using GuildWars2.Guilds.Emblems;
+using GuildWars2.Guilds.Emblems;
 
 namespace GuildWars2.Guilds;
 

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Emblems;
+namespace GuildWars2.Guilds.Emblems;
 
 /// <summary>Information about the guild's current emblem.</summary>
 [DataTransferObject]

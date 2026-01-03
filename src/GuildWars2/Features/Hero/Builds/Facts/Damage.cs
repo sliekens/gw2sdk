@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>An amount of damage applied by the skill/trait.</summary>
 public sealed record Damage : Fact

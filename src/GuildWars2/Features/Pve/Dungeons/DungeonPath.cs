@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pve.Dungeons;
+namespace GuildWars2.Pve.Dungeons;
 
 /// <summary>Information about a path of a dungeon.</summary>
 [DataTransferObject]

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Upgrades;
+namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about a guild collectible cost for a guild upgrade, for example Favor.</summary>
 [DataTransferObject]

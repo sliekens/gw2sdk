@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Accounts;
+namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Short summary about a player character.</summary>
 [DataTransferObject]

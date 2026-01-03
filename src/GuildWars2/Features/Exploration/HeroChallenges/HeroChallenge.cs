@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace GuildWars2.Exploration.HeroChallenges;
 

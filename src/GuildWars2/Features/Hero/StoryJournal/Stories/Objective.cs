@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.StoryJournal.Stories;
+namespace GuildWars2.Hero.StoryJournal.Stories;
 
 /// <summary>Information about an objective to complete in order to progress through a story step.</summary>
 [DataTransferObject]

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Markup;
+namespace GuildWars2.Markup;
 
 /// <summary>Represents a text node in the markup structure.</summary>
 /// <param name="text">The text content of the node.</param>

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Seasons;
+namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a division in a PvP season.</summary>
 /// <remarks>In the first 4 seasons, division was an indication of player skill and used in the matchmaking algorithm. Only

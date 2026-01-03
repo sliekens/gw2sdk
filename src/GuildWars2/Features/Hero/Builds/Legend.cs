@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds;
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>Information about a Revenant legend.</summary>
 [DataTransferObject]

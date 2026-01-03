@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Wallet;
+namespace GuildWars2.Hero.Wallet;
 
 /// <summary>Information about a currency in the account wallet.</summary>
 [DataTransferObject]

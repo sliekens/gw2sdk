@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Http.WebLinks;
+namespace GuildWars2.Http.WebLinks;
 
 /// <summary>Represents web links in Link header values.</summary>
 /// <remarks>The Link header is defined in RFC 8288: Web Linking.</remarks>

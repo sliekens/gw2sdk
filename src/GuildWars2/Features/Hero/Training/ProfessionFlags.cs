@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training;
 
 /// <summary>Modifiers for professions.</summary>
 public sealed record ProfessionFlags : Flags

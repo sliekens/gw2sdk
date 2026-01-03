@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Items;
+namespace GuildWars2.Items;
 
 /// <summary>Modifiers for upgrade components.</summary>
 public sealed record UpgradeComponentFlags : Flags

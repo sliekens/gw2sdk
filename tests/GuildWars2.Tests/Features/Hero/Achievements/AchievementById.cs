@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Achievements;
+using GuildWars2.Hero.Achievements;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tests.Common;
+namespace GuildWars2.Tests.Common;
 
 public partial class AssemblyFixture
 {

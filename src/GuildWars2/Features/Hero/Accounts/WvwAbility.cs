@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Accounts;
+namespace GuildWars2.Hero.Accounts;
 
 /// <summary>Information about a character's WvW ability training progress.</summary>
 [DataTransferObject]

@@ -1,4 +1,4 @@
-﻿using GuildWars2.Metadata;
+using GuildWars2.Metadata;
 
 namespace ApiVersionInfo;
 

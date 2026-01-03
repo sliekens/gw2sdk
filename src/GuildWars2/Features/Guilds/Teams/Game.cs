@@ -1,4 +1,4 @@
-﻿using GuildWars2.Pvp.Games;
+using GuildWars2.Pvp.Games;
 
 namespace GuildWars2.Guilds.Teams;
 

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The duration of the skill/trait.</summary>
 public sealed record Duration : Fact

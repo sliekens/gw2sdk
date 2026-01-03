@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Builds.Facts;
+using GuildWars2.Hero.Builds.Facts;
 
 namespace GuildWars2.Hero.Builds;
 

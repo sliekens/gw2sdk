@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Quaggans;
+namespace GuildWars2.Quaggans;
 
 /// <summary>Information about a quaggan.</summary>
 [DataTransferObject]

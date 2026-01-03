@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Accounts;
+namespace GuildWars2.Hero.Accounts;
 
 /// <summary>The Id and the amount of a progression kind on the account.</summary>
 public sealed record Progression

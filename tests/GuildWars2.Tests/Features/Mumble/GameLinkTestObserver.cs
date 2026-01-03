@@ -1,4 +1,4 @@
-﻿using GuildWars2.Mumble;
+using GuildWars2.Mumble;
 
 namespace GuildWars2.Tests.Features.Mumble;
 

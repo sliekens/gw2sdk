@@ -1,4 +1,4 @@
-﻿using System.IO.Compression;
+using System.IO.Compression;
 
 namespace GuildWars2.Tests.TestInfrastructure;
 

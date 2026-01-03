@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Http;
+namespace GuildWars2.Http;
 
 /// <summary>Thrown when a server returns an unusable response.</summary>
 public sealed class BadResponseException : HttpRequestException

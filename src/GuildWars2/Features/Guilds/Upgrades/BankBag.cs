@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Upgrades;
+namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about an upgrade that increases the guild vault's capacity.</summary>
 public sealed record BankBag : GuildUpgrade

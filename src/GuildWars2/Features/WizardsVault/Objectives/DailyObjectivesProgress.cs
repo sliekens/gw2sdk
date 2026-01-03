@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.WizardsVault.Objectives;
+namespace GuildWars2.WizardsVault.Objectives;
 
 /// <summary>Information about progress towards completing daily Wizard's Vault objectives.</summary>
 [DataTransferObject]

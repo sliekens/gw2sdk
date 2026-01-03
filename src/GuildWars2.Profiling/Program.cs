@@ -1,4 +1,4 @@
-﻿// This is just some code to test the performance of the GW2SDK library
+// This is just some code to test the performance of the GW2SDK library
 // VS2022 has a built-in profiler (alt + F2), so I'm using that to see how the library performs 
 
 using GuildWars2;

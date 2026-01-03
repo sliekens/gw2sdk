@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Skills;
+namespace GuildWars2.Hero.Builds.Skills;
 
 /// <summary>An elite skill.</summary>
 public sealed record EliteSkill : SlotSkill

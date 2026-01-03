@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Seasons;
+namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a leaderboard scoring method.</summary>
 [DataTransferObject]

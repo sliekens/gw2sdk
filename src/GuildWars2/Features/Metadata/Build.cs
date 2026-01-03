@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Metadata;
+namespace GuildWars2.Metadata;
 
 /// <summary>Information about the current build of the game client.</summary>
 [DataTransferObject]

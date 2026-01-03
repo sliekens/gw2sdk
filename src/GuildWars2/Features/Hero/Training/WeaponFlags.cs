@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Training;
+namespace GuildWars2.Hero.Training;
 
 /// <summary>Modifiers for weapons.</summary>
 public sealed record WeaponFlags : Flags

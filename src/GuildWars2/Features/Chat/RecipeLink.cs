@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Chat;
+namespace GuildWars2.Chat;
 
 /// <summary>Represents a recipe chat link.</summary>
 public sealed record RecipeLink : Link

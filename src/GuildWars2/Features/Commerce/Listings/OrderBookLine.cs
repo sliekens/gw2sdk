@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Commerce.Listings;
+namespace GuildWars2.Commerce.Listings;
 
 /// <summary>Information about a price level.</summary>
 [DataTransferObject]

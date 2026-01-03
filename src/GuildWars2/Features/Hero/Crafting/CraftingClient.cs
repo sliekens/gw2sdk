@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Crafting.Daily;
+using GuildWars2.Hero.Crafting.Daily;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Crafting.Recipes;
 

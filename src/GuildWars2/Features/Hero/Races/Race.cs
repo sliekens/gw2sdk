@@ -1,4 +1,4 @@
-﻿using GuildWars2.Collections;
+using GuildWars2.Collections;
 
 using static GuildWars2.Hero.RaceName;
 

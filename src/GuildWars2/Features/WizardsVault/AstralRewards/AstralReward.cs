@@ -1,4 +1,4 @@
-﻿using GuildWars2.Chat;
+using GuildWars2.Chat;
 
 namespace GuildWars2.WizardsVault.AstralRewards;
 

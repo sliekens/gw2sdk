@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tasks;
+namespace GuildWars2.Tasks;
 
 internal static class InterleavedTask
 {

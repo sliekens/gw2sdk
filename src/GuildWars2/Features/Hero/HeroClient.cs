@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Accounts;
+using GuildWars2.Hero.Accounts;
 using GuildWars2.Hero.Achievements;
 using GuildWars2.Hero.Banking;
 using GuildWars2.Hero.Builds;

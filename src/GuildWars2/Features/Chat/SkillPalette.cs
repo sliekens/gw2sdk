@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Chat;
+namespace GuildWars2.Chat;
 
 /// <summary>Information about selected skills.</summary>
 /// <param name="Heal">The heal skill palette ID.</param>

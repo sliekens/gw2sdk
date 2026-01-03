@@ -1,4 +1,4 @@
-﻿using GuildWars2.Http.WebLinks;
+using GuildWars2.Http.WebLinks;
 
 namespace GuildWars2.Tests.Http.WebLinks;
 

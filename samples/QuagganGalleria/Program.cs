@@ -1,4 +1,4 @@
-﻿using GuildWars2.Quaggans;
+using GuildWars2.Quaggans;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

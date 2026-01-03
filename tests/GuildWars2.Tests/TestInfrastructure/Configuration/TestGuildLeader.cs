@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tests.TestInfrastructure.Configuration;
+namespace GuildWars2.Tests.TestInfrastructure.Configuration;
 
 public sealed record TestGuildLeader
 {

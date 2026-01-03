@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Ranks;
+namespace GuildWars2.Wvw.Ranks;
 
 /// <summary>Information about a World Rank.</summary>
 [DataTransferObject]

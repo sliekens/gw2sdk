@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Exploration.PointsOfInterest;
+namespace GuildWars2.Exploration.PointsOfInterest;
 
 /// <summary>Information about a landmark, which indicates a notable location.</summary>
 public sealed record Landmark : PointOfInterest;

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Upgrades;
+namespace GuildWars2.Wvw.Upgrades;
 
 /// <summary>Information about a tier of an objective upgrade.</summary>
 [DataTransferObject]

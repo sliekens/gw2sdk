@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds;
+namespace GuildWars2.Hero.Builds;
 
 /// <summary>The base type for skills which are activated by the player to perform an action. Cast objects of this type to
 /// a more specific type to access more properties.</summary>

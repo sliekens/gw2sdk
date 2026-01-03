@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;

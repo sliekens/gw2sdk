@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>An attribute that is modified by the skill/trait.</summary>
 public sealed record AttributeAdjustment : Fact

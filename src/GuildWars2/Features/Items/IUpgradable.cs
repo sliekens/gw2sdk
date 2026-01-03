@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Items;
+namespace GuildWars2.Items;
 
 /// <summary>The interface for items with upgrade or infusion slots.</summary>
 public interface IUpgradable

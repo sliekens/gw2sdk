@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Seasons;
+namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Information about a PvP season.</summary>
 [DataTransferObject]

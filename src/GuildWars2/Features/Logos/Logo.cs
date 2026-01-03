@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Logos;
+namespace GuildWars2.Logos;
 
 /// <summary>Information about a logo.</summary>
 [DataTransferObject]

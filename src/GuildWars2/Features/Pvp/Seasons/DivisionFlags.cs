@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Seasons;
+namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>Modifiers for divisions.</summary>
 public sealed record DivisionFlags : Flags

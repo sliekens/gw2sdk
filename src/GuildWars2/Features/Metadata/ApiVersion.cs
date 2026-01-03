@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Metadata;
+namespace GuildWars2.Metadata;
 
 /// <summary>Information about an API version.</summary>
 /// <remarks>Don't expect new top-level versions in the future: '/v1' has been turned off, and '/v2' has been updated with

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Commerce.Prices;
+namespace GuildWars2.Commerce.Prices;
 
 /// <summary>Information about the best prices for an item on the trading post.</summary>
 [DataTransferObject]

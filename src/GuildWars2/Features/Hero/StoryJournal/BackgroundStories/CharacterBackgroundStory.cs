@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
+namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 
 /// <summary>Information about a character's background story.</summary>
 [DataTransferObject]

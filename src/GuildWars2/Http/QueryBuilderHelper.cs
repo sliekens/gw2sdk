@@ -1,4 +1,4 @@
-﻿#if !NET
+#if !NET
 namespace GuildWars2.Http;
 
 internal static class QueryBuilderHelper

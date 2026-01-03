@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Achievements.Rewards;
+namespace GuildWars2.Hero.Achievements.Rewards;
 
 /// <summary>A title reward for completing an achievement.</summary>
 public sealed record TitleReward : AchievementReward

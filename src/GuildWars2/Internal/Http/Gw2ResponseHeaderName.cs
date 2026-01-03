@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Http;
+namespace GuildWars2.Http;
 
 internal static class Gw2ResponseHeaderName
 {

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Markup;
+namespace GuildWars2.Markup;
 
 internal sealed class MarkupTokenIterator(IEnumerable<MarkupToken> input)
 {

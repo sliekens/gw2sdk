@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero;
+using GuildWars2.Hero;
 using GuildWars2.Hero.Training;
 using GuildWars2.Tests.TestInfrastructure.Composition;
 

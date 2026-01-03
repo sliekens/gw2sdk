@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 
 using GuildWars2.Hero.Crafting.Recipes;
 using GuildWars2.Items;

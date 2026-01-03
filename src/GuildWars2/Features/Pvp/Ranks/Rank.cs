@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Ranks;
+namespace GuildWars2.Pvp.Ranks;
 
 /// <summary>Information about a PvP rank.</summary>
 [DataTransferObject]

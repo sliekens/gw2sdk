@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Commerce.Transactions;
+namespace GuildWars2.Commerce.Transactions;
 
 /// <summary>Information about the completed transaction.</summary>
 [DataTransferObject]

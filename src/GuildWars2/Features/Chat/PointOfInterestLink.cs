@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Chat;
+namespace GuildWars2.Chat;
 
 /// <summary>Represents a point of interest chat link.</summary>
 public sealed record PointOfInterestLink : Link

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Items;
+namespace GuildWars2.Items;
 
 /// <summary>Information about a gizmo, which is a type of item that is similar to a <see cref="Consumable" />, but it is
 /// typically not consumed after one use. Some gizmo items are donated to your current guild when used, such as guild

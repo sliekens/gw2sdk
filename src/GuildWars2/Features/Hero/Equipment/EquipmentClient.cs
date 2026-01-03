@@ -1,4 +1,4 @@
-﻿using GuildWars2.Hero.Equipment.Dyes;
+using GuildWars2.Hero.Equipment.Dyes;
 using GuildWars2.Hero.Equipment.Finishers;
 using GuildWars2.Hero.Equipment.Gliders;
 using GuildWars2.Hero.Equipment.JadeBots;

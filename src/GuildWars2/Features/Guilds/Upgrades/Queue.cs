@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Upgrades;
+namespace GuildWars2.Guilds.Upgrades;
 
 // TODO: reconsider naming, as this is not a queue in the traditional sense
 

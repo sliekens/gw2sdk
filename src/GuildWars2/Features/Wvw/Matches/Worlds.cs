@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Matches;
+namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about the worlds participating in a World vs. World match.</summary>
 [DataTransferObject]

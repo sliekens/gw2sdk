@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Timers;
+namespace GuildWars2.Wvw.Timers;
 
 /// <summary>Information about WvW lockout or team assignment dates.</summary>
 public sealed record WvwTimer

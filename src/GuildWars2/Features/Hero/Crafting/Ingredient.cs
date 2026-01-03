@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Crafting;
+namespace GuildWars2.Hero.Crafting;
 
 /// <summary>Information about an ingredient required to craft an item.</summary>
 [DataTransferObject]

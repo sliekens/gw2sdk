@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A combo finisher effect activated by the skill/trait.</summary>
 public sealed record ComboFinisher : Fact

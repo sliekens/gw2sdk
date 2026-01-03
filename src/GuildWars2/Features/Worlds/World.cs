@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Worlds;
+namespace GuildWars2.Worlds;
 
 /// <summary>Information about a world (AKA server).</summary>
 [DataTransferObject]

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Hero.Builds.Facts;
+namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A percentage of something as referenced by the <see cref="Fact.Text" />.</summary>
 public sealed record Percentage : Fact

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Ranks;
+namespace GuildWars2.Pvp.Ranks;
 
 /// <summary>Information about the rank points required to gain a rank level.</summary>
 [DataTransferObject]

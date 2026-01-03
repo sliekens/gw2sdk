@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Guilds;
+namespace GuildWars2.Wvw.Guilds;
 
 /// <summary>Information about a guild in World vs. World.</summary>
 [DataTransferObject]

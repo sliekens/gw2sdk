@@ -1,4 +1,4 @@
-﻿using System.IO.Compression;
+using System.IO.Compression;
 using System.Text.Json;
 
 namespace GuildWars2.TestDataHelper;

@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Markup;
+namespace GuildWars2.Markup;
 
 /// <summary>Represents a token with a specific type and value.</summary>
 /// <param name="Type">The type of the token.</param>

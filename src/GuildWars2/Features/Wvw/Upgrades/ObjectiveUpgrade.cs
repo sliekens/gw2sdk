@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Wvw.Upgrades;
+namespace GuildWars2.Wvw.Upgrades;
 
 /// <summary>Information about a World vs. World objective upgrade.</summary>
 [DataTransferObject]

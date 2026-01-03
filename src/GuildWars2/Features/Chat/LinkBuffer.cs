@@ -1,4 +1,4 @@
-﻿#if !NET
+#if !NET
 using System.Buffers;
 #endif
 

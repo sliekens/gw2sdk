@@ -1,4 +1,4 @@
-﻿using GuildWars2;
+using GuildWars2;
 
 using Spectre.Console;
 

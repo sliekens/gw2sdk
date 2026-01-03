@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pve.Home.Decorations;
+namespace GuildWars2.Pve.Home.Decorations;
 
 /// <summary>Information about a homestead decoration category.</summary>
 [DataTransferObject]

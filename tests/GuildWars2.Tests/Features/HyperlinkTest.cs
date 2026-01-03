@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Tests.Features;
+namespace GuildWars2.Tests.Features;
 
 public class HyperlinkTest
 {

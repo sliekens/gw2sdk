@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Stats;
+namespace GuildWars2.Pvp.Stats;
 
 /// <summary>Information about the statistics of a player in various PvP ladders.</summary>
 [DataTransferObject]

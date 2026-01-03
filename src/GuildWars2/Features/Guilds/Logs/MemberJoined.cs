@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Guilds.Logs;
+namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a member joining the guild.</summary>
 [DataTransferObject]
