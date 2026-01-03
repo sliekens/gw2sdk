@@ -21,7 +21,7 @@ public class MasteryTracks(Gw2Client sut)
                 await Assert.That(mastery.Name).IsNotEmpty();
                 await Assert.That(mastery.Requirement).IsNotNull();
                 await Assert.That(mastery.Order).IsGreaterThanOrEqualTo(0);
-                await Assert.That(mastery.BackgroundHref).IsNotEmpty();
+                await Assert.That(mastery.BackgroundUrl.IsAbsoluteUri).IsTrue();
                 await Assert.That(mastery.Region.IsDefined()).IsTrue().Because($"Region {mastery.Region} should be defined");
                 await Assert.That(mastery.Region).IsNotEqualTo(MasteryRegionName.Unknown);
                 foreach (Mastery level in mastery.Masteries)

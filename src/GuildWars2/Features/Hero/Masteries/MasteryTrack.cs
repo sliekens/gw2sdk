@@ -18,7 +18,11 @@ public sealed record MasteryTrack
     public required int Order { get; init; }
 
     /// <summary>The URI of the mastery track background image as it appears in the masteries panel.</summary>
+    [Obsolete("Use BackgroundUrl instead.")]
     public required string BackgroundHref { get; init; }
+
+    /// <summary>The URI of the mastery track background image as it appears in the masteries panel.</summary>
+    public required Uri BackgroundUrl { get; init; }
 
     /// <summary>The region to which this mastery track belongs. The mastery track can only be progressed by earning experience
     /// in the region indicated by this property.</summary>
