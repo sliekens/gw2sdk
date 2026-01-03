@@ -1,3 +1,13 @@
 #nullable enable
-GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.get -> System.Uri!
+GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
+GuildWars2.Items.ConjuredDoorwayUnlocker
+GuildWars2.Items.ConjuredDoorwayUnlocker.ConjuredDoorwayUnlocker() -> void
+GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.ConjuredDoorwayUnlocker? other) -> bool
+override GuildWars2.Items.ConjuredDoorwayUnlocker.<Clone>$() -> GuildWars2.Items.ConjuredDoorwayUnlocker!
+override GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(object? obj) -> bool
+override GuildWars2.Items.ConjuredDoorwayUnlocker.GetHashCode() -> int
+override GuildWars2.Items.ConjuredDoorwayUnlocker.ToString() -> string!
+override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
+static GuildWars2.Items.ConjuredDoorwayUnlocker.operator !=(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool
+static GuildWars2.Items.ConjuredDoorwayUnlocker.operator ==(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool

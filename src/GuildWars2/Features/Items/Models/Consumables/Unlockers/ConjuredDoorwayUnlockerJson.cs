@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 internal static class MagicDoorSkinUnlockerJson
 {
-    public static MagicDoorSkinUnlocker GetMagicDoorSkinUnlocker(this in JsonElement json)
+    public static ConjuredDoorwayUnlocker GetMagicDoorSkinUnlocker(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -103,7 +103,7 @@ internal static class MagicDoorSkinUnlockerJson
         }
 
         string? iconString = icon.Map(static (in value) => value.GetString());
-        return new MagicDoorSkinUnlocker
+        return new ConjuredDoorwayUnlocker
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

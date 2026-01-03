@@ -5,16 +5,18 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal sealed class MagicDoorSkinUnlockerJsonConverter : JsonConverter<MagicDoorSkinUnlocker>
+internal sealed class ConjuredDoorwayUnlockerJsonConverter : JsonConverter<ConjuredDoorwayUnlocker>
 {
-    public const string DiscriminatorValue = "magic_door_skin_unlocker";
+    public const string DiscriminatorValue = "conjured_doorway_unlocker";
+
+    internal const string PreviousDiscriminatorValue = "magic_door_skin_unlocker";
 
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeof(MagicDoorSkinUnlocker).IsAssignableFrom(typeToConvert);
+        return typeof(ConjuredDoorwayUnlocker).IsAssignableFrom(typeToConvert);
     }
 
-    public override MagicDoorSkinUnlocker Read(
+    public override ConjuredDoorwayUnlocker Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -26,14 +28,14 @@ internal sealed class MagicDoorSkinUnlockerJsonConverter : JsonConverter<MagicDo
 
     public override void Write(
         Utf8JsonWriter writer,
-        MagicDoorSkinUnlocker value,
+        ConjuredDoorwayUnlocker value,
         JsonSerializerOptions options
     )
     {
         Write(writer, value);
     }
 
-    public static MagicDoorSkinUnlocker Read(in JsonElement json)
+    public static ConjuredDoorwayUnlocker Read(in JsonElement json)
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
             .ValueEquals(ConsumableJsonConverter.DiscriminatorValue))
@@ -51,8 +53,8 @@ internal sealed class MagicDoorSkinUnlockerJsonConverter : JsonConverter<MagicDo
             );
         }
 
-        if (!json.GetProperty(UnlockerJsonConverter.DiscriminatorName)
-            .ValueEquals(DiscriminatorValue))
+        JsonElement unlockerType = json.GetProperty(UnlockerJsonConverter.DiscriminatorName);
+        if (!unlockerType.ValueEquals(DiscriminatorValue) && !unlockerType.ValueEquals(PreviousDiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(UnlockerJsonConverter.DiscriminatorName).GetString()
@@ -60,7 +62,7 @@ internal sealed class MagicDoorSkinUnlockerJsonConverter : JsonConverter<MagicDo
         }
 
         string? iconString = json.GetProperty("icon").GetString();
-        return new MagicDoorSkinUnlocker
+        return new ConjuredDoorwayUnlocker
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
@@ -77,7 +79,7 @@ internal sealed class MagicDoorSkinUnlockerJsonConverter : JsonConverter<MagicDo
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, MagicDoorSkinUnlocker value)
+    public static void Write(Utf8JsonWriter writer, ConjuredDoorwayUnlocker value)
     {
         writer.WriteStartObject();
         writer.WriteString(

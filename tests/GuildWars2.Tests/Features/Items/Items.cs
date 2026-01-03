@@ -124,7 +124,7 @@ public class Items
                                 case EquipmentTemplateExpansion:
                                 case GliderSkinUnlocker:
                                 case JadeBotSkinUnlocker:
-                                case MagicDoorSkinUnlocker:
+                                case ConjuredDoorwayUnlocker:
                                 case MiniatureUnlocker:
                                 case MistChampionSkinUnlocker:
                                 case MountSkinUnlocker:

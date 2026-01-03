@@ -71,8 +71,9 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                     return GliderSkinUnlockerJsonConverter.Read(json);
                 case JadeBotSkinUnlockerJsonConverter.DiscriminatorValue:
                     return JadeBotSkinUnlockerJsonConverter.Read(json);
-                case MagicDoorSkinUnlockerJsonConverter.DiscriminatorValue:
-                    return MagicDoorSkinUnlockerJsonConverter.Read(json);
+                case ConjuredDoorwayUnlockerJsonConverter.DiscriminatorValue:
+                case ConjuredDoorwayUnlockerJsonConverter.PreviousDiscriminatorValue:
+                    return ConjuredDoorwayUnlockerJsonConverter.Read(json);
                 case MiniatureUnlockerJsonConverter.DiscriminatorValue:
                     return MiniatureUnlockerJsonConverter.Read(json);
                 case MistChampionSkinUnlockerJsonConverter.DiscriminatorValue:
@@ -141,8 +142,8 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
             case JadeBotSkinUnlocker jadeBotSkinUnlocker:
                 JadeBotSkinUnlockerJsonConverter.Write(writer, jadeBotSkinUnlocker);
                 break;
-            case MagicDoorSkinUnlocker magicDoorSkinUnlocker:
-                MagicDoorSkinUnlockerJsonConverter.Write(writer, magicDoorSkinUnlocker);
+            case ConjuredDoorwayUnlocker conjuredDoorwayUnlocker:
+                ConjuredDoorwayUnlockerJsonConverter.Write(writer, conjuredDoorwayUnlocker);
                 break;
             case MiniatureUnlocker miniatureUnlocker:
                 MiniatureUnlockerJsonConverter.Write(writer, miniatureUnlocker);
