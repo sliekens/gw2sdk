@@ -1,8 +1,6 @@
 using System.Text.Json.Serialization;
 
-using GuildWars2.Hero.Achievements.Rewards;
-
-namespace GuildWars2.Hero.Achievements;
+namespace GuildWars2.Hero.Achievements.Rewards;
 
 /// <summary>An item reward for completing an achievement.</summary>
 [JsonConverter(typeof(ItemRewardJsonConverter))]

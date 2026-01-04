@@ -1,13 +1,27 @@
 #nullable enable
+GuildWars2.Hero.Achievements.Rewards.ItemReward
+GuildWars2.Hero.Achievements.Rewards.ItemReward.Count.get -> int
+GuildWars2.Hero.Achievements.Rewards.ItemReward.Count.init -> void
+GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achievements.Rewards.ItemReward? other) -> bool
+GuildWars2.Hero.Achievements.Rewards.ItemReward.Id.get -> int
+GuildWars2.Hero.Achievements.Rewards.ItemReward.Id.init -> void
+GuildWars2.Hero.Achievements.Rewards.ItemReward.ItemReward() -> void
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.get -> System.Uri!
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker
 GuildWars2.Items.ConjuredDoorwayUnlocker.ConjuredDoorwayUnlocker() -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.ConjuredDoorwayUnlocker? other) -> bool
+override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.AchievementReward!
+override GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(object? obj) -> bool
+override GuildWars2.Hero.Achievements.Rewards.ItemReward.GetHashCode() -> int
+override GuildWars2.Hero.Achievements.Rewards.ItemReward.ToString() -> string!
 override GuildWars2.Items.ConjuredDoorwayUnlocker.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(object? obj) -> bool
 override GuildWars2.Items.ConjuredDoorwayUnlocker.GetHashCode() -> int
 override GuildWars2.Items.ConjuredDoorwayUnlocker.ToString() -> string!
+override sealed GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
+static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator !=(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
+static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator ==(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
 static GuildWars2.Items.ConjuredDoorwayUnlocker.operator !=(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool
 static GuildWars2.Items.ConjuredDoorwayUnlocker.operator ==(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool

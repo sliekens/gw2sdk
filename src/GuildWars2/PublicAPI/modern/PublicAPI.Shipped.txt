@@ -1561,13 +1561,6 @@ GuildWars2.Hero.Achievements.Groups.AchievementGroup.Name.get -> string!
 GuildWars2.Hero.Achievements.Groups.AchievementGroup.Name.init -> void
 GuildWars2.Hero.Achievements.Groups.AchievementGroup.Order.get -> int
 GuildWars2.Hero.Achievements.Groups.AchievementGroup.Order.init -> void
-GuildWars2.Hero.Achievements.ItemReward
-GuildWars2.Hero.Achievements.ItemReward.Count.get -> int
-GuildWars2.Hero.Achievements.ItemReward.Count.init -> void
-GuildWars2.Hero.Achievements.ItemReward.Equals(GuildWars2.Hero.Achievements.ItemReward? other) -> bool
-GuildWars2.Hero.Achievements.ItemReward.Id.get -> int
-GuildWars2.Hero.Achievements.ItemReward.Id.init -> void
-GuildWars2.Hero.Achievements.ItemReward.ItemReward() -> void
 GuildWars2.Hero.Achievements.LevelRequirement
 GuildWars2.Hero.Achievements.LevelRequirement.<Clone>$() -> GuildWars2.Hero.Achievements.LevelRequirement!
 GuildWars2.Hero.Achievements.LevelRequirement.Equals(GuildWars2.Hero.Achievements.LevelRequirement? other) -> bool
@@ -6298,10 +6291,6 @@ override GuildWars2.Hero.Achievements.CollectionAchievement.ToString() -> string
 override GuildWars2.Hero.Achievements.Groups.AchievementGroup.Equals(object? obj) -> bool
 override GuildWars2.Hero.Achievements.Groups.AchievementGroup.GetHashCode() -> int
 override GuildWars2.Hero.Achievements.Groups.AchievementGroup.ToString() -> string!
-override GuildWars2.Hero.Achievements.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.ItemReward!
-override GuildWars2.Hero.Achievements.ItemReward.Equals(object? obj) -> bool
-override GuildWars2.Hero.Achievements.ItemReward.GetHashCode() -> int
-override GuildWars2.Hero.Achievements.ItemReward.ToString() -> string!
 override GuildWars2.Hero.Achievements.LevelRequirement.Equals(object? obj) -> bool
 override GuildWars2.Hero.Achievements.LevelRequirement.GetHashCode() -> int
 override GuildWars2.Hero.Achievements.LevelRequirement.ToString() -> string!
@@ -7928,7 +7917,6 @@ override sealed GuildWars2.Hero.Achievements.Bits.AchievementSkinBit.Equals(Guil
 override sealed GuildWars2.Hero.Achievements.Bits.AchievementTextBit.Equals(GuildWars2.Hero.Achievements.AchievementBit? other) -> bool
 override sealed GuildWars2.Hero.Achievements.Categories.AchievementFlags.Equals(GuildWars2.Flags? other) -> bool
 override sealed GuildWars2.Hero.Achievements.CollectionAchievement.Equals(GuildWars2.Hero.Achievements.Achievement? other) -> bool
-override sealed GuildWars2.Hero.Achievements.ItemReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.CoinsReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.MasteryPointReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.TitleReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
@@ -8504,8 +8492,6 @@ static GuildWars2.Hero.Achievements.CollectionAchievement.operator !=(GuildWars2
 static GuildWars2.Hero.Achievements.CollectionAchievement.operator ==(GuildWars2.Hero.Achievements.CollectionAchievement? left, GuildWars2.Hero.Achievements.CollectionAchievement? right) -> bool
 static GuildWars2.Hero.Achievements.Groups.AchievementGroup.operator !=(GuildWars2.Hero.Achievements.Groups.AchievementGroup? left, GuildWars2.Hero.Achievements.Groups.AchievementGroup? right) -> bool
 static GuildWars2.Hero.Achievements.Groups.AchievementGroup.operator ==(GuildWars2.Hero.Achievements.Groups.AchievementGroup? left, GuildWars2.Hero.Achievements.Groups.AchievementGroup? right) -> bool
-static GuildWars2.Hero.Achievements.ItemReward.operator !=(GuildWars2.Hero.Achievements.ItemReward? left, GuildWars2.Hero.Achievements.ItemReward? right) -> bool
-static GuildWars2.Hero.Achievements.ItemReward.operator ==(GuildWars2.Hero.Achievements.ItemReward? left, GuildWars2.Hero.Achievements.ItemReward? right) -> bool
 static GuildWars2.Hero.Achievements.LevelRequirement.operator !=(GuildWars2.Hero.Achievements.LevelRequirement? left, GuildWars2.Hero.Achievements.LevelRequirement? right) -> bool
 static GuildWars2.Hero.Achievements.LevelRequirement.operator ==(GuildWars2.Hero.Achievements.LevelRequirement? left, GuildWars2.Hero.Achievements.LevelRequirement? right) -> bool
 static GuildWars2.Hero.Achievements.Rewards.CoinsReward.operator !=(GuildWars2.Hero.Achievements.Rewards.CoinsReward? left, GuildWars2.Hero.Achievements.Rewards.CoinsReward? right) -> bool
