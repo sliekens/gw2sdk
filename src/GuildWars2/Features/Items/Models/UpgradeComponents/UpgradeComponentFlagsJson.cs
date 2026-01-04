@@ -144,7 +144,7 @@ internal static class UpgradeComponentFlagsJson
             Greatsword = greatsword,
             Hammer = hammer,
             Spear = harpoon,
-            LongBow = longbow,
+            Longbow = longbow,
             Mace = mace,
             Pistol = pistol,
             Rifle = rifle,

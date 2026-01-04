@@ -30,8 +30,8 @@ public sealed record UpgradeComponentFlags : Flags
     /// <summary>Indicates if the upgrade component can be applied to a Harpoon Gun.</summary>
     public required bool HarpoonGun { get; init; }
 
-    /// <summary>Indicates if the upgrade component can be applied to a Long Bow.</summary>
-    public required bool LongBow { get; init; }
+    /// <summary>Indicates if the upgrade component can be applied to a Longbow.</summary>
+    public required bool Longbow { get; init; }
 
     /// <summary>Indicates if the upgrade component can be applied to a Mace.</summary>
     public required bool Mace { get; init; }

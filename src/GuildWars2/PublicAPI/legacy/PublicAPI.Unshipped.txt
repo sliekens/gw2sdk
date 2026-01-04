@@ -11,6 +11,8 @@ GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker
 GuildWars2.Items.ConjuredDoorwayUnlocker.ConjuredDoorwayUnlocker() -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.ConjuredDoorwayUnlocker? other) -> bool
+GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
+GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.AchievementReward!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(object? obj) -> bool
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.GetHashCode() -> int

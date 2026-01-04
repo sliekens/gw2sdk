@@ -39,7 +39,7 @@ internal sealed class UpgradeComponentFlagsJsonConverter : JsonConverter<Upgrade
             Greatsword = json.GetProperty("greatsword").GetBoolean(),
             Hammer = json.GetProperty("hammer").GetBoolean(),
             HarpoonGun = json.GetProperty("harpoon_gun").GetBoolean(),
-            LongBow = json.GetProperty("long_bow").GetBoolean(),
+            Longbow = json.GetProperty("long_bow").GetBoolean(),
             Mace = json.GetProperty("mace").GetBoolean(),
             Pistol = json.GetProperty("pistol").GetBoolean(),
             Rifle = json.GetProperty("rifle").GetBoolean(),
@@ -69,7 +69,7 @@ internal sealed class UpgradeComponentFlagsJsonConverter : JsonConverter<Upgrade
         writer.WriteBoolean("greatsword", value.Greatsword);
         writer.WriteBoolean("hammer", value.Hammer);
         writer.WriteBoolean("harpoon_gun", value.HarpoonGun);
-        writer.WriteBoolean("long_bow", value.LongBow);
+        writer.WriteBoolean("long_bow", value.Longbow);
         writer.WriteBoolean("mace", value.Mace);
         writer.WriteBoolean("pistol", value.Pistol);
         writer.WriteBoolean("rifle", value.Rifle);

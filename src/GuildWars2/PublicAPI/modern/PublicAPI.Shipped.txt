@@ -4321,8 +4321,6 @@ GuildWars2.Items.UpgradeComponentFlags.HeavyArmor.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.HeavyArmor.init -> void
 GuildWars2.Items.UpgradeComponentFlags.LightArmor.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.LightArmor.init -> void
-GuildWars2.Items.UpgradeComponentFlags.LongBow.get -> bool
-GuildWars2.Items.UpgradeComponentFlags.LongBow.init -> void
 GuildWars2.Items.UpgradeComponentFlags.Mace.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Mace.init -> void
 GuildWars2.Items.UpgradeComponentFlags.MediumArmor.get -> bool
