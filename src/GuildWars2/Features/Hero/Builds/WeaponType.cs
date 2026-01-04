@@ -80,7 +80,7 @@ public enum WeaponType
     Warhorn,
 
     /// <summary>The short bow is a mid-range, two-handed weapon with a high attack rate and ability to apply conditions.</summary>
-    Shortbow,
+    ShortBow,
 
     /// <summary>The longbow is a two-handed weapon that is known for its long-range projectiles, wide area of effect abilities
     /// and strong control skills to keep foes away.</summary>

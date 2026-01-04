@@ -6,6 +6,7 @@ GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achieveme
 GuildWars2.Hero.Achievements.Rewards.ItemReward.Id.get -> int
 GuildWars2.Hero.Achievements.Rewards.ItemReward.Id.init -> void
 GuildWars2.Hero.Achievements.Rewards.ItemReward.ItemReward() -> void
+GuildWars2.Hero.Builds.WeaponType.ShortBow = 19 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.get -> System.Uri!
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker

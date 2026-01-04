@@ -2195,7 +2195,6 @@ GuildWars2.Hero.Builds.WeaponType.Pistol = 8 -> GuildWars2.Hero.Builds.WeaponTyp
 GuildWars2.Hero.Builds.WeaponType.Rifle = 9 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Scepter = 5 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Shield = 10 -> GuildWars2.Hero.Builds.WeaponType
-GuildWars2.Hero.Builds.WeaponType.Shortbow = 19 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Spear = 16 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Staff = 4 -> GuildWars2.Hero.Builds.WeaponType
 GuildWars2.Hero.Builds.WeaponType.Sword = 6 -> GuildWars2.Hero.Builds.WeaponType

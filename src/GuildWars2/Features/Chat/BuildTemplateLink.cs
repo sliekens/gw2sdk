@@ -340,7 +340,7 @@ public sealed record BuildTemplateLink : Link
                 WeaponType.Sword => 0x005a,
                 WeaponType.Torch => 0x0066,
                 WeaponType.Warhorn => 0x0067,
-                WeaponType.Shortbow => 0x006b,
+                WeaponType.ShortBow => 0x006b,
                 WeaponType.Spear => 0x0109,
                 WeaponType.Trident => 0,
                 WeaponType.HarpoonGun => 0,
@@ -579,7 +579,7 @@ public sealed record BuildTemplateLink : Link
                 0x005a => WeaponType.Sword,
                 0x0066 => WeaponType.Torch,
                 0x0067 => WeaponType.Warhorn,
-                0x006b => WeaponType.Shortbow,
+                0x006b => WeaponType.ShortBow,
                 0x0109 => WeaponType.Spear,
                 _ => WeaponType.None
             };
