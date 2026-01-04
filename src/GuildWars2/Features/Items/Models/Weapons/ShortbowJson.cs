@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class ShortbowJson
+internal static class ShortBowJson
 {
-    public static Shortbow GetShortbow(this in JsonElement json)
+    public static ShortBow GetShortBow(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -172,7 +172,7 @@ internal static class ShortbowJson
         }
 
         string? iconString = icon.Map(static (in value) => value.GetString());
-        return new Shortbow
+        return new ShortBow
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

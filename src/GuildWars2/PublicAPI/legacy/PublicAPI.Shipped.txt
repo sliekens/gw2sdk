@@ -4188,9 +4188,6 @@ GuildWars2.Items.SharedInventorySlot.SharedInventorySlot() -> void
 GuildWars2.Items.Shield
 GuildWars2.Items.Shield.Equals(GuildWars2.Items.Shield? other) -> bool
 GuildWars2.Items.Shield.Shield() -> void
-GuildWars2.Items.Shortbow
-GuildWars2.Items.Shortbow.Equals(GuildWars2.Items.Shortbow? other) -> bool
-GuildWars2.Items.Shortbow.Shortbow() -> void
 GuildWars2.Items.Shoulders
 GuildWars2.Items.Shoulders.Equals(GuildWars2.Items.Shoulders? other) -> bool
 GuildWars2.Items.Shoulders.Shoulders() -> void
@@ -7408,11 +7405,6 @@ override GuildWars2.Items.Shield.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.Shield.Equals(object? obj) -> bool
 override GuildWars2.Items.Shield.GetHashCode() -> int
 override GuildWars2.Items.Shield.ToString() -> string!
-override GuildWars2.Items.Shortbow.<Clone>$() -> GuildWars2.Items.Item!
-override GuildWars2.Items.Shortbow.Equals(object? obj) -> bool
-override GuildWars2.Items.Shortbow.GetHashCode() -> int
-override GuildWars2.Items.Shortbow.ToString() -> string!
-override GuildWars2.Items.Shortbow.TwoHanded.get -> bool
 override GuildWars2.Items.Shoulders.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.Shoulders.Equals(object? obj) -> bool
 override GuildWars2.Items.Shoulders.GetHashCode() -> int
@@ -8123,7 +8115,6 @@ override sealed GuildWars2.Items.Scepter.Equals(GuildWars2.Items.Weapon? other) 
 override sealed GuildWars2.Items.Service.Equals(GuildWars2.Items.Consumable? other) -> bool
 override sealed GuildWars2.Items.SharedInventorySlot.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.Shield.Equals(GuildWars2.Items.Weapon? other) -> bool
-override sealed GuildWars2.Items.Shortbow.Equals(GuildWars2.Items.Weapon? other) -> bool
 override sealed GuildWars2.Items.Shoulders.Equals(GuildWars2.Items.Armor? other) -> bool
 override sealed GuildWars2.Items.Sigil.Equals(GuildWars2.Items.UpgradeComponent? other) -> bool
 override sealed GuildWars2.Items.SmallBundle.Equals(GuildWars2.Items.Weapon? other) -> bool
@@ -9082,8 +9073,6 @@ static GuildWars2.Items.SharedInventorySlot.operator !=(GuildWars2.Items.SharedI
 static GuildWars2.Items.SharedInventorySlot.operator ==(GuildWars2.Items.SharedInventorySlot? left, GuildWars2.Items.SharedInventorySlot? right) -> bool
 static GuildWars2.Items.Shield.operator !=(GuildWars2.Items.Shield? left, GuildWars2.Items.Shield? right) -> bool
 static GuildWars2.Items.Shield.operator ==(GuildWars2.Items.Shield? left, GuildWars2.Items.Shield? right) -> bool
-static GuildWars2.Items.Shortbow.operator !=(GuildWars2.Items.Shortbow? left, GuildWars2.Items.Shortbow? right) -> bool
-static GuildWars2.Items.Shortbow.operator ==(GuildWars2.Items.Shortbow? left, GuildWars2.Items.Shortbow? right) -> bool
 static GuildWars2.Items.Shoulders.operator !=(GuildWars2.Items.Shoulders? left, GuildWars2.Items.Shoulders? right) -> bool
 static GuildWars2.Items.Shoulders.operator ==(GuildWars2.Items.Shoulders? left, GuildWars2.Items.Shoulders? right) -> bool
 static GuildWars2.Items.Sigil.operator !=(GuildWars2.Items.Sigil? left, GuildWars2.Items.Sigil? right) -> bool

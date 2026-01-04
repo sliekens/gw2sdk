@@ -6,16 +6,17 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal sealed class ShortbowJsonConverter : JsonConverter<Shortbow>
+internal sealed class ShortBowJsonConverter : JsonConverter<ShortBow>
 {
-    public const string DiscriminatorValue = "shortbow";
+    public const string DiscriminatorValue = "short_bow";
+    private const string PreviousDiscriminatorValue = "shortbow";
 
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeof(Shortbow).IsAssignableFrom(typeToConvert);
+        return typeof(ShortBow).IsAssignableFrom(typeToConvert);
     }
 
-    public override Shortbow Read(
+    public override ShortBow Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -25,12 +26,12 @@ internal sealed class ShortbowJsonConverter : JsonConverter<Shortbow>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, Shortbow value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ShortBow value, JsonSerializerOptions options)
     {
         Write(writer, value);
     }
 
-    public static Shortbow Read(in JsonElement json)
+    public static ShortBow Read(in JsonElement json)
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName)
             .ValueEquals(WeaponJsonConverter.DiscriminatorValue))
@@ -40,8 +41,8 @@ internal sealed class ShortbowJsonConverter : JsonConverter<Shortbow>
             );
         }
 
-        if (!json.GetProperty(WeaponJsonConverter.DiscriminatorName)
-            .ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(WeaponJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue)
+            && !json.GetProperty(WeaponJsonConverter.DiscriminatorName).ValueEquals(PreviousDiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(WeaponJsonConverter.DiscriminatorName).GetString()
@@ -49,7 +50,7 @@ internal sealed class ShortbowJsonConverter : JsonConverter<Shortbow>
         }
 
         string? iconString = json.GetProperty("icon").GetString();
-        return new Shortbow
+        return new ShortBow
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
@@ -83,7 +84,7 @@ internal sealed class ShortbowJsonConverter : JsonConverter<Shortbow>
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, Shortbow value)
+    public static void Write(Utf8JsonWriter writer, ShortBow value)
     {
         writer.WriteStartObject();
         writer.WriteString(

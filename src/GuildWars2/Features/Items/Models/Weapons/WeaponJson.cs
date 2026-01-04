@@ -39,7 +39,7 @@ internal static class WeaponJson
                 case "Shield":
                     return json.GetShield();
                 case "ShortBow":
-                    return json.GetShortbow();
+                    return json.GetShortBow();
                 case "SmallBundle":
                     return json.GetSmallBundle();
                 case "Speargun":

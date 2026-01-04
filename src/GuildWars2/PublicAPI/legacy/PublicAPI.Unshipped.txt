@@ -12,6 +12,9 @@ GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker
 GuildWars2.Items.ConjuredDoorwayUnlocker.ConjuredDoorwayUnlocker() -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.ConjuredDoorwayUnlocker? other) -> bool
+GuildWars2.Items.ShortBow
+GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.ShortBow? other) -> bool
+GuildWars2.Items.ShortBow.ShortBow() -> void
 GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.AchievementReward!
@@ -22,9 +25,17 @@ override GuildWars2.Items.ConjuredDoorwayUnlocker.<Clone>$() -> GuildWars2.Items
 override GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(object? obj) -> bool
 override GuildWars2.Items.ConjuredDoorwayUnlocker.GetHashCode() -> int
 override GuildWars2.Items.ConjuredDoorwayUnlocker.ToString() -> string!
+override GuildWars2.Items.ShortBow.<Clone>$() -> GuildWars2.Items.Item!
+override GuildWars2.Items.ShortBow.Equals(object? obj) -> bool
+override GuildWars2.Items.ShortBow.GetHashCode() -> int
+override GuildWars2.Items.ShortBow.ToString() -> string!
+override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
+override sealed GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.Weapon? other) -> bool
 static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator !=(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
 static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator ==(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
 static GuildWars2.Items.ConjuredDoorwayUnlocker.operator !=(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool
 static GuildWars2.Items.ConjuredDoorwayUnlocker.operator ==(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool
+static GuildWars2.Items.ShortBow.operator !=(GuildWars2.Items.ShortBow? left, GuildWars2.Items.ShortBow? right) -> bool
+static GuildWars2.Items.ShortBow.operator ==(GuildWars2.Items.ShortBow? left, GuildWars2.Items.ShortBow? right) -> bool

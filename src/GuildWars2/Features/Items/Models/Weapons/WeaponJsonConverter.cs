@@ -67,8 +67,8 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
                     return DaggerJsonConverter.Read(json);
                 case FocusJsonConverter.DiscriminatorValue:
                     return FocusJsonConverter.Read(json);
-                case ShortbowJsonConverter.DiscriminatorValue:
-                    return ShortbowJsonConverter.Read(json);
+                case ShortBowJsonConverter.DiscriminatorValue:
+                    return ShortBowJsonConverter.Read(json);
                 case LongbowJsonConverter.DiscriminatorValue:
                     return LongbowJsonConverter.Read(json);
                 case TorchJsonConverter.DiscriminatorValue:
@@ -168,8 +168,8 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
             case Focus focus:
                 FocusJsonConverter.Write(writer, focus);
                 break;
-            case Shortbow shortbow:
-                ShortbowJsonConverter.Write(writer, shortbow);
+            case ShortBow shortbow:
+                ShortBowJsonConverter.Write(writer, shortbow);
                 break;
             case Longbow longbow:
                 LongbowJsonConverter.Write(writer, longbow);
