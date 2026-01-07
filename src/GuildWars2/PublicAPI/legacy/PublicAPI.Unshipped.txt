@@ -61,6 +61,7 @@ GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.ShortBow? other) -> bool
 GuildWars2.Items.ShortBow.ShortBow() -> void
 GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
+GuildWars2.Pvp.Stats.AccountStats.Professions.get -> System.Collections.Generic.IReadOnlyDictionary<GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>, GuildWars2.Pvp.Stats.Results!>!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.AchievementReward!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(object? obj) -> bool
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.GetHashCode() -> int

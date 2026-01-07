@@ -57,11 +57,7 @@ internal static class AccountStatsJson
             Professions =
                 professions.Map(static (in value) => value.EnumerateObject()
                     .ToDictionary(
-#if NET
-                        pair => Enum.Parse<ProfessionName>(pair.Name, true),
-#else
-                        pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
-#endif
+                        pair => new Extensible<ProfessionName>(pair.Name),
                         pair => pair.Value.GetResults()
                     )
                 ),

@@ -18,9 +18,8 @@ public sealed record AccountStats
     /// <summary>The aggregated statistics of the account (total wins, total losses etc.)</summary>
     public required Results Aggregate { get; init; }
 
-    // TODO: change key type to Extensible<ProfessionName>
     /// <summary>The statistics of the account for each profession (wins, losses etc.)</summary>
-    public required IReadOnlyDictionary<ProfessionName, Results> Professions { get; init; }
+    public required IReadOnlyDictionary<Extensible<ProfessionName>, Results> Professions { get; init; }
 
     /// <summary>The statistics of the account, grouped by game rating type (wins, losses etc.)</summary>
     public required Ladders Ladders { get; init; }

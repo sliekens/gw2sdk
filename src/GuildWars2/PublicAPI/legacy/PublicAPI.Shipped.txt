@@ -5171,7 +5171,6 @@ GuildWars2.Pvp.Stats.AccountStats.Aggregate.init -> void
 GuildWars2.Pvp.Stats.AccountStats.Equals(GuildWars2.Pvp.Stats.AccountStats? other) -> bool
 GuildWars2.Pvp.Stats.AccountStats.Ladders.get -> GuildWars2.Pvp.Stats.Ladders!
 GuildWars2.Pvp.Stats.AccountStats.Ladders.init -> void
-GuildWars2.Pvp.Stats.AccountStats.Professions.get -> System.Collections.Generic.IReadOnlyDictionary<GuildWars2.Hero.ProfessionName, GuildWars2.Pvp.Stats.Results!>!
 GuildWars2.Pvp.Stats.AccountStats.Professions.init -> void
 GuildWars2.Pvp.Stats.AccountStats.PvpRank.get -> int
 GuildWars2.Pvp.Stats.AccountStats.PvpRank.init -> void
