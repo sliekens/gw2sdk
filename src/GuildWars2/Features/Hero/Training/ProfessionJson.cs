@@ -108,9 +108,9 @@ internal static class ProfessionJson
                 return WeaponType.HarpoonGun;
             }
 #if NET
-            return Enum.Parse<WeaponType>(text);
+            return Enum.Parse<WeaponType>(text, ignoreCase: true);
 #else
-            return (WeaponType)Enum.Parse(typeof(WeaponType), text);
+            return (WeaponType)Enum.Parse(typeof(WeaponType), text, ignoreCase: true);
 #endif
         }
     }
