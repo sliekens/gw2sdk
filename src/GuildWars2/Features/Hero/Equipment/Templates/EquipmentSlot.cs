@@ -23,8 +23,8 @@ public enum EquipmentSlot
     /// <summary>The logging axe slot.</summary>
     Axe,
 
-    /// <summary>The backpiece slot.</summary>
-    Backpack,
+    /// <summary>The back item slot.</summary>
+    Back,
 
     /// <summary>The boots slot.</summary>
     Boots,

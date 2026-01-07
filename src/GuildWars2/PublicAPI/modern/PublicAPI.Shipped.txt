@@ -2917,7 +2917,6 @@ GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Accessory1 = 1 -> GuildWars2.H
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Accessory2 = 2 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Amulet = 3 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Axe = 4 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
-GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Backpack = 5 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Boots = 6 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Coat = 7 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.FishingBait = 8 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot

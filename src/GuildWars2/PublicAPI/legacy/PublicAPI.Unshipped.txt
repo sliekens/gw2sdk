@@ -13,6 +13,7 @@ GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.Equals(GuildWars2.Hero.Crafting.
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? other) -> bool
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.ShortBowRecipe() -> void
+GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Back = 5 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin
 GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin? other) -> bool
 GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.ShortBowSkin() -> void
