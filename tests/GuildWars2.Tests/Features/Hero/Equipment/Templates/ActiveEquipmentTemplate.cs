@@ -20,9 +20,9 @@ public class ActiveEquipmentTemplate(Gw2Client sut)
             .And.Member(a => a.TabNumber, tabNumber => tabNumber.IsGreaterThan(0))
             .And.Member(a => a.Name, name => name.IsNotEmpty())
             .And.Member(a => a.Items, items => items.IsNotEmpty());
-        using (Assert.Multiple())
+        foreach (EquipmentItem item in actual.Items)
         {
-            foreach (EquipmentItem item in actual.Items)
+            using (Assert.Multiple())
             {
                 await EquipmentItemValidation.Validate(item);
             }

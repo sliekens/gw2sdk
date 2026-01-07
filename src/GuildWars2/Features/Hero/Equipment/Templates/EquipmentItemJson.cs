@@ -105,7 +105,7 @@ internal static class EquipmentItemJson
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Count = count.Map(static (in value) => value.GetInt32()),
-            Slot = slot.Map(static (in value) => value.GetEnum<EquipmentSlot>()),
+            Slot = slot.Map(static (in value) => value.GetEquipmentSlot()),
             SuffixItemId = suffixItemId,
             SecondarySuffixItemId = secondarySuffixItemId,
             InfusionItemIds =
