@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class BackpackJson
+internal static class BackItemJson
 {
-    public static Backpack GetBackpack(this in JsonElement json)
+    public static BackItem GetBackItem(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -150,7 +150,7 @@ internal static class BackpackJson
         }
 
         string? iconString = icon.Map(static (in value) => value.GetString());
-        return new Backpack
+        return new BackItem
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

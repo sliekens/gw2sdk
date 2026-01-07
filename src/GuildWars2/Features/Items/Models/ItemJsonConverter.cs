@@ -51,8 +51,8 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
                     return RelicJsonConverter.Read(json);
                 case TrophyJsonConverter.DiscriminatorValue:
                     return TrophyJsonConverter.Read(json);
-                case BackpackJsonConverter.DiscriminatorValue:
-                    return BackpackJsonConverter.Read(json);
+                case BackItemJsonConverter.DiscriminatorValue:
+                    return BackItemJsonConverter.Read(json);
                 case SalvageToolJsonConverter.DiscriminatorValue:
                     return SalvageToolJsonConverter.Read(json);
                 case ContainerJsonConverter.DiscriminatorValue:
@@ -119,8 +119,8 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
             case Trophy trophy:
                 TrophyJsonConverter.Write(writer, trophy);
                 break;
-            case Backpack backpack:
-                BackpackJsonConverter.Write(writer, backpack);
+            case BackItem backpack:
+                BackItemJsonConverter.Write(writer, backpack);
                 break;
             case SalvageTool salvageTool:
                 SalvageToolJsonConverter.Write(writer, salvageTool);

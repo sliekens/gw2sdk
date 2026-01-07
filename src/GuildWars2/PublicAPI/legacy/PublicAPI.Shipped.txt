@@ -3734,32 +3734,6 @@ GuildWars2.Items.Armor.WeightClass.init -> void
 GuildWars2.Items.Axe
 GuildWars2.Items.Axe.Axe() -> void
 GuildWars2.Items.Axe.Equals(GuildWars2.Items.Axe? other) -> bool
-GuildWars2.Items.Backpack
-GuildWars2.Items.Backpack.AttributeAdjustment.get -> double
-GuildWars2.Items.Backpack.AttributeAdjustment.init -> void
-GuildWars2.Items.Backpack.AttributeCombinationId.get -> int?
-GuildWars2.Items.Backpack.AttributeCombinationId.init -> void
-GuildWars2.Items.Backpack.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
-GuildWars2.Items.Backpack.Attributes.init -> void
-GuildWars2.Items.Backpack.Backpack() -> void
-GuildWars2.Items.Backpack.Buff.get -> GuildWars2.Items.Buff?
-GuildWars2.Items.Backpack.Buff.init -> void
-GuildWars2.Items.Backpack.DefaultSkinId.get -> int
-GuildWars2.Items.Backpack.DefaultSkinId.init -> void
-GuildWars2.Items.Backpack.Equals(GuildWars2.Items.Backpack? other) -> bool
-GuildWars2.Items.Backpack.InfusionSlotCount.get -> int
-GuildWars2.Items.Backpack.InfusionSlots.get -> System.Collections.Generic.IReadOnlyList<GuildWars2.Items.InfusionSlot!>!
-GuildWars2.Items.Backpack.InfusionSlots.init -> void
-GuildWars2.Items.Backpack.StatChoices.get -> System.Collections.Generic.IReadOnlyList<int>!
-GuildWars2.Items.Backpack.StatChoices.init -> void
-GuildWars2.Items.Backpack.SuffixItemId.get -> int?
-GuildWars2.Items.Backpack.SuffixItemId.init -> void
-GuildWars2.Items.Backpack.UpgradesFrom.get -> System.Collections.Generic.IReadOnlyCollection<GuildWars2.Items.InfusionSlotUpgradeSource!>!
-GuildWars2.Items.Backpack.UpgradesFrom.init -> void
-GuildWars2.Items.Backpack.UpgradesInto.get -> System.Collections.Generic.IReadOnlyCollection<GuildWars2.Items.InfusionSlotUpgradePath!>!
-GuildWars2.Items.Backpack.UpgradesInto.init -> void
-GuildWars2.Items.Backpack.UpgradeSlotCount.get -> int
-GuildWars2.Items.Backpack.UpgradeSlots.get -> System.Collections.Generic.IReadOnlyList<int?>!
 GuildWars2.Items.Bag
 GuildWars2.Items.Bag.Bag() -> void
 GuildWars2.Items.Bag.Equals(GuildWars2.Items.Bag? other) -> bool
@@ -7073,10 +7047,6 @@ override GuildWars2.Items.Axe.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.Axe.Equals(object? obj) -> bool
 override GuildWars2.Items.Axe.GetHashCode() -> int
 override GuildWars2.Items.Axe.ToString() -> string!
-override GuildWars2.Items.Backpack.<Clone>$() -> GuildWars2.Items.Item!
-override GuildWars2.Items.Backpack.Equals(object? obj) -> bool
-override GuildWars2.Items.Backpack.GetHashCode() -> int
-override GuildWars2.Items.Backpack.ToString() -> string!
 override GuildWars2.Items.Bag.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.Bag.Equals(object? obj) -> bool
 override GuildWars2.Items.Bag.GetHashCode() -> int
@@ -8020,7 +7990,6 @@ override sealed GuildWars2.Items.Amulet.Equals(GuildWars2.Items.Trinket? other) 
 override sealed GuildWars2.Items.AppearanceChanger.Equals(GuildWars2.Items.Consumable? other) -> bool
 override sealed GuildWars2.Items.Armor.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.Axe.Equals(GuildWars2.Items.Weapon? other) -> bool
-override sealed GuildWars2.Items.Backpack.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.Bag.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.BagSlotExpansion.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.Bait.Equals(GuildWars2.Items.GatheringTool? other) -> bool
@@ -8889,8 +8858,6 @@ static GuildWars2.Items.Armor.operator !=(GuildWars2.Items.Armor? left, GuildWar
 static GuildWars2.Items.Armor.operator ==(GuildWars2.Items.Armor? left, GuildWars2.Items.Armor? right) -> bool
 static GuildWars2.Items.Axe.operator !=(GuildWars2.Items.Axe? left, GuildWars2.Items.Axe? right) -> bool
 static GuildWars2.Items.Axe.operator ==(GuildWars2.Items.Axe? left, GuildWars2.Items.Axe? right) -> bool
-static GuildWars2.Items.Backpack.operator !=(GuildWars2.Items.Backpack? left, GuildWars2.Items.Backpack? right) -> bool
-static GuildWars2.Items.Backpack.operator ==(GuildWars2.Items.Backpack? left, GuildWars2.Items.Backpack? right) -> bool
 static GuildWars2.Items.Bag.operator !=(GuildWars2.Items.Bag? left, GuildWars2.Items.Bag? right) -> bool
 static GuildWars2.Items.Bag.operator ==(GuildWars2.Items.Bag? left, GuildWars2.Items.Bag? right) -> bool
 static GuildWars2.Items.BagSlotExpansion.operator !=(GuildWars2.Items.BagSlotExpansion? left, GuildWars2.Items.BagSlotExpansion? right) -> bool

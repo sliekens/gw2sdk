@@ -170,7 +170,7 @@ public class Items
                             .And.Member(w => w.Attributes, m => m.IsEmpty());
                     }
                     break;
-                case Backpack backItem:
+                case BackItem backItem:
                     await Assert.That(backItem.Attributes).All(attribute => attribute.Value >= 1);
                     if (backItem.SuffixItemId.HasValue)
                     {

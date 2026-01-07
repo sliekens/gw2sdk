@@ -6,11 +6,11 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
+internal sealed class BackItemJsonConverter : JsonConverter<BackItem>
 {
     public const string DiscriminatorValue = "back";
 
-    public override Backpack? Read(
+    public override BackItem? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -20,12 +20,12 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         return Read(json.RootElement);
     }
 
-    public override void Write(Utf8JsonWriter writer, Backpack value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, BackItem value, JsonSerializerOptions options)
     {
         Write(writer, value);
     }
 
-    public static Backpack Read(in JsonElement json)
+    public static BackItem Read(in JsonElement json)
     {
         if (json.TryGetProperty(ItemJsonConverter.DiscriminatorName, out JsonElement discriminator) && !discriminator.ValueEquals(DiscriminatorValue))
         {
@@ -33,7 +33,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         }
 
         string? iconString = json.GetProperty("icon").GetString();
-        return new Backpack
+        return new BackItem
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
@@ -70,7 +70,7 @@ internal sealed class BackpackJsonConverter : JsonConverter<Backpack>
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, Backpack value)
+    public static void Write(Utf8JsonWriter writer, BackItem value)
     {
         writer.WriteStartObject();
         writer.WriteString(ItemJsonConverter.DiscriminatorName, DiscriminatorValue);

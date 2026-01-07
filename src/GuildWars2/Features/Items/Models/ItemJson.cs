@@ -15,7 +15,7 @@ internal static class ItemJson
                 case "Armor":
                     return json.GetArmor();
                 case "Back":
-                    return json.GetBackpack();
+                    return json.GetBackItem();
                 case "Bag":
                     return json.GetBag();
                 case "Consumable":
