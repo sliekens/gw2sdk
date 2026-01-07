@@ -3,9 +3,58 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Achievements.ItemReward</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Wardrobe.ShortbowSkin</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.MagicDoorSkinUnlocker</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Shortbow</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Achievements.ItemReward</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Wardrobe.ShortbowSkin</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -17,9 +66,65 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Shortbow</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Achievements.ItemReward</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Wardrobe.ShortbowSkin</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.MagicDoorSkinUnlocker</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Shortbow</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Achievements.ItemReward</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Wardrobe.ShortbowSkin</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -31,9 +136,51 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Shortbow</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Achievements.ItemReward</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Hero.Equipment.Wardrobe.ShortbowSkin</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.MagicDoorSkinUnlocker</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Shortbow</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>F:GuildWars2.Hero.Builds.WeaponType.Shortbow</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -543,6 +690,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_IconHref(System.String)</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.get_LongBow</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.set_LongBow(System.Boolean)</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -787,6 +948,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>F:GuildWars2.Hero.Builds.WeaponType.Shortbow</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Exploration.GodShrines.GodShrine.get_IconContestedHref</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
@@ -1292,6 +1460,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_IconHref(System.String)</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.get_LongBow</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.set_LongBow(System.Boolean)</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1536,6 +1718,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>F:GuildWars2.Hero.Builds.WeaponType.Shortbow</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Exploration.GodShrines.GodShrine.get_IconContestedHref</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
@@ -2041,6 +2230,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_IconHref(System.String)</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.get_LongBow</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.set_LongBow(System.Boolean)</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -2285,6 +2488,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>F:GuildWars2.Hero.Builds.WeaponType.Shortbow</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Exploration.GodShrines.GodShrine.get_IconContestedHref</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
@@ -2790,6 +3000,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_IconHref(System.String)</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.get_LongBow</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.set_LongBow(System.Boolean)</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -3034,6 +3258,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>F:GuildWars2.Hero.Builds.WeaponType.Shortbow</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Exploration.GodShrines.GodShrine.get_IconContestedHref</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
@@ -3539,6 +3770,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Items.Item.set_IconHref(System.String)</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.get_LongBow</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Items.UpgradeComponentFlags.set_LongBow(System.Boolean)</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
