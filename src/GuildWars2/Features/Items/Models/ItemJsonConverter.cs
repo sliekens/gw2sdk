@@ -45,8 +45,8 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
                     return PowerCoreJsonConverter.Read(json);
                 case BagJsonConverter.DiscriminatorValue:
                     return BagJsonConverter.Read(json);
-                case MiniatureJsonConverter.DiscriminatorValue:
-                    return MiniatureJsonConverter.Read(json);
+                case MiniatureItemJsonConverter.DiscriminatorValue:
+                    return MiniatureItemJsonConverter.Read(json);
                 case RelicJsonConverter.DiscriminatorValue:
                     return RelicJsonConverter.Read(json);
                 case TrophyJsonConverter.DiscriminatorValue:
@@ -110,8 +110,8 @@ internal sealed class ItemJsonConverter : JsonConverter<Item>
             case Bag bag:
                 BagJsonConverter.Write(writer, bag);
                 break;
-            case Miniature miniature:
-                MiniatureJsonConverter.Write(writer, miniature);
+            case MiniatureItem miniature:
+                MiniatureItemJsonConverter.Write(writer, miniature);
                 break;
             case Relic relic:
                 RelicJsonConverter.Write(writer, relic);

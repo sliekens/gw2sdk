@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal static class MiniatureJson
+internal static class MiniatureItemJson
 {
-    public static Miniature GetMiniature(this in JsonElement json)
+    public static MiniatureItem GetMiniatureItem(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -94,7 +94,7 @@ internal static class MiniatureJson
         }
 
         string? iconString = icon.Map(static (in value) => value.GetString());
-        return new Miniature
+        return new MiniatureItem
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

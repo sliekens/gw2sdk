@@ -4088,11 +4088,6 @@ GuildWars2.Items.Lure.Lure() -> void
 GuildWars2.Items.Mace
 GuildWars2.Items.Mace.Equals(GuildWars2.Items.Mace? other) -> bool
 GuildWars2.Items.Mace.Mace() -> void
-GuildWars2.Items.Miniature
-GuildWars2.Items.Miniature.Equals(GuildWars2.Items.Miniature? other) -> bool
-GuildWars2.Items.Miniature.Miniature() -> void
-GuildWars2.Items.Miniature.MiniatureId.get -> int
-GuildWars2.Items.Miniature.MiniatureId.init -> void
 GuildWars2.Items.MiniatureUnlocker
 GuildWars2.Items.MiniatureUnlocker.Equals(GuildWars2.Items.MiniatureUnlocker? other) -> bool
 GuildWars2.Items.MiniatureUnlocker.MiniatureUnlocker() -> void
@@ -7306,10 +7301,6 @@ override GuildWars2.Items.Mace.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.Mace.Equals(object? obj) -> bool
 override GuildWars2.Items.Mace.GetHashCode() -> int
 override GuildWars2.Items.Mace.ToString() -> string!
-override GuildWars2.Items.Miniature.<Clone>$() -> GuildWars2.Items.Item!
-override GuildWars2.Items.Miniature.Equals(object? obj) -> bool
-override GuildWars2.Items.Miniature.GetHashCode() -> int
-override GuildWars2.Items.Miniature.ToString() -> string!
 override GuildWars2.Items.MiniatureUnlocker.<Clone>$() -> GuildWars2.Items.Item!
 override GuildWars2.Items.MiniatureUnlocker.Equals(object? obj) -> bool
 override GuildWars2.Items.MiniatureUnlocker.GetHashCode() -> int
@@ -8078,7 +8069,6 @@ override sealed GuildWars2.Items.LoggingAxe.Equals(GuildWars2.Items.GatheringToo
 override sealed GuildWars2.Items.Longbow.Equals(GuildWars2.Items.Weapon? other) -> bool
 override sealed GuildWars2.Items.Lure.Equals(GuildWars2.Items.GatheringTool? other) -> bool
 override sealed GuildWars2.Items.Mace.Equals(GuildWars2.Items.Weapon? other) -> bool
-override sealed GuildWars2.Items.Miniature.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.MiniatureUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.MiningPick.Equals(GuildWars2.Items.GatheringTool? other) -> bool
 override sealed GuildWars2.Items.MistChampionSkinUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
@@ -9011,8 +9001,6 @@ static GuildWars2.Items.Lure.operator !=(GuildWars2.Items.Lure? left, GuildWars2
 static GuildWars2.Items.Lure.operator ==(GuildWars2.Items.Lure? left, GuildWars2.Items.Lure? right) -> bool
 static GuildWars2.Items.Mace.operator !=(GuildWars2.Items.Mace? left, GuildWars2.Items.Mace? right) -> bool
 static GuildWars2.Items.Mace.operator ==(GuildWars2.Items.Mace? left, GuildWars2.Items.Mace? right) -> bool
-static GuildWars2.Items.Miniature.operator !=(GuildWars2.Items.Miniature? left, GuildWars2.Items.Miniature? right) -> bool
-static GuildWars2.Items.Miniature.operator ==(GuildWars2.Items.Miniature? left, GuildWars2.Items.Miniature? right) -> bool
 static GuildWars2.Items.MiniatureUnlocker.operator !=(GuildWars2.Items.MiniatureUnlocker? left, GuildWars2.Items.MiniatureUnlocker? right) -> bool
 static GuildWars2.Items.MiniatureUnlocker.operator ==(GuildWars2.Items.MiniatureUnlocker? left, GuildWars2.Items.MiniatureUnlocker? right) -> bool
 static GuildWars2.Items.MiningPick.operator !=(GuildWars2.Items.MiningPick? left, GuildWars2.Items.MiningPick? right) -> bool

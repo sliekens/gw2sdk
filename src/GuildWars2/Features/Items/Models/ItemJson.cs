@@ -31,7 +31,7 @@ internal static class ItemJson
                 case "JadeTechModule":
                     return json.GetJadeTechModule();
                 case "MiniPet":
-                    return json.GetMiniature();
+                    return json.GetMiniatureItem();
                 case "PowerCore":
                     return json.GetPowerCore();
                 case "Relic":

@@ -31,6 +31,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Miniature</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.Shortbow</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
@@ -66,6 +73,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Miniature</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.Shortbow</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
@@ -101,6 +115,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Miniature</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.Shortbow</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
@@ -136,6 +157,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Miniature</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.Shortbow</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
@@ -165,6 +193,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:GuildWars2.Items.MagicDoorSkinUnlocker</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:GuildWars2.Items.Miniature</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

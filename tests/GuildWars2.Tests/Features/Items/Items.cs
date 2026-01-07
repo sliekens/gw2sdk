@@ -244,7 +244,7 @@ public class Items
                 case SalvageTool salvageTool:
                     await Assert.That(salvageTool.Charges).IsBetween(1, 250);
                     break;
-                case Miniature miniature:
+                case MiniatureItem miniature:
                     await Assert.That(miniature.MiniatureId >= 1).IsTrue();
                     break;
                 case UpgradeComponent upgradeComponent:

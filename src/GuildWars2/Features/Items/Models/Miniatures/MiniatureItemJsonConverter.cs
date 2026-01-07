@@ -5,11 +5,11 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Items;
 
-internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
+internal sealed class MiniatureItemJsonConverter : JsonConverter<MiniatureItem>
 {
     public const string DiscriminatorValue = "miniature";
 
-    public override Miniature? Read(
+    public override MiniatureItem? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -21,14 +21,14 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
 
     public override void Write(
         Utf8JsonWriter writer,
-        Miniature value,
+        MiniatureItem value,
         JsonSerializerOptions options
     )
     {
         Write(writer, value);
     }
 
-    public static Miniature Read(in JsonElement json)
+    public static MiniatureItem Read(in JsonElement json)
     {
         if (!json.GetProperty(ItemJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue))
         {
@@ -38,7 +38,7 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
         }
 
         string? iconString = json.GetProperty("icon").GetString();
-        return new Miniature
+        return new MiniatureItem
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
@@ -56,7 +56,7 @@ internal sealed class MiniatureJsonConverter : JsonConverter<Miniature>
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, Miniature value)
+    public static void Write(Utf8JsonWriter writer, MiniatureItem value)
     {
         writer.WriteStartObject();
         writer.WriteString(ItemJsonConverter.DiscriminatorName, DiscriminatorValue);
