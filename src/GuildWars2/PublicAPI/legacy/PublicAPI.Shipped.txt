@@ -1252,8 +1252,6 @@ GuildWars2.Hero.Accounts.AccountSummary.WorldId.get -> int
 GuildWars2.Hero.Accounts.AccountSummary.WorldId.init -> void
 GuildWars2.Hero.Accounts.AccountSummary.Wvw.get -> GuildWars2.Hero.Accounts.AccountWvwSummary!
 GuildWars2.Hero.Accounts.AccountSummary.Wvw.init -> void
-GuildWars2.Hero.Accounts.AccountSummary.WvwRank.get -> int?
-GuildWars2.Hero.Accounts.AccountSummary.WvwRank.init -> void
 GuildWars2.Hero.Accounts.AccountWvwSummary
 GuildWars2.Hero.Accounts.AccountWvwSummary.<Clone>$() -> GuildWars2.Hero.Accounts.AccountWvwSummary!
 GuildWars2.Hero.Accounts.AccountWvwSummary.AccountWvwSummary() -> void

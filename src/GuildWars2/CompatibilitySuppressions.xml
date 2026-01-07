@@ -444,6 +444,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.get_WvwRank</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.set_WvwRank(System.Nullable{System.Int32})</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Achievements.Achievement.get_IconHref</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
@@ -1221,6 +1235,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.get_WvwRank</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.set_WvwRank(System.Nullable{System.Int32})</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Achievements.Achievement.get_IconHref</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
@@ -1998,6 +2026,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.get_WvwRank</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.set_WvwRank(System.Nullable{System.Int32})</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Achievements.Achievement.get_IconHref</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
@@ -2775,6 +2817,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.get_WvwRank</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.set_WvwRank(System.Nullable{System.Int32})</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Achievements.Achievement.get_IconHref</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
@@ -3546,6 +3602,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Guilds.Upgrades.GuildUpgrade.set_IconHref(System.String)</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.get_WvwRank</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Accounts.AccountSummary.set_WvwRank(System.Nullable{System.Int32})</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
