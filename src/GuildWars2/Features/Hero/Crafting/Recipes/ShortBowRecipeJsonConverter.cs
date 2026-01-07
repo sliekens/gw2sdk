@@ -8,7 +8,8 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal sealed class ShortBowRecipeJsonConverter : JsonConverter<ShortBowRecipe>
 {
-    public const string DiscriminatorValue = "shortbow_recipe";
+    public const string DiscriminatorValue = "short_bow_recipe";
+    public const string PreviousDiscriminatorValue = "shortbow_recipe";
 
     public override ShortBowRecipe Read(
         ref Utf8JsonReader reader,
@@ -31,8 +32,8 @@ internal sealed class ShortBowRecipeJsonConverter : JsonConverter<ShortBowRecipe
 
     public static ShortBowRecipe Read(in JsonElement json)
     {
-        if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
-            .ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue)
+            && !json.GetProperty(RecipeJsonConverter.DiscriminatorName).ValueEquals(PreviousDiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(RecipeJsonConverter.DiscriminatorName).GetString()

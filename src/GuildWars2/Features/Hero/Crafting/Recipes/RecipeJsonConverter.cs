@@ -291,8 +291,8 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
             case ShieldRecipe shieldRecipe:
                 ShieldRecipeJsonConverter.Write(writer, shieldRecipe);
                 break;
-            case ShortBowRecipe shortbowRecipe:
-                ShortBowRecipeJsonConverter.Write(writer, shortbowRecipe);
+            case ShortBowRecipe shortBowRecipe:
+                ShortBowRecipeJsonConverter.Write(writer, shortBowRecipe);
                 break;
             case ShouldersRecipe shouldersRecipe:
                 ShouldersRecipeJsonConverter.Write(writer, shouldersRecipe);

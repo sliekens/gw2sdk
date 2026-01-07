@@ -147,8 +147,8 @@ internal sealed class WeaponSkinJsonConverter : JsonConverter<WeaponSkin>
             case FocusSkin focusSkin:
                 FocusSkinJsonConverter.Write(writer, focusSkin);
                 break;
-            case ShortBowSkin shortbowSkin:
-                ShortBowSkinJsonConverter.Write(writer, shortbowSkin);
+            case ShortBowSkin shortBowSkin:
+                ShortBowSkinJsonConverter.Write(writer, shortBowSkin);
                 break;
             case LongbowSkin longbowSkin:
                 LongbowSkinJsonConverter.Write(writer, longbowSkin);

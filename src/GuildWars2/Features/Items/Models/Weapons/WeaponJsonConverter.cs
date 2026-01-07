@@ -168,8 +168,8 @@ internal sealed class WeaponJsonConverter : JsonConverter<Weapon>
             case Focus focus:
                 FocusJsonConverter.Write(writer, focus);
                 break;
-            case ShortBow shortbow:
-                ShortBowJsonConverter.Write(writer, shortbow);
+            case ShortBow shortBow:
+                ShortBowJsonConverter.Write(writer, shortBow);
                 break;
             case Longbow longbow:
                 LongbowJsonConverter.Write(writer, longbow);

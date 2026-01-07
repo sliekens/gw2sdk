@@ -8,7 +8,8 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal sealed class ShortBowSkinJsonConverter : JsonConverter<ShortBowSkin>
 {
-    public const string DiscriminatorValue = "shortbow_skin";
+    public const string DiscriminatorValue = "short_bow_skin";
+    public const string PreviousDiscriminatorValue = "shortbow_skin";
 
     public override bool CanConvert(Type typeToConvert)
     {
@@ -44,8 +45,8 @@ internal sealed class ShortBowSkinJsonConverter : JsonConverter<ShortBowSkin>
             );
         }
 
-        if (!json.GetProperty(WeaponSkinJsonConverter.DiscriminatorName)
-            .ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(WeaponSkinJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue)
+            && !json.GetProperty(WeaponSkinJsonConverter.DiscriminatorName).ValueEquals(PreviousDiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(WeaponSkinJsonConverter.DiscriminatorName).GetString()

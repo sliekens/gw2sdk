@@ -24,7 +24,7 @@ internal static class UpgradeComponentFlagsJson
         bool rifle = false;
         bool scepter = false;
         bool shield = false;
-        bool shortbow = false;
+        bool shortBow = false;
         bool speargun = false;
         bool staff = false;
         bool sword = false;
@@ -85,7 +85,7 @@ internal static class UpgradeComponentFlagsJson
             }
             else if (entry.ValueEquals("ShortBow"))
             {
-                shortbow = true;
+                shortBow = true;
             }
             else if (entry.ValueEquals("Speargun"))
             {
@@ -150,7 +150,7 @@ internal static class UpgradeComponentFlagsJson
             Rifle = rifle,
             Scepter = scepter,
             Shield = shield,
-            ShortBow = shortbow,
+            ShortBow = shortBow,
             HarpoonGun = speargun,
             Staff = staff,
             Sword = sword,
