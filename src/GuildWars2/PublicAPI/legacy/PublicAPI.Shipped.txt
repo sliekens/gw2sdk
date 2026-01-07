@@ -2440,9 +2440,6 @@ GuildWars2.Hero.Crafting.Recipes.SeasoningRecipe.SeasoningRecipe() -> void
 GuildWars2.Hero.Crafting.Recipes.ShieldRecipe
 GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShieldRecipe? other) -> bool
 GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.ShieldRecipe() -> void
-GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe
-GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe? other) -> bool
-GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.ShortbowRecipe() -> void
 GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe
 GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe? other) -> bool
 GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.ShouldersRecipe() -> void
@@ -6666,10 +6663,6 @@ override GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.<Clone>$() -> GuildWars2.
 override GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.Equals(object? obj) -> bool
 override GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.GetHashCode() -> int
 override GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.ToString() -> string!
-override GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.<Clone>$() -> GuildWars2.Hero.Crafting.Recipes.Recipe!
-override GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.Equals(object? obj) -> bool
-override GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.GetHashCode() -> int
-override GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.ToString() -> string!
 override GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.<Clone>$() -> GuildWars2.Hero.Crafting.Recipes.Recipe!
 override GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.Equals(object? obj) -> bool
 override GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.GetHashCode() -> int
@@ -7980,7 +7973,6 @@ override sealed GuildWars2.Hero.Crafting.Recipes.RingRecipe.Equals(GuildWars2.He
 override sealed GuildWars2.Hero.Crafting.Recipes.ScepterRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.SeasoningRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
-override sealed GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.SnackRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.SoupRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
@@ -8679,8 +8671,6 @@ static GuildWars2.Hero.Crafting.Recipes.SeasoningRecipe.operator !=(GuildWars2.H
 static GuildWars2.Hero.Crafting.Recipes.SeasoningRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.SeasoningRecipe? left, GuildWars2.Hero.Crafting.Recipes.SeasoningRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.ShieldRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShieldRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.ShieldRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.ShieldRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShieldRecipe? right) -> bool
-static GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe? right) -> bool
-static GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShortbowRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShouldersRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.SnackRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.SnackRecipe? left, GuildWars2.Hero.Crafting.Recipes.SnackRecipe? right) -> bool

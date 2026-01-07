@@ -96,7 +96,7 @@ internal static class RecipeJson
                 case "Shield":
                     return json.GetShieldRecipe();
                 case "ShortBow":
-                    return json.GetShortbowRecipe();
+                    return json.GetShortBowRecipe();
                 case "Shoulders":
                     return json.GetShouldersRecipe();
                 case "Snack":

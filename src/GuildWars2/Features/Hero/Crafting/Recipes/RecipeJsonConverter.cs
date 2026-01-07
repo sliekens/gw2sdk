@@ -120,8 +120,8 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
                     return SeasoningRecipeJsonConverter.Read(json);
                 case ShieldRecipeJsonConverter.DiscriminatorValue:
                     return ShieldRecipeJsonConverter.Read(json);
-                case ShortbowRecipeJsonConverter.DiscriminatorValue:
-                    return ShortbowRecipeJsonConverter.Read(json);
+                case ShortBowRecipeJsonConverter.DiscriminatorValue:
+                    return ShortBowRecipeJsonConverter.Read(json);
                 case ShouldersRecipeJsonConverter.DiscriminatorValue:
                     return ShouldersRecipeJsonConverter.Read(json);
                 case SnackRecipeJsonConverter.DiscriminatorValue:
@@ -291,8 +291,8 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
             case ShieldRecipe shieldRecipe:
                 ShieldRecipeJsonConverter.Write(writer, shieldRecipe);
                 break;
-            case ShortbowRecipe shortbowRecipe:
-                ShortbowRecipeJsonConverter.Write(writer, shortbowRecipe);
+            case ShortBowRecipe shortbowRecipe:
+                ShortBowRecipeJsonConverter.Write(writer, shortbowRecipe);
                 break;
             case ShouldersRecipe shouldersRecipe:
                 ShouldersRecipeJsonConverter.Write(writer, shouldersRecipe);

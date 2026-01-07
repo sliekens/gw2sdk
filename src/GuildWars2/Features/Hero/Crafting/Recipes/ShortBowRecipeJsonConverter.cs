@@ -6,11 +6,11 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 
-internal sealed class ShortbowRecipeJsonConverter : JsonConverter<ShortbowRecipe>
+internal sealed class ShortBowRecipeJsonConverter : JsonConverter<ShortBowRecipe>
 {
     public const string DiscriminatorValue = "shortbow_recipe";
 
-    public override ShortbowRecipe Read(
+    public override ShortBowRecipe Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -22,14 +22,14 @@ internal sealed class ShortbowRecipeJsonConverter : JsonConverter<ShortbowRecipe
 
     public override void Write(
         Utf8JsonWriter writer,
-        ShortbowRecipe value,
+        ShortBowRecipe value,
         JsonSerializerOptions options
     )
     {
         Write(writer, value);
     }
 
-    public static ShortbowRecipe Read(in JsonElement json)
+    public static ShortBowRecipe Read(in JsonElement json)
     {
         if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
             .ValueEquals(DiscriminatorValue))
@@ -39,7 +39,7 @@ internal sealed class ShortbowRecipeJsonConverter : JsonConverter<ShortbowRecipe
             );
         }
 
-        return new ShortbowRecipe
+        return new ShortBowRecipe
         {
             Id = json.GetProperty("id").GetInt32(),
             OutputItemId = json.GetProperty("output_item_id").GetInt32(),
@@ -56,7 +56,7 @@ internal sealed class ShortbowRecipeJsonConverter : JsonConverter<ShortbowRecipe
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, ShortbowRecipe value)
+    public static void Write(Utf8JsonWriter writer, ShortBowRecipe value)
     {
         writer.WriteStartObject();
         writer.WriteString(RecipeJsonConverter.DiscriminatorName, DiscriminatorValue);

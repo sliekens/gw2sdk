@@ -7,6 +7,9 @@ GuildWars2.Hero.Achievements.Rewards.ItemReward.Id.get -> int
 GuildWars2.Hero.Achievements.Rewards.ItemReward.Id.init -> void
 GuildWars2.Hero.Achievements.Rewards.ItemReward.ItemReward() -> void
 GuildWars2.Hero.Builds.WeaponType.ShortBow = 19 -> GuildWars2.Hero.Builds.WeaponType
+GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe
+GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? other) -> bool
+GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.ShortBowRecipe() -> void
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.get -> System.Uri!
 GuildWars2.Hero.Masteries.MasteryTrack.BackgroundUrl.init -> void
 GuildWars2.Items.ConjuredDoorwayUnlocker
@@ -21,6 +24,10 @@ override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(object? obj) -> bool
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.GetHashCode() -> int
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.ToString() -> string!
+override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.<Clone>$() -> GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe!
+override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(object? obj) -> bool
+override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.GetHashCode() -> int
+override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.ToString() -> string!
 override GuildWars2.Items.ConjuredDoorwayUnlocker.<Clone>$() -> GuildWars2.Items.ConjuredDoorwayUnlocker!
 override GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(object? obj) -> bool
 override GuildWars2.Items.ConjuredDoorwayUnlocker.GetHashCode() -> int
@@ -31,10 +38,13 @@ override GuildWars2.Items.ShortBow.GetHashCode() -> int
 override GuildWars2.Items.ShortBow.ToString() -> string!
 override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
+override sealed GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.Weapon? other) -> bool
 static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator !=(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
 static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator ==(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
+static GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? right) -> bool
+static GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? right) -> bool
 static GuildWars2.Items.ConjuredDoorwayUnlocker.operator !=(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool
 static GuildWars2.Items.ConjuredDoorwayUnlocker.operator ==(GuildWars2.Items.ConjuredDoorwayUnlocker? left, GuildWars2.Items.ConjuredDoorwayUnlocker? right) -> bool
 static GuildWars2.Items.ShortBow.operator !=(GuildWars2.Items.ShortBow? left, GuildWars2.Items.ShortBow? right) -> bool

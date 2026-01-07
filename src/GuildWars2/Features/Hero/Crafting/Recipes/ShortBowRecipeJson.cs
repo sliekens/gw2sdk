@@ -5,9 +5,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 
-internal static class ShortbowRecipeJson
+internal static class ShortBowRecipeJson
 {
-    public static ShortbowRecipe GetShortbowRecipe(this in JsonElement json)
+    public static ShortBowRecipe GetShortBowRecipe(this in JsonElement json)
     {
         RequiredMember outputItemId = "output_item_id";
         RequiredMember outputItemCount = "output_item_count";
@@ -69,7 +69,7 @@ internal static class ShortbowRecipeJson
             }
         }
 
-        return new ShortbowRecipe
+        return new ShortBowRecipe
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             OutputItemId = outputItemId.Map(static (in value) => value.GetInt32()),
