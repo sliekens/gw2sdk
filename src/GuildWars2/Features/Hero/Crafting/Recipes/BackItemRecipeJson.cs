@@ -5,9 +5,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 
-internal static class BackpackRecipeJson
+internal static class BackItemRecipeJson
 {
-    public static BackpackRecipe GetBackpackRecipe(this in JsonElement json)
+    public static BackItemRecipe GetBackItemRecipe(this in JsonElement json)
     {
         RequiredMember outputItemId = "output_item_id";
         RequiredMember outputItemCount = "output_item_count";
@@ -69,7 +69,7 @@ internal static class BackpackRecipeJson
             }
         }
 
-        return new BackpackRecipe
+        return new BackItemRecipe
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             OutputItemId = outputItemId.Map(static (in value) => value.GetInt32()),

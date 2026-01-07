@@ -6,11 +6,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
 
-internal sealed class BackpackRecipeJsonConverter : JsonConverter<BackpackRecipe>
+internal sealed class BackItemRecipeJsonConverter : JsonConverter<BackItemRecipe>
 {
-    public const string DiscriminatorValue = "backpack_recipe";
+    public const string DiscriminatorValue = "back_recipe";
+    public const string PreviousDiscriminatorValue = "backpack_recipe";
 
-    public override BackpackRecipe Read(
+    public override BackItemRecipe Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -22,24 +23,24 @@ internal sealed class BackpackRecipeJsonConverter : JsonConverter<BackpackRecipe
 
     public override void Write(
         Utf8JsonWriter writer,
-        BackpackRecipe value,
+        BackItemRecipe value,
         JsonSerializerOptions options
     )
     {
         Write(writer, value);
     }
 
-    public static BackpackRecipe Read(in JsonElement json)
+    public static BackItemRecipe Read(in JsonElement json)
     {
-        if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName)
-            .ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(RecipeJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue)
+            && !json.GetProperty(RecipeJsonConverter.DiscriminatorName).ValueEquals(PreviousDiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(RecipeJsonConverter.DiscriminatorName).GetString()
             );
         }
 
-        return new BackpackRecipe
+        return new BackItemRecipe
         {
             Id = json.GetProperty("id").GetInt32(),
             OutputItemId = json.GetProperty("output_item_id").GetInt32(),
@@ -56,7 +57,7 @@ internal sealed class BackpackRecipeJsonConverter : JsonConverter<BackpackRecipe
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, BackpackRecipe value)
+    public static void Write(Utf8JsonWriter writer, BackItemRecipe value)
     {
         writer.WriteStartObject();
         writer.WriteString(RecipeJsonConverter.DiscriminatorName, DiscriminatorValue);

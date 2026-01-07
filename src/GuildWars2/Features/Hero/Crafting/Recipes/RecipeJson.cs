@@ -18,7 +18,7 @@ internal static class RecipeJson
                 case "Axe":
                     return json.GetAxeRecipe();
                 case "Backpack":
-                    return json.GetBackpackRecipe();
+                    return json.GetBackItemRecipe();
                 case "Bag":
                     return json.GetBagRecipe();
                 case "Boots":

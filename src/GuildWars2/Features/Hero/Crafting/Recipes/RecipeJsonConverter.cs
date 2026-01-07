@@ -42,8 +42,8 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
                     return AmuletRecipeJsonConverter.Read(json);
                 case AxeRecipeJsonConverter.DiscriminatorValue:
                     return AxeRecipeJsonConverter.Read(json);
-                case BackpackRecipeJsonConverter.DiscriminatorValue:
-                    return BackpackRecipeJsonConverter.Read(json);
+                case BackItemRecipeJsonConverter.DiscriminatorValue:
+                    return BackItemRecipeJsonConverter.Read(json);
                 case BagRecipeJsonConverter.DiscriminatorValue:
                     return BagRecipeJsonConverter.Read(json);
                 case BootsRecipeJsonConverter.DiscriminatorValue:
@@ -174,8 +174,8 @@ internal sealed class RecipeJsonConverter : JsonConverter<Recipe>
             case AxeRecipe axeRecipe:
                 AxeRecipeJsonConverter.Write(writer, axeRecipe);
                 break;
-            case BackpackRecipe backpackRecipe:
-                BackpackRecipeJsonConverter.Write(writer, backpackRecipe);
+            case BackItemRecipe backpackRecipe:
+                BackItemRecipeJsonConverter.Write(writer, backpackRecipe);
                 break;
             case BagRecipe bagRecipe:
                 BagRecipeJsonConverter.Write(writer, bagRecipe);
