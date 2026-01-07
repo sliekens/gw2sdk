@@ -48,10 +48,10 @@ internal sealed class EquipmentItemValidation
             await Assert.That(item.Stats.Attributes).IsNotEmpty();
             using (Assert.Multiple())
             {
-                foreach (KeyValuePair<AttributeName, int> attribute in item.Stats.Attributes)
+                foreach (KeyValuePair<Extensible<AttributeName>, int> attribute in item.Stats.Attributes)
                 {
 #if NET
-                    await Assert.That(Enum.IsDefined(attribute.Key)).IsTrue();
+                    await Assert.That(attribute.Key.IsDefined()).IsTrue();
 #else
                     await TUnit.Assertions.Assert.That(Enum.IsDefined(typeof(AttributeName), attribute.Key)).IsTrue();
 #endif

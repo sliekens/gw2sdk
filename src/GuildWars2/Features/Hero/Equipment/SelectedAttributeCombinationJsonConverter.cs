@@ -25,21 +25,7 @@ internal sealed class
             Id = json.GetProperty("id").GetInt32(),
             Attributes = json.GetProperty("attributes")
                 .GetMap(
-                    static name => name switch
-                    {
-                        nameof(AttributeName.None) => AttributeName.None,
-                        nameof(AttributeName.Power) => AttributeName.Power,
-                        nameof(AttributeName.Precision) => AttributeName.Precision,
-                        nameof(AttributeName.Toughness) => AttributeName.Toughness,
-                        nameof(AttributeName.Vitality) => AttributeName.Vitality,
-                        nameof(AttributeName.Concentration) => AttributeName.Concentration,
-                        nameof(AttributeName.ConditionDamage) => AttributeName.ConditionDamage,
-                        nameof(AttributeName.Expertise) => AttributeName.Expertise,
-                        nameof(AttributeName.Ferocity) => AttributeName.Ferocity,
-                        nameof(AttributeName.HealingPower) => AttributeName.HealingPower,
-                        nameof(AttributeName.AgonyResistance) => AttributeName.AgonyResistance,
-                        _ => throw new JsonException()
-                    },
+                    static name => new Extensible<AttributeName>(name),
                     static (in value) => value.GetInt32()
                 )
         };
@@ -59,7 +45,7 @@ internal sealed class
         writer.WriteStartObject();
         writer.WriteNumber("id", value.Id);
         writer.WriteStartObject("attributes");
-        foreach (KeyValuePair<AttributeName, int> pair in value.Attributes)
+        foreach (KeyValuePair<Extensible<AttributeName>, int> pair in value.Attributes)
         {
             writer.WriteNumber(pair.Key.ToString(), pair.Value);
         }

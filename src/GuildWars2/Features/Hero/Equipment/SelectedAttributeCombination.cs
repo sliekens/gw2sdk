@@ -10,7 +10,6 @@ public sealed record SelectedAttributeCombination
     /// <summary>The ID of the combination which can be used to look up its name and base stats.</summary>
     public required int Id { get; init; }
 
-    // TODO: should have been Extensible<AttributeName> instead of AttributeName
     /// <summary>The effective attributes of the selected combination.</summary>
-    public required IDictionary<AttributeName, int> Attributes { get; init; }
+    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 }

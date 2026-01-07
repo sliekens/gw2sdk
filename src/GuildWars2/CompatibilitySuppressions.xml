@@ -696,6 +696,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.SelectedAttributeCombination.get_Attributes</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.get_IconHref</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
@@ -893,6 +900,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Pve.Pets.Pet.set_IconHref(System.String)</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Pvp.Amulets.Amulet.get_Attributes</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1494,6 +1508,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.SelectedAttributeCombination.get_Attributes</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.get_IconHref</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
@@ -1691,6 +1712,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Pve.Pets.Pet.set_IconHref(System.String)</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Pvp.Amulets.Amulet.get_Attributes</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -2292,6 +2320,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.SelectedAttributeCombination.get_Attributes</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.get_IconHref</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
@@ -2489,6 +2524,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Pve.Pets.Pet.set_IconHref(System.String)</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Pvp.Amulets.Amulet.get_Attributes</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -3090,6 +3132,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.SelectedAttributeCombination.get_Attributes</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.get_IconHref</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
@@ -3287,6 +3336,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Pve.Pets.Pet.set_IconHref(System.String)</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Pvp.Amulets.Amulet.get_Attributes</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -3888,6 +3944,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.SelectedAttributeCombination.get_Attributes</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Skiffs.SkiffSkin.get_IconHref</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
@@ -4085,6 +4148,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Pve.Pets.Pet.set_IconHref(System.String)</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Pvp.Amulets.Amulet.get_Attributes</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

@@ -7,9 +7,9 @@ namespace GuildWars2.Hero.Equipment;
 
 internal static class AttributesJson
 {
-    public static ValueDictionary<AttributeName, int> GetAttributes(this in JsonElement json)
+    public static ValueDictionary<Extensible<AttributeName>, int> GetAttributes(this in JsonElement json)
     {
-        ValueDictionary<AttributeName, int> result = new(4);
+        ValueDictionary<Extensible<AttributeName>, int> result = new(4);
         foreach (JsonProperty member in json.EnumerateObject())
         {
             // Somemetimes the old attribute names (or partial names) are used in the API
@@ -56,6 +56,10 @@ internal static class AttributesJson
             else if (JsonOptions.MissingMemberBehavior == MissingMemberBehavior.Error)
             {
                 ThrowHelper.ThrowUnexpectedMember(member.Name);
+            }
+            else
+            {
+                result[member.Name] = member.Value.GetInt32();
             }
         }
 

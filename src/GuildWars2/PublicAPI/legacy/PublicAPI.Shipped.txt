@@ -2833,7 +2833,6 @@ GuildWars2.Hero.Equipment.Outfits.OutfitsClient.GetUnlockedOutfits(string? acces
 GuildWars2.Hero.Equipment.Outfits.OutfitsClient.OutfitsClient(System.Net.Http.HttpClient! httpClient) -> void
 GuildWars2.Hero.Equipment.SelectedAttributeCombination
 GuildWars2.Hero.Equipment.SelectedAttributeCombination.<Clone>$() -> GuildWars2.Hero.Equipment.SelectedAttributeCombination!
-GuildWars2.Hero.Equipment.SelectedAttributeCombination.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Hero.AttributeName, int>!
 GuildWars2.Hero.Equipment.SelectedAttributeCombination.Attributes.init -> void
 GuildWars2.Hero.Equipment.SelectedAttributeCombination.Equals(GuildWars2.Hero.Equipment.SelectedAttributeCombination? other) -> bool
 GuildWars2.Hero.Equipment.SelectedAttributeCombination.Id.get -> int
@@ -4792,7 +4791,6 @@ GuildWars2.Pve.WorldBosses.WorldBossesClient.WorldBossesClient(System.Net.Http.H
 GuildWars2.Pvp.Amulets.Amulet
 GuildWars2.Pvp.Amulets.Amulet.<Clone>$() -> GuildWars2.Pvp.Amulets.Amulet!
 GuildWars2.Pvp.Amulets.Amulet.Amulet() -> void
-GuildWars2.Pvp.Amulets.Amulet.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Hero.AttributeName, int>!
 GuildWars2.Pvp.Amulets.Amulet.Attributes.init -> void
 GuildWars2.Pvp.Amulets.Amulet.Equals(GuildWars2.Pvp.Amulets.Amulet? other) -> bool
 GuildWars2.Pvp.Amulets.Amulet.IconUrl.get -> System.Uri!

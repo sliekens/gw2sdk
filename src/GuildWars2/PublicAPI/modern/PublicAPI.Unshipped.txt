@@ -13,6 +13,7 @@ GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.Equals(GuildWars2.Hero.Crafting.
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? other) -> bool
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.ShortBowRecipe() -> void
+GuildWars2.Hero.Equipment.SelectedAttributeCombination.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Back = 5 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
 GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin
 GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.BackItemSkin() -> void
@@ -61,6 +62,7 @@ GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.ShortBow? other) -> bool
 GuildWars2.Items.ShortBow.ShortBow() -> void
 GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
+GuildWars2.Pvp.Amulets.Amulet.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
 GuildWars2.Pvp.Stats.AccountStats.Professions.get -> System.Collections.Generic.IReadOnlyDictionary<GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>, GuildWars2.Pvp.Stats.Results!>!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.Rewards.ItemReward!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(object? obj) -> bool
