@@ -5,9 +5,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-internal static class BackpackSkinJson
+internal static class BackItemSkinJson
 {
-    public static BackpackSkin GetBackpackSkin(this in JsonElement json)
+    public static BackItemSkin GetBackItemSkin(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -60,7 +60,7 @@ internal static class BackpackSkinJson
         }
 
         string iconString = icon.Map(static (in value) => value.GetString()) ?? "";
-        return new BackpackSkin
+        return new BackItemSkin
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

@@ -6,11 +6,12 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-internal sealed class BackpackSkinJsonConverter : JsonConverter<BackpackSkin>
+internal sealed class BackItemSkinJsonConverter : JsonConverter<BackItemSkin>
 {
-    public const string DiscriminatorValue = "backpack_skin";
+    public const string DiscriminatorValue = "back_skin";
+    public const string PreviousDiscriminatorValue = "backpack_skin";
 
-    public override BackpackSkin Read(
+    public override BackItemSkin Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -22,17 +23,17 @@ internal sealed class BackpackSkinJsonConverter : JsonConverter<BackpackSkin>
 
     public override void Write(
         Utf8JsonWriter writer,
-        BackpackSkin value,
+        BackItemSkin value,
         JsonSerializerOptions options
     )
     {
         Write(writer, value);
     }
 
-    public static BackpackSkin Read(in JsonElement json)
+    public static BackItemSkin Read(in JsonElement json)
     {
-        if (!json.GetProperty(EquipmentSkinJsonConverter.DiscriminatorName)
-            .ValueEquals(DiscriminatorValue))
+        if (!json.GetProperty(EquipmentSkinJsonConverter.DiscriminatorName).ValueEquals(DiscriminatorValue)
+            && !json.GetProperty(EquipmentSkinJsonConverter.DiscriminatorName).ValueEquals(PreviousDiscriminatorValue))
         {
             ThrowHelper.ThrowInvalidDiscriminator(
                 json.GetProperty(EquipmentSkinJsonConverter.DiscriminatorName).GetString()
@@ -40,7 +41,7 @@ internal sealed class BackpackSkinJsonConverter : JsonConverter<BackpackSkin>
         }
 
         string iconString = json.GetProperty("icon").GetString() ?? "";
-        return new BackpackSkin
+        return new BackItemSkin
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
@@ -52,7 +53,7 @@ internal sealed class BackpackSkinJsonConverter : JsonConverter<BackpackSkin>
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, BackpackSkin value)
+    public static void Write(Utf8JsonWriter writer, BackItemSkin value)
     {
         writer.WriteStartObject();
         writer.WriteString(EquipmentSkinJsonConverter.DiscriminatorName, DiscriminatorValue);

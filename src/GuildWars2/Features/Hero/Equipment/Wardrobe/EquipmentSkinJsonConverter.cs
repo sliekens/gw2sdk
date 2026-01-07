@@ -44,8 +44,8 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
             {
                 case ArmorSkinJsonConverter.DiscriminatorValue:
                     return ArmorSkinJsonConverter.Read(json);
-                case BackpackSkinJsonConverter.DiscriminatorValue:
-                    return BackpackSkinJsonConverter.Read(json);
+                case BackItemSkinJsonConverter.DiscriminatorValue:
+                    return BackItemSkinJsonConverter.Read(json);
                 case GatheringToolSkinJsonConverter.DiscriminatorValue:
                     return GatheringToolSkinJsonConverter.Read(json);
                 case WeaponSkinJsonConverter.DiscriminatorValue:
@@ -75,8 +75,8 @@ internal sealed class EquipmentSkinJsonConverter : JsonConverter<EquipmentSkin>
             case ArmorSkin armorSkin:
                 ArmorSkinJsonConverter.Write(writer, armorSkin);
                 break;
-            case BackpackSkin backpackSkin:
-                BackpackSkinJsonConverter.Write(writer, backpackSkin);
+            case BackItemSkin backpackSkin:
+                BackItemSkinJsonConverter.Write(writer, backpackSkin);
                 break;
             case GatheringToolSkin gatheringToolSkin:
                 GatheringToolSkinJsonConverter.Write(writer, gatheringToolSkin);

@@ -14,6 +14,9 @@ GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? other) -> bool
 GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.ShortBowRecipe() -> void
 GuildWars2.Hero.Equipment.Templates.EquipmentSlot.Back = 5 -> GuildWars2.Hero.Equipment.Templates.EquipmentSlot
+GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin
+GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.BackItemSkin() -> void
+GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin? other) -> bool
 GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin
 GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin? other) -> bool
 GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.ShortBowSkin() -> void
@@ -70,6 +73,10 @@ override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.<Clone>$() -> GuildWars
 override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(object? obj) -> bool
 override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.GetHashCode() -> int
 override GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.ToString() -> string!
+override GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.<Clone>$() -> GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin!
+override GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.Equals(object? obj) -> bool
+override GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.GetHashCode() -> int
+override GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.ToString() -> string!
 override GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.<Clone>$() -> GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin!
 override GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.Equals(object? obj) -> bool
 override GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.GetHashCode() -> int
@@ -94,6 +101,7 @@ override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
+override sealed GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin? other) -> bool
 override sealed GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.WeaponSkin? other) -> bool
 override sealed GuildWars2.Items.BackItem.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
@@ -105,6 +113,8 @@ static GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.operator !=(GuildWars2.He
 static GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.BackItemRecipe? left, GuildWars2.Hero.Crafting.Recipes.BackItemRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.operator ==(GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? left, GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe? right) -> bool
+static GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.operator !=(GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin? left, GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin? right) -> bool
+static GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin.operator ==(GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin? left, GuildWars2.Hero.Equipment.Wardrobe.BackItemSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.operator !=(GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin? left, GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin.operator ==(GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin? left, GuildWars2.Hero.Equipment.Wardrobe.ShortBowSkin? right) -> bool
 static GuildWars2.Items.BackItem.operator !=(GuildWars2.Items.BackItem? left, GuildWars2.Items.BackItem? right) -> bool

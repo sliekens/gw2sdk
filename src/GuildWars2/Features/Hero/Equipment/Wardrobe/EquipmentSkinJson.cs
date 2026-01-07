@@ -16,7 +16,7 @@ internal static class EquipmentSkinJson
                 case "Armor":
                     return json.GetArmorSkin();
                 case "Back":
-                    return json.GetBackpackSkin();
+                    return json.GetBackItemSkin();
                 case "Gathering":
                     return json.GetGatheringToolSkin();
                 case "Weapon":

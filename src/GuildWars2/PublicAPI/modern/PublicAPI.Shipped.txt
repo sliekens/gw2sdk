@@ -2994,9 +2994,6 @@ GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.WeightClass.init -> void
 GuildWars2.Hero.Equipment.Wardrobe.AxeSkin
 GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.AxeSkin() -> void
 GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.AxeSkin? other) -> bool
-GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin
-GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.BackpackSkin() -> void
-GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin? other) -> bool
 GuildWars2.Hero.Equipment.Wardrobe.BootsSkin
 GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.BootsSkin() -> void
 GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.BootsSkin? other) -> bool
@@ -6746,10 +6743,6 @@ override GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.<Clone>$() -> GuildWars2.Her
 override GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.Equals(object? obj) -> bool
 override GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.GetHashCode() -> int
 override GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.ToString() -> string!
-override GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.<Clone>$() -> GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin!
-override GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.Equals(object? obj) -> bool
-override GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.GetHashCode() -> int
-override GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.ToString() -> string!
 override GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.<Clone>$() -> GuildWars2.Hero.Equipment.Wardrobe.BootsSkin!
 override GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.Equals(object? obj) -> bool
 override GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.GetHashCode() -> int
@@ -7934,7 +7927,6 @@ override sealed GuildWars2.Hero.Crafting.Recipes.WarhornRecipe.Equals(GuildWars2
 override sealed GuildWars2.Hero.Equipment.MailCarriers.MailCarrierFlags.Equals(GuildWars2.Flags? other) -> bool
 override sealed GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin? other) -> bool
 override sealed GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.WeaponSkin? other) -> bool
-override sealed GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.EquipmentSkin? other) -> bool
 override sealed GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin? other) -> bool
 override sealed GuildWars2.Hero.Equipment.Wardrobe.CoatSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin? other) -> bool
 override sealed GuildWars2.Hero.Equipment.Wardrobe.DaggerSkin.Equals(GuildWars2.Hero.Equipment.Wardrobe.WeaponSkin? other) -> bool
@@ -8686,8 +8678,6 @@ static GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.operator !=(GuildWars2.Hero.
 static GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin.operator ==(GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin? left, GuildWars2.Hero.Equipment.Wardrobe.ArmorSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.operator !=(GuildWars2.Hero.Equipment.Wardrobe.AxeSkin? left, GuildWars2.Hero.Equipment.Wardrobe.AxeSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.AxeSkin.operator ==(GuildWars2.Hero.Equipment.Wardrobe.AxeSkin? left, GuildWars2.Hero.Equipment.Wardrobe.AxeSkin? right) -> bool
-static GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.operator !=(GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin? left, GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin? right) -> bool
-static GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin.operator ==(GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin? left, GuildWars2.Hero.Equipment.Wardrobe.BackpackSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.operator !=(GuildWars2.Hero.Equipment.Wardrobe.BootsSkin? left, GuildWars2.Hero.Equipment.Wardrobe.BootsSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.BootsSkin.operator ==(GuildWars2.Hero.Equipment.Wardrobe.BootsSkin? left, GuildWars2.Hero.Equipment.Wardrobe.BootsSkin? right) -> bool
 static GuildWars2.Hero.Equipment.Wardrobe.CoatSkin.operator !=(GuildWars2.Hero.Equipment.Wardrobe.CoatSkin? left, GuildWars2.Hero.Equipment.Wardrobe.CoatSkin? right) -> bool
