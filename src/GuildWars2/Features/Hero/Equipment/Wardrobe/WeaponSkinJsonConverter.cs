@@ -67,8 +67,8 @@ internal sealed class WeaponSkinJsonConverter : JsonConverter<WeaponSkin>
                     return DaggerSkinJsonConverter.Read(json);
                 case FocusSkinJsonConverter.DiscriminatorValue:
                     return FocusSkinJsonConverter.Read(json);
-                case ShortbowSkinJsonConverter.DiscriminatorValue:
-                    return ShortbowSkinJsonConverter.Read(json);
+                case ShortBowSkinJsonConverter.DiscriminatorValue:
+                    return ShortBowSkinJsonConverter.Read(json);
                 case LongbowSkinJsonConverter.DiscriminatorValue:
                     return LongbowSkinJsonConverter.Read(json);
                 case TorchSkinJsonConverter.DiscriminatorValue:
@@ -147,8 +147,8 @@ internal sealed class WeaponSkinJsonConverter : JsonConverter<WeaponSkin>
             case FocusSkin focusSkin:
                 FocusSkinJsonConverter.Write(writer, focusSkin);
                 break;
-            case ShortbowSkin shortbowSkin:
-                ShortbowSkinJsonConverter.Write(writer, shortbowSkin);
+            case ShortBowSkin shortbowSkin:
+                ShortBowSkinJsonConverter.Write(writer, shortbowSkin);
                 break;
             case LongbowSkin longbowSkin:
                 LongbowSkinJsonConverter.Write(writer, longbowSkin);

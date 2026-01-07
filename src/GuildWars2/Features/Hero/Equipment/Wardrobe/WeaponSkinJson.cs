@@ -38,7 +38,7 @@ internal static class WeaponSkinJson
                 case "Shield":
                     return json.GetShieldSkin();
                 case "Shortbow":
-                    return json.GetShortbowSkin();
+                    return json.GetShortBowSkin();
                 case "SmallBundle":
                     return json.GetSmallBundleSkin();
                 case "Spear":

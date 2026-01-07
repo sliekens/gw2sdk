@@ -5,9 +5,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-internal static class ShortbowSkinJson
+internal static class ShortBowSkinJson
 {
-    public static ShortbowSkin GetShortbowSkin(this in JsonElement json)
+    public static ShortBowSkin GetShortBowSkin(this in JsonElement json)
     {
         RequiredMember name = "name";
         OptionalMember description = "description";
@@ -82,7 +82,7 @@ internal static class ShortbowSkinJson
         }
 
         string iconString = icon.Map(static (in value) => value.GetString()) ?? "";
-        return new ShortbowSkin
+        return new ShortBowSkin
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

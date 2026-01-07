@@ -6,16 +6,16 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
-internal sealed class ShortbowSkinJsonConverter : JsonConverter<ShortbowSkin>
+internal sealed class ShortBowSkinJsonConverter : JsonConverter<ShortBowSkin>
 {
     public const string DiscriminatorValue = "shortbow_skin";
 
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeof(ShortbowSkin).IsAssignableFrom(typeToConvert);
+        return typeof(ShortBowSkin).IsAssignableFrom(typeToConvert);
     }
 
-    public override ShortbowSkin Read(
+    public override ShortBowSkin Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -27,14 +27,14 @@ internal sealed class ShortbowSkinJsonConverter : JsonConverter<ShortbowSkin>
 
     public override void Write(
         Utf8JsonWriter writer,
-        ShortbowSkin value,
+        ShortBowSkin value,
         JsonSerializerOptions options
     )
     {
         Write(writer, value);
     }
 
-    public static ShortbowSkin Read(in JsonElement json)
+    public static ShortBowSkin Read(in JsonElement json)
     {
         if (!json.GetProperty(EquipmentSkinJsonConverter.DiscriminatorName)
             .ValueEquals(WeaponSkinJsonConverter.DiscriminatorValue))
@@ -53,7 +53,7 @@ internal sealed class ShortbowSkinJsonConverter : JsonConverter<ShortbowSkin>
         }
 
         string iconString = json.GetProperty("icon").GetString() ?? "";
-        return new ShortbowSkin
+        return new ShortBowSkin
         {
             Id = json.GetProperty("id").GetInt32(),
             Name = json.GetProperty("name").GetStringRequired(),
@@ -66,7 +66,7 @@ internal sealed class ShortbowSkinJsonConverter : JsonConverter<ShortbowSkin>
         };
     }
 
-    public static void Write(Utf8JsonWriter writer, ShortbowSkin value)
+    public static void Write(Utf8JsonWriter writer, ShortBowSkin value)
     {
         writer.WriteStartObject();
         writer.WriteString(
