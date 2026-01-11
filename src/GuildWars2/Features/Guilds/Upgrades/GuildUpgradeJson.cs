@@ -23,7 +23,7 @@ internal static class GuildUpgradeJson
                 case "Consumable":
                     return json.GetConsumable();
                 case "Decoration":
-                    return json.GetDecoration();
+                    return json.GetGuildDecoration();
                 case "GuildHall":
                     return json.GetGuildHall();
                 case "GuildHallExpedition":

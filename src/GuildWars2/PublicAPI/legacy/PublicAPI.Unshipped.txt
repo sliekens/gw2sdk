@@ -1,4 +1,7 @@
 #nullable enable
+GuildWars2.Guilds.Upgrades.GuildDecoration
+GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(GuildWars2.Guilds.Upgrades.GuildDecoration? other) -> bool
+GuildWars2.Guilds.Upgrades.GuildDecoration.GuildDecoration() -> void
 GuildWars2.Guilds.Upgrades.GuildUnlocker
 GuildWars2.Guilds.Upgrades.GuildUnlocker.Equals(GuildWars2.Guilds.Upgrades.GuildUnlocker? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildUnlocker.GuildUnlocker() -> void
@@ -73,6 +76,10 @@ GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
 GuildWars2.Pvp.Amulets.Amulet.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
 GuildWars2.Pvp.Stats.AccountStats.Professions.get -> System.Collections.Generic.IReadOnlyDictionary<GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>, GuildWars2.Pvp.Stats.Results!>!
+override GuildWars2.Guilds.Upgrades.GuildDecoration.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
+override GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(object? obj) -> bool
+override GuildWars2.Guilds.Upgrades.GuildDecoration.GetHashCode() -> int
+override GuildWars2.Guilds.Upgrades.GuildDecoration.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.GuildUnlocker.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
 override GuildWars2.Guilds.Upgrades.GuildUnlocker.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.GuildUnlocker.GetHashCode() -> int
@@ -122,6 +129,7 @@ override GuildWars2.Items.ShortBow.Equals(object? obj) -> bool
 override GuildWars2.Items.ShortBow.GetHashCode() -> int
 override GuildWars2.Items.ShortBow.ToString() -> string!
 override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
+override sealed GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildUnlocker.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.WorkshopRestoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.WvwObjectiveUpgrade.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
@@ -134,6 +142,8 @@ override sealed GuildWars2.Items.BackItem.Equals(GuildWars2.Items.Item? other) -
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.MiniatureItem.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.Weapon? other) -> bool
+static GuildWars2.Guilds.Upgrades.GuildDecoration.operator !=(GuildWars2.Guilds.Upgrades.GuildDecoration? left, GuildWars2.Guilds.Upgrades.GuildDecoration? right) -> bool
+static GuildWars2.Guilds.Upgrades.GuildDecoration.operator ==(GuildWars2.Guilds.Upgrades.GuildDecoration? left, GuildWars2.Guilds.Upgrades.GuildDecoration? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildUnlocker.operator !=(GuildWars2.Guilds.Upgrades.GuildUnlocker? left, GuildWars2.Guilds.Upgrades.GuildUnlocker? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildUnlocker.operator ==(GuildWars2.Guilds.Upgrades.GuildUnlocker? left, GuildWars2.Guilds.Upgrades.GuildUnlocker? right) -> bool
 static GuildWars2.Guilds.Upgrades.WorkshopRestoration.operator !=(GuildWars2.Guilds.Upgrades.WorkshopRestoration? left, GuildWars2.Guilds.Upgrades.WorkshopRestoration? right) -> bool

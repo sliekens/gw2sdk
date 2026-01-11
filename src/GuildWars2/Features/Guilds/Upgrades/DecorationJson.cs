@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class DecorationJson
+internal static class GuildDecorationJson
 {
-    public static Decoration GetDecoration(this in JsonElement json)
+    public static GuildDecoration GetGuildDecoration(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class DecorationJson
             }
         }
 
-        return new Decoration
+        return new GuildDecoration
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

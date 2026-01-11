@@ -1109,9 +1109,6 @@ GuildWars2.Guilds.Upgrades.Boost.Equals(GuildWars2.Guilds.Upgrades.Boost? other)
 GuildWars2.Guilds.Upgrades.Consumable
 GuildWars2.Guilds.Upgrades.Consumable.Consumable() -> void
 GuildWars2.Guilds.Upgrades.Consumable.Equals(GuildWars2.Guilds.Upgrades.Consumable? other) -> bool
-GuildWars2.Guilds.Upgrades.Decoration
-GuildWars2.Guilds.Upgrades.Decoration.Decoration() -> void
-GuildWars2.Guilds.Upgrades.Decoration.Equals(GuildWars2.Guilds.Upgrades.Decoration? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildHall
 GuildWars2.Guilds.Upgrades.GuildHall.Equals(GuildWars2.Guilds.Upgrades.GuildHall? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildHall.GuildHall() -> void
@@ -6103,10 +6100,6 @@ override GuildWars2.Guilds.Upgrades.Consumable.<Clone>$() -> GuildWars2.Guilds.U
 override GuildWars2.Guilds.Upgrades.Consumable.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.Consumable.GetHashCode() -> int
 override GuildWars2.Guilds.Upgrades.Consumable.ToString() -> string!
-override GuildWars2.Guilds.Upgrades.Decoration.<Clone>$() -> GuildWars2.Guilds.Upgrades.Decoration!
-override GuildWars2.Guilds.Upgrades.Decoration.Equals(object? obj) -> bool
-override GuildWars2.Guilds.Upgrades.Decoration.GetHashCode() -> int
-override GuildWars2.Guilds.Upgrades.Decoration.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.GuildHall.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildHall!
 override GuildWars2.Guilds.Upgrades.GuildHall.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.GuildHall.GetHashCode() -> int
@@ -7793,7 +7786,6 @@ override sealed GuildWars2.Guilds.Upgrades.AccumulatingCurrency.Equals(GuildWars
 override sealed GuildWars2.Guilds.Upgrades.BankBag.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Boost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Consumable.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
-override sealed GuildWars2.Guilds.Upgrades.Decoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildHall.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildHallExpedition.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildUpgradeCoinsCost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgradeCost? other) -> bool
@@ -8304,8 +8296,6 @@ static GuildWars2.Guilds.Upgrades.Boost.operator !=(GuildWars2.Guilds.Upgrades.B
 static GuildWars2.Guilds.Upgrades.Boost.operator ==(GuildWars2.Guilds.Upgrades.Boost? left, GuildWars2.Guilds.Upgrades.Boost? right) -> bool
 static GuildWars2.Guilds.Upgrades.Consumable.operator !=(GuildWars2.Guilds.Upgrades.Consumable? left, GuildWars2.Guilds.Upgrades.Consumable? right) -> bool
 static GuildWars2.Guilds.Upgrades.Consumable.operator ==(GuildWars2.Guilds.Upgrades.Consumable? left, GuildWars2.Guilds.Upgrades.Consumable? right) -> bool
-static GuildWars2.Guilds.Upgrades.Decoration.operator !=(GuildWars2.Guilds.Upgrades.Decoration? left, GuildWars2.Guilds.Upgrades.Decoration? right) -> bool
-static GuildWars2.Guilds.Upgrades.Decoration.operator ==(GuildWars2.Guilds.Upgrades.Decoration? left, GuildWars2.Guilds.Upgrades.Decoration? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildHall.operator !=(GuildWars2.Guilds.Upgrades.GuildHall? left, GuildWars2.Guilds.Upgrades.GuildHall? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildHall.operator ==(GuildWars2.Guilds.Upgrades.GuildHall? left, GuildWars2.Guilds.Upgrades.GuildHall? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildHallExpedition.operator !=(GuildWars2.Guilds.Upgrades.GuildHallExpedition? left, GuildWars2.Guilds.Upgrades.GuildHallExpedition? right) -> bool
