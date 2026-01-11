@@ -14,7 +14,7 @@ public class V1(Gw2Client sut)
         {
             foreach (string language in actual.Languages)
             {
-                await Assert.That(new[] { "en", "es", "de", "fr", "zh" }).Contains(language);
+                await Assert.That(["en", "es", "de", "fr", "zh"]).Contains(language);
             }
         }
     }

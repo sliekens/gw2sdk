@@ -14,7 +14,7 @@ public class V2(Gw2Client sut)
         {
             foreach (string language in actual.Languages)
             {
-                await Assert.That(new[] { "en", "es", "de", "fr", "zh" }).Contains(language);
+                await Assert.That(["en", "es", "de", "fr", "zh"]).Contains(language);
             }
         }
         // curl -s https://api.guildwars2.com/v2.json?v=latest | jq '.routes[].path' | sort | awk '{print $0 ","}'

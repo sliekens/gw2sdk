@@ -15,7 +15,7 @@ public class UnlockedEmotes(Gw2Client sut)
         // The best we can do is verify that there are no unexpected emotes
         foreach (string chest in actual)
         {
-            await Assert.That(new[] { "Bless", "geargrind", "Heroic", "Paper", "playdead", "Possessed", "Rock", "rockout", "Scissors", "shiver", "Shiverplus", "shuffle", "step", "Stretch" }).Contains(chest);
+            await Assert.That(["Bless", "geargrind", "Heroic", "Paper", "playdead", "Possessed", "Rock", "rockout", "Scissors", "shiver", "Shiverplus", "shuffle", "step", "Stretch"]).Contains(chest);
         }
     }
 }
