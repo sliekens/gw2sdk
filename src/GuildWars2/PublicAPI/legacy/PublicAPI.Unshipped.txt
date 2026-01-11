@@ -1,4 +1,7 @@
 #nullable enable
+GuildWars2.Guilds.Upgrades.WorkshopRestoration
+GuildWars2.Guilds.Upgrades.WorkshopRestoration.Equals(GuildWars2.Guilds.Upgrades.WorkshopRestoration? other) -> bool
+GuildWars2.Guilds.Upgrades.WorkshopRestoration.WorkshopRestoration() -> void
 GuildWars2.Hero.Achievements.Rewards.ItemReward
 GuildWars2.Hero.Achievements.Rewards.ItemReward.Count.get -> int
 GuildWars2.Hero.Achievements.Rewards.ItemReward.Count.init -> void
@@ -64,6 +67,10 @@ GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
 GuildWars2.Pvp.Amulets.Amulet.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
 GuildWars2.Pvp.Stats.AccountStats.Professions.get -> System.Collections.Generic.IReadOnlyDictionary<GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>, GuildWars2.Pvp.Stats.Results!>!
+override GuildWars2.Guilds.Upgrades.WorkshopRestoration.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
+override GuildWars2.Guilds.Upgrades.WorkshopRestoration.Equals(object? obj) -> bool
+override GuildWars2.Guilds.Upgrades.WorkshopRestoration.GetHashCode() -> int
+override GuildWars2.Guilds.Upgrades.WorkshopRestoration.ToString() -> string!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.<Clone>$() -> GuildWars2.Hero.Achievements.AchievementReward!
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(object? obj) -> bool
 override GuildWars2.Hero.Achievements.Rewards.ItemReward.GetHashCode() -> int
@@ -101,6 +108,7 @@ override GuildWars2.Items.ShortBow.Equals(object? obj) -> bool
 override GuildWars2.Items.ShortBow.GetHashCode() -> int
 override GuildWars2.Items.ShortBow.ToString() -> string!
 override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
+override sealed GuildWars2.Guilds.Upgrades.WorkshopRestoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Hero.Achievements.Rewards.ItemReward.Equals(GuildWars2.Hero.Achievements.AchievementReward? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
 override sealed GuildWars2.Hero.Crafting.Recipes.ShortBowRecipe.Equals(GuildWars2.Hero.Crafting.Recipes.Recipe? other) -> bool
@@ -110,6 +118,8 @@ override sealed GuildWars2.Items.BackItem.Equals(GuildWars2.Items.Item? other) -
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.MiniatureItem.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.Weapon? other) -> bool
+static GuildWars2.Guilds.Upgrades.WorkshopRestoration.operator !=(GuildWars2.Guilds.Upgrades.WorkshopRestoration? left, GuildWars2.Guilds.Upgrades.WorkshopRestoration? right) -> bool
+static GuildWars2.Guilds.Upgrades.WorkshopRestoration.operator ==(GuildWars2.Guilds.Upgrades.WorkshopRestoration? left, GuildWars2.Guilds.Upgrades.WorkshopRestoration? right) -> bool
 static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator !=(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
 static GuildWars2.Hero.Achievements.Rewards.ItemReward.operator ==(GuildWars2.Hero.Achievements.Rewards.ItemReward? left, GuildWars2.Hero.Achievements.Rewards.ItemReward? right) -> bool
 static GuildWars2.Hero.Crafting.Recipes.BackItemRecipe.operator !=(GuildWars2.Hero.Crafting.Recipes.BackItemRecipe? left, GuildWars2.Hero.Crafting.Recipes.BackItemRecipe? right) -> bool

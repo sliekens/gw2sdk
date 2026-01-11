@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class QueueJson
+internal static class WorkshopRestorationJson
 {
-    public static Queue GetQueue(this in JsonElement json)
+    public static WorkshopRestoration GetWorkshopRestoration(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class QueueJson
             }
         }
 
-        return new Queue
+        return new WorkshopRestoration
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

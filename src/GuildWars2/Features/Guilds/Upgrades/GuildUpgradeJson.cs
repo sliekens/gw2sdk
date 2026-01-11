@@ -31,7 +31,7 @@ internal static class GuildUpgradeJson
                 case "Hub":
                     return json.GetHub();
                 case "Queue":
-                    return json.GetQueue();
+                    return json.GetWorkshopRestoration();
                 case "Unlock":
                     return json.GetUnlock();
                 default:

@@ -1178,9 +1178,6 @@ GuildWars2.Guilds.Upgrades.GuildUpgradeItemCost.Name.init -> void
 GuildWars2.Guilds.Upgrades.Hub
 GuildWars2.Guilds.Upgrades.Hub.Equals(GuildWars2.Guilds.Upgrades.Hub? other) -> bool
 GuildWars2.Guilds.Upgrades.Hub.Hub() -> void
-GuildWars2.Guilds.Upgrades.Queue
-GuildWars2.Guilds.Upgrades.Queue.Equals(GuildWars2.Guilds.Upgrades.Queue? other) -> bool
-GuildWars2.Guilds.Upgrades.Queue.Queue() -> void
 GuildWars2.Guilds.Upgrades.Unlock
 GuildWars2.Guilds.Upgrades.Unlock.Equals(GuildWars2.Guilds.Upgrades.Unlock? other) -> bool
 GuildWars2.Guilds.Upgrades.Unlock.Unlock() -> void
@@ -6154,10 +6151,6 @@ override GuildWars2.Guilds.Upgrades.Hub.<Clone>$() -> GuildWars2.Guilds.Upgrades
 override GuildWars2.Guilds.Upgrades.Hub.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.Hub.GetHashCode() -> int
 override GuildWars2.Guilds.Upgrades.Hub.ToString() -> string!
-override GuildWars2.Guilds.Upgrades.Queue.<Clone>$() -> GuildWars2.Guilds.Upgrades.Queue!
-override GuildWars2.Guilds.Upgrades.Queue.Equals(object? obj) -> bool
-override GuildWars2.Guilds.Upgrades.Queue.GetHashCode() -> int
-override GuildWars2.Guilds.Upgrades.Queue.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.Unlock.<Clone>$() -> GuildWars2.Guilds.Upgrades.Unlock!
 override GuildWars2.Guilds.Upgrades.Unlock.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.Unlock.GetHashCode() -> int
@@ -7823,7 +7816,6 @@ override sealed GuildWars2.Guilds.Upgrades.GuildUpgradeCollectibleCost.Equals(Gu
 override sealed GuildWars2.Guilds.Upgrades.GuildUpgradeCurrencyCost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgradeCost? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildUpgradeItemCost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgradeCost? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Hub.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
-override sealed GuildWars2.Guilds.Upgrades.Queue.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Unlock.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Hero.Accounts.CharacterFlags.Equals(GuildWars2.Flags? other) -> bool
 override sealed GuildWars2.Hero.Achievements.AchievementFlags.Equals(GuildWars2.Flags? other) -> bool
@@ -8350,8 +8342,6 @@ static GuildWars2.Guilds.Upgrades.GuildUpgradeItemCost.operator !=(GuildWars2.Gu
 static GuildWars2.Guilds.Upgrades.GuildUpgradeItemCost.operator ==(GuildWars2.Guilds.Upgrades.GuildUpgradeItemCost? left, GuildWars2.Guilds.Upgrades.GuildUpgradeItemCost? right) -> bool
 static GuildWars2.Guilds.Upgrades.Hub.operator !=(GuildWars2.Guilds.Upgrades.Hub? left, GuildWars2.Guilds.Upgrades.Hub? right) -> bool
 static GuildWars2.Guilds.Upgrades.Hub.operator ==(GuildWars2.Guilds.Upgrades.Hub? left, GuildWars2.Guilds.Upgrades.Hub? right) -> bool
-static GuildWars2.Guilds.Upgrades.Queue.operator !=(GuildWars2.Guilds.Upgrades.Queue? left, GuildWars2.Guilds.Upgrades.Queue? right) -> bool
-static GuildWars2.Guilds.Upgrades.Queue.operator ==(GuildWars2.Guilds.Upgrades.Queue? left, GuildWars2.Guilds.Upgrades.Queue? right) -> bool
 static GuildWars2.Guilds.Upgrades.Unlock.operator !=(GuildWars2.Guilds.Upgrades.Unlock? left, GuildWars2.Guilds.Upgrades.Unlock? right) -> bool
 static GuildWars2.Guilds.Upgrades.Unlock.operator ==(GuildWars2.Guilds.Upgrades.Unlock? left, GuildWars2.Guilds.Upgrades.Unlock? right) -> bool
 static GuildWars2.Hero.Accounts.AccountLuck.operator !=(GuildWars2.Hero.Accounts.AccountLuck? left, GuildWars2.Hero.Accounts.AccountLuck? right) -> bool
