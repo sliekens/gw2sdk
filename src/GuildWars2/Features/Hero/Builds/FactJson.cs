@@ -60,6 +60,7 @@ internal static class FactJson
         }
 
         // BUG: Life Force Cost is missing a type property, but we can treat it as Percent
+        // https://github.com/gw2-api/issues/issues/8
         if (discriminator.ValueKind == JsonValueKind.Undefined
             && json.TryGetProperty("percent", out _))
         {
