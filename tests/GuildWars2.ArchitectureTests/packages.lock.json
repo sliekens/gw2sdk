@@ -31,9 +31,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.5.0, )",
-        "resolved": "9.5.0",
-        "contentHash": "T3E8+K+W0u78495PwSSJOzT6QUbnZSdkDK4B3nfvxUo9nctDr6ChSDLV4l/RD2ZmA5oHM2YbLvyp+a2uE0ftOQ=="
+        "requested": "[9.7.0, )",
+        "resolved": "9.7.0",
+        "contentHash": "0KMGnpeZe7TZCnM+Hc0sihtJJFFlTq2IAEmkgFtyGLNpCB98pqowyyHCsaFRahFFhKbGDU/1zWHDTBLFOlqvBA=="
       },
       "TUnit": {
         "type": "Direct",
@@ -330,9 +330,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.5.0, )",
-        "resolved": "9.5.0",
-        "contentHash": "T3E8+K+W0u78495PwSSJOzT6QUbnZSdkDK4B3nfvxUo9nctDr6ChSDLV4l/RD2ZmA5oHM2YbLvyp+a2uE0ftOQ=="
+        "requested": "[9.7.0, )",
+        "resolved": "9.7.0",
+        "contentHash": "0KMGnpeZe7TZCnM+Hc0sihtJJFFlTq2IAEmkgFtyGLNpCB98pqowyyHCsaFRahFFhKbGDU/1zWHDTBLFOlqvBA=="
       },
       "TUnit": {
         "type": "Direct",
