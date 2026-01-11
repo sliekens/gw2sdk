@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class ConsumableJson
+internal static class GuildConsumableJson
 {
-    public static Consumable GetConsumable(this in JsonElement json)
+    public static GuildConsumable GetGuildConsumable(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class ConsumableJson
             }
         }
 
-        return new Consumable
+        return new GuildConsumable
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

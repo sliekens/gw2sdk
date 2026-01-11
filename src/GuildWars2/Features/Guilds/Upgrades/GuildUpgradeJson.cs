@@ -21,7 +21,7 @@ internal static class GuildUpgradeJson
                 case "Claimable":
                     return json.GetWvwObjectiveUpgrade();
                 case "Consumable":
-                    return json.GetConsumable();
+                    return json.GetGuildConsumable();
                 case "Decoration":
                     return json.GetGuildDecoration();
                 case "GuildHall":
