@@ -1,4 +1,112 @@
 #nullable enable
+GuildWars2.Collections.ValueImmutableList<T>
+GuildWars2.Collections.ValueImmutableList<T>.Add(T value) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.AddRange(System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.Clear() -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.Count.get -> int
+GuildWars2.Collections.ValueImmutableList<T>.Equals(GuildWars2.Collections.ValueImmutableList<T>? other) -> bool
+GuildWars2.Collections.ValueImmutableList<T>.GetEnumerator() -> System.Collections.Generic.IEnumerator<T>!
+GuildWars2.Collections.ValueImmutableList<T>.IndexOf(T item, int index, int count, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> int
+GuildWars2.Collections.ValueImmutableList<T>.Insert(int index, T element) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.InsertRange(int index, System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.LastIndexOf(T item, int index, int count, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> int
+GuildWars2.Collections.ValueImmutableList<T>.Remove(T value, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.RemoveAll(System.Predicate<T>! match) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.RemoveAt(int index) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.RemoveRange(int index, int count) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>! items, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.SetItem(int index, T value) -> GuildWars2.Collections.ValueImmutableList<T>!
+GuildWars2.Collections.ValueImmutableList<T>.this[int index].get -> T
+GuildWars2.Collections.ValueImmutableList<T>.ValueImmutableList() -> void
+GuildWars2.Collections.ValueImmutableList<T>.ValueImmutableList(System.Collections.Generic.IEnumerable<T>! collection) -> void
+override GuildWars2.Collections.ValueImmutableList<T>.Equals(object? obj) -> bool
+override GuildWars2.Collections.ValueImmutableList<T>.GetHashCode() -> int
+static GuildWars2.Collections.ValueImmutableList<T>.Empty.get -> GuildWars2.Collections.ValueImmutableList<T>!
+static GuildWars2.Collections.ValueImmutableList<T>.operator !=(GuildWars2.Collections.ValueImmutableList<T>? left, GuildWars2.Collections.ValueImmutableList<T>? right) -> bool
+static GuildWars2.Collections.ValueImmutableList<T>.operator ==(GuildWars2.Collections.ValueImmutableList<T>? left, GuildWars2.Collections.ValueImmutableList<T>? right) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>
+GuildWars2.Collections.ValueImmutableHashSet<T>.Add(T value) -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.Clear() -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.Contains(T value) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.Count.get -> int
+GuildWars2.Collections.ValueImmutableHashSet<T>.Equals(GuildWars2.Collections.ValueImmutableHashSet<T>? other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.Except(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.GetEnumerator() -> System.Collections.Generic.IEnumerator<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.Intersect(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.IsProperSubsetOf(System.Collections.Generic.IEnumerable<T>! other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.IsProperSupersetOf(System.Collections.Generic.IEnumerable<T>! other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.IsSubsetOf(System.Collections.Generic.IEnumerable<T>! other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.IsSupersetOf(System.Collections.Generic.IEnumerable<T>! other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.Overlaps(System.Collections.Generic.IEnumerable<T>! other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.Remove(T value) -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.SetEquals(System.Collections.Generic.IEnumerable<T>! other) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.SymmetricExcept(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.TryGetValue(T equalValue, out T actualValue) -> bool
+GuildWars2.Collections.ValueImmutableHashSet<T>.Union(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+GuildWars2.Collections.ValueImmutableHashSet<T>.ValueImmutableHashSet() -> void
+GuildWars2.Collections.ValueImmutableHashSet<T>.ValueImmutableHashSet(System.Collections.Generic.IEnumerable<T>! collection) -> void
+override GuildWars2.Collections.ValueImmutableHashSet<T>.Equals(object? obj) -> bool
+override GuildWars2.Collections.ValueImmutableHashSet<T>.GetHashCode() -> int
+static GuildWars2.Collections.ValueImmutableHashSet<T>.Empty.get -> GuildWars2.Collections.ValueImmutableHashSet<T>!
+static GuildWars2.Collections.ValueImmutableHashSet<T>.operator !=(GuildWars2.Collections.ValueImmutableHashSet<T>? left, GuildWars2.Collections.ValueImmutableHashSet<T>? right) -> bool
+static GuildWars2.Collections.ValueImmutableHashSet<T>.operator ==(GuildWars2.Collections.ValueImmutableHashSet<T>? left, GuildWars2.Collections.ValueImmutableHashSet<T>? right) -> bool
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Add(TKey key, TValue value) -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.AddRange(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! pairs) -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Clear() -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Contains(System.Collections.Generic.KeyValuePair<TKey, TValue> pair) -> bool
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.ContainsKey(TKey key) -> bool
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Count.get -> int
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Equals(GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>? other) -> bool
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.GetEnumerator() -> System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<TKey, TValue>>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Keys.get -> System.Collections.Generic.IEnumerable<TKey>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Remove(TKey key) -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.RemoveRange(System.Collections.Generic.IEnumerable<TKey>! keys) -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.SetItem(TKey key, TValue value) -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.SetItems(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! items) -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.this[TKey key].get -> TValue
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.TryGetKey(TKey equalKey, out TKey actualKey) -> bool
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) -> bool
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.ValueImmutableDictionary() -> void
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.ValueImmutableDictionary(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! collection) -> void
+GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Values.get -> System.Collections.Generic.IEnumerable<TValue>!
+override GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Equals(object? obj) -> bool
+override GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.GetHashCode() -> int
+static GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.Empty.get -> GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>!
+static GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.operator !=(GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>? left, GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>? right) -> bool
+static GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>.operator ==(GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>? left, GuildWars2.Collections.ValueImmutableDictionary<TKey, TValue>? right) -> bool
+GuildWars2.Collections.ValueImmutableArray<T>
+GuildWars2.Collections.ValueImmutableArray<T>.Add(T value) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.AddRange(System.Collections.Generic.IEnumerable<T>! values) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.AsMemory() -> System.ReadOnlyMemory<T>
+GuildWars2.Collections.ValueImmutableArray<T>.AsSpan() -> System.ReadOnlySpan<T>
+GuildWars2.Collections.ValueImmutableArray<T>.Clear() -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.Contains(T item) -> bool
+GuildWars2.Collections.ValueImmutableArray<T>.Count.get -> int
+GuildWars2.Collections.ValueImmutableArray<T>.Equals(GuildWars2.Collections.ValueImmutableArray<T>? other) -> bool
+GuildWars2.Collections.ValueImmutableArray<T>.GetEnumerator() -> System.Collections.Generic.IEnumerator<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.IndexOf(T item, int index, int count, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> int
+GuildWars2.Collections.ValueImmutableArray<T>.Insert(int index, T element) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.InsertRange(int index, System.Collections.Generic.IEnumerable<T>! elements) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.LastIndexOf(T item, int index, int count, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> int
+GuildWars2.Collections.ValueImmutableArray<T>.Length.get -> int
+GuildWars2.Collections.ValueImmutableArray<T>.Remove(T value, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.RemoveAll(System.Predicate<T>! match) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.RemoveAt(int index) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>! elementsToRemove, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.RemoveRange(int index, int count) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.SetItem(int index, T value) -> GuildWars2.Collections.ValueImmutableArray<T>!
+GuildWars2.Collections.ValueImmutableArray<T>.this[int index].get -> T
+GuildWars2.Collections.ValueImmutableArray<T>.ValueImmutableArray() -> void
+GuildWars2.Collections.ValueImmutableArray<T>.ValueImmutableArray(System.Collections.Generic.IEnumerable<T>! collection) -> void
+GuildWars2.Collections.ValueImmutableArray<T>.ValueImmutableArray(in System.ReadOnlySpan<T> items) -> void
+override GuildWars2.Collections.ValueImmutableArray<T>.Equals(object? obj) -> bool
+override GuildWars2.Collections.ValueImmutableArray<T>.GetHashCode() -> int
+static GuildWars2.Collections.ValueImmutableArray<T>.Empty.get -> GuildWars2.Collections.ValueImmutableArray<T>!
+static GuildWars2.Collections.ValueImmutableArray<T>.operator !=(GuildWars2.Collections.ValueImmutableArray<T>? left, GuildWars2.Collections.ValueImmutableArray<T>? right) -> bool
+static GuildWars2.Collections.ValueImmutableArray<T>.operator ==(GuildWars2.Collections.ValueImmutableArray<T>? left, GuildWars2.Collections.ValueImmutableArray<T>? right) -> bool
 GuildWars2.Guilds.Upgrades.AetheriumUpgrade
 GuildWars2.Guilds.Upgrades.AetheriumUpgrade.AetheriumUpgrade() -> void
 GuildWars2.Guilds.Upgrades.AetheriumUpgrade.Equals(GuildWars2.Guilds.Upgrades.AetheriumUpgrade? other) -> bool

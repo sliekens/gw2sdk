@@ -1,0 +1,301 @@
+using System.Collections;
+using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+
+namespace GuildWars2.Collections;
+
+/// <summary>Represents an immutable list collection with value semantics, meaning two <see cref="ValueImmutableList{T}"/> instances are considered equal if their contents are equal.</summary>
+/// <typeparam name="T">The type of elements in the list.</typeparam>
+[DebuggerDisplay("Count = {Count}")]
+[SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableList<T>.")]
+[SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
+[SuppressMessage("Style", "IDE0303", Justification = "Cannot simplify to collection expression.")]
+public sealed class ValueImmutableList<T> : IImmutableList<T>, IEquatable<ValueImmutableList<T>>
+{
+    /// <summary>Gets an empty <see cref="ValueImmutableList{T}"/>.</summary>
+    [SuppressMessage("Design", "CA1000", Justification = "Follows BCL pattern for immutable collections.")]
+    public static ValueImmutableList<T> Empty { get; } = new();
+
+    private readonly ImmutableList<T> items;
+
+    /// <summary>Initializes a new instance of the <see cref="ValueImmutableList{T}"/> class that is empty.</summary>
+    public ValueImmutableList()
+    {
+        items = ImmutableList<T>.Empty;
+    }
+
+    /// <summary>Initializes a new instance of the <see cref="ValueImmutableList{T}"/> class that contains elements copied from the specified collection.</summary>
+    /// <param name="collection">The collection whose elements are copied to the new list.</param>
+    public ValueImmutableList(IEnumerable<T> collection)
+    {
+        items = ImmutableList.CreateRange(collection);
+    }
+
+    private ValueImmutableList(ImmutableList<T> items)
+    {
+        this.items = items;
+    }
+
+    /// <inheritdoc/>
+    public int Count => items.Count;
+
+    /// <inheritdoc/>
+    public T this[int index] => items[index];
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the specified item added to the end.</summary>
+    /// <param name="value">The item to add.</param>
+    /// <returns>A new list with the item added.</returns>
+    public ValueImmutableList<T> Add(T value)
+    {
+        return new ValueImmutableList<T>(items.Add(value));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the specified items added to the end.</summary>
+    /// <param name="items">The items to add.</param>
+    /// <returns>A new list with the items added.</returns>
+    public ValueImmutableList<T> AddRange(IEnumerable<T> items)
+    {
+        return new ValueImmutableList<T>(this.items.AddRange(items));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the specified item inserted at the specified index.</summary>
+    /// <param name="index">The zero-based index at which to insert the item.</param>
+    /// <param name="element">The item to insert.</param>
+    /// <returns>A new list with the item inserted.</returns>
+    public ValueImmutableList<T> Insert(int index, T element)
+    {
+        return new ValueImmutableList<T>(items.Insert(index, element));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the item at the specified index removed.</summary>
+    /// <param name="index">The zero-based index of the item to remove.</param>
+    /// <returns>A new list with the item removed.</returns>
+    public ValueImmutableList<T> RemoveAt(int index)
+    {
+        return new ValueImmutableList<T>(items.RemoveAt(index));
+    }
+
+    /// <summary>Searches for the specified item and returns the zero-based index of the first occurrence within the range of elements that starts at the specified index and contains the specified number of elements.</summary>
+    /// <param name="item">The item to locate in the list.</param>
+    /// <param name="index">The zero-based starting index of the search.</param>
+    /// <param name="count">The number of elements in the section to search.</param>
+    /// <param name="equalityComparer">The equality comparer to use in the search, or <c>null</c> to use the default comparer.</param>
+    /// <returns>The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref name="equalityComparer"/>, if found; otherwise, -1.</returns>
+    public int IndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer)
+    {
+        return items.IndexOf(item, index, count, equalityComparer);
+    }
+
+    /// <summary>Searches for the specified item and returns the zero-based index of the last occurrence within the range of elements that contains the specified number of elements and ends at the specified index.</summary>
+    /// <param name="item">The item to locate in the list.</param>
+    /// <param name="index">The zero-based starting index of the backward search.</param>
+    /// <param name="count">The number of elements in the section to search.</param>
+    /// <param name="equalityComparer">The equality comparer to use in the search, or <c>null</c> to use the default comparer.</param>
+    /// <returns>The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref name="equalityComparer"/>, if found; otherwise, -1.</returns>
+    public int LastIndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer)
+    {
+        return items.LastIndexOf(item, index, count, equalityComparer);
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the specified items inserted at the specified index.</summary>
+    /// <param name="index">The zero-based index at which the new items should be inserted.</param>
+    /// <param name="items">The items to insert.</param>
+    /// <returns>A new list with the items inserted.</returns>
+    public ValueImmutableList<T> InsertRange(int index, IEnumerable<T> items)
+    {
+        return new ValueImmutableList<T>(this.items.InsertRange(index, items));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the first occurrence of the specified item removed.</summary>
+    /// <param name="value">The item to remove.</param>
+    /// <param name="equalityComparer">The equality comparer to use to locate <paramref name="value"/>, or <c>null</c> to use the default comparer.</param>
+    /// <returns>A new list with the item removed, or the same list if the item was not found.</returns>
+    public ValueImmutableList<T> Remove(T value, IEqualityComparer<T>? equalityComparer)
+    {
+        return new ValueImmutableList<T>(items.Remove(value, equalityComparer));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with all elements that match the conditions defined by the specified predicate removed.</summary>
+    /// <param name="match">The predicate that defines the conditions of the elements to remove.</param>
+    /// <returns>A new list with the matching elements removed.</returns>
+    public ValueImmutableList<T> RemoveAll(Predicate<T> match)
+    {
+        return new ValueImmutableList<T>(items.RemoveAll(match));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the specified items removed.</summary>
+    /// <param name="items">The items to remove from the list.</param>
+    /// <param name="equalityComparer">The equality comparer to use to locate the items, or <c>null</c> to use the default comparer.</param>
+    /// <returns>A new list with the items removed.</returns>
+    public ValueImmutableList<T> RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
+    {
+        return new ValueImmutableList<T>(this.items.RemoveRange(items, equalityComparer));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with a range of elements removed.</summary>
+    /// <param name="index">The zero-based starting index of the range of elements to remove.</param>
+    /// <param name="count">The number of elements to remove.</param>
+    /// <returns>A new list with the elements removed.</returns>
+    public ValueImmutableList<T> RemoveRange(int index, int count)
+    {
+        return new ValueImmutableList<T>(items.RemoveRange(index, count));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the first occurrence of the specified value replaced with a new value.</summary>
+    /// <param name="oldValue">The value to be replaced.</param>
+    /// <param name="newValue">The value to replace the first occurrence of <paramref name="oldValue"/>.</param>
+    /// <param name="equalityComparer">The equality comparer to use to locate <paramref name="oldValue"/>, or <c>null</c> to use the default comparer.</param>
+    /// <returns>A new list with the value replaced.</returns>
+    public ValueImmutableList<T> Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
+    {
+        return new ValueImmutableList<T>(items.Replace(oldValue, newValue, equalityComparer));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with the element at the specified index replaced.</summary>
+    /// <param name="index">The zero-based index of the element to replace.</param>
+    /// <param name="value">The new value.</param>
+    /// <returns>A new list with the element replaced.</returns>
+    public ValueImmutableList<T> SetItem(int index, T value)
+    {
+        return new ValueImmutableList<T>(items.SetItem(index, value));
+    }
+
+    /// <summary>Creates a new <see cref="ValueImmutableList{T}"/> with all items removed.</summary>
+    /// <returns>An empty list.</returns>
+    public ValueImmutableList<T> Clear()
+    {
+        return Empty;
+    }
+
+    /// <summary>Determines whether the current <see cref="ValueImmutableList{T}"/> is equal to another <see cref="ValueImmutableList{T}"/> based on value semantics.</summary>
+    /// <param name="other">The other <see cref="ValueImmutableList{T}"/> to compare with this instance.</param>
+    /// <returns><c>true</c> if the lists are equal by value; otherwise, <c>false</c>.</returns>
+    public bool Equals(ValueImmutableList<T>? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Count == other.Count && items.SequenceEqual(other.items);
+    }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj) || (obj is ValueImmutableList<T> other && Equals(other));
+    }
+
+    /// <summary>Returns a hash code based on the values of the items in the list.</summary>
+    /// <returns>A hash code for the current object.</returns>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        foreach (T item in items)
+        {
+            hash.Add(item);
+        }
+
+        return hash.ToHashCode();
+    }
+
+    /// <inheritdoc/>
+    public IEnumerator<T> GetEnumerator()
+    {
+        return items.GetEnumerator();
+    }
+
+    /// <inheritdoc/>
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    /// <summary>Determines whether two <see cref="ValueImmutableList{T}"/> instances are equal by value.</summary>
+    /// <param name="left">The first <see cref="ValueImmutableList{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueImmutableList{T}"/> to compare.</param>
+    /// <returns><c>true</c> if the lists are equal by value; otherwise, <c>false</c>.</returns>
+    public static bool operator ==(ValueImmutableList<T>? left, ValueImmutableList<T>? right)
+    {
+        return Equals(left, right);
+    }
+
+    /// <summary>Determines whether two <see cref="ValueImmutableList{T}"/> instances are not equal by value.</summary>
+    /// <param name="left">The first <see cref="ValueImmutableList{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ValueImmutableList{T}"/> to compare.</param>
+    /// <returns><c>true</c> if the lists are not equal by value; otherwise, <c>false</c>.</returns>
+    public static bool operator !=(ValueImmutableList<T>? left, ValueImmutableList<T>? right)
+    {
+        return !Equals(left, right);
+    }
+
+    #region Explicit IImmutableList<T> implementation
+
+    IImmutableList<T> IImmutableList<T>.Add(T value)
+    {
+        return Add(value);
+    }
+
+    IImmutableList<T> IImmutableList<T>.AddRange(IEnumerable<T> items)
+    {
+        return AddRange(items);
+    }
+
+    IImmutableList<T> IImmutableList<T>.Clear()
+    {
+        return Clear();
+    }
+
+    IImmutableList<T> IImmutableList<T>.Insert(int index, T element)
+    {
+        return Insert(index, element);
+    }
+
+    IImmutableList<T> IImmutableList<T>.InsertRange(int index, IEnumerable<T> items)
+    {
+        return InsertRange(index, items);
+    }
+
+    IImmutableList<T> IImmutableList<T>.Remove(T value, IEqualityComparer<T>? equalityComparer)
+    {
+        return Remove(value, equalityComparer);
+    }
+
+    IImmutableList<T> IImmutableList<T>.RemoveAll(Predicate<T> match)
+    {
+        return RemoveAll(match);
+    }
+
+    IImmutableList<T> IImmutableList<T>.RemoveAt(int index)
+    {
+        return RemoveAt(index);
+    }
+
+    IImmutableList<T> IImmutableList<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
+    {
+        return RemoveRange(items, equalityComparer);
+    }
+
+    IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count)
+    {
+        return RemoveRange(index, count);
+    }
+
+    IImmutableList<T> IImmutableList<T>.Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
+    {
+        return Replace(oldValue, newValue, equalityComparer);
+    }
+
+    IImmutableList<T> IImmutableList<T>.SetItem(int index, T value)
+    {
+        return SetItem(index, value);
+    }
+
+    #endregion Explicit IImmutableList<T> implementation
+}
