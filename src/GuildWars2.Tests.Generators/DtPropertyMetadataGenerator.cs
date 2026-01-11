@@ -18,7 +18,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
 
     private static void Execute(Compilation compilation, SourceProductionContext context)
     {
-        IAssemblySymbol? sdk = compilation.SourceModule.ReferencedAssemblySymbols.FirstOrDefault(a => string.Equals(a.Name, "GW2SDK", StringComparison.Ordinal));
+        IAssemblySymbol? sdk = compilation.SourceModule.ReferencedAssemblySymbols.FirstOrDefault(a => string.Equals(a.Name, "GuildWars2", StringComparison.Ordinal));
         if (sdk is null)
         {
             EmitPlaceholder(context);
