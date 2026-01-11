@@ -50,11 +50,7 @@ internal sealed class EquipmentItemValidation
             {
                 foreach (KeyValuePair<Extensible<AttributeName>, int> attribute in item.Stats.Attributes)
                 {
-#if NET
                     await Assert.That(attribute.Key.IsDefined()).IsTrue();
-#else
-                    await TUnit.Assertions.Assert.That(Enum.IsDefined(typeof(AttributeName), attribute.Key)).IsTrue();
-#endif
                     await Assert.That(attribute.Value).IsGreaterThan(0);
                 }
             }
