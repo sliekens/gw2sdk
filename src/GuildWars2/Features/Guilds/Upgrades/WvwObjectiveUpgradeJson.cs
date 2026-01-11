@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class ClaimableJson
+internal static class WvwObjectiveUpgradeJson
 {
-    public static Claimable GetClaimable(this in JsonElement json)
+    public static WvwObjectiveUpgrade GetWvwObjectiveUpgrade(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class ClaimableJson
             }
         }
 
-        return new Claimable
+        return new WvwObjectiveUpgrade
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

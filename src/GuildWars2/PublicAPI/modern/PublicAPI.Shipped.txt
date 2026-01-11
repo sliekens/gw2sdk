@@ -1106,9 +1106,6 @@ GuildWars2.Guilds.Upgrades.BankBag.MaxItems.init -> void
 GuildWars2.Guilds.Upgrades.Boost
 GuildWars2.Guilds.Upgrades.Boost.Boost() -> void
 GuildWars2.Guilds.Upgrades.Boost.Equals(GuildWars2.Guilds.Upgrades.Boost? other) -> bool
-GuildWars2.Guilds.Upgrades.Claimable
-GuildWars2.Guilds.Upgrades.Claimable.Claimable() -> void
-GuildWars2.Guilds.Upgrades.Claimable.Equals(GuildWars2.Guilds.Upgrades.Claimable? other) -> bool
 GuildWars2.Guilds.Upgrades.Consumable
 GuildWars2.Guilds.Upgrades.Consumable.Consumable() -> void
 GuildWars2.Guilds.Upgrades.Consumable.Equals(GuildWars2.Guilds.Upgrades.Consumable? other) -> bool
@@ -6105,10 +6102,6 @@ override GuildWars2.Guilds.Upgrades.Boost.<Clone>$() -> GuildWars2.Guilds.Upgrad
 override GuildWars2.Guilds.Upgrades.Boost.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.Boost.GetHashCode() -> int
 override GuildWars2.Guilds.Upgrades.Boost.ToString() -> string!
-override GuildWars2.Guilds.Upgrades.Claimable.<Clone>$() -> GuildWars2.Guilds.Upgrades.Claimable!
-override GuildWars2.Guilds.Upgrades.Claimable.Equals(object? obj) -> bool
-override GuildWars2.Guilds.Upgrades.Claimable.GetHashCode() -> int
-override GuildWars2.Guilds.Upgrades.Claimable.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.Consumable.<Clone>$() -> GuildWars2.Guilds.Upgrades.Consumable!
 override GuildWars2.Guilds.Upgrades.Consumable.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.Consumable.GetHashCode() -> int
@@ -7806,7 +7799,6 @@ override sealed GuildWars2.Guilds.Logs.TreasuryDeposit.Equals(GuildWars2.Guilds.
 override sealed GuildWars2.Guilds.Upgrades.AccumulatingCurrency.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.BankBag.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Boost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
-override sealed GuildWars2.Guilds.Upgrades.Claimable.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Consumable.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.Decoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildHall.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
@@ -8318,8 +8310,6 @@ static GuildWars2.Guilds.Upgrades.BankBag.operator !=(GuildWars2.Guilds.Upgrades
 static GuildWars2.Guilds.Upgrades.BankBag.operator ==(GuildWars2.Guilds.Upgrades.BankBag? left, GuildWars2.Guilds.Upgrades.BankBag? right) -> bool
 static GuildWars2.Guilds.Upgrades.Boost.operator !=(GuildWars2.Guilds.Upgrades.Boost? left, GuildWars2.Guilds.Upgrades.Boost? right) -> bool
 static GuildWars2.Guilds.Upgrades.Boost.operator ==(GuildWars2.Guilds.Upgrades.Boost? left, GuildWars2.Guilds.Upgrades.Boost? right) -> bool
-static GuildWars2.Guilds.Upgrades.Claimable.operator !=(GuildWars2.Guilds.Upgrades.Claimable? left, GuildWars2.Guilds.Upgrades.Claimable? right) -> bool
-static GuildWars2.Guilds.Upgrades.Claimable.operator ==(GuildWars2.Guilds.Upgrades.Claimable? left, GuildWars2.Guilds.Upgrades.Claimable? right) -> bool
 static GuildWars2.Guilds.Upgrades.Consumable.operator !=(GuildWars2.Guilds.Upgrades.Consumable? left, GuildWars2.Guilds.Upgrades.Consumable? right) -> bool
 static GuildWars2.Guilds.Upgrades.Consumable.operator ==(GuildWars2.Guilds.Upgrades.Consumable? left, GuildWars2.Guilds.Upgrades.Consumable? right) -> bool
 static GuildWars2.Guilds.Upgrades.Decoration.operator !=(GuildWars2.Guilds.Upgrades.Decoration? left, GuildWars2.Guilds.Upgrades.Decoration? right) -> bool
