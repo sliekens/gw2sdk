@@ -29,7 +29,7 @@ internal static class GuildUpgradeJson
                 case "GuildHallExpedition":
                     return json.GetGuildHallExpedition();
                 case "Hub":
-                    return json.GetHub();
+                    return json.GetGuildInitiativeOffice();
                 case "Queue":
                     return json.GetWorkshopRestoration();
                 case "Unlock":

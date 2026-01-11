@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class HubJson
+internal static class GuildInitiativeOfficeJson
 {
-    public static Hub GetHub(this in JsonElement json)
+    public static GuildInitiativeOffice GetGuildInitiativeOffice(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class HubJson
             }
         }
 
-        return new Hub
+        return new GuildInitiativeOffice
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

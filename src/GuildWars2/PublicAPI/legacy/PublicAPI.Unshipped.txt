@@ -8,6 +8,9 @@ GuildWars2.Guilds.Upgrades.GuildConsumable.GuildConsumable() -> void
 GuildWars2.Guilds.Upgrades.GuildDecoration
 GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(GuildWars2.Guilds.Upgrades.GuildDecoration? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildDecoration.GuildDecoration() -> void
+GuildWars2.Guilds.Upgrades.GuildInitiativeOffice
+GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.Equals(GuildWars2.Guilds.Upgrades.GuildInitiativeOffice? other) -> bool
+GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.GuildInitiativeOffice() -> void
 GuildWars2.Guilds.Upgrades.GuildUnlocker
 GuildWars2.Guilds.Upgrades.GuildUnlocker.Equals(GuildWars2.Guilds.Upgrades.GuildUnlocker? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildUnlocker.GuildUnlocker() -> void
@@ -94,6 +97,10 @@ override GuildWars2.Guilds.Upgrades.GuildDecoration.<Clone>$() -> GuildWars2.Gui
 override GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.GuildDecoration.GetHashCode() -> int
 override GuildWars2.Guilds.Upgrades.GuildDecoration.ToString() -> string!
+override GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
+override GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.Equals(object? obj) -> bool
+override GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.GetHashCode() -> int
+override GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.GuildUnlocker.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
 override GuildWars2.Guilds.Upgrades.GuildUnlocker.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.GuildUnlocker.GetHashCode() -> int
@@ -146,6 +153,7 @@ override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildBoost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildConsumable.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
+override sealed GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildUnlocker.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.WorkshopRestoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.WvwObjectiveUpgrade.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
@@ -164,6 +172,8 @@ static GuildWars2.Guilds.Upgrades.GuildConsumable.operator !=(GuildWars2.Guilds.
 static GuildWars2.Guilds.Upgrades.GuildConsumable.operator ==(GuildWars2.Guilds.Upgrades.GuildConsumable? left, GuildWars2.Guilds.Upgrades.GuildConsumable? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildDecoration.operator !=(GuildWars2.Guilds.Upgrades.GuildDecoration? left, GuildWars2.Guilds.Upgrades.GuildDecoration? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildDecoration.operator ==(GuildWars2.Guilds.Upgrades.GuildDecoration? left, GuildWars2.Guilds.Upgrades.GuildDecoration? right) -> bool
+static GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.operator !=(GuildWars2.Guilds.Upgrades.GuildInitiativeOffice? left, GuildWars2.Guilds.Upgrades.GuildInitiativeOffice? right) -> bool
+static GuildWars2.Guilds.Upgrades.GuildInitiativeOffice.operator ==(GuildWars2.Guilds.Upgrades.GuildInitiativeOffice? left, GuildWars2.Guilds.Upgrades.GuildInitiativeOffice? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildUnlocker.operator !=(GuildWars2.Guilds.Upgrades.GuildUnlocker? left, GuildWars2.Guilds.Upgrades.GuildUnlocker? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildUnlocker.operator ==(GuildWars2.Guilds.Upgrades.GuildUnlocker? left, GuildWars2.Guilds.Upgrades.GuildUnlocker? right) -> bool
 static GuildWars2.Guilds.Upgrades.WorkshopRestoration.operator !=(GuildWars2.Guilds.Upgrades.WorkshopRestoration? left, GuildWars2.Guilds.Upgrades.WorkshopRestoration? right) -> bool
