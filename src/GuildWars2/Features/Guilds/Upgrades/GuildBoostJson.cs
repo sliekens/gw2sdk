@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class BoostJson
+internal static class GuildBoostJson
 {
-    public static Boost GetBoost(this in JsonElement json)
+    public static GuildBoost GetGuildBoost(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class BoostJson
             }
         }
 
-        return new Boost
+        return new GuildBoost
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

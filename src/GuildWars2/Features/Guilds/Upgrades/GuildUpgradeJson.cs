@@ -17,7 +17,7 @@ internal static class GuildUpgradeJson
                 case "BankBag":
                     return json.GetBankBag();
                 case "Boost":
-                    return json.GetBoost();
+                    return json.GetGuildBoost();
                 case "Claimable":
                     return json.GetWvwObjectiveUpgrade();
                 case "Consumable":
