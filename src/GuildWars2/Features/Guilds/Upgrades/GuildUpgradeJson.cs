@@ -13,7 +13,7 @@ internal static class GuildUpgradeJson
             switch (discriminator.GetString())
             {
                 case "AccumulatingCurrency":
-                    return json.GetAccumulatingCurrency();
+                    return json.GetAetheriumUpgrade();
                 case "BankBag":
                     return json.GetGuildBankUpgrade();
                 case "Boost":

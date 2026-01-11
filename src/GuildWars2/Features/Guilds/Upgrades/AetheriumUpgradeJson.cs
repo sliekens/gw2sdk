@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class AccumulatingCurrencyJson
+internal static class AetheriumUpgradeJson
 {
-    public static AccumulatingCurrency GetAccumulatingCurrency(this in JsonElement json)
+    public static AetheriumUpgrade GetAetheriumUpgrade(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class AccumulatingCurrencyJson
             }
         }
 
-        return new AccumulatingCurrency
+        return new AetheriumUpgrade
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

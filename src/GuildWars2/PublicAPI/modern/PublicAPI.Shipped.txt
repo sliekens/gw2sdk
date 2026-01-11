@@ -1093,9 +1093,6 @@ GuildWars2.Guilds.Treasury.GuildTreasurySlot.Equals(GuildWars2.Guilds.Treasury.G
 GuildWars2.Guilds.Treasury.GuildTreasurySlot.GuildTreasurySlot() -> void
 GuildWars2.Guilds.Treasury.GuildTreasurySlot.ItemId.get -> int
 GuildWars2.Guilds.Treasury.GuildTreasurySlot.ItemId.init -> void
-GuildWars2.Guilds.Upgrades.AccumulatingCurrency
-GuildWars2.Guilds.Upgrades.AccumulatingCurrency.AccumulatingCurrency() -> void
-GuildWars2.Guilds.Upgrades.AccumulatingCurrency.Equals(GuildWars2.Guilds.Upgrades.AccumulatingCurrency? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildHall
 GuildWars2.Guilds.Upgrades.GuildHall.Equals(GuildWars2.Guilds.Upgrades.GuildHall? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildHall.GuildHall() -> void
@@ -6068,10 +6065,6 @@ override GuildWars2.Guilds.Treasury.CountNeededForUpgrade.ToString() -> string!
 override GuildWars2.Guilds.Treasury.GuildTreasurySlot.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Treasury.GuildTreasurySlot.GetHashCode() -> int
 override GuildWars2.Guilds.Treasury.GuildTreasurySlot.ToString() -> string!
-override GuildWars2.Guilds.Upgrades.AccumulatingCurrency.<Clone>$() -> GuildWars2.Guilds.Upgrades.AccumulatingCurrency!
-override GuildWars2.Guilds.Upgrades.AccumulatingCurrency.Equals(object? obj) -> bool
-override GuildWars2.Guilds.Upgrades.AccumulatingCurrency.GetHashCode() -> int
-override GuildWars2.Guilds.Upgrades.AccumulatingCurrency.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.GuildHall.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildHall!
 override GuildWars2.Guilds.Upgrades.GuildHall.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.GuildHall.GetHashCode() -> int
@@ -7750,7 +7743,6 @@ override sealed GuildWars2.Guilds.Logs.MemberKicked.Equals(GuildWars2.Guilds.Log
 override sealed GuildWars2.Guilds.Logs.NewMessageOfTheDay.Equals(GuildWars2.Guilds.Logs.GuildLogEntry? other) -> bool
 override sealed GuildWars2.Guilds.Logs.RankChange.Equals(GuildWars2.Guilds.Logs.GuildLogEntry? other) -> bool
 override sealed GuildWars2.Guilds.Logs.TreasuryDeposit.Equals(GuildWars2.Guilds.Logs.GuildLogEntry? other) -> bool
-override sealed GuildWars2.Guilds.Upgrades.AccumulatingCurrency.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildHall.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildHallExpedition.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildUpgradeCoinsCost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgradeCost? other) -> bool
@@ -8252,8 +8244,6 @@ static GuildWars2.Guilds.Treasury.CountNeededForUpgrade.operator !=(GuildWars2.G
 static GuildWars2.Guilds.Treasury.CountNeededForUpgrade.operator ==(GuildWars2.Guilds.Treasury.CountNeededForUpgrade? left, GuildWars2.Guilds.Treasury.CountNeededForUpgrade? right) -> bool
 static GuildWars2.Guilds.Treasury.GuildTreasurySlot.operator !=(GuildWars2.Guilds.Treasury.GuildTreasurySlot? left, GuildWars2.Guilds.Treasury.GuildTreasurySlot? right) -> bool
 static GuildWars2.Guilds.Treasury.GuildTreasurySlot.operator ==(GuildWars2.Guilds.Treasury.GuildTreasurySlot? left, GuildWars2.Guilds.Treasury.GuildTreasurySlot? right) -> bool
-static GuildWars2.Guilds.Upgrades.AccumulatingCurrency.operator !=(GuildWars2.Guilds.Upgrades.AccumulatingCurrency? left, GuildWars2.Guilds.Upgrades.AccumulatingCurrency? right) -> bool
-static GuildWars2.Guilds.Upgrades.AccumulatingCurrency.operator ==(GuildWars2.Guilds.Upgrades.AccumulatingCurrency? left, GuildWars2.Guilds.Upgrades.AccumulatingCurrency? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildHall.operator !=(GuildWars2.Guilds.Upgrades.GuildHall? left, GuildWars2.Guilds.Upgrades.GuildHall? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildHall.operator ==(GuildWars2.Guilds.Upgrades.GuildHall? left, GuildWars2.Guilds.Upgrades.GuildHall? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildHallExpedition.operator !=(GuildWars2.Guilds.Upgrades.GuildHallExpedition? left, GuildWars2.Guilds.Upgrades.GuildHallExpedition? right) -> bool
