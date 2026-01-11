@@ -9,7 +9,7 @@ internal static class AchievementBitJson
 {
     public static AchievementBit GetAchievementBit(this in JsonElement json)
     {
-        // BUG: some achievement bits don't have a type property, see https://github.com/arenanet/api-cdi/issues/670
+        // BUG: some achievement bits don't have a type property, see https://github.com/gw2-api/issues/issues/15
         // Hopefully this will get fixed and then TryGetProperty can be replaced by GetProperty
         if (json.TryGetProperty("type", out JsonElement type))
         {
