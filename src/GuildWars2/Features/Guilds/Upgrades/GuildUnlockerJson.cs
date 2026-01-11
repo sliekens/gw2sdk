@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class UnlockJson
+internal static class GuildUnlockerJson
 {
-    public static Unlock GetUnlock(this in JsonElement json)
+    public static GuildUnlocker GetGuildUnlocker(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -69,7 +69,7 @@ internal static class UnlockJson
             }
         }
 
-        return new Unlock
+        return new GuildUnlocker
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

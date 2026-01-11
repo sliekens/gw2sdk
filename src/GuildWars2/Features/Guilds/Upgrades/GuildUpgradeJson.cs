@@ -33,7 +33,7 @@ internal static class GuildUpgradeJson
                 case "Queue":
                     return json.GetWorkshopRestoration();
                 case "Unlock":
-                    return json.GetUnlock();
+                    return json.GetGuildUnlocker();
                 default:
                     break;
             }
