@@ -23,7 +23,7 @@ public class GuildUpgrades(Gw2Client sut)
                     .And.Member(e => e.Description, m => m.IsNotNull())
                     .And.Member(e => e.IconUrl.IsAbsoluteUri, m => m.IsTrue())
                     .And.Member(e => e.Costs, m => m.IsNotNull());
-                if (entry is BankBag bankBag)
+                if (entry is GuildBankUpgrade bankBag)
                 {
                     await Assert.That(bankBag)
                         .Member(b => b.MaxItems, m => m.IsGreaterThan(0))
