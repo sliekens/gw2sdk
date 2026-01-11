@@ -1,4 +1,11 @@
 #nullable enable
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade.Equals(GuildWars2.Guilds.Upgrades.GuildBankUpgrade? other) -> bool
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade.GuildBankUpgrade() -> void
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade.MaxCoins.get -> GuildWars2.Coin
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade.MaxCoins.init -> void
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade.MaxItems.get -> int
+GuildWars2.Guilds.Upgrades.GuildBankUpgrade.MaxItems.init -> void
 GuildWars2.Guilds.Upgrades.GuildBoost
 GuildWars2.Guilds.Upgrades.GuildBoost.Equals(GuildWars2.Guilds.Upgrades.GuildBoost? other) -> bool
 GuildWars2.Guilds.Upgrades.GuildBoost.GuildBoost() -> void
@@ -85,6 +92,10 @@ GuildWars2.Items.UpgradeComponentFlags.Longbow.get -> bool
 GuildWars2.Items.UpgradeComponentFlags.Longbow.init -> void
 GuildWars2.Pvp.Amulets.Amulet.Attributes.get -> System.Collections.Generic.IDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
 GuildWars2.Pvp.Stats.AccountStats.Professions.get -> System.Collections.Generic.IReadOnlyDictionary<GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>, GuildWars2.Pvp.Stats.Results!>!
+override GuildWars2.Guilds.Upgrades.GuildBankUpgrade.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
+override GuildWars2.Guilds.Upgrades.GuildBankUpgrade.Equals(object? obj) -> bool
+override GuildWars2.Guilds.Upgrades.GuildBankUpgrade.GetHashCode() -> int
+override GuildWars2.Guilds.Upgrades.GuildBankUpgrade.ToString() -> string!
 override GuildWars2.Guilds.Upgrades.GuildBoost.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
 override GuildWars2.Guilds.Upgrades.GuildBoost.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.GuildBoost.GetHashCode() -> int
@@ -150,6 +161,7 @@ override GuildWars2.Items.ShortBow.Equals(object? obj) -> bool
 override GuildWars2.Items.ShortBow.GetHashCode() -> int
 override GuildWars2.Items.ShortBow.ToString() -> string!
 override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
+override sealed GuildWars2.Guilds.Upgrades.GuildBankUpgrade.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildBoost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildConsumable.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildDecoration.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
@@ -166,6 +178,8 @@ override sealed GuildWars2.Items.BackItem.Equals(GuildWars2.Items.Item? other) -
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.MiniatureItem.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.Weapon? other) -> bool
+static GuildWars2.Guilds.Upgrades.GuildBankUpgrade.operator !=(GuildWars2.Guilds.Upgrades.GuildBankUpgrade? left, GuildWars2.Guilds.Upgrades.GuildBankUpgrade? right) -> bool
+static GuildWars2.Guilds.Upgrades.GuildBankUpgrade.operator ==(GuildWars2.Guilds.Upgrades.GuildBankUpgrade? left, GuildWars2.Guilds.Upgrades.GuildBankUpgrade? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildBoost.operator !=(GuildWars2.Guilds.Upgrades.GuildBoost? left, GuildWars2.Guilds.Upgrades.GuildBoost? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildBoost.operator ==(GuildWars2.Guilds.Upgrades.GuildBoost? left, GuildWars2.Guilds.Upgrades.GuildBoost? right) -> bool
 static GuildWars2.Guilds.Upgrades.GuildConsumable.operator !=(GuildWars2.Guilds.Upgrades.GuildConsumable? left, GuildWars2.Guilds.Upgrades.GuildConsumable? right) -> bool

@@ -4,9 +4,9 @@ using GuildWars2.Json;
 
 namespace GuildWars2.Guilds.Upgrades;
 
-internal static class BankBagJson
+internal static class GuildBankUpgradeJson
 {
-    public static BankBag GetBankBag(this in JsonElement json)
+    public static GuildBankUpgrade GetGuildBankUpgrade(this in JsonElement json)
     {
         RequiredMember id = "id";
         RequiredMember name = "name";
@@ -79,7 +79,7 @@ internal static class BankBagJson
             }
         }
 
-        return new BankBag
+        return new GuildBankUpgrade
         {
             Id = id.Map(static (in value) => value.GetInt32()),
             Name = name.Map(static (in value) => value.GetStringRequired()),

@@ -15,7 +15,7 @@ internal static class GuildUpgradeJson
                 case "AccumulatingCurrency":
                     return json.GetAccumulatingCurrency();
                 case "BankBag":
-                    return json.GetBankBag();
+                    return json.GetGuildBankUpgrade();
                 case "Boost":
                     return json.GetGuildBoost();
                 case "Claimable":
