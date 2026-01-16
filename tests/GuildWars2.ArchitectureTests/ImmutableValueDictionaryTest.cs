@@ -2,14 +2,14 @@ using GuildWars2.Collections;
 
 namespace GuildWars2.ArchitectureTests;
 
-public class ValueImmutableDictionaryTest
+public class ImmutableValueDictionaryTest
 {
-    private sealed record SampleRecord(ValueImmutableDictionary<string, int> Data);
+    private sealed record SampleRecord(ImmutableValueDictionary<string, int> Data);
 
     [Test]
     public async Task Empty_dictionary_has_zero_count()
     {
-        ValueImmutableDictionary<string, int> dict = [];
+        ImmutableValueDictionary<string, int> dict = [];
 
         await Assert.That(dict.Count).IsEqualTo(0);
     }
@@ -17,8 +17,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Dictionaries_with_same_entries_are_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
 
         await Assert.That(dict1.Equals(dict2)).IsTrue();
         await Assert.That(dict1 == dict2).IsTrue();
@@ -28,8 +28,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Dictionaries_with_same_entries_in_different_order_are_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["b"] = 2, ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["b"] = 2, ["a"] = 1 });
 
         await Assert.That(dict1.Equals(dict2)).IsTrue();
         await Assert.That(dict1 == dict2).IsTrue();
@@ -38,8 +38,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Dictionaries_with_different_values_are_not_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 99 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 99 });
 
         await Assert.That(dict1.Equals(dict2)).IsFalse();
         await Assert.That(dict1 == dict2).IsFalse();
@@ -49,8 +49,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Dictionaries_with_different_keys_are_not_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["c"] = 2 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["c"] = 2 });
 
         await Assert.That(dict1.Equals(dict2)).IsFalse();
         await Assert.That(dict1 == dict2).IsFalse();
@@ -59,8 +59,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Dictionaries_with_different_counts_are_not_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1 });
 
         await Assert.That(dict1.Equals(dict2)).IsFalse();
         await Assert.That(dict1 == dict2).IsFalse();
@@ -69,7 +69,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Same_reference_is_equal()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
 
         await Assert.That(dict.Equals(dict)).IsTrue();
 #pragma warning disable CS1718 // Comparison made to same variable
@@ -80,7 +80,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Null_is_not_equal()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
 
 #pragma warning disable CA1508 // Intentionally testing null comparison
         await Assert.That(dict.Equals(null)).IsFalse();
@@ -92,8 +92,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Both_null_are_equal()
     {
-        ValueImmutableDictionary<string, int>? left = null;
-        ValueImmutableDictionary<string, int>? right = null;
+        ImmutableValueDictionary<string, int>? left = null;
+        ImmutableValueDictionary<string, int>? right = null;
 
 #pragma warning disable CA1508 // Intentionally testing null comparison
         await Assert.That(left == right).IsTrue();
@@ -103,8 +103,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Equal_dictionaries_have_same_hash_code()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
 
         await Assert.That(dict1.GetHashCode()).IsEqualTo(dict2.GetHashCode());
     }
@@ -112,8 +112,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Equal_dictionaries_with_different_order_have_same_hash_code()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["b"] = 2, ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["b"] = 2, ["a"] = 1 });
 
         await Assert.That(dict1.GetHashCode()).IsEqualTo(dict2.GetHashCode());
     }
@@ -121,8 +121,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Different_dictionaries_have_different_hash_codes()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 99 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 99 });
 
         await Assert.That(dict1.GetHashCode()).IsNotEqualTo(dict2.GetHashCode());
     }
@@ -130,8 +130,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Records_with_equal_dictionaries_are_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["a"] = 1 });
 
         SampleRecord left = new(dict1);
         SampleRecord right = new(dict2);
@@ -143,8 +143,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Records_with_different_dictionaries_are_not_equal()
     {
-        ValueImmutableDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict1 = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict2 = new(new Dictionary<string, int> { ["b"] = 2 });
 
         SampleRecord left = new(dict1);
         SampleRecord right = new(dict2);
@@ -156,8 +156,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Add_returns_new_dictionary_with_entry()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> modified = original.Add("b", 2);
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> modified = original.Add("b", 2);
 
         await Assert.That(original.Count).IsEqualTo(1);
         await Assert.That(modified.Count).IsEqualTo(2);
@@ -167,8 +167,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task SetItem_returns_new_dictionary_with_updated_entry()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> modified = original.SetItem("a", 99);
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> modified = original.SetItem("a", 99);
 
         await Assert.That(original["a"]).IsEqualTo(1);
         await Assert.That(modified["a"]).IsEqualTo(99);
@@ -177,8 +177,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task SetItem_adds_new_key_if_not_exists()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> modified = original.SetItem("b", 2);
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> modified = original.SetItem("b", 2);
 
         await Assert.That(original.Count).IsEqualTo(1);
         await Assert.That(modified.Count).IsEqualTo(2);
@@ -188,8 +188,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task AddRange_returns_new_dictionary_with_entries()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> modified = original.AddRange(new Dictionary<string, int> { ["b"] = 2, ["c"] = 3 });
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> modified = original.AddRange(new Dictionary<string, int> { ["b"] = 2, ["c"] = 3 });
 
         await Assert.That(original.Count).IsEqualTo(1);
         await Assert.That(modified.Count).IsEqualTo(3);
@@ -198,8 +198,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Remove_returns_new_dictionary_without_key()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> modified = original.Remove("a");
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> modified = original.Remove("a");
 
         await Assert.That(original.Count).IsEqualTo(2);
         await Assert.That(modified.Count).IsEqualTo(1);
@@ -209,8 +209,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Remove_nonexistent_key_returns_same_dictionary()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
-        ValueImmutableDictionary<string, int> modified = original.Remove("nonexistent");
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> modified = original.Remove("nonexistent");
 
         await Assert.That(ReferenceEquals(original, modified)).IsTrue();
     }
@@ -218,8 +218,8 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task RemoveRange_returns_new_dictionary_without_keys()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2, ["c"] = 3 });
-        ValueImmutableDictionary<string, int> modified = original.RemoveRange(["a", "c"]);
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2, ["c"] = 3 });
+        ImmutableValueDictionary<string, int> modified = original.RemoveRange(["a", "c"]);
 
         await Assert.That(original.Count).IsEqualTo(3);
         await Assert.That(modified.Count).IsEqualTo(1);
@@ -229,18 +229,18 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Clear_returns_empty_dictionary()
     {
-        ValueImmutableDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
-        ValueImmutableDictionary<string, int> cleared = original.Clear();
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> cleared = original.Clear();
 
         await Assert.That(original.Count).IsEqualTo(2);
         await Assert.That(cleared.Count).IsEqualTo(0);
-        await Assert.That(ReferenceEquals(cleared, ValueImmutableDictionary<string, int>.Empty)).IsTrue();
+        await Assert.That(ReferenceEquals(cleared, ImmutableValueDictionary<string, int>.Empty)).IsTrue();
     }
 
     [Test]
     public async Task ContainsKey_returns_true_for_existing_key()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
 
         await Assert.That(dict.ContainsKey("a")).IsTrue();
         await Assert.That(dict.ContainsKey("nonexistent")).IsFalse();
@@ -249,7 +249,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task TryGetValue_returns_value_for_existing_key()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
 
         bool found = dict.TryGetValue("a", out int value);
 
@@ -260,7 +260,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task TryGetValue_returns_false_for_nonexistent_key()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1 });
 
         bool found = dict.TryGetValue("nonexistent", out _);
 
@@ -270,7 +270,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Indexer_returns_value_for_key()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
 
         await Assert.That(dict["a"]).IsEqualTo(1);
         await Assert.That(dict["b"]).IsEqualTo(2);
@@ -279,7 +279,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Keys_returns_all_keys()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
 
         await Assert.That(dict.Keys).Contains("a");
         await Assert.That(dict.Keys).Contains("b");
@@ -288,7 +288,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Values_returns_all_values()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
 
         await Assert.That(dict.Values).Contains(1);
         await Assert.That(dict.Values).Contains(2);
@@ -297,7 +297,7 @@ public class ValueImmutableDictionaryTest
     [Test]
     public async Task Can_enumerate_entries()
     {
-        ValueImmutableDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+        ImmutableValueDictionary<string, int> dict = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
         List<KeyValuePair<string, int>> result = [];
 
         foreach (KeyValuePair<string, int> kvp in dict)

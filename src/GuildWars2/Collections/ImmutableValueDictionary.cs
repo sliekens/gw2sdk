@@ -1,40 +1,39 @@
 using System.Collections;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace GuildWars2.Collections;
 
-/// <summary>Represents an immutable dictionary collection with value semantics, meaning two <see cref="ValueImmutableDictionary{TKey, TValue}"/> instances are considered equal if their contents are equal.</summary>
+/// <summary>Represents an immutable dictionary collection with value semantics, meaning two <see cref="ImmutableValueDictionary{TKey, TValue}"/> instances are considered equal if their contents are equal.</summary>
 /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
 [DebuggerDisplay("Count = {Count}")]
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableDictionary<TKey, TValue>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
 [SuppressMessage("Style", "IDE0303", Justification = "Cannot simplify to collection expression.")]
-public sealed class ValueImmutableDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IEquatable<ValueImmutableDictionary<TKey, TValue>>
+public sealed class ImmutableValueDictionary<TKey, TValue> : IImmutableValueDictionary<TKey, TValue>
     where TKey : notnull
 {
-    /// <summary>Gets an empty <see cref="ValueImmutableDictionary{TKey, TValue}"/>.</summary>
+    /// <summary>Gets an empty <see cref="ImmutableValueDictionary{TKey, TValue}"/>.</summary>
     [SuppressMessage("Design", "CA1000", Justification = "Follows BCL pattern for immutable collections.")]
-    public static ValueImmutableDictionary<TKey, TValue> Empty { get; } = new();
+    public static ImmutableValueDictionary<TKey, TValue> Empty { get; } = new();
 
     private readonly ImmutableDictionary<TKey, TValue> items;
 
-    /// <summary>Initializes a new instance of the <see cref="ValueImmutableDictionary{TKey, TValue}"/> class that is empty.</summary>
-    public ValueImmutableDictionary()
+    /// <summary>Initializes a new instance of the <see cref="ImmutableValueDictionary{TKey, TValue}"/> class that is empty.</summary>
+    public ImmutableValueDictionary()
     {
         items = ImmutableDictionary<TKey, TValue>.Empty;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="ValueImmutableDictionary{TKey, TValue}"/> class that contains elements copied from the specified collection.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ImmutableValueDictionary{TKey, TValue}"/> class that contains elements copied from the specified collection.</summary>
     /// <param name="collection">The collection whose elements are copied to the new dictionary.</param>
-    public ValueImmutableDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
+    public ImmutableValueDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
     {
         items = ImmutableDictionary.CreateRange(collection);
     }
 
-    private ValueImmutableDictionary(ImmutableDictionary<TKey, TValue> items)
+    private ImmutableValueDictionary(ImmutableDictionary<TKey, TValue> items)
     {
         this.items = items;
     }
@@ -67,61 +66,61 @@ public sealed class ValueImmutableDictionary<TKey, TValue> : IImmutableDictionar
         return items.TryGetValue(key, out value!);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with the specified key and value added or updated.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with the specified key and value added or updated.</summary>
     /// <param name="key">The key to add or update.</param>
     /// <param name="value">The value to associate with the key.</param>
     /// <returns>A new dictionary with the key-value pair added or updated.</returns>
-    public ValueImmutableDictionary<TKey, TValue> SetItem(TKey key, TValue value)
+    public ImmutableValueDictionary<TKey, TValue> SetItem(TKey key, TValue value)
     {
-        return new ValueImmutableDictionary<TKey, TValue>(items.SetItem(key, value));
+        return new ImmutableValueDictionary<TKey, TValue>(items.SetItem(key, value));
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with the specified key and value added.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with the specified key and value added.</summary>
     /// <param name="key">The key to add.</param>
     /// <param name="value">The value to associate with the key.</param>
     /// <returns>A new dictionary with the key-value pair added.</returns>
     /// <exception cref="ArgumentException">The key already exists in the dictionary.</exception>
-    public ValueImmutableDictionary<TKey, TValue> Add(TKey key, TValue value)
+    public ImmutableValueDictionary<TKey, TValue> Add(TKey key, TValue value)
     {
-        return new ValueImmutableDictionary<TKey, TValue>(items.Add(key, value));
+        return new ImmutableValueDictionary<TKey, TValue>(items.Add(key, value));
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with the specified key-value pairs added.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with the specified key-value pairs added.</summary>
     /// <param name="pairs">The key-value pairs to add.</param>
     /// <returns>A new dictionary with the key-value pairs added.</returns>
-    public ValueImmutableDictionary<TKey, TValue> AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
+    public ImmutableValueDictionary<TKey, TValue> AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
     {
-        return new ValueImmutableDictionary<TKey, TValue>(items.AddRange(pairs));
+        return new ImmutableValueDictionary<TKey, TValue>(items.AddRange(pairs));
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with the specified key removed.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with the specified key removed.</summary>
     /// <param name="key">The key to remove.</param>
     /// <returns>A new dictionary with the key removed, or the same dictionary if the key was not found.</returns>
-    public ValueImmutableDictionary<TKey, TValue> Remove(TKey key)
+    public ImmutableValueDictionary<TKey, TValue> Remove(TKey key)
     {
         ImmutableDictionary<TKey, TValue> newItems = items.Remove(key);
-        return ReferenceEquals(newItems, items) ? this : new ValueImmutableDictionary<TKey, TValue>(newItems);
+        return ReferenceEquals(newItems, items) ? this : new ImmutableValueDictionary<TKey, TValue>(newItems);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with the specified keys removed.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with the specified keys removed.</summary>
     /// <param name="keys">The keys to remove.</param>
     /// <returns>A new dictionary with the keys removed.</returns>
-    public ValueImmutableDictionary<TKey, TValue> RemoveRange(IEnumerable<TKey> keys)
+    public ImmutableValueDictionary<TKey, TValue> RemoveRange(IEnumerable<TKey> keys)
     {
-        return new ValueImmutableDictionary<TKey, TValue>(items.RemoveRange(keys));
+        return new ImmutableValueDictionary<TKey, TValue>(items.RemoveRange(keys));
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with all items removed.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with all items removed.</summary>
     /// <returns>An empty dictionary.</returns>
-    public ValueImmutableDictionary<TKey, TValue> Clear()
+    public ImmutableValueDictionary<TKey, TValue> Clear()
     {
         return Empty;
     }
 
-    /// <summary>Determines whether the current <see cref="ValueImmutableDictionary{TKey, TValue}"/> is equal to another <see cref="ValueImmutableDictionary{TKey, TValue}"/> based on value semantics.</summary>
-    /// <param name="other">The other <see cref="ValueImmutableDictionary{TKey, TValue}"/> to compare with this instance.</param>
+    /// <summary>Determines whether the current <see cref="ImmutableValueDictionary{TKey, TValue}"/> is equal to another <see cref="IImmutableValueDictionary{TKey, TValue}"/> based on value semantics.</summary>
+    /// <param name="other">The other <see cref="IImmutableValueDictionary{TKey, TValue}"/> to compare with this instance.</param>
     /// <returns><c>true</c> if the dictionaries are equal by value; otherwise, <c>false</c>.</returns>
-    public bool Equals(ValueImmutableDictionary<TKey, TValue>? other)
+    public bool Equals(IImmutableValueDictionary<TKey, TValue>? other)
     {
         if (other is null)
         {
@@ -140,7 +139,7 @@ public sealed class ValueImmutableDictionary<TKey, TValue> : IImmutableDictionar
 
         foreach (KeyValuePair<TKey, TValue> pair in items)
         {
-            if (!other.items.TryGetValue(pair.Key, out TValue? otherValue)
+            if (!other.TryGetValue(pair.Key, out TValue? otherValue)
                 || !EqualityComparer<TValue>.Default.Equals(pair.Value, otherValue))
             {
                 return false;
@@ -153,7 +152,7 @@ public sealed class ValueImmutableDictionary<TKey, TValue> : IImmutableDictionar
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || (obj is ValueImmutableDictionary<TKey, TValue> other && Equals(other));
+        return ReferenceEquals(this, obj) || (obj is IImmutableValueDictionary<TKey, TValue> other && Equals(other));
     }
 
     /// <summary>Returns a hash code based on the keys and values in the dictionary.</summary>
@@ -182,20 +181,20 @@ public sealed class ValueImmutableDictionary<TKey, TValue> : IImmutableDictionar
         return GetEnumerator();
     }
 
-    /// <summary>Determines whether two <see cref="ValueImmutableDictionary{TKey, TValue}"/> instances are equal by value.</summary>
-    /// <param name="left">The first <see cref="ValueImmutableDictionary{TKey, TValue}"/> to compare.</param>
-    /// <param name="right">The second <see cref="ValueImmutableDictionary{TKey, TValue}"/> to compare.</param>
+    /// <summary>Determines whether two <see cref="ImmutableValueDictionary{TKey, TValue}"/> instances are equal by value.</summary>
+    /// <param name="left">The first <see cref="ImmutableValueDictionary{TKey, TValue}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ImmutableValueDictionary{TKey, TValue}"/> to compare.</param>
     /// <returns><c>true</c> if the dictionaries are equal by value; otherwise, <c>false</c>.</returns>
-    public static bool operator ==(ValueImmutableDictionary<TKey, TValue>? left, ValueImmutableDictionary<TKey, TValue>? right)
+    public static bool operator ==(ImmutableValueDictionary<TKey, TValue>? left, ImmutableValueDictionary<TKey, TValue>? right)
     {
         return Equals(left, right);
     }
 
-    /// <summary>Determines whether two <see cref="ValueImmutableDictionary{TKey, TValue}"/> instances are not equal by value.</summary>
-    /// <param name="left">The first <see cref="ValueImmutableDictionary{TKey, TValue}"/> to compare.</param>
-    /// <param name="right">The second <see cref="ValueImmutableDictionary{TKey, TValue}"/> to compare.</param>
+    /// <summary>Determines whether two <see cref="ImmutableValueDictionary{TKey, TValue}"/> instances are not equal by value.</summary>
+    /// <param name="left">The first <see cref="ImmutableValueDictionary{TKey, TValue}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ImmutableValueDictionary{TKey, TValue}"/> to compare.</param>
     /// <returns><c>true</c> if the dictionaries are not equal by value; otherwise, <c>false</c>.</returns>
-    public static bool operator !=(ValueImmutableDictionary<TKey, TValue>? left, ValueImmutableDictionary<TKey, TValue>? right)
+    public static bool operator !=(ImmutableValueDictionary<TKey, TValue>? left, ImmutableValueDictionary<TKey, TValue>? right)
     {
         return !Equals(left, right);
     }
@@ -208,12 +207,12 @@ public sealed class ValueImmutableDictionary<TKey, TValue> : IImmutableDictionar
         return items.Contains(pair);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableDictionary{TKey, TValue}"/> with the specified key-value pairs set, adding or updating as necessary.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueDictionary{TKey, TValue}"/> with the specified key-value pairs set, adding or updating as necessary.</summary>
     /// <param name="items">The key-value pairs to set.</param>
     /// <returns>A new dictionary with the key-value pairs set.</returns>
-    public ValueImmutableDictionary<TKey, TValue> SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items)
+    public ImmutableValueDictionary<TKey, TValue> SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items)
     {
-        return new ValueImmutableDictionary<TKey, TValue>(this.items.SetItems(items));
+        return new ImmutableValueDictionary<TKey, TValue>(this.items.SetItems(items));
     }
 
     /// <summary>Searches the dictionary for a given key and returns the equal key it finds, if any.</summary>

@@ -1,38 +1,37 @@
 using System.Collections;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace GuildWars2.Collections;
 
-/// <summary>Represents an immutable set collection with value semantics, meaning two <see cref="ValueImmutableHashSet{T}"/> instances are considered equal if their contents are equal.</summary>
+/// <summary>Represents an immutable set collection with value semantics, meaning two <see cref="ImmutableValueSet{T}"/> instances are considered equal if their contents are equal.</summary>
 /// <typeparam name="T">The type of elements in the set.</typeparam>
 [DebuggerDisplay("Count = {Count}")]
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableHashSet<T>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
 [SuppressMessage("Style", "IDE0303", Justification = "Cannot simplify to collection expression.")]
-public sealed class ValueImmutableHashSet<T> : IImmutableSet<T>, IEquatable<ValueImmutableHashSet<T>>
+public sealed class ImmutableValueSet<T> : IImmutableValueSet<T>
 {
-    /// <summary>Gets an empty <see cref="ValueImmutableHashSet{T}"/>.</summary>
+    /// <summary>Gets an empty <see cref="ImmutableValueSet{T}"/>.</summary>
     [SuppressMessage("Design", "CA1000", Justification = "Follows BCL pattern for immutable collections.")]
-    public static ValueImmutableHashSet<T> Empty { get; } = new();
+    public static ImmutableValueSet<T> Empty { get; } = new();
 
     private readonly ImmutableHashSet<T> items;
 
-    /// <summary>Initializes a new instance of the <see cref="ValueImmutableHashSet{T}"/> class that is empty.</summary>
-    public ValueImmutableHashSet()
+    /// <summary>Initializes a new instance of the <see cref="ImmutableValueSet{T}"/> class that is empty.</summary>
+    public ImmutableValueSet()
     {
         items = ImmutableHashSet<T>.Empty;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="ValueImmutableHashSet{T}"/> class that contains elements copied from the specified collection.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ImmutableValueSet{T}"/> class that contains elements copied from the specified collection.</summary>
     /// <param name="collection">The collection whose elements are copied to the new set.</param>
-    public ValueImmutableHashSet(IEnumerable<T> collection)
+    public ImmutableValueSet(IEnumerable<T> collection)
     {
         items = ImmutableHashSet.CreateRange(collection);
     }
 
-    private ValueImmutableHashSet(ImmutableHashSet<T> items)
+    private ImmutableValueSet(ImmutableHashSet<T> items)
     {
         this.items = items;
     }
@@ -48,53 +47,53 @@ public sealed class ValueImmutableHashSet<T> : IImmutableSet<T>, IEquatable<Valu
         return items.Contains(value);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> with the specified item added.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> with the specified item added.</summary>
     /// <param name="value">The item to add.</param>
     /// <returns>A new set with the item added, or the same set if the item already exists.</returns>
-    public ValueImmutableHashSet<T> Add(T value)
+    public ImmutableValueSet<T> Add(T value)
     {
         ImmutableHashSet<T> newItems = items.Add(value);
-        return ReferenceEquals(newItems, items) ? this : new ValueImmutableHashSet<T>(newItems);
+        return ReferenceEquals(newItems, items) ? this : new ImmutableValueSet<T>(newItems);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> with the specified item removed.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> with the specified item removed.</summary>
     /// <param name="value">The item to remove.</param>
     /// <returns>A new set with the item removed, or the same set if the item was not found.</returns>
-    public ValueImmutableHashSet<T> Remove(T value)
+    public ImmutableValueSet<T> Remove(T value)
     {
         ImmutableHashSet<T> newItems = items.Remove(value);
-        return ReferenceEquals(newItems, items) ? this : new ValueImmutableHashSet<T>(newItems);
+        return ReferenceEquals(newItems, items) ? this : new ImmutableValueSet<T>(newItems);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> with all items removed.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> with all items removed.</summary>
     /// <returns>An empty set.</returns>
-    public ValueImmutableHashSet<T> Clear()
+    public ImmutableValueSet<T> Clear()
     {
         return Empty;
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> that is the union of this set and the specified collection.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> that is the union of this set and the specified collection.</summary>
     /// <param name="other">The collection to union with.</param>
     /// <returns>A new set containing all elements from both this set and the specified collection.</returns>
-    public ValueImmutableHashSet<T> Union(IEnumerable<T> other)
+    public ImmutableValueSet<T> Union(IEnumerable<T> other)
     {
-        return new ValueImmutableHashSet<T>(items.Union(other));
+        return new ImmutableValueSet<T>(items.Union(other));
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> that is the intersection of this set and the specified collection.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> that is the intersection of this set and the specified collection.</summary>
     /// <param name="other">The collection to intersect with.</param>
     /// <returns>A new set containing only elements present in both this set and the specified collection.</returns>
-    public ValueImmutableHashSet<T> Intersect(IEnumerable<T> other)
+    public ImmutableValueSet<T> Intersect(IEnumerable<T> other)
     {
-        return new ValueImmutableHashSet<T>(items.Intersect(other));
+        return new ImmutableValueSet<T>(items.Intersect(other));
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> that contains elements in this set but not in the specified collection.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> that contains elements in this set but not in the specified collection.</summary>
     /// <param name="other">The collection to except.</param>
     /// <returns>A new set containing elements present in this set but not in the specified collection.</returns>
-    public ValueImmutableHashSet<T> Except(IEnumerable<T> other)
+    public ImmutableValueSet<T> Except(IEnumerable<T> other)
     {
-        return new ValueImmutableHashSet<T>(items.Except(other));
+        return new ImmutableValueSet<T>(items.Except(other));
     }
 
     /// <summary>Determines whether this set is a subset of the specified collection.</summary>
@@ -145,12 +144,12 @@ public sealed class ValueImmutableHashSet<T> : IImmutableSet<T>, IEquatable<Valu
         return items.IsProperSupersetOf(other);
     }
 
-    /// <summary>Creates a new <see cref="ValueImmutableHashSet{T}"/> that contains elements present in either this set or the specified collection, but not both.</summary>
+    /// <summary>Creates a new <see cref="ImmutableValueSet{T}"/> that contains elements present in either this set or the specified collection, but not both.</summary>
     /// <param name="other">The collection to compare.</param>
     /// <returns>A new set containing elements present in either this set or the specified collection, but not both.</returns>
-    public ValueImmutableHashSet<T> SymmetricExcept(IEnumerable<T> other)
+    public ImmutableValueSet<T> SymmetricExcept(IEnumerable<T> other)
     {
-        return new ValueImmutableHashSet<T>(items.SymmetricExcept(other));
+        return new ImmutableValueSet<T>(items.SymmetricExcept(other));
     }
 
     /// <summary>Searches the set for a given value and returns the equal value it finds, if any.</summary>
@@ -162,10 +161,10 @@ public sealed class ValueImmutableHashSet<T> : IImmutableSet<T>, IEquatable<Valu
         return items.TryGetValue(equalValue, out actualValue!);
     }
 
-    /// <summary>Determines whether the current <see cref="ValueImmutableHashSet{T}"/> is equal to another <see cref="ValueImmutableHashSet{T}"/> based on value semantics.</summary>
-    /// <param name="other">The other <see cref="ValueImmutableHashSet{T}"/> to compare with this instance.</param>
+    /// <summary>Determines whether the current <see cref="ImmutableValueSet{T}"/> is equal to another <see cref="IImmutableValueSet{T}"/> based on value semantics.</summary>
+    /// <param name="other">The other <see cref="IImmutableValueSet{T}"/> to compare with this instance.</param>
     /// <returns><c>true</c> if the sets are equal by value; otherwise, <c>false</c>.</returns>
-    public bool Equals(ValueImmutableHashSet<T>? other)
+    public bool Equals(IImmutableValueSet<T>? other)
     {
         if (other is null)
         {
@@ -177,13 +176,13 @@ public sealed class ValueImmutableHashSet<T> : IImmutableSet<T>, IEquatable<Valu
             return true;
         }
 
-        return items.SetEquals(other.items);
+        return items.SetEquals(other);
     }
 
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || (obj is ValueImmutableHashSet<T> other && Equals(other));
+        return ReferenceEquals(this, obj) || (obj is IImmutableValueSet<T> other && Equals(other));
     }
 
     /// <summary>Returns a hash code based on the values of the items in the set.</summary>
@@ -212,20 +211,20 @@ public sealed class ValueImmutableHashSet<T> : IImmutableSet<T>, IEquatable<Valu
         return GetEnumerator();
     }
 
-    /// <summary>Determines whether two <see cref="ValueImmutableHashSet{T}"/> instances are equal by value.</summary>
-    /// <param name="left">The first <see cref="ValueImmutableHashSet{T}"/> to compare.</param>
-    /// <param name="right">The second <see cref="ValueImmutableHashSet{T}"/> to compare.</param>
+    /// <summary>Determines whether two <see cref="ImmutableValueSet{T}"/> instances are equal by value.</summary>
+    /// <param name="left">The first <see cref="ImmutableValueSet{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ImmutableValueSet{T}"/> to compare.</param>
     /// <returns><c>true</c> if the sets are equal by value; otherwise, <c>false</c>.</returns>
-    public static bool operator ==(ValueImmutableHashSet<T>? left, ValueImmutableHashSet<T>? right)
+    public static bool operator ==(ImmutableValueSet<T>? left, ImmutableValueSet<T>? right)
     {
         return Equals(left, right);
     }
 
-    /// <summary>Determines whether two <see cref="ValueImmutableHashSet{T}"/> instances are not equal by value.</summary>
-    /// <param name="left">The first <see cref="ValueImmutableHashSet{T}"/> to compare.</param>
-    /// <param name="right">The second <see cref="ValueImmutableHashSet{T}"/> to compare.</param>
+    /// <summary>Determines whether two <see cref="ImmutableValueSet{T}"/> instances are not equal by value.</summary>
+    /// <param name="left">The first <see cref="ImmutableValueSet{T}"/> to compare.</param>
+    /// <param name="right">The second <see cref="ImmutableValueSet{T}"/> to compare.</param>
     /// <returns><c>true</c> if the sets are not equal by value; otherwise, <c>false</c>.</returns>
-    public static bool operator !=(ValueImmutableHashSet<T>? left, ValueImmutableHashSet<T>? right)
+    public static bool operator !=(ImmutableValueSet<T>? left, ImmutableValueSet<T>? right)
     {
         return !Equals(left, right);
     }
