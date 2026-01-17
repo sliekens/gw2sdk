@@ -3899,9 +3899,7 @@ GuildWars2.Markup.LineBreakNode.LineBreakNode() -> void
 GuildWars2.Markup.MarkupColorName
 GuildWars2.Markup.MarkupConverter
 GuildWars2.Markup.MarkupHtmlConverter
-GuildWars2.Markup.MarkupHtmlConverter.MarkupHtmlConverter() -> void
 GuildWars2.Markup.MarkupLexer
-GuildWars2.Markup.MarkupLexer.MarkupLexer() -> void
 GuildWars2.Markup.MarkupNode
 GuildWars2.Markup.MarkupNode.MarkupNode() -> void
 GuildWars2.Markup.MarkupNodeType
@@ -3911,9 +3909,7 @@ GuildWars2.Markup.MarkupNodeType.None = 0 -> GuildWars2.Markup.MarkupNodeType
 GuildWars2.Markup.MarkupNodeType.Root = 1 -> GuildWars2.Markup.MarkupNodeType
 GuildWars2.Markup.MarkupNodeType.Text = 2 -> GuildWars2.Markup.MarkupNodeType
 GuildWars2.Markup.MarkupParser
-GuildWars2.Markup.MarkupParser.MarkupParser() -> void
 GuildWars2.Markup.MarkupTextConverter
-GuildWars2.Markup.MarkupTextConverter.MarkupTextConverter() -> void
 GuildWars2.Markup.MarkupToken
 GuildWars2.Markup.MarkupToken.<Clone>$() -> GuildWars2.Markup.MarkupToken!
 GuildWars2.Markup.MarkupToken.Deconstruct(out GuildWars2.Markup.MarkupTokenType Type, out string! Value) -> void

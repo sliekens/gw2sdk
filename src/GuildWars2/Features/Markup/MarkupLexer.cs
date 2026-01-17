@@ -2,8 +2,7 @@ namespace GuildWars2.Markup;
 
 /// <summary>Represents a lexer for tokenizing markup input.</summary>
 /// <remarks>Initializes a new instance of the <see cref="MarkupLexer"/> class.</remarks>
-[method: Obsolete("MarkupLexer methods are now static. Use static methods instead.")]
-public sealed class MarkupLexer()
+public static class MarkupLexer
 {
     private static readonly HashSet<string> VoidElements =
         new(StringComparer.OrdinalIgnoreCase) { "br" };

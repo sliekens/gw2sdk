@@ -5,8 +5,7 @@ namespace GuildWars2.Markup;
 
 /// <summary>Represents a parser that converts a sequence of tokens into a hierarchical node structure.</summary>
 /// <remarks>Initializes a new instance of the <see cref="MarkupParser"/> class.</remarks>
-[method: Obsolete("MarkupParser methods are now static. Use static methods instead.")]
-public sealed class MarkupParser()
+public static class MarkupParser
 {
     /// <summary>Parses a sequence of tokens into a hierarchical node structure.</summary>
     /// <param name="input">The sequence of markup tokens to parse.</param>

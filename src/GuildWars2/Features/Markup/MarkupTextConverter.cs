@@ -4,8 +4,7 @@ namespace GuildWars2.Markup;
 
 /// <summary>Provides functionality to convert a <see cref="RootNode" /> to a string representation.</summary>
 /// <remarks>Initializes a new instance of the <see cref="MarkupTextConverter"/> class.</remarks>
-[method: Obsolete("MarkupTextConverter methods are now static. Use static methods instead.")]
-public sealed class MarkupTextConverter()
+public static class MarkupTextConverter
 {
     /// <summary>Converts a <see cref="RootNode" /> to a string representation.</summary>
     /// <param name="root">The root node containing nodes to be converted.</param>
