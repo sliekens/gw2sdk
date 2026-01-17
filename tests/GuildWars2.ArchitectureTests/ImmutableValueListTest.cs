@@ -212,4 +212,48 @@ public class ImmutableValueListTest
         await Assert.That(list[1]).IsEqualTo("b");
         await Assert.That(list[2]).IsEqualTo("c");
     }
+
+    [Test]
+    public async Task Collection_expression_creates_list_with_elements()
+    {
+        ImmutableValueList<int> list = [1, 2, 3];
+
+        await Assert.That(list.Count).IsEqualTo(3);
+        await Assert.That(list[0]).IsEqualTo(1);
+        await Assert.That(list[1]).IsEqualTo(2);
+        await Assert.That(list[2]).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Collection_expression_with_spread_creates_list_with_elements()
+    {
+        int[] source = [1, 2, 3];
+        ImmutableValueList<int> list = [.. source];
+
+        await Assert.That(list.Count).IsEqualTo(3);
+        await Assert.That(list[0]).IsEqualTo(1);
+        await Assert.That(list[1]).IsEqualTo(2);
+        await Assert.That(list[2]).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Collection_expression_with_spread_from_list_creates_list_with_elements()
+    {
+        List<int> source = [4, 5, 6];
+        ImmutableValueList<int> list = [.. source];
+
+        await Assert.That(list.Count).IsEqualTo(3);
+        await Assert.That(list[0]).IsEqualTo(4);
+        await Assert.That(list[1]).IsEqualTo(5);
+        await Assert.That(list[2]).IsEqualTo(6);
+    }
+
+    [Test]
+    public async Task Collection_expression_created_list_equals_constructor_created_list()
+    {
+        ImmutableValueList<int> fromExpression = [1, 2, 3];
+        ImmutableValueList<int> fromConstructor = new([1, 2, 3]);
+
+        await Assert.That(fromExpression).IsEqualTo(fromConstructor);
+    }
 }

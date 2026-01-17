@@ -6,6 +6,7 @@ GuildWars2.Collections.IImmutableValueArray<T>
 GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>
 GuildWars2.Collections.IImmutableValueList<T>
 GuildWars2.Collections.IImmutableValueSet<T>
+GuildWars2.Collections.ImmutableValueArray
 GuildWars2.Collections.ImmutableValueArray<T>
 GuildWars2.Collections.ImmutableValueArray<T>.Add(T value) -> GuildWars2.Collections.ImmutableValueArray<T>!
 GuildWars2.Collections.ImmutableValueArray<T>.AddRange(System.Collections.Generic.IEnumerable<T>! values) -> GuildWars2.Collections.ImmutableValueArray<T>!
@@ -49,6 +50,7 @@ GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.this[TKey key].get
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.TryGetKey(TKey equalKey, out TKey actualKey) -> bool
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) -> bool
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.Values.get -> System.Collections.Generic.IEnumerable<TValue>!
+GuildWars2.Collections.ImmutableValueList
 GuildWars2.Collections.ImmutableValueList<T>
 GuildWars2.Collections.ImmutableValueList<T>.Add(T value) -> GuildWars2.Collections.ImmutableValueList<T>!
 GuildWars2.Collections.ImmutableValueList<T>.AddRange(System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.ImmutableValueList<T>!
@@ -70,6 +72,7 @@ GuildWars2.Collections.ImmutableValueList<T>.RemoveRange(System.Collections.Gene
 GuildWars2.Collections.ImmutableValueList<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ImmutableValueList<T>!
 GuildWars2.Collections.ImmutableValueList<T>.SetItem(int index, T value) -> GuildWars2.Collections.ImmutableValueList<T>!
 GuildWars2.Collections.ImmutableValueList<T>.this[int index].get -> T
+GuildWars2.Collections.ImmutableValueSet
 GuildWars2.Collections.ImmutableValueSet<T>
 GuildWars2.Collections.ImmutableValueSet<T>.Add(T value) -> GuildWars2.Collections.ImmutableValueSet<T>!
 GuildWars2.Collections.ImmutableValueSet<T>.Clear() -> GuildWars2.Collections.ImmutableValueSet<T>!
@@ -865,15 +868,21 @@ override sealed GuildWars2.Items.BackItem.Equals(GuildWars2.Items.Item? other) -
 override sealed GuildWars2.Items.ConjuredDoorwayUnlocker.Equals(GuildWars2.Items.Unlocker? other) -> bool
 override sealed GuildWars2.Items.MiniatureItem.Equals(GuildWars2.Items.Item? other) -> bool
 override sealed GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.Weapon? other) -> bool
+static GuildWars2.Collections.ImmutableValueArray.Create<T>(System.ReadOnlySpan<T> values) -> GuildWars2.Collections.ImmutableValueArray<T>!
+static GuildWars2.Collections.ImmutableValueArray<T>.Create(System.ReadOnlySpan<T> values) -> GuildWars2.Collections.ImmutableValueArray<T>!
 static GuildWars2.Collections.ImmutableValueArray<T>.Empty.get -> GuildWars2.Collections.ImmutableValueArray<T>!
 static GuildWars2.Collections.ImmutableValueArray<T>.operator !=(GuildWars2.Collections.ImmutableValueArray<T>? left, GuildWars2.Collections.ImmutableValueArray<T>? right) -> bool
 static GuildWars2.Collections.ImmutableValueArray<T>.operator ==(GuildWars2.Collections.ImmutableValueArray<T>? left, GuildWars2.Collections.ImmutableValueArray<T>? right) -> bool
 static GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.Empty.get -> GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>!
 static GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.operator !=(GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>? left, GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>? right) -> bool
 static GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.operator ==(GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>? left, GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>? right) -> bool
+static GuildWars2.Collections.ImmutableValueList.Create<T>(System.ReadOnlySpan<T> values) -> GuildWars2.Collections.ImmutableValueList<T>!
+static GuildWars2.Collections.ImmutableValueList<T>.Create(System.ReadOnlySpan<T> values) -> GuildWars2.Collections.ImmutableValueList<T>!
 static GuildWars2.Collections.ImmutableValueList<T>.Empty.get -> GuildWars2.Collections.ImmutableValueList<T>!
 static GuildWars2.Collections.ImmutableValueList<T>.operator !=(GuildWars2.Collections.ImmutableValueList<T>? left, GuildWars2.Collections.ImmutableValueList<T>? right) -> bool
 static GuildWars2.Collections.ImmutableValueList<T>.operator ==(GuildWars2.Collections.ImmutableValueList<T>? left, GuildWars2.Collections.ImmutableValueList<T>? right) -> bool
+static GuildWars2.Collections.ImmutableValueSet.Create<T>(System.ReadOnlySpan<T> values) -> GuildWars2.Collections.ImmutableValueSet<T>!
+static GuildWars2.Collections.ImmutableValueSet<T>.Create(System.ReadOnlySpan<T> values) -> GuildWars2.Collections.ImmutableValueSet<T>!
 static GuildWars2.Collections.ImmutableValueSet<T>.Empty.get -> GuildWars2.Collections.ImmutableValueSet<T>!
 static GuildWars2.Collections.ImmutableValueSet<T>.operator !=(GuildWars2.Collections.ImmutableValueSet<T>? left, GuildWars2.Collections.ImmutableValueSet<T>? right) -> bool
 static GuildWars2.Collections.ImmutableValueSet<T>.operator ==(GuildWars2.Collections.ImmutableValueSet<T>? left, GuildWars2.Collections.ImmutableValueSet<T>? right) -> bool

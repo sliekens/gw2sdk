@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace GuildWars2.Collections;
 
 /// <summary>Represents an immutable set collection with value semantics, meaning two <see cref="ImmutableValueSet{T}"/> instances are considered equal if their contents are equal.</summary>
 /// <typeparam name="T">The type of elements in the set.</typeparam>
+[CollectionBuilder(typeof(ImmutableValueSet), nameof(ImmutableValueSet.Create))]
 [DebuggerDisplay("Count = {Count}")]
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableHashSet<T>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
@@ -15,6 +17,26 @@ public sealed class ImmutableValueSet<T> : IImmutableValueSet<T>
     /// <summary>Gets an empty <see cref="ImmutableValueSet{T}"/>.</summary>
     [SuppressMessage("Design", "CA1000", Justification = "Follows BCL pattern for immutable collections.")]
     public static ImmutableValueSet<T> Empty { get; } = new();
+
+    /// <summary>Creates an <see cref="ImmutableValueSet{T}"/> from a span of values. Used by collection expressions.</summary>
+    /// <param name="values">The values to include in the set.</param>
+    /// <returns>An <see cref="ImmutableValueSet{T}"/> containing the specified values.</returns>
+    [SuppressMessage("Design", "CA1000", Justification = "Required for CollectionBuilder attribute.")]
+#pragma warning disable RCS1231 // CollectionBuilder requires exact signature without 'in'
+    public static ImmutableValueSet<T> Create(ReadOnlySpan<T> values)
+#pragma warning restore RCS1231
+    {
+        if (values.IsEmpty)
+        {
+            return Empty;
+        }
+
+        T[] array = new T[values.Length];
+        values.CopyTo(array);
+#pragma warning disable IDE0306 // Cannot use collection expression in CollectionBuilder method
+        return new ImmutableValueSet<T>(array);
+#pragma warning restore IDE0306
+    }
 
     private readonly ImmutableHashSet<T> items;
 

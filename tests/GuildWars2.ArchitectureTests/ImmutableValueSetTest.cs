@@ -292,4 +292,56 @@ public class ImmutableValueSetTest
 
         await Assert.That(result).Count().IsEqualTo(3);
     }
+
+    [Test]
+    public async Task Collection_expression_creates_set_with_elements()
+    {
+        ImmutableValueSet<int> set = [1, 2, 3];
+
+        await Assert.That(set.Count).IsEqualTo(3);
+        await Assert.That(set.Contains(1)).IsTrue();
+        await Assert.That(set.Contains(2)).IsTrue();
+        await Assert.That(set.Contains(3)).IsTrue();
+    }
+
+    [Test]
+    public async Task Collection_expression_with_spread_creates_set_with_elements()
+    {
+        int[] source = [1, 2, 3];
+        ImmutableValueSet<int> set = [.. source];
+
+        await Assert.That(set.Count).IsEqualTo(3);
+        await Assert.That(set.Contains(1)).IsTrue();
+        await Assert.That(set.Contains(2)).IsTrue();
+        await Assert.That(set.Contains(3)).IsTrue();
+    }
+
+    [Test]
+    public async Task Collection_expression_with_spread_from_list_creates_set_with_elements()
+    {
+        List<int> source = [4, 5, 6];
+        ImmutableValueSet<int> set = [.. source];
+
+        await Assert.That(set.Count).IsEqualTo(3);
+        await Assert.That(set.Contains(4)).IsTrue();
+        await Assert.That(set.Contains(5)).IsTrue();
+        await Assert.That(set.Contains(6)).IsTrue();
+    }
+
+    [Test]
+    public async Task Collection_expression_deduplicates_elements()
+    {
+        ImmutableValueSet<int> set = [1, 2, 2, 3, 3, 3];
+
+        await Assert.That(set.Count).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Collection_expression_created_set_equals_constructor_created_set()
+    {
+        ImmutableValueSet<int> fromExpression = [1, 2, 3];
+        ImmutableValueSet<int> fromConstructor = new([1, 2, 3]);
+
+        await Assert.That(fromExpression).IsEqualTo(fromConstructor);
+    }
 }

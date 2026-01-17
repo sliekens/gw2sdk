@@ -309,4 +309,48 @@ public class ImmutableValueArrayTest
 
         await Assert.That(collection.Count).IsEqualTo(3);
     }
+
+    [Test]
+    public async Task Collection_expression_creates_array_with_elements()
+    {
+        ImmutableValueArray<int> array = [1, 2, 3];
+
+        await Assert.That(array.Length).IsEqualTo(3);
+        await Assert.That(array[0]).IsEqualTo(1);
+        await Assert.That(array[1]).IsEqualTo(2);
+        await Assert.That(array[2]).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Collection_expression_with_spread_creates_array_with_elements()
+    {
+        int[] source = [1, 2, 3];
+        ImmutableValueArray<int> array = [.. source];
+
+        await Assert.That(array.Length).IsEqualTo(3);
+        await Assert.That(array[0]).IsEqualTo(1);
+        await Assert.That(array[1]).IsEqualTo(2);
+        await Assert.That(array[2]).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Collection_expression_with_spread_from_list_creates_array_with_elements()
+    {
+        List<int> source = [4, 5, 6];
+        ImmutableValueArray<int> array = [.. source];
+
+        await Assert.That(array.Length).IsEqualTo(3);
+        await Assert.That(array[0]).IsEqualTo(4);
+        await Assert.That(array[1]).IsEqualTo(5);
+        await Assert.That(array[2]).IsEqualTo(6);
+    }
+
+    [Test]
+    public async Task Collection_expression_created_array_equals_constructor_created_array()
+    {
+        ImmutableValueArray<int> fromExpression = [1, 2, 3];
+        ImmutableValueArray<int> fromConstructor = new([1, 2, 3]);
+
+        await Assert.That(fromExpression).IsEqualTo(fromConstructor);
+    }
 }

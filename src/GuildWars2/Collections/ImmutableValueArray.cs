@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace GuildWars2.Collections;
 
 /// <summary>Represents an immutable array with value semantics, meaning two <see cref="ImmutableValueArray{T}"/> instances are considered equal if their contents are equal.</summary>
 /// <typeparam name="T">The type of elements in the array.</typeparam>
 /// <remarks>This type wraps <see cref="ImmutableArray{T}"/> and is more memory-efficient than <see cref="ImmutableValueList{T}"/> for fixed-size collections.</remarks>
+[CollectionBuilder(typeof(ImmutableValueArray), nameof(ImmutableValueArray.Create))]
 [DebuggerDisplay("Length = {Length}")]
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableArray<T>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
@@ -16,6 +18,26 @@ public sealed class ImmutableValueArray<T> : IImmutableValueArray<T>
     /// <summary>Gets an empty <see cref="ImmutableValueArray{T}"/>.</summary>
     [SuppressMessage("Design", "CA1000", Justification = "Follows BCL pattern for immutable collections.")]
     public static ImmutableValueArray<T> Empty { get; } = new();
+
+    /// <summary>Creates an <see cref="ImmutableValueArray{T}"/> from a span of values. Used by collection expressions.</summary>
+    /// <param name="values">The values to include in the array.</param>
+    /// <returns>An <see cref="ImmutableValueArray{T}"/> containing the specified values.</returns>
+    [SuppressMessage("Design", "CA1000", Justification = "Required for CollectionBuilder attribute.")]
+#pragma warning disable RCS1231 // CollectionBuilder requires exact signature without 'in'
+    public static ImmutableValueArray<T> Create(ReadOnlySpan<T> values)
+#pragma warning restore RCS1231
+    {
+        if (values.IsEmpty)
+        {
+            return Empty;
+        }
+
+        T[] array = new T[values.Length];
+        values.CopyTo(array);
+#pragma warning disable IDE0306 // Cannot use collection expression in CollectionBuilder method
+        return new ImmutableValueArray<T>(ImmutableArray.Create(array));
+#pragma warning restore IDE0306
+    }
 
     private readonly ImmutableArray<T> items;
 
