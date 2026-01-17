@@ -604,6 +604,10 @@ GuildWars2.Logos.LogosClient.GetLogos(GuildWars2.MissingMemberBehavior missingMe
 GuildWars2.Logos.LogosClient.GetLogosByIds(System.Collections.Generic.IEnumerable<string!>! logoIds, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<GuildWars2.Logos.Logo!>! Value, GuildWars2.MessageContext! Context)>!
 GuildWars2.Logos.LogosClient.GetLogosByPage(int pageIndex, int? pageSize = null, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<GuildWars2.Logos.Logo!>! Value, GuildWars2.MessageContext! Context)>!
 GuildWars2.Logos.LogosClient.GetLogosIndex(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<string!>! Value, GuildWars2.MessageContext! Context)>!
+GuildWars2.Markup.ColoredTextNode.Children.get -> System.Collections.Immutable.IImmutableList<GuildWars2.Markup.MarkupNode!>!
+GuildWars2.Markup.ColoredTextNode.ColoredTextNode(string! color, System.Collections.Immutable.IImmutableList<GuildWars2.Markup.MarkupNode!>! children) -> void
+GuildWars2.Markup.RootNode.Children.get -> System.Collections.Immutable.IImmutableList<GuildWars2.Markup.MarkupNode!>!
+GuildWars2.Markup.RootNode.RootNode(System.Collections.Immutable.IImmutableList<GuildWars2.Markup.MarkupNode!>! children) -> void
 GuildWars2.Metadata.ApiVersion.Languages.get -> GuildWars2.Collections.IImmutableValueList<string!>!
 GuildWars2.Metadata.ApiVersion.Routes.get -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Metadata.Route!>!
 GuildWars2.Metadata.ApiVersion.SchemaVersions.get -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Metadata.Schema!>!

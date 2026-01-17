@@ -14,17 +14,17 @@ public sealed class MarkupParser()
     public static RootNode Parse(IEnumerable<MarkupToken> input)
     {
         MarkupTokenIterator iterator = new(input);
-        RootNode root = new();
+        ImmutableArray<MarkupNode>.Builder children = ImmutableArray.CreateBuilder<MarkupNode>();
         while (iterator.Current is { Type: not MarkupTokenType.End })
         {
             MarkupNode? node = ParseNode(iterator);
             if (node is not null)
             {
-                root.Children.Add(node);
+                children.Add(node);
             }
         }
 
-        return root;
+        return new RootNode(children.ToImmutable());
     }
 
     private static MarkupNode? ParseNode(MarkupTokenIterator iterator)
@@ -82,23 +82,24 @@ public sealed class MarkupParser()
             // e.g. <c=@reminder>Some text<c>
             if (iterator.Current?.Type != MarkupTokenType.TagValue)
             {
-                return new ColoredTextNode("");
+                return new ColoredTextNode("", ImmutableArray<MarkupNode>.Empty);
             }
 
-            ColoredTextNode node = new(iterator.Current.Value);
+            string color = iterator.Current.Value;
             iterator.Advance();
+            ImmutableArray<MarkupNode>.Builder children = ImmutableArray.CreateBuilder<MarkupNode>();
             while (iterator.Current is { Type: not MarkupTokenType.TagClose and not MarkupTokenType.End })
             {
                 MarkupNode? nextChild = ParseNode(iterator);
                 if (nextChild is ColoredTextNode { Color: "" })
                 {
                     // Treat the <c> tag as TagClose if the color tag is not closed correctly.
-                    return node;
+                    return new ColoredTextNode(color, children.ToImmutable());
                 }
 
                 if (nextChild is not null)
                 {
-                    node.Children.Add(nextChild);
+                    children.Add(nextChild);
                 }
             }
 
@@ -107,7 +108,7 @@ public sealed class MarkupParser()
                 iterator.Advance();
             }
 
-            return node;
+            return new ColoredTextNode(color, children.ToImmutable());
         }
 
         return null;

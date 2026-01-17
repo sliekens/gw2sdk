@@ -3905,9 +3905,7 @@ GuildWars2.Logos.LogosClient
 GuildWars2.Logos.LogosClient.GetLogoById(string! logoId, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Logos.Logo! Value, GuildWars2.MessageContext! Context)>!
 GuildWars2.Logos.LogosClient.LogosClient(System.Net.Http.HttpClient! httpClient) -> void
 GuildWars2.Markup.ColoredTextNode
-GuildWars2.Markup.ColoredTextNode.Children.get -> System.Collections.Generic.List<GuildWars2.Markup.MarkupNode!>!
 GuildWars2.Markup.ColoredTextNode.Color.get -> string!
-GuildWars2.Markup.ColoredTextNode.ColoredTextNode(string! color) -> void
 GuildWars2.Markup.LineBreakNode
 GuildWars2.Markup.LineBreakNode.LineBreakNode() -> void
 GuildWars2.Markup.MarkupColorName
@@ -3947,8 +3945,6 @@ GuildWars2.Markup.MarkupTokenType.TagValue = 4 -> GuildWars2.Markup.MarkupTokenT
 GuildWars2.Markup.MarkupTokenType.TagVoid = 6 -> GuildWars2.Markup.MarkupTokenType
 GuildWars2.Markup.MarkupTokenType.Text = 1 -> GuildWars2.Markup.MarkupTokenType
 GuildWars2.Markup.RootNode
-GuildWars2.Markup.RootNode.Children.get -> System.Collections.Generic.List<GuildWars2.Markup.MarkupNode!>!
-GuildWars2.Markup.RootNode.RootNode() -> void
 GuildWars2.Markup.TextNode
 GuildWars2.Markup.TextNode.Text.get -> string!
 GuildWars2.Markup.TextNode.TextNode(string! text) -> void
