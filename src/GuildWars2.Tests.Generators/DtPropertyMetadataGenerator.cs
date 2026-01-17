@@ -39,9 +39,9 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         builder.AppendLine("{");
         builder.AppendLine("    public readonly struct DtProperty");
         builder.AppendLine("    {");
-        builder.AppendLine("        public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute)");
+        builder.AppendLine("        public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute, bool isCollection, bool isImmutableCollection, bool isPrimaryConstructorProperty)");
         builder.AppendLine("        {");
-        builder.AppendLine("            DeclaringType = declaringType;\n            Name = name;\n            HasSetter = hasSetter;\n            IsInitOnly = isInitOnly;\n            IsObsolete = isObsolete;\n            HasRequiredMemberAttribute = hasRequiredMemberAttribute;");
+        builder.AppendLine("            DeclaringType = declaringType;\n            Name = name;\n            HasSetter = hasSetter;\n            IsInitOnly = isInitOnly;\n            IsObsolete = isObsolete;\n            HasRequiredMemberAttribute = hasRequiredMemberAttribute;\n            IsCollection = isCollection;\n            IsImmutableCollection = isImmutableCollection;\n            IsPrimaryConstructorProperty = isPrimaryConstructorProperty;");
         builder.AppendLine("        }");
         builder.AppendLine("        public string DeclaringType { get; }");
         builder.AppendLine("        public string Name { get; }");
@@ -49,6 +49,9 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         builder.AppendLine("        public bool IsInitOnly { get; }");
         builder.AppendLine("        public bool IsObsolete { get; }");
         builder.AppendLine("        public bool HasRequiredMemberAttribute { get; }");
+        builder.AppendLine("        public bool IsCollection { get; }");
+        builder.AppendLine("        public bool IsImmutableCollection { get; }");
+        builder.AppendLine("        public bool IsPrimaryConstructorProperty { get; }");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    public IEnumerable<DtProperty> DataTransferObjectProperties { get; } = new DtProperty[]");
@@ -60,7 +63,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
             {
                 builder.AppendLine(",");
             }
-            builder.Append("        new DtProperty(\"" + p.DeclaringType + "\", \"" + p.Name + "\", hasSetter: " + (p.HasSetter ? "true" : "false") + ", isInitOnly: " + (p.IsInitOnly ? "true" : "false") + ", isObsolete: " + (p.IsObsolete ? "true" : "false") + ", hasRequiredMemberAttribute: " + (p.HasRequiredMemberAttribute ? "true" : "false") + ")");
+            builder.Append("        new DtProperty(\"" + p.DeclaringType + "\", \"" + p.Name + "\", hasSetter: " + (p.HasSetter ? "true" : "false") + ", isInitOnly: " + (p.IsInitOnly ? "true" : "false") + ", isObsolete: " + (p.IsObsolete ? "true" : "false") + ", hasRequiredMemberAttribute: " + (p.HasRequiredMemberAttribute ? "true" : "false") + ", isCollection: " + (p.IsCollection ? "true" : "false") + ", isImmutableCollection: " + (p.IsImmutableCollection ? "true" : "false") + ", isPrimaryConstructorProperty: " + (p.IsPrimaryConstructorProperty ? "true" : "false") + ")");
             first = false;
         }
         builder.AppendLine();
@@ -77,29 +80,28 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
             {
                 Enumerate(ns, properties);
             }
-            else if (member is INamedTypeSymbol type && type.TypeKind == TypeKind.Class)
+            else if (member is INamedTypeSymbol type && type.TypeKind == TypeKind.Class && type.IsRecord)
             {
-                bool isDto = false;
-                foreach (AttributeData attribute in type.GetAttributes())
-                {
-                    if (string.Equals(attribute.AttributeClass?.Name, "DataTransferObjectAttribute", StringComparison.Ordinal))
-                    {
-                        isDto = true;
-                        break;
-                    }
-                }
-                if (!isDto)
-                {
-                    continue;
-                }
-
                 string declaringType = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).Replace("global::", string.Empty);
+
+                // Collect primary constructor parameter names
+                HashSet<string> primaryCtorParams = GetPrimaryConstructorParameterNames(type);
+
                 foreach (IPropertySymbol property in type.GetMembers().OfType<IPropertySymbol>())
                 {
+                    // Skip explicit interface implementations (they may use different types for compatibility).
+                    if (property.ExplicitInterfaceImplementations.Length > 0)
+                    {
+                        continue;
+                    }
+
                     bool hasSetter = property.SetMethod is not null;
                     bool isInitOnly = property.SetMethod?.IsInitOnly == true;
                     bool isObsolete = IsObsolete(property);
                     bool hasRequired = HasRequiredMember(property);
+                    bool isCollection = IsCollectionType(property.Type);
+                    bool isImmutableCollection = IsImmutableCollectionInterface(property.Type);
+                    bool isPrimaryCtorProperty = primaryCtorParams.Contains(property.Name);
                     properties.Add(new PropertyMetadata
                     {
                         DeclaringType = declaringType,
@@ -107,11 +109,71 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                         HasSetter = hasSetter,
                         IsInitOnly = isInitOnly,
                         IsObsolete = isObsolete,
-                        HasRequiredMemberAttribute = hasRequired
+                        HasRequiredMemberAttribute = hasRequired,
+                        IsCollection = isCollection,
+                        IsImmutableCollection = isImmutableCollection,
+                        IsPrimaryConstructorProperty = isPrimaryCtorProperty
                     });
                 }
             }
         }
+    }
+
+    private static HashSet<string> GetPrimaryConstructorParameterNames(INamedTypeSymbol type)
+    {
+        HashSet<string> names = new(StringComparer.Ordinal);
+
+        // For records, find the primary constructor (the one with parameters matching synthesized properties)
+        // When analyzing metadata (referenced assemblies), DeclaringSyntaxReferences is empty,
+        // so we identify primary constructor by finding a constructor whose parameters all have
+        // corresponding auto-generated properties with init-only setters.
+        foreach (IMethodSymbol ctor in type.InstanceConstructors)
+        {
+            // Skip the copy constructor (single parameter of the same type)
+            if (ctor.Parameters.Length == 1 && SymbolEqualityComparer.Default.Equals(ctor.Parameters[0].Type, type))
+            {
+                continue;
+            }
+
+            // Skip parameterless constructors
+            if (ctor.Parameters.Length == 0)
+            {
+                continue;
+            }
+
+            // Check if all parameters have matching properties (characteristic of primary constructor)
+            bool allParamsHaveProperties = true;
+            List<string> candidateNames = [];
+
+            foreach (IParameterSymbol param in ctor.Parameters)
+            {
+                IPropertySymbol? matchingProperty = type.GetMembers(param.Name)
+                    .OfType<IPropertySymbol>()
+                    .FirstOrDefault(p => !p.IsStatic && SymbolEqualityComparer.Default.Equals(p.Type, param.Type));
+
+                if (matchingProperty is not null)
+                {
+                    candidateNames.Add(param.Name);
+                }
+                else
+                {
+                    allParamsHaveProperties = false;
+                    break;
+                }
+            }
+
+            // If all parameters have matching properties, this is likely the primary constructor
+            if (allParamsHaveProperties && candidateNames.Count > 0)
+            {
+                foreach (string name in candidateNames)
+                {
+                    names.Add(name);
+                }
+                break; // Found the primary constructor
+            }
+        }
+
+        return names;
     }
 
     private static bool IsObsolete(IPropertySymbol property)
@@ -177,7 +239,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
             {
                 public readonly struct DtProperty
                 {
-                    public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute)
+                    public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute, bool isCollection, bool isImmutableCollection, bool isPrimaryConstructorProperty)
                     {
                         DeclaringType = declaringType;
                         Name = name;
@@ -185,6 +247,9 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                         IsInitOnly = isInitOnly;
                         IsObsolete = isObsolete;
                         HasRequiredMemberAttribute = hasRequiredMemberAttribute;
+                        IsCollection = isCollection;
+                        IsImmutableCollection = isImmutableCollection;
+                        IsPrimaryConstructorProperty = isPrimaryConstructorProperty;
                     }
                     public string DeclaringType { get; }
                     public string Name { get; }
@@ -192,6 +257,9 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                     public bool IsInitOnly { get; }
                     public bool IsObsolete { get; }
                     public bool HasRequiredMemberAttribute { get; }
+                    public bool IsCollection { get; }
+                    public bool IsImmutableCollection { get; }
+                    public bool IsPrimaryConstructorProperty { get; }
                 }
                 public IEnumerable<DtProperty> DataTransferObjectProperties { get; } = new DtProperty[] { };
             }
@@ -207,5 +275,45 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         public bool IsInitOnly { get; set; }
         public bool IsObsolete { get; set; }
         public bool HasRequiredMemberAttribute { get; set; }
+        public bool IsCollection { get; set; }
+        public bool IsImmutableCollection { get; set; }
+        public bool IsPrimaryConstructorProperty { get; set; }
+    }
+
+    private static bool IsCollectionType(ITypeSymbol type)
+    {
+        // Check if the type implements IEnumerable<T> (but exclude string)
+        if (type.SpecialType == SpecialType.System_String)
+        {
+            return false;
+        }
+
+        foreach (INamedTypeSymbol iface in type.AllInterfaces)
+        {
+            if (iface.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T)
+            {
+                return true;
+            }
+        }
+
+        // Also check if the type itself is IEnumerable<T>
+        if (type is INamedTypeSymbol namedType && namedType.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsImmutableCollectionInterface(ITypeSymbol type)
+    {
+        // Check if type is IImmutableValueList<T>, IImmutableValueSet<T>, IImmutableValueDictionary<TKey, TValue>, IImmutableValueArray<T>
+        if (type is INamedTypeSymbol namedType)
+        {
+            string name = namedType.OriginalDefinition.ToDisplayString();
+            return name.StartsWith("GuildWars2.Collections.IImmutableValue", StringComparison.Ordinal);
+        }
+
+        return false;
     }
 }
