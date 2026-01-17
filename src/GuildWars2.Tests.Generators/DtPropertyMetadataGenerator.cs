@@ -39,9 +39,9 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         builder.AppendLine("{");
         builder.AppendLine("    public readonly struct DtProperty");
         builder.AppendLine("    {");
-        builder.AppendLine("        public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute, bool isCollection, bool isImmutableCollection, bool isPrimaryConstructorProperty, bool isNullable)");
+        builder.AppendLine("        public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute, bool isCollection, bool isImmutableCollection, bool isPrimaryConstructorProperty, bool isNullable, bool hasDefaultValueAttribute)");
         builder.AppendLine("        {");
-        builder.AppendLine("            DeclaringType = declaringType;\n            Name = name;\n            HasSetter = hasSetter;\n            IsInitOnly = isInitOnly;\n            IsObsolete = isObsolete;\n            HasRequiredMemberAttribute = hasRequiredMemberAttribute;\n            IsCollection = isCollection;\n            IsImmutableCollection = isImmutableCollection;\n            IsPrimaryConstructorProperty = isPrimaryConstructorProperty;\n            IsNullable = isNullable;");
+        builder.AppendLine("            DeclaringType = declaringType;\n            Name = name;\n            HasSetter = hasSetter;\n            IsInitOnly = isInitOnly;\n            IsObsolete = isObsolete;\n            HasRequiredMemberAttribute = hasRequiredMemberAttribute;\n            IsCollection = isCollection;\n            IsImmutableCollection = isImmutableCollection;\n            IsPrimaryConstructorProperty = isPrimaryConstructorProperty;\n            IsNullable = isNullable;\n            HasDefaultValueAttribute = hasDefaultValueAttribute;");
         builder.AppendLine("        }");
         builder.AppendLine("        public string DeclaringType { get; }");
         builder.AppendLine("        public string Name { get; }");
@@ -53,6 +53,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         builder.AppendLine("        public bool IsImmutableCollection { get; }");
         builder.AppendLine("        public bool IsPrimaryConstructorProperty { get; }");
         builder.AppendLine("        public bool IsNullable { get; }");
+        builder.AppendLine("        public bool HasDefaultValueAttribute { get; }");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    public IEnumerable<DtProperty> DataTransferObjectProperties { get; } = new DtProperty[]");
@@ -64,7 +65,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
             {
                 builder.AppendLine(",");
             }
-            builder.Append("        new DtProperty(\"" + p.DeclaringType + "\", \"" + p.Name + "\", hasSetter: " + (p.HasSetter ? "true" : "false") + ", isInitOnly: " + (p.IsInitOnly ? "true" : "false") + ", isObsolete: " + (p.IsObsolete ? "true" : "false") + ", hasRequiredMemberAttribute: " + (p.HasRequiredMemberAttribute ? "true" : "false") + ", isCollection: " + (p.IsCollection ? "true" : "false") + ", isImmutableCollection: " + (p.IsImmutableCollection ? "true" : "false") + ", isPrimaryConstructorProperty: " + (p.IsPrimaryConstructorProperty ? "true" : "false") + ", isNullable: " + (p.IsNullable ? "true" : "false") + ")");
+            builder.Append("        new DtProperty(\"" + p.DeclaringType + "\", \"" + p.Name + "\", hasSetter: " + (p.HasSetter ? "true" : "false") + ", isInitOnly: " + (p.IsInitOnly ? "true" : "false") + ", isObsolete: " + (p.IsObsolete ? "true" : "false") + ", hasRequiredMemberAttribute: " + (p.HasRequiredMemberAttribute ? "true" : "false") + ", isCollection: " + (p.IsCollection ? "true" : "false") + ", isImmutableCollection: " + (p.IsImmutableCollection ? "true" : "false") + ", isPrimaryConstructorProperty: " + (p.IsPrimaryConstructorProperty ? "true" : "false") + ", isNullable: " + (p.IsNullable ? "true" : "false") + ", hasDefaultValueAttribute: " + (p.HasDefaultValueAttribute ? "true" : "false") + ")");
             first = false;
         }
         builder.AppendLine();
@@ -104,6 +105,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                     bool isImmutableCollection = IsImmutableCollectionInterface(property.Type);
                     bool isPrimaryCtorProperty = primaryCtorParams.Contains(property.Name);
                     bool isNullable = IsNullableType(property.Type);
+                    bool hasDefaultValueAttribute = HasDefaultValueAttribute(property);
                     properties.Add(new PropertyMetadata
                     {
                         DeclaringType = declaringType,
@@ -115,7 +117,8 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                         IsCollection = isCollection,
                         IsImmutableCollection = isImmutableCollection,
                         IsPrimaryConstructorProperty = isPrimaryCtorProperty,
-                        IsNullable = isNullable
+                        IsNullable = isNullable,
+                        HasDefaultValueAttribute = hasDefaultValueAttribute
                     });
                 }
             }
@@ -229,6 +232,24 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         return isRequiredFlag;
     }
 
+    private static bool HasDefaultValueAttribute(IPropertySymbol property)
+    {
+        foreach (AttributeData attribute in property.GetAttributes())
+        {
+            INamedTypeSymbol? attrClass = attribute.AttributeClass;
+            if (attrClass is null)
+            {
+                continue;
+            }
+            if (attrClass.Name == "DefaultValueAttribute" ||
+                attrClass.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) == "global::System.ComponentModel.DefaultValueAttribute")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static void EmitPlaceholder(SourceProductionContext context)
     {
         context.AddSource("AssemblyFixture.DtPropertyMetadata.g.cs",
@@ -242,7 +263,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
             {
                 public readonly struct DtProperty
                 {
-                    public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute, bool isCollection, bool isImmutableCollection, bool isPrimaryConstructorProperty, bool isNullable)
+                    public DtProperty(string declaringType, string name, bool hasSetter, bool isInitOnly, bool isObsolete, bool hasRequiredMemberAttribute, bool isCollection, bool isImmutableCollection, bool isPrimaryConstructorProperty, bool isNullable, bool hasDefaultValueAttribute)
                     {
                         DeclaringType = declaringType;
                         Name = name;
@@ -254,6 +275,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                         IsImmutableCollection = isImmutableCollection;
                         IsPrimaryConstructorProperty = isPrimaryConstructorProperty;
                         IsNullable = isNullable;
+                        HasDefaultValueAttribute = hasDefaultValueAttribute;
                     }
                     public string DeclaringType { get; }
                     public string Name { get; }
@@ -265,6 +287,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
                     public bool IsImmutableCollection { get; }
                     public bool IsPrimaryConstructorProperty { get; }
                     public bool IsNullable { get; }
+                    public bool HasDefaultValueAttribute { get; }
                 }
                 public IEnumerable<DtProperty> DataTransferObjectProperties { get; } = new DtProperty[] { };
             }
@@ -284,6 +307,7 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
         public bool IsImmutableCollection { get; set; }
         public bool IsPrimaryConstructorProperty { get; set; }
         public bool IsNullable { get; set; }
+        public bool HasDefaultValueAttribute { get; set; }
     }
 
     private static bool IsNullableType(ITypeSymbol type)
