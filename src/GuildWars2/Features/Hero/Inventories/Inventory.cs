@@ -1,6 +1,7 @@
 namespace GuildWars2.Hero.Inventories;
 
 /// <summary>Information about items in a bag or shared inventory.</summary>
+[DataTransferObject]
 public sealed record Inventory
 {
     /// <summary>The item slots in the bag. Empty slots are represented as <c>null</c>.</summary>

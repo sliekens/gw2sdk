@@ -1,6 +1,7 @@
 namespace GuildWars2.Hero.Masteries;
 
 /// <summary>Information about mastery points on the account.</summary>
+[DataTransferObject]
 public sealed record MasteryPointsProgress
 {
     /// <summary>The aggregated totals of mastery points on the account by region.</summary>
