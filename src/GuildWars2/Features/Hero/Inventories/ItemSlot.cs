@@ -28,10 +28,10 @@ public sealed record ItemSlot
     public required int? SecondarySuffixItemId { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
-    public required IReadOnlyList<int> InfusionItemIds { get; init; }
+    public required IImmutableValueList<int> InfusionItemIds { get; init; }
 
     /// <summary>The color IDs of the dyes applied to the current item.</summary>
-    public required IReadOnlyList<int> DyeColorIds { get; init; }
+    public required IImmutableValueList<int> DyeColorIds { get; init; }
 
     /// <summary>Whether this item is bound.</summary>
     public required Extensible<ItemBinding> Binding { get; init; }

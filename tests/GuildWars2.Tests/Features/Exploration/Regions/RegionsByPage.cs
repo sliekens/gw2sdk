@@ -12,7 +12,7 @@ public class RegionsByPage(Gw2Client sut)
         const int continentId = 1;
         const int floorId = 1;
         const int pageSize = 3;
-        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByPage(continentId, floorId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context).Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))

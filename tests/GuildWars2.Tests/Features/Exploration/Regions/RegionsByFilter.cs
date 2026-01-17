@@ -12,7 +12,7 @@ public class RegionsByFilter(Gw2Client sut)
         const int continentId = 1;
         const int floorId = 0;
         HashSet<int> ids = [1, 2, 3];
-        (HashSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByIds(continentId, floorId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Region> actual, MessageContext context) = await sut.Exploration.GetRegionsByIds(continentId, floorId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(ids.Count));
         await Assert.That(actual).Count().IsEqualTo(ids.Count);

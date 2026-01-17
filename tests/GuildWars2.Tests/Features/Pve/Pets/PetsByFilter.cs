@@ -10,7 +10,7 @@ public class PetsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [1, 2, 3];
-        (HashSet<Pet> actual, MessageContext context) = await sut.Pve.Pets.GetPetsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Pet> actual, MessageContext context) = await sut.Pve.Pets.GetPetsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

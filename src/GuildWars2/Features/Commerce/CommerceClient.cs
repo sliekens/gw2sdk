@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Commerce.Delivery;
 using GuildWars2.Commerce.Exchange;
 using GuildWars2.Commerce.Listings;
@@ -59,7 +58,7 @@ public sealed class CommerceClient
     /// <summary>Retrieves the item IDs of all items with listings on the trading post.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetItemPricesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetItemPricesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -69,7 +68,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -104,7 +103,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
+    public async Task<(IImmutableValueSet<ItemPrice> Value, MessageContext Context)> GetItemPricesByIds(
         IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -118,7 +117,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItemPrice());
+            ImmutableValueSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItemPrice());
             return (value, response.Context);
         }
     }
@@ -155,7 +154,7 @@ public sealed class CommerceClient
             CancellationToken cancellationToken
         )
         {
-            (HashSet<ItemPrice> values, MessageContext context) =
+            (IImmutableValueSet<ItemPrice> values, MessageContext context) =
                 await GetItemPricesByIds(chunk, missingMemberBehavior, cancellationToken)
                     .ConfigureAwait(false);
             return values.Select(value => (value, context)).ToList();
@@ -177,7 +176,7 @@ public sealed class CommerceClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        (HashSet<int> value, _) = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
+        (IImmutableValueSet<int> value, _) = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
         IAsyncEnumerable<(ItemPrice Value, MessageContext Context)> producer = GetItemPricesBulk(
             value,
             missingMemberBehavior,
@@ -199,7 +198,7 @@ public sealed class CommerceClient
     /// <summary>Retrieves the item IDs of all items with listings on the trading post.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetOrderBooksIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetOrderBooksIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -209,7 +208,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -244,7 +243,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
+    public async Task<(IImmutableValueSet<OrderBook> Value, MessageContext Context)> GetOrderBooksByIds(
         IEnumerable<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -258,7 +257,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<OrderBook> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrderBook());
+            ImmutableValueSet<OrderBook> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrderBook());
             return (value, response.Context);
         }
     }
@@ -295,7 +294,7 @@ public sealed class CommerceClient
             CancellationToken cancellationToken
         )
         {
-            (HashSet<OrderBook> values, MessageContext context) =
+            (IImmutableValueSet<OrderBook> values, MessageContext context) =
                 await GetOrderBooksByIds(chunk, missingMemberBehavior, cancellationToken)
                     .ConfigureAwait(false);
             return values.Select(value => (value, context)).ToList();
@@ -317,7 +316,7 @@ public sealed class CommerceClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        (HashSet<int> value, _) = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
+        (IImmutableValueSet<int> value, _) = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
         IAsyncEnumerable<(OrderBook Value, MessageContext Context)> producer = GetOrderBooksBulk(
             value,
             missingMemberBehavior,
@@ -396,7 +395,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Order> Value, MessageContext Context)> GetBuyOrders(
+    public async Task<(IImmutableValueSet<Order> Value, MessageContext Context)> GetBuyOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -415,7 +414,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
+            ImmutableValueSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -428,7 +427,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Order> Value, MessageContext Context)> GetSellOrders(
+    public async Task<(IImmutableValueSet<Order> Value, MessageContext Context)> GetSellOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -447,7 +446,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
+            ImmutableValueSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -460,7 +459,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Transaction> Value, MessageContext Context)> GetPurchases(
+    public async Task<(IImmutableValueSet<Transaction> Value, MessageContext Context)> GetPurchases(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -479,7 +478,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
+            ImmutableValueSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }
@@ -492,7 +491,7 @@ public sealed class CommerceClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Transaction> Value, MessageContext Context)> GetSales(
+    public async Task<(IImmutableValueSet<Transaction> Value, MessageContext Context)> GetSales(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -511,7 +510,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
+            ImmutableValueSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }

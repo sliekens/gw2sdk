@@ -9,7 +9,7 @@ namespace GuildWars2;
 public abstract record Flags
 {
     /// <summary>Other undocumented flags. If you find out what they mean, please open an issue or a pull request.</summary>
-    public required IReadOnlyList<string> Other { get; init; }
+    public required IImmutableValueList<string> Other { get; init; }
 
     /// <inheritdoc />
     public virtual bool Equals(Flags? other)

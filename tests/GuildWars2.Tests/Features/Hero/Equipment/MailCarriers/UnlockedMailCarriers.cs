@@ -11,9 +11,9 @@ public class UnlockedMailCarriers(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<int> actual, _) = await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<int> actual, _) = await sut.Hero.Equipment.MailCarriers.GetUnlockedMailCarriers(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
-        (HashSet<MailCarrier> carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(actual, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MailCarrier> carriers, _) = await sut.Hero.Equipment.MailCarriers.GetMailCarriersByIds(actual, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(carriers.Count).IsEqualTo(actual.Count);
         foreach (MailCarrier carrier in carriers)
         {

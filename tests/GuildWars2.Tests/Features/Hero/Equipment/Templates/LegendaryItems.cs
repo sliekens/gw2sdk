@@ -11,7 +11,7 @@ public class LegendaryItems(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<LegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItems(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<LegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItems(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
         using (Assert.Multiple())
         {

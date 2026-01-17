@@ -12,7 +12,7 @@ public class MountSkins(Gw2Client sut)
     [Test]
     public async Task Mount_skins_can_be_listed()
     {
-        (HashSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(
+        (IImmutableValueSet<MountSkin> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountSkins(
             cancellationToken: TestContext.Current!.Execution.CancellationToken
         );
 

@@ -8,5 +8,5 @@ public sealed record ObjectiveUpgrade
     public required int Id { get; init; }
 
     /// <summary>The upgrade tiers.</summary>
-    public required IReadOnlyList<UpgradeTier> Tiers { get; init; }
+    public required IImmutableValueList<UpgradeTier> Tiers { get; init; }
 }

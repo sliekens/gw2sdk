@@ -19,5 +19,5 @@ public sealed record Floor
     public required Rectangle? ClampedView { get; init; }
 
     /// <summary>The regions that are available on this floor. The key is the region ID, the value is the region.</summary>
-    public required Dictionary<int, Regions.Region> Regions { get; init; }
+    public required IImmutableValueDictionary<int, Regions.Region> Regions { get; init; }
 }

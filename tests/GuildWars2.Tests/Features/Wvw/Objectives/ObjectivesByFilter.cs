@@ -10,7 +10,7 @@ public class ObjectivesByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<string> ids = ["1099-99", "1143-99", "1102-99"];
-        (HashSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Objective> actual, MessageContext context) = await sut.Wvw.GetObjectivesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

@@ -5,22 +5,22 @@ namespace GuildWars2;
 /// <summary>Miscellaneous extension methods.</summary>
 public static class Extensions
 {
-    /// <summary>Returns a new task that converts the <see cref="HashSet{T}" /> from the original task to a
+    /// <summary>Returns a new task that converts the <see cref="IImmutableValueSet{T}" /> from the original task to a
     /// <see cref="Dictionary{TKey,TValue}" />.</summary>
     /// <typeparam name="TKey">The type of the key in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the value in the dictionary.</typeparam>
     /// <param name="instance">The task.</param>
     /// <param name="keySelector">The function to select the key from the value.</param>
     /// <returns>A new task.</returns>
-    public static async Task<(Dictionary<TKey, TValue> Value, MessageContext Context)>
+    public static async Task<(IImmutableDictionary<TKey, TValue> Value, MessageContext Context)>
         AsDictionary<TKey, TValue>(
-            this Task<(HashSet<TValue> Value, MessageContext Context)> instance,
+            this Task<(IImmutableValueSet<TValue> Value, MessageContext Context)> instance,
             Func<TValue, TKey> keySelector
         ) where TKey : notnull
     {
         ThrowHelper.ThrowIfNull(instance);
-        (HashSet<TValue> value, MessageContext context) = await instance.ConfigureAwait(false);
-        return (value.ToDictionary(keySelector), context);
+        (IImmutableValueSet<TValue> value, MessageContext context) = await instance.ConfigureAwait(false);
+        return (value.ToImmutableDictionary(keySelector), context);
     }
 
     /// <summary>Returns a new task that only returns the value of the original task, discarding the message context.</summary>

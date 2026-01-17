@@ -13,7 +13,7 @@ public class BoundLegendaryItems(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<BoundLegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<BoundLegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetBoundLegendaryItems(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).IsNotNull();
         await Assert.That(actual).IsNotEmpty();
         foreach (BoundLegendaryItem entry in actual)

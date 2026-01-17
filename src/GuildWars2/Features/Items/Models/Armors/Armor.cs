@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
@@ -31,14 +30,14 @@ public record Armor : Item, ICombatEquipment, IUpgradable
     public required int? AttributeCombinationId { get; init; }
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
+    public required IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
+    public required IImmutableValueList<int> StatChoices { get; init; }
 
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
@@ -48,11 +47,11 @@ public record Armor : Item, ICombatEquipment, IUpgradable
 #pragma warning restore CA1033 // Interface methods should be callable by child types
 
     /// <summary>The upgrade slots of the armor.</summary>
-    public IReadOnlyList<int?> UpgradeSlots =>
+    public IImmutableValueList<int?> UpgradeSlots =>
         this switch
         {
             _ when Flags.NotUpgradeable => [],
-            _ => (ValueList<int?>)[SuffixItemId]
+            _ => new ImmutableValueList<int?>([SuffixItemId])
         };
 
     /// <summary>The number of upgrade slots available on the armor item.</summary>
@@ -64,7 +63,7 @@ public record Armor : Item, ICombatEquipment, IUpgradable
         };
 
     /// <summary>The infusion slots of the armor (only available on ascended and legendary items).</summary>
-    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
+    public required IImmutableValueList<InfusionSlot> InfusionSlots { get; init; }
 
     /// <summary>The number of infusion slots available on the armor item.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;

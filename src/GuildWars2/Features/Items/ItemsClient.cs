@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Items.Stats;
 using GuildWars2.Json;
@@ -27,7 +26,7 @@ public sealed class ItemsClient
     /// <summary>Retrieves the IDs of all items.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetItemsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetItemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -37,7 +36,7 @@ public sealed class ItemsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -76,7 +75,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByIds(
+    public async Task<(IImmutableValueSet<Item> Value, MessageContext Context)> GetItemsByIds(
         IEnumerable<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -92,7 +91,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
+            ImmutableValueSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
             return (value, response.Context);
         }
     }
@@ -104,7 +103,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Item> Value, MessageContext Context)> GetItemsByPage(
+    public async Task<(IImmutableValueSet<Item> Value, MessageContext Context)> GetItemsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -121,7 +120,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
+            ImmutableValueSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
             return (value, response.Context);
         }
     }
@@ -159,7 +158,7 @@ public sealed class ItemsClient
             CancellationToken cancellationToken
         )
         {
-            (HashSet<Item> values, MessageContext context) = await GetItemsByIds(
+            (IImmutableValueSet<Item> values, MessageContext context) = await GetItemsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
@@ -187,7 +186,7 @@ public sealed class ItemsClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        (HashSet<int> value, _) = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
+        (IImmutableValueSet<int> value, _) = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
         IAsyncEnumerable<(Item Value, MessageContext Context)> producer = GetItemsBulk(
             value,
             language,
@@ -210,7 +209,7 @@ public sealed class ItemsClient
     /// <summary>Retrieves the IDs of all attribute combinations.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetAttributeCombinationsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetAttributeCombinationsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -220,7 +219,7 @@ public sealed class ItemsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -230,7 +229,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinations(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -246,7 +245,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AttributeCombination> value =
+            ImmutableValueSet<AttributeCombination> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
@@ -286,7 +285,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinationsByIds(
             IEnumerable<int> attributeCombinationIds,
             Language? language = default,
@@ -303,7 +302,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AttributeCombination> value =
+            ImmutableValueSet<AttributeCombination> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
@@ -316,7 +315,7 @@ public sealed class ItemsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<AttributeCombination> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<AttributeCombination> Value, MessageContext Context)>
         GetAttributeCombinationByPage(
             int pageIndex,
             int? pageSize = default,
@@ -334,7 +333,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AttributeCombination> value =
+            ImmutableValueSet<AttributeCombination> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }

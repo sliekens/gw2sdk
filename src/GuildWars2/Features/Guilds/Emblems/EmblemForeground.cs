@@ -8,5 +8,5 @@ public sealed record EmblemForeground
     public required int Id { get; init; }
 
     /// <summary>The image URLs of the foreground layers.</summary>
-    public required IReadOnlyList<Uri> LayerUrls { get; init; }
+    public required IImmutableValueList<Uri> LayerUrls { get; init; }
 }

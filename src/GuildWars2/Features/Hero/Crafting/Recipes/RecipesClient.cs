@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -30,7 +29,7 @@ public sealed class RecipesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedRecipes(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedRecipes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -41,7 +40,7 @@ public sealed class RecipesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -58,7 +57,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetLearnedRecipes(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetLearnedRecipes(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -75,7 +74,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            HashSet<int> value = response.Json.RootElement.GetLearnedRecipes();
+            IImmutableValueSet<int> value = response.Json.RootElement.GetLearnedRecipes();
             return (value, response.Context);
         }
     }
@@ -87,7 +86,7 @@ public sealed class RecipesClient
     /// <summary>Retrieves the IDs of all recipes.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetRecipesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -97,7 +96,7 @@ public sealed class RecipesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -132,7 +131,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
+    public async Task<(IImmutableValueSet<Recipe> Value, MessageContext Context)> GetRecipesByIds(
         IEnumerable<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -146,7 +145,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
+            ImmutableValueSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -157,7 +156,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByPage(
+    public async Task<(IImmutableValueSet<Recipe> Value, MessageContext Context)> GetRecipesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -172,7 +171,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
+            ImmutableValueSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -209,7 +208,7 @@ public sealed class RecipesClient
             CancellationToken cancellationToken
         )
         {
-            (HashSet<Recipe> values, MessageContext context) =
+            (IImmutableValueSet<Recipe> values, MessageContext context) =
                 await GetRecipesByIds(chunk, missingMemberBehavior, cancellationToken)
                     .ConfigureAwait(false);
             return values.Select(value => (value, context)).ToList();
@@ -231,7 +230,7 @@ public sealed class RecipesClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        (HashSet<int> value, _) = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
+        (IImmutableValueSet<int> value, _) = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
         IAsyncEnumerable<(Recipe Value, MessageContext Context)> producer = GetRecipesBulk(
             value,
             missingMemberBehavior,
@@ -254,7 +253,7 @@ public sealed class RecipesClient
     /// <param name="ingredientItemId">The item ID of the ingredient.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)>
         GetRecipesIndexByIngredientItemId(
             int ingredientItemId,
             CancellationToken cancellationToken = default
@@ -267,7 +266,7 @@ public sealed class RecipesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -277,7 +276,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemId(
+    public async Task<(IImmutableValueSet<Recipe> Value, MessageContext Context)> GetRecipesByIngredientItemId(
         int ingredientItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -292,7 +291,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
+            ImmutableValueSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -304,7 +303,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Recipe> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<Recipe> Value, MessageContext Context)>
         GetRecipesByIngredientItemIdByPage(
             int ingredientItemId,
             int pageIndex,
@@ -322,7 +321,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
+            ImmutableValueSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -331,7 +330,7 @@ public sealed class RecipesClient
     /// <param name="outputItemId">The item ID of the created item.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetRecipesIndexByOutputItemId(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetRecipesIndexByOutputItemId(
         int outputItemId,
         CancellationToken cancellationToken = default
     )
@@ -343,7 +342,7 @@ public sealed class RecipesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -353,7 +352,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemId(
+    public async Task<(IImmutableValueSet<Recipe> Value, MessageContext Context)> GetRecipesByOutputItemId(
         int outputItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -368,7 +367,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
+            ImmutableValueSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }
@@ -380,7 +379,7 @@ public sealed class RecipesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Recipe> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<Recipe> Value, MessageContext Context)>
         GetRecipesByOutputItemIdByPage(
             int outputItemId,
             int pageIndex,
@@ -398,7 +397,7 @@ public sealed class RecipesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
+            ImmutableValueSet<Recipe> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRecipe());
             return (value, response.Context);
         }
     }

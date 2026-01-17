@@ -9,7 +9,7 @@ public class EmblemBackgrounds(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgrounds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<EmblemBackground> actual, MessageContext context) = await sut.Guilds.GetEmblemBackgrounds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
         await Assert.That(actual).IsNotEmpty();

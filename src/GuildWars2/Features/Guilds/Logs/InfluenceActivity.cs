@@ -11,5 +11,5 @@ public sealed record InfluenceActivity : GuildLogEntry
     public required int TotalParticipants { get; init; }
 
     /// <summary>The user IDs of the members who participated in the activity.</summary>
-    public required IReadOnlyCollection<string> Participants { get; init; }
+    public required IImmutableValueList<string> Participants { get; init; }
 }

@@ -12,7 +12,7 @@ public class JadeBotSkins(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<JadeBotSkin> actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkins(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<JadeBotSkin> actual, MessageContext context) = await sut.Hero.Equipment.JadeBots.GetJadeBotSkins(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);

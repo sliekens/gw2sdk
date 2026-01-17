@@ -9,7 +9,7 @@ public class Quaggans(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggans(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggans(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

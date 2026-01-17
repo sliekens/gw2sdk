@@ -13,7 +13,7 @@ public class MapsByPage(Gw2Client sut)
         const int floorId = 0;
         const int regionId = 1;
         const int pageSize = 3;
-        (HashSet<Map> actual, MessageContext context) = await sut.Exploration.GetMapsByPage(continentId, floorId, regionId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Map> actual, MessageContext context) = await sut.Exploration.GetMapsByPage(continentId, floorId, regionId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context).Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment.MailCarriers;
@@ -10,7 +9,7 @@ internal static class MailCarrierFlagsJson
     public static MailCarrierFlags GetMailCarrierFlags(this in JsonElement json)
     {
         bool @default = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("Default"))
@@ -26,7 +25,7 @@ internal static class MailCarrierFlagsJson
         return new MailCarrierFlags
         {
             Default = @default,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

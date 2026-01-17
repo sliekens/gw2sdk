@@ -10,7 +10,7 @@ public class AmuletsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [4, 8, 9];
-        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmuletsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

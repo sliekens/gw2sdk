@@ -10,7 +10,7 @@ public class AchievementsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Achievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Achievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

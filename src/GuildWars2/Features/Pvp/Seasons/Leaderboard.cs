@@ -8,5 +8,5 @@ public sealed record Leaderboard
     public required LeaderboardSetting Settings { get; init; }
 
     /// <summary>The scoring methods, used for cross-referencing with leaderboard entries.</summary>
-    public required IReadOnlyList<LeaderboardScoring> Scorings { get; init; }
+    public required IImmutableValueList<LeaderboardScoring> Scorings { get; init; }
 }

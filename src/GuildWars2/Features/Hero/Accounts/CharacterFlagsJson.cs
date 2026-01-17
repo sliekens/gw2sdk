@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Accounts;
@@ -10,7 +9,7 @@ internal static class CharacterFlagsJson
     public static CharacterFlags GetCharacterFlags(this in JsonElement json)
     {
         bool beta = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("Beta"))
@@ -26,7 +25,7 @@ internal static class CharacterFlagsJson
         return new CharacterFlags
         {
             Beta = beta,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

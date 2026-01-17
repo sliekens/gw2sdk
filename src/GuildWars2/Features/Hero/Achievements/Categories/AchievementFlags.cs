@@ -1,7 +1,5 @@
 using System.Text.Json.Serialization;
 
-using GuildWars2.Collections;
-
 namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>Modifiers for achievements.</summary>
@@ -13,7 +11,7 @@ public sealed record AchievementFlags : Flags
     {
         SpecialEvent = false,
         PvE = false,
-        Other = new ValueList<string>(0)
+        Other = ImmutableValueList<string>.Empty
     };
 
     /// <summary>The achievement is related to a festival celebration.</summary>

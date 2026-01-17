@@ -11,5 +11,5 @@ public sealed record UpgradeTier
     public required int YaksRequired { get; init; }
 
     /// <summary>The upgrade effects provided by this tier.</summary>
-    public required IReadOnlyList<Upgrade> Upgrades { get; init; }
+    public required IImmutableValueList<Upgrade> Upgrades { get; init; }
 }

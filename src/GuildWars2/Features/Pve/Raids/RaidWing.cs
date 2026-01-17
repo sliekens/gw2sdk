@@ -8,5 +8,5 @@ public sealed record RaidWing
     public required string Id { get; init; }
 
     /// <summary>The encounters in this wing.</summary>
-    public required IReadOnlyList<Encounter> Encounters { get; init; }
+    public required IImmutableValueList<Encounter> Encounters { get; init; }
 }

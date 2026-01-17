@@ -25,7 +25,7 @@ public sealed record EquipmentItem
     public required int? SecondarySuffixItemId { get; init; }
 
     /// <summary>The item IDs of infusions in this item.</summary>
-    public required IReadOnlyList<int> InfusionItemIds { get; init; }
+    public required IImmutableValueList<int> InfusionItemIds { get; init; }
 
     /// <summary>The skin ID.</summary>
     public required int? SkinId { get; init; }
@@ -43,10 +43,10 @@ public sealed record EquipmentItem
     public required Extensible<EquipmentLocation> Location { get; init; }
 
     /// <summary>The equipment template numbers in which this item is (re)used.</summary>
-    public required IReadOnlyList<int> TemplateNumbers { get; init; }
+    public required IImmutableValueList<int> TemplateNumbers { get; init; }
 
     /// <summary>The color IDs of dyes applied to the item.</summary>
-    public required IReadOnlyList<int> DyeColorIds { get; init; }
+    public required IImmutableValueList<int> DyeColorIds { get; init; }
 
 #pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this item.</summary>

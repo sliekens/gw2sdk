@@ -24,9 +24,8 @@ public sealed record AchievementCategory
     public required Uri IconUrl { get; init; }
 
     /// <summary>The achievements in this category.</summary>
-    /// <remarks>Can be empty.</remarks>
-    public required IReadOnlyList<AchievementRef> Achievements { get; init; }
+    public required IImmutableValueList<AchievementRef> Achievements { get; init; }
 
     /// <summary>Tomorrow's achievements in this category in the case of achievements that change on a daily basis.</summary>
-    public required IReadOnlyList<AchievementRef>? Tomorrow { get; init; }
+    public required IImmutableValueList<AchievementRef>? Tomorrow { get; init; }
 }

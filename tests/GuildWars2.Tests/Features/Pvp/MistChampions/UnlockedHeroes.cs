@@ -10,7 +10,7 @@ public class UnlockedHeroes(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<int> actual, _) = await sut.Pvp.GetUnlockedMistChampions(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<int> actual, _) = await sut.Pvp.GetUnlockedMistChampions(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

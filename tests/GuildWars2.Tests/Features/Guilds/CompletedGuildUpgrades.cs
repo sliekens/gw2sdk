@@ -14,7 +14,7 @@ public class CompletedGuildUpgrades(Gw2Client sut)
         (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
-            (HashSet<int> actual, _) = await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token, TestContext.Current!.Execution.CancellationToken);
+            (IImmutableValueSet<int> actual, _) = await sut.Guilds.GetCompletedGuildUpgrades(guildId, guildLeader.Token, TestContext.Current!.Execution.CancellationToken);
             await Assert.That(actual).IsNotEmpty();
         }
     }

@@ -31,14 +31,14 @@ public sealed record Trait
     /// <summary>The list of trait behaviors. For example, if the current trait grants a boon, this list will contain a
     /// <see cref="Buff" /> fact describing the boon. The list type is abstract, the derived types are documented in the Facts
     /// namespace.</summary>
-    public required IReadOnlyList<Fact>? Facts { get; init; }
+    public required IImmutableValueList<Fact>? Facts { get; init; }
 
     /// <summary>Some specialization traits can alter this trait's <see cref="Facts" />, modifying their behavior or adding new
     /// behaviors. This list contains the overrides that apply when a certain trait is equipped.</summary>
-    public required IReadOnlyList<TraitedFact>? TraitedFacts { get; init; }
+    public required IImmutableValueList<TraitedFact>? TraitedFacts { get; init; }
 
     /// <summary>The IDs of the skills which may be cast by this trait.</summary>
-    public required IReadOnlyList<Skill>? Skills { get; init; }
+    public required IImmutableValueList<Skill>? Skills { get; init; }
 
     /// <summary>The ID of the specialization this trait belongs to.</summary>
     public required int SpezializationId { get; init; }

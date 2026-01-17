@@ -10,7 +10,7 @@ public class RaidsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<string> ids = ["forsaken_thicket", "bastion_of_the_penitent", "hall_of_chains"];
-        (HashSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaidsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Raid> actual, MessageContext context) = await sut.Pve.Raids.GetRaidsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

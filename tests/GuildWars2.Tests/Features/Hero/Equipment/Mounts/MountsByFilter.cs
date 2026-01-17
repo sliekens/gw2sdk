@@ -10,7 +10,7 @@ public class MountsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_name()
     {
         HashSet<MountName> names = [MountName.Raptor, MountName.Jackal, MountName.Skimmer];
-        (HashSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Mount> actual, MessageContext context) = await sut.Hero.Equipment.Mounts.GetMountsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(names.Count);
         await Assert.That(context.ResultTotal).IsNotNull().And.IsGreaterThan(names.Count);
         await Assert.That(actual.Count).IsEqualTo(names.Count);

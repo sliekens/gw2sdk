@@ -10,7 +10,7 @@ public class FloorsIndex(Gw2Client sut)
     [Arguments(2)]
     public async Task Can_be_listed(int continentId)
     {
-        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetFloorsIndex(continentId, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<int> actual, MessageContext context) = await sut.Exploration.GetFloorsIndex(continentId, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
         await Assert.That(actual).IsNotEmpty();

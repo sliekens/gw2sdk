@@ -10,7 +10,7 @@ public class GlyphsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<string> ids = ["leatherworker_logging", "watchknight_harvesting", "unbound_mining"];
-        (HashSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Glyph> actual, MessageContext context) = await sut.Pve.Home.GetGlyphsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

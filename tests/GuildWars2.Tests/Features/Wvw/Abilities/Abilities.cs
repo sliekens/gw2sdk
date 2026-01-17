@@ -9,7 +9,7 @@ public class Abilities(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilities(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Ability> actual, MessageContext context) = await sut.Wvw.GetAbilities(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
         await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));

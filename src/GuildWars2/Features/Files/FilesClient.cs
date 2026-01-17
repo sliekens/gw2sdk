@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -24,7 +23,7 @@ public sealed class FilesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Asset> Value, MessageContext Context)> GetFiles(
+    public async Task<(IImmutableValueSet<Asset> Value, MessageContext Context)> GetFiles(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -37,7 +36,7 @@ public sealed class FilesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
+            ImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
             return (value, response.Context);
         }
     }
@@ -45,7 +44,7 @@ public sealed class FilesClient
     /// <summary>Retrieves the IDs of all the available files.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetFilesIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetFilesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -55,7 +54,7 @@ public sealed class FilesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -89,7 +88,7 @@ public sealed class FilesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Asset> Value, MessageContext Context)> GetFilesByIds(
+    public async Task<(IImmutableValueSet<Asset> Value, MessageContext Context)> GetFilesByIds(
         IEnumerable<string> fileIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -103,7 +102,7 @@ public sealed class FilesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
+            ImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
             return (value, response.Context);
         }
     }
@@ -114,7 +113,7 @@ public sealed class FilesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Asset> Value, MessageContext Context)> GetFilesByPage(
+    public async Task<(IImmutableValueSet<Asset> Value, MessageContext Context)> GetFilesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -129,7 +128,7 @@ public sealed class FilesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
+            ImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
             return (value, response.Context);
         }
     }

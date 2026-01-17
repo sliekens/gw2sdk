@@ -9,7 +9,7 @@ public class BackgroundStoryQuestions(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<BackgroundStoryQuestion> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<BackgroundStoryQuestion> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
         using (Assert.Multiple())
         {

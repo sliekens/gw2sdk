@@ -10,7 +10,7 @@ public class ItemsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [24, 46, 56];
-        (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal!.Value, rt => rt.IsGreaterThan(ids.Count));
         await Assert.That(actual).Count().IsEqualTo(ids.Count);

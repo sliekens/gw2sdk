@@ -9,7 +9,7 @@ public class Stories(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Story> actual, MessageContext context) = await sut.Hero.StoryJournal.GetStories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context).Member(c => c.ResultCount, resultCount => resultCount.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, resultTotal => resultTotal.IsEqualTo(actual.Count));

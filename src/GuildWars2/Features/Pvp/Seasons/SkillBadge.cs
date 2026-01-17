@@ -20,5 +20,5 @@ public sealed record SkillBadge
     public required Uri SmallOverlayUrl { get; init; }
 
     /// <summary>The badge's tiers.</summary>
-    public required IReadOnlyList<SkillBadgeTier> Tiers { get; init; }
+    public required IImmutableValueList<SkillBadgeTier> Tiers { get; init; }
 }

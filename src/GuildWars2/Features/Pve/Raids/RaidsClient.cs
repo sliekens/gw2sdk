@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class RaidsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetCompletedEncounters(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetCompletedEncounters(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +37,7 @@ public sealed class RaidsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -50,7 +49,7 @@ public sealed class RaidsClient
     /// <summary>Retrieves the IDs of all raids.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetRaidsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetRaidsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -60,7 +59,7 @@ public sealed class RaidsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -94,7 +93,7 @@ public sealed class RaidsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByIds(
+    public async Task<(IImmutableValueSet<Raid> Value, MessageContext Context)> GetRaidsByIds(
         IEnumerable<string> raidIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -108,7 +107,7 @@ public sealed class RaidsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Raid> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRaid());
+            ImmutableValueSet<Raid> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRaid());
             return (value, response.Context);
         }
     }
@@ -119,7 +118,7 @@ public sealed class RaidsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Raid> Value, MessageContext Context)> GetRaidsByPage(
+    public async Task<(IImmutableValueSet<Raid> Value, MessageContext Context)> GetRaidsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -134,7 +133,7 @@ public sealed class RaidsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Raid> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRaid());
+            ImmutableValueSet<Raid> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRaid());
             return (value, response.Context);
         }
     }
@@ -143,7 +142,7 @@ public sealed class RaidsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Raid> Value, MessageContext Context)> GetRaids(
+    public async Task<(IImmutableValueSet<Raid> Value, MessageContext Context)> GetRaids(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -156,7 +155,7 @@ public sealed class RaidsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Raid> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRaid());
+            ImmutableValueSet<Raid> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRaid());
             return (value, response.Context);
         }
     }

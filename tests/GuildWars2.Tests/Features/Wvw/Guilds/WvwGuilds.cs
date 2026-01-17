@@ -12,7 +12,7 @@ public class WvwGuilds(Gw2Client sut)
     [Arguments(WorldRegion.Europe)]
     public async Task Can_be_listed(WorldRegion region)
     {
-        (HashSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<WvwGuild> actual, MessageContext context) = await sut.Wvw.GetWvwGuilds(region, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).IsNotNull();
         await Assert.That(actual).IsNotEmpty();
         foreach (WvwGuild entry in actual)

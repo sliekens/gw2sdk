@@ -9,7 +9,7 @@ public class Worlds(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<World> actual, MessageContext context) = await sut.Worlds.GetWorlds(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         using (Assert.Multiple())
         {

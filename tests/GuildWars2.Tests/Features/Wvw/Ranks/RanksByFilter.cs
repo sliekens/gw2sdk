@@ -10,7 +10,7 @@ public class RanksByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [1, 2, 3];
-        (HashSet<Rank> actual, MessageContext context) = await sut.Wvw.GetRanksByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Rank> actual, MessageContext context) = await sut.Wvw.GetRanksByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

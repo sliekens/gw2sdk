@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class GlidersClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedGliderSkins(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedGliderSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +37,7 @@ public sealed class GlidersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -52,7 +51,7 @@ public sealed class GlidersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkins(
+    public async Task<(IImmutableValueSet<GliderSkin> Value, MessageContext Context)> GetGliderSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -67,7 +66,7 @@ public sealed class GlidersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GliderSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGliderSkin());
+            ImmutableValueSet<GliderSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGliderSkin());
             return (value, response.Context);
         }
     }
@@ -75,7 +74,7 @@ public sealed class GlidersClient
     /// <summary>Retrieves the IDs of all glider skins.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetGliderSkinsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetGliderSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -85,7 +84,7 @@ public sealed class GlidersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -123,7 +122,7 @@ public sealed class GlidersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByIds(
+    public async Task<(IImmutableValueSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByIds(
         IEnumerable<int> gliderSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -139,7 +138,7 @@ public sealed class GlidersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GliderSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGliderSkin());
+            ImmutableValueSet<GliderSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGliderSkin());
             return (value, response.Context);
         }
     }
@@ -151,7 +150,7 @@ public sealed class GlidersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByPage(
+    public async Task<(IImmutableValueSet<GliderSkin> Value, MessageContext Context)> GetGliderSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -168,7 +167,7 @@ public sealed class GlidersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GliderSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGliderSkin());
+            ImmutableValueSet<GliderSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGliderSkin());
             return (value, response.Context);
         }
     }

@@ -11,7 +11,7 @@ public class FloorsByFilter(Gw2Client sut)
     {
         const int continentId = 1;
         HashSet<int> ids = [0, 1, 2];
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByIds(continentId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByIds(continentId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(ids.Count));
         await Assert.That(actual).Count().IsEqualTo(ids.Count);

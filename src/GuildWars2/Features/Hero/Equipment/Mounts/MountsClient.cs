@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class MountsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Extensible<MountName>> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<Extensible<MountName>> Value, MessageContext Context)>
         GetUnlockedMounts(string? accessToken, CancellationToken cancellationToken = default)
     {
         RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/account/mounts/types", accessToken);
@@ -36,7 +35,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountName());
+            ImmutableValueSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -46,7 +45,7 @@ public sealed class MountsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMountSkins(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedMountSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -57,7 +56,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -71,7 +70,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Mount> Value, MessageContext Context)> GetMounts(
+    public async Task<(IImmutableValueSet<Mount> Value, MessageContext Context)> GetMounts(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -86,7 +85,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
+            ImmutableValueSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -94,7 +93,7 @@ public sealed class MountsClient
     /// <summary>Retrieves the names of all mounts.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Extensible<MountName>> Value, MessageContext Context)> GetMountNames(
+    public async Task<(IImmutableValueSet<Extensible<MountName>> Value, MessageContext Context)> GetMountNames(
         CancellationToken cancellationToken = default
     )
     {
@@ -104,7 +103,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountName());
+            ImmutableValueSet<Extensible<MountName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountName());
             return (value, response.Context);
         }
     }
@@ -142,7 +141,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Mount> Value, MessageContext Context)> GetMountsByNames(
+    public Task<(IImmutableValueSet<Mount> Value, MessageContext Context)> GetMountsByNames(
         IEnumerable<MountName> mountNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -163,7 +162,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Mount> Value, MessageContext Context)> GetMountsByNames(
+    public async Task<(IImmutableValueSet<Mount> Value, MessageContext Context)> GetMountsByNames(
         IEnumerable<Extensible<MountName>> mountNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -179,7 +178,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
+            ImmutableValueSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -191,7 +190,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Mount> Value, MessageContext Context)> GetMountsByPage(
+    public async Task<(IImmutableValueSet<Mount> Value, MessageContext Context)> GetMountsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -208,7 +207,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
+            ImmutableValueSet<Mount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMount());
             return (value, response.Context);
         }
     }
@@ -222,7 +221,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkins(
+    public async Task<(IImmutableValueSet<MountSkin> Value, MessageContext Context)> GetMountSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -237,7 +236,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
+            ImmutableValueSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -245,7 +244,7 @@ public sealed class MountsClient
     /// <summary>Retrieves the IDs of all mount skins.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetMountSkinsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetMountSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -255,7 +254,7 @@ public sealed class MountsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -293,7 +292,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByIds(
+    public async Task<(IImmutableValueSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByIds(
         IEnumerable<int> mountSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -309,7 +308,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
+            ImmutableValueSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }
@@ -321,7 +320,7 @@ public sealed class MountsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByPage(
+    public async Task<(IImmutableValueSet<MountSkin> Value, MessageContext Context)> GetMountSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -338,7 +337,7 @@ public sealed class MountsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
+            ImmutableValueSet<MountSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMountSkin());
             return (value, response.Context);
         }
     }

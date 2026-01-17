@@ -1,5 +1,3 @@
-using GuildWars2.Collections;
-
 using static GuildWars2.Hero.RaceName;
 
 namespace GuildWars2.Hero.Races;
@@ -9,22 +7,21 @@ namespace GuildWars2.Hero.Races;
 public sealed record Race
 {
     /// <summary>The names of all races.</summary>
-    public static readonly IReadOnlyList<Extensible<RaceName>> AllRaces =
-        new ValueList<Extensible<RaceName>>
-        {
+    public static readonly IImmutableValueList<Extensible<RaceName>> AllRaces =
+        new ImmutableValueList<Extensible<RaceName>>([
             Asura,
             Charr,
             Human,
             Norn,
             Sylvari
-        };
+        ]);
 
     /// <summary>The race ID.</summary>
     public required Extensible<RaceName> Id { get; init; }
 
     /// <summary>The list of racial skill IDs. Each race has 6 unique skills which are healing, utility or elite skills. The
     /// racial skills can be used by any profession except Revenant.</summary>
-    public required IReadOnlyList<int> SkillIds { get; init; }
+    public required IImmutableValueList<int> SkillIds { get; init; }
 
     /// <summary>The display name of the race.</summary>
     public required string Name { get; init; }

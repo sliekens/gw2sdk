@@ -9,7 +9,7 @@ public class Objectives(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Objective> actual, MessageContext context) = await sut.WizardsVault.GetObjectives(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Objective> actual, MessageContext context) = await sut.WizardsVault.GetObjectives(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         using (Assert.Multiple())
         {

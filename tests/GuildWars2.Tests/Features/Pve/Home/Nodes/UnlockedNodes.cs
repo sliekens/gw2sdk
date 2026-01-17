@@ -10,7 +10,7 @@ public class UnlockedNodes(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey token = TestConfiguration.ApiKey;
-        (HashSet<string> actual, _) = await sut.Pve.Home.GetUnlockedNodes(token.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, _) = await sut.Pve.Home.GetUnlockedNodes(token.Key, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         using (Assert.Multiple())
         {

@@ -12,7 +12,7 @@ public class BuyOrders(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
 
-        (HashSet<Order> bids, MessageContext context) = await sut.Commerce.GetBuyOrders(0, 200, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Order> bids, MessageContext context) = await sut.Commerce.GetBuyOrders(0, 200, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         // Step through with debugger to see if the values reflect your in-game transactions
         await Assert.That(context).IsNotNull();
         await Assert.That(bids).IsNotNull();

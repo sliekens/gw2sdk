@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -81,7 +80,7 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<MaterialCategory> Value, MessageContext Context)>
         GetMaterialCategories(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -97,7 +96,7 @@ public sealed class BankClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MaterialCategory> value =
+            ImmutableValueSet<MaterialCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
@@ -106,7 +105,7 @@ public sealed class BankClient
     /// <summary>Retrieves the IDs of all material categories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetMaterialCategoriesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetMaterialCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -116,7 +115,7 @@ public sealed class BankClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -155,7 +154,7 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<MaterialCategory> Value, MessageContext Context)>
         GetMaterialCategoriesByIds(
             IEnumerable<int> materialCategoryIds,
             Language? language = default,
@@ -172,7 +171,7 @@ public sealed class BankClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MaterialCategory> value =
+            ImmutableValueSet<MaterialCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
@@ -185,7 +184,7 @@ public sealed class BankClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MaterialCategory> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<MaterialCategory> Value, MessageContext Context)>
         GetMaterialCategoriesByPage(
             int pageIndex,
             int? pageSize = default,
@@ -203,7 +202,7 @@ public sealed class BankClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MaterialCategory> value =
+            ImmutableValueSet<MaterialCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }

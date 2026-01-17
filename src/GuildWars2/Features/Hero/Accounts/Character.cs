@@ -1,4 +1,3 @@
-using GuildWars2.Collections;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Crafting.Disciplines;
 using GuildWars2.Hero.Equipment.Templates;
@@ -14,12 +13,11 @@ namespace GuildWars2.Hero.Accounts;
 public sealed record Character
 {
     /// <summary>The names of all body types.</summary>
-    public static readonly IReadOnlyList<Extensible<BodyType>> AllBodyTypes =
-        new ValueList<Extensible<BodyType>>
-        {
+    public static readonly IImmutableValueList<Extensible<BodyType>> AllBodyTypes =
+        new ImmutableValueList<Extensible<BodyType>>([
             Female,
             Male
-        };
+        ]);
 
     /// <summary>The name of the current character.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>
@@ -58,16 +56,16 @@ public sealed record Character
     public required int Deaths { get; init; }
 
     /// <summary>The crafting disciplines of the current character.</summary>
-    public required IReadOnlyCollection<CraftingDiscipline> CraftingDisciplines { get; init; }
+    public required IImmutableValueList<CraftingDiscipline> CraftingDisciplines { get; init; }
 
     /// <summary>The selected title ID of the current character.</summary>
     public required int? TitleId { get; init; }
 
     /// <summary>The IDs of the answers to backstory questions that were selected during creation of the current character.</summary>
-    public required IReadOnlyCollection<string> Backstory { get; init; }
+    public required IImmutableValueList<string> Backstory { get; init; }
 
     /// <summary>The trained WvW abilities and their rank.</summary>
-    public required IReadOnlyCollection<WvwAbility>? WvwAbilities { get; init; }
+    public required IImmutableValueList<WvwAbility>? WvwAbilities { get; init; }
 
     /// <summary>The number of build templates available to the current character.</summary>
     public required int? BuildTemplatesCount { get; init; }
@@ -78,7 +76,7 @@ public sealed record Character
     public required int? ActiveBuildTemplateNumber { get; init; }
 
     /// <summary>All the build templates of the current character.</summary>
-    public required IReadOnlyList<BuildTemplate>? BuildTemplates { get; init; }
+    public required IImmutableValueList<BuildTemplate>? BuildTemplates { get; init; }
 
     /// <summary>The number of equipment templates available to the current character.</summary>
     public required int? EquipmentTemplatesCount { get; init; }
@@ -90,19 +88,19 @@ public sealed record Character
 
     /// <summary>All the items equipped by the current character. This includes items from all equipment templates, not just
     /// the current template.</summary>
-    public required IReadOnlyList<EquipmentItem>? EquippedItems { get; init; }
+    public required IImmutableValueList<EquipmentItem>? EquippedItems { get; init; }
 
     /// <summary>All the equipment templates of the current character.</summary>
-    public required IReadOnlyList<EquipmentTemplate>? EquipmentTemplates { get; init; }
+    public required IImmutableValueList<EquipmentTemplate>? EquipmentTemplates { get; init; }
 
     /// <summary>The IDs of the recipes that the current character has unlocked.</summary>
     /// <summary>This includes unlocked recipes that are unavailable to the character's active crafting disciplines.</summary>
-    public required IReadOnlyCollection<int>? Recipes { get; init; }
+    public required IImmutableValueList<int>? Recipes { get; init; }
 
     /// <summary>The current character's hero point progression.</summary>
-    public required IReadOnlyCollection<TrainingProgress>? Training { get; init; }
+    public required IImmutableValueList<TrainingProgress>? Training { get; init; }
 
     /// <summary>The current character's bags, sorted by in-game order. Enumerated values can contain <c>null</c> when some bag
     /// expansion slots are empty.</summary>
-    public required IReadOnlyCollection<Bag?>? Bags { get; init; }
+    public required IImmutableValueList<Bag?>? Bags { get; init; }
 }

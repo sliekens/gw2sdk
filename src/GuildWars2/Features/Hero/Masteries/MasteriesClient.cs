@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -28,7 +27,7 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MasteryTrackProgress> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<MasteryTrackProgress> Value, MessageContext Context)>
         GetMasteryTrackProgress(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -42,7 +41,7 @@ public sealed class MasteriesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MasteryTrackProgress> value =
+            ImmutableValueSet<MasteryTrackProgress> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrackProgress());
             return (value, response.Context);
         }
@@ -86,7 +85,7 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracks(
+    public async Task<(IImmutableValueSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -101,7 +100,7 @@ public sealed class MasteriesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
+            ImmutableValueSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
             return (value, response.Context);
         }
     }
@@ -109,7 +108,7 @@ public sealed class MasteriesClient
     /// <summary>Retrieves the IDs of all mastery tracks.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetMasteryTracksIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetMasteryTracksIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -119,7 +118,7 @@ public sealed class MasteriesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -157,7 +156,7 @@ public sealed class MasteriesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracksByIds(
+    public async Task<(IImmutableValueSet<MasteryTrack> Value, MessageContext Context)> GetMasteryTracksByIds(
         IEnumerable<int> masteryTrackIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -173,7 +172,7 @@ public sealed class MasteriesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
+            ImmutableValueSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
             return (value, response.Context);
         }
     }

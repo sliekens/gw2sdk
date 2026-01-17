@@ -10,7 +10,7 @@ public class MasteryTrackProgress(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<GuildWars2.Hero.Masteries.MasteryTrackProgress> actual, _) = await sut.Hero.Masteries.GetMasteryTrackProgress(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<GuildWars2.Hero.Masteries.MasteryTrackProgress> actual, _) = await sut.Hero.Masteries.GetMasteryTrackProgress(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         foreach (GuildWars2.Hero.Masteries.MasteryTrackProgress progress in actual)
         {

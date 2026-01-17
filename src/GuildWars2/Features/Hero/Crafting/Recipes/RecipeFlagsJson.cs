@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Crafting.Recipes;
@@ -11,7 +10,7 @@ internal static class RecipeFlagsJson
     {
         bool autoLearned = false;
         bool learnedFromItem = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("AutoLearned"))
@@ -32,7 +31,7 @@ internal static class RecipeFlagsJson
         {
             AutoLearned = autoLearned,
             LearnedFromItem = learnedFromItem,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

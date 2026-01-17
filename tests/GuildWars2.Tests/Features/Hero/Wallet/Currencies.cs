@@ -9,7 +9,7 @@ public class Currencies(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrencies(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrencies(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
 
         using (Assert.Multiple())

@@ -14,7 +14,7 @@ public class SectorsByPage(Gw2Client sut)
         const int regionId = 1;
         const int mapId = 26;
         const int pageSize = 3;
-        (HashSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Sector> actual, MessageContext context) = await sut.Exploration.GetSectorsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context).Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))

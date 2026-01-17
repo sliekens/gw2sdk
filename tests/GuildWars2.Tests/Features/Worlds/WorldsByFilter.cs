@@ -10,7 +10,7 @@ public class WorldsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [1001, 1002, 1003];
-        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {

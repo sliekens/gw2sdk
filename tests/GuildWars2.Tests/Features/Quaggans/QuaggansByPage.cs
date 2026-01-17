@@ -10,7 +10,7 @@ public class QuaggansByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Quaggan> actual, MessageContext context) = await sut.Quaggans.GetQuaggansByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {

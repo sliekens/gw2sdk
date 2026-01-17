@@ -20,5 +20,5 @@ public sealed record WeeklyObjectivesProgress
     public required bool Claimed { get; init; }
 
     /// <summary>The weekly objectives and the player's progress.</summary>
-    public required IReadOnlyList<ObjectiveProgress> Objectives { get; init; }
+    public required IImmutableValueList<ObjectiveProgress> Objectives { get; init; }
 }

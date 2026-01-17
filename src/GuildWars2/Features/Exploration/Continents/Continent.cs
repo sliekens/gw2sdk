@@ -22,5 +22,5 @@ public sealed record Continent
     public required int MaxZoom { get; init; }
 
     /// <summary>A list of floors ids available for this continent.</summary>
-    public required IReadOnlyList<int> Floors { get; init; }
+    public required IImmutableValueList<int> Floors { get; init; }
 }

@@ -9,7 +9,7 @@ public class Leaderboards(Gw2Client sut)
     public async Task Can_be_found()
     {
         const string id = "2B2E80D3-0A74-424F-B0EA-E221500B323C";
-        (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardIds(id, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, _) = await sut.Pvp.GetLeaderboardIds(id, TestContext.Current!.Execution.CancellationToken);
         HashSet<string> expected = ["guild", "legendary"];
         using (Assert.Multiple())
         {

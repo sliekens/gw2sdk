@@ -11,5 +11,5 @@ public sealed record GuildTreasurySlot
     public required int Count { get; init; }
 
     /// <summary>The count of this item which is needed for currently in-progress guild upgrades.</summary>
-    public required IReadOnlyCollection<CountNeededForUpgrade> CountNeededForUpgrades { get; init; }
+    public required IImmutableValueList<CountNeededForUpgrade> CountNeededForUpgrades { get; init; }
 }

@@ -9,7 +9,7 @@ public class AttributeCombinations(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinations(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinations(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
     }
 }

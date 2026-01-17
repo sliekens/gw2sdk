@@ -10,7 +10,7 @@ public class ContinentsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Continent> actual, MessageContext context) = await sut.Exploration.GetContinentsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(2);

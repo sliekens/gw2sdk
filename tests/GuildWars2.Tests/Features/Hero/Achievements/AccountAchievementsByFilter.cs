@@ -12,7 +12,7 @@ public class AccountAchievementsByFilter(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         HashSet<int> ids = [1, 2, 3];
-        (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
         await Assert.That(context.ResultTotal > ids.Count).IsTrue();
         await Assert.That(actual.Count).IsEqualTo(ids.Count);

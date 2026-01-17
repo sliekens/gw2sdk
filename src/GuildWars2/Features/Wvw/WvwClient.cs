@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Worlds;
@@ -63,7 +62,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<WvwGuild> Value, MessageContext Context)> GetWvwGuilds(
+    public async Task<(IImmutableValueSet<WvwGuild> Value, MessageContext Context)> GetWvwGuilds(
         WorldRegion region,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -82,7 +81,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<WvwGuild> wvwGuilds = [.. response.Json.RootElement.GetMap(static (in value) => value.GetStringRequired())
+            ImmutableValueSet<WvwGuild> wvwGuilds = [.. response.Json.RootElement.GetMap(static (in value) => value.GetStringRequired())
                 .Select(map => new WvwGuild
                 {
                     Name = map.Key,
@@ -102,7 +101,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilities(
+    public async Task<(IImmutableValueSet<Ability> Value, MessageContext Context)> GetAbilities(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -117,7 +116,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Ability> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAbility());
+            ImmutableValueSet<Ability> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -125,7 +124,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all World Abilities.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetAbilitiesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetAbilitiesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -135,7 +134,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -173,7 +172,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByIds(
+    public async Task<(IImmutableValueSet<Ability> Value, MessageContext Context)> GetAbilitiesByIds(
         IEnumerable<int> abilityIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -189,7 +188,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Ability> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAbility());
+            ImmutableValueSet<Ability> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -201,7 +200,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Ability> Value, MessageContext Context)> GetAbilitiesByPage(
+    public async Task<(IImmutableValueSet<Ability> Value, MessageContext Context)> GetAbilitiesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -218,7 +217,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Ability> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAbility());
+            ImmutableValueSet<Ability> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAbility());
             return (value, response.Context);
         }
     }
@@ -232,7 +231,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
+    public async Task<(IImmutableValueSet<Objective> Value, MessageContext Context)> GetObjectives(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -247,7 +246,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -255,7 +254,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all WvW objectives.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetObjectivesIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetObjectivesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -265,7 +264,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -303,7 +302,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
+    public async Task<(IImmutableValueSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
         IEnumerable<string> objectiveIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -319,7 +318,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -331,7 +330,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
+    public async Task<(IImmutableValueSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -348,7 +347,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -362,7 +361,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Rank> Value, MessageContext Context)> GetRanks(
+    public async Task<(IImmutableValueSet<Rank> Value, MessageContext Context)> GetRanks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -377,7 +376,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
+            ImmutableValueSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -385,7 +384,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all World Ranks.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetRanksIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -395,7 +394,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -433,7 +432,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
+    public async Task<(IImmutableValueSet<Rank> Value, MessageContext Context)> GetRanksByIds(
         IEnumerable<int> rankIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -449,7 +448,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
+            ImmutableValueSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -461,7 +460,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
+    public async Task<(IImmutableValueSet<Rank> Value, MessageContext Context)> GetRanksByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -478,7 +477,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
+            ImmutableValueSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -492,7 +491,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgrades(
+    public async Task<(IImmutableValueSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -507,7 +506,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<ObjectiveUpgrade> value =
+            ImmutableValueSet<ObjectiveUpgrade> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
@@ -516,7 +515,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all WvW objective upgrades.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUpgradesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUpgradesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -526,7 +525,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -564,7 +563,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByIds(
+    public async Task<(IImmutableValueSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByIds(
         IEnumerable<int> upgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -580,7 +579,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<ObjectiveUpgrade> value =
+            ImmutableValueSet<ObjectiveUpgrade> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
@@ -593,7 +592,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByPage(
+    public async Task<(IImmutableValueSet<ObjectiveUpgrade> Value, MessageContext Context)> GetUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -610,7 +609,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<ObjectiveUpgrade> value =
+            ImmutableValueSet<ObjectiveUpgrade> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetObjectiveUpgrade());
             return (value, response.Context);
         }
@@ -624,7 +623,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Match> Value, MessageContext Context)> GetMatches(
+    public async Task<(IImmutableValueSet<Match> Value, MessageContext Context)> GetMatches(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -637,7 +636,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Match> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatch());
+            ImmutableValueSet<Match> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -645,7 +644,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all WvW matches.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetMatchesIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetMatchesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -655,7 +654,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -689,7 +688,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByIds(
+    public async Task<(IImmutableValueSet<Match> Value, MessageContext Context)> GetMatchesByIds(
         IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -703,7 +702,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Match> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatch());
+            ImmutableValueSet<Match> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -714,7 +713,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Match> Value, MessageContext Context)> GetMatchesByPage(
+    public async Task<(IImmutableValueSet<Match> Value, MessageContext Context)> GetMatchesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -729,7 +728,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Match> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatch());
+            ImmutableValueSet<Match> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatch());
             return (value, response.Context);
         }
     }
@@ -766,7 +765,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverview(
+    public async Task<(IImmutableValueSet<MatchOverview> Value, MessageContext Context)> GetMatchesOverview(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -779,7 +778,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchOverview());
+            ImmutableValueSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -787,7 +786,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all WvW matches.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetMatchesOverviewIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetMatchesOverviewIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -797,7 +796,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -831,7 +830,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchOverview> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<MatchOverview> Value, MessageContext Context)>
         GetMatchesOverviewByIds(
             IEnumerable<string> matchIds,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -846,7 +845,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchOverview());
+            ImmutableValueSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -857,7 +856,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchOverview> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<MatchOverview> Value, MessageContext Context)>
         GetMatchesOverviewByPage(
             int pageIndex,
             int? pageSize = default,
@@ -873,7 +872,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchOverview());
+            ImmutableValueSet<MatchOverview> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchOverview());
             return (value, response.Context);
         }
     }
@@ -910,7 +909,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScores(
+    public async Task<(IImmutableValueSet<MatchScores> Value, MessageContext Context)> GetMatchesScores(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -923,7 +922,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchScores> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchScores());
+            ImmutableValueSet<MatchScores> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -931,7 +930,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all WvW matches.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetMatchesScoresIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetMatchesScoresIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -941,7 +940,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -975,7 +974,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByIds(
+    public async Task<(IImmutableValueSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByIds(
         IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -989,7 +988,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchScores> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchScores());
+            ImmutableValueSet<MatchScores> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -1000,7 +999,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByPage(
+    public async Task<(IImmutableValueSet<MatchScores> Value, MessageContext Context)> GetMatchesScoresByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -1015,7 +1014,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchScores> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchScores());
+            ImmutableValueSet<MatchScores> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchScores());
             return (value, response.Context);
         }
     }
@@ -1052,7 +1051,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStats(
+    public async Task<(IImmutableValueSet<MatchStats> Value, MessageContext Context)> GetMatchesStats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -1065,7 +1064,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchStats> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchStats());
+            ImmutableValueSet<MatchStats> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1073,7 +1072,7 @@ public sealed class WvwClient
     /// <summary>Retrieves the IDs of all WvW matches.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetMatchesStatsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetMatchesStatsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -1083,7 +1082,7 @@ public sealed class WvwClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -1117,7 +1116,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByIds(
+    public async Task<(IImmutableValueSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByIds(
         IEnumerable<string> matchIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -1131,7 +1130,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchStats> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchStats());
+            ImmutableValueSet<MatchStats> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }
@@ -1142,7 +1141,7 @@ public sealed class WvwClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByPage(
+    public async Task<(IImmutableValueSet<MatchStats> Value, MessageContext Context)> GetMatchesStatsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -1157,7 +1156,7 @@ public sealed class WvwClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MatchStats> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchStats());
+            ImmutableValueSet<MatchStats> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMatchStats());
             return (value, response.Context);
         }
     }

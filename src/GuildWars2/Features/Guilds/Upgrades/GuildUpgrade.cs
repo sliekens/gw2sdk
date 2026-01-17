@@ -28,8 +28,8 @@ public record GuildUpgrade
     public required int Experience { get; init; }
 
     /// <summary>The IDs of guild upgrades that must be completed first.</summary>
-    public required IReadOnlyList<int> Prerequisites { get; init; }
+    public required IImmutableValueList<int> Prerequisites { get; init; }
 
     /// <summary>The costs of the guild upgrade.</summary>
-    public required IReadOnlyList<GuildUpgradeCost> Costs { get; init; }
+    public required IImmutableValueList<GuildUpgradeCost> Costs { get; init; }
 }

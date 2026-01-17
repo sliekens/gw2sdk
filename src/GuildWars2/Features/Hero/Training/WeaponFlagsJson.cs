@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Training;
@@ -13,7 +12,7 @@ internal static class WeaponFlagsJson
         bool offhand = false;
         bool twoHand = false;
         bool aquatic = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("Mainhand"))
@@ -44,7 +43,7 @@ internal static class WeaponFlagsJson
             Offhand = offhand,
             TwoHand = twoHand,
             Aquatic = aquatic,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

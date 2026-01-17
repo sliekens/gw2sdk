@@ -10,7 +10,7 @@ public class LogosByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<string> ids = ["Guild-Wars-2-logo-en", "Guild-Wars-2-logo-es", "Guild-Wars-2-logo-de",];
-        (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogosByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {

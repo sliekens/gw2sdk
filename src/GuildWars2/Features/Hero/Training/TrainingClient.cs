@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -59,7 +58,7 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessions(
+    public async Task<(IImmutableValueSet<Profession> Value, MessageContext Context)> GetProfessions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -74,7 +73,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
+            ImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -82,7 +81,7 @@ public sealed class TrainingClient
     /// <summary>Retrieves the names of all professions.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Extensible<ProfessionName>> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<Extensible<ProfessionName>> Value, MessageContext Context)>
         GetProfessionNames(CancellationToken cancellationToken = default)
     {
         RequestBuilder requestBuilder = RequestBuilder.HttpGet("v2/professions");
@@ -91,7 +90,7 @@ public sealed class TrainingClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<ProfessionName>> value =
+            ImmutableValueSet<Extensible<ProfessionName>> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<ProfessionName>());
             return (value, response.Context);
         }
@@ -130,7 +129,7 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
+    public Task<(IImmutableValueSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
         IEnumerable<ProfessionName> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -151,7 +150,7 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
+    public async Task<(IImmutableValueSet<Profession> Value, MessageContext Context)> GetProfessionsByNames(
         IEnumerable<Extensible<ProfessionName>> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -167,7 +166,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
+            ImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -179,7 +178,7 @@ public sealed class TrainingClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Profession> Value, MessageContext Context)> GetProfessionsByPage(
+    public async Task<(IImmutableValueSet<Profession> Value, MessageContext Context)> GetProfessionsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -196,7 +195,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
+            ImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }

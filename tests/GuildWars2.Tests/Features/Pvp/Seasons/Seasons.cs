@@ -9,7 +9,7 @@ public class Seasons(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasons(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasons(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

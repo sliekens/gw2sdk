@@ -9,7 +9,7 @@ public class Professions(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Profession> actual, _) = await sut.Hero.Training.GetProfessions(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual.Count).IsEqualTo(Profession.AllProfessions.Count);
         foreach (Profession profession in actual)
         {

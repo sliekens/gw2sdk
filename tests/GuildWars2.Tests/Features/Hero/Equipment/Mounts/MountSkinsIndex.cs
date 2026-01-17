@@ -8,7 +8,7 @@ public class MountSkinsIndex(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<int> actual, MessageContext context) =
+        (IImmutableValueSet<int> actual, MessageContext context) =
             await sut.Hero.Equipment.Mounts.GetMountSkinsIndex(
                 TestContext.Current!.Execution.CancellationToken
             );

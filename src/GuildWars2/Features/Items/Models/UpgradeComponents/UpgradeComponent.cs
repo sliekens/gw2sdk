@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero;
 
 namespace GuildWars2.Items;
@@ -29,15 +28,15 @@ public record UpgradeComponent : Item, ICombatEquipment, IInfusable
     /// items with selectable stats.</summary>
     public required int? AttributeCombinationId { get; init; }
 
-    IReadOnlyList<int> ICombatEquipment.StatChoices { get; } = (ValueList<int>)[];
+    IImmutableValueList<int> ICombatEquipment.StatChoices { get; } = ImmutableValueList<int>.Empty;
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
+    public required IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
     /// <summary>If the current upgrade component is used in the Mystic Forge to infuse or attune equipment, this collection
     /// contains the IDs of the infused (or attuned) items. Each item in the collection represents a different recipe.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
+    public required IImmutableValueList<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 }

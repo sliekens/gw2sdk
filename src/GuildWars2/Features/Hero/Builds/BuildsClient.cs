@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -28,7 +27,7 @@ public sealed class BuildsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(IReadOnlyList<int> Value, MessageContext Context)> GetStoredBuildNumbers(
+    public async Task<(IImmutableValueList<int> Value, MessageContext Context)> GetStoredBuildNumbers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -39,7 +38,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
+            ImmutableValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -77,7 +76,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
+    public async Task<(IImmutableValueList<Build> Value, MessageContext Context)> GetStoredBuilds(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -91,7 +90,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
+            ImmutableValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -103,7 +102,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(IReadOnlyList<Build> Value, MessageContext Context)> GetStoredBuilds(
+    public async Task<(IImmutableValueList<Build> Value, MessageContext Context)> GetStoredBuilds(
         IEnumerable<int> storageNumbers,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -118,7 +117,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
+            ImmutableValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -134,7 +133,7 @@ public sealed class BuildsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetBuildNumbers(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetBuildNumbers(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -149,7 +148,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -192,7 +191,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<BuildTemplate> Value, MessageContext Context)> GetBuilds(
+    public async Task<(IImmutableValueSet<BuildTemplate> Value, MessageContext Context)> GetBuilds(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -211,7 +210,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<BuildTemplate> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetBuildTemplate());
+            ImmutableValueSet<BuildTemplate> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetBuildTemplate());
             return (value, response.Context);
         }
     }
@@ -255,7 +254,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Skill> Value, MessageContext Context)> GetSkills(
+    public async Task<(IImmutableValueSet<Skill> Value, MessageContext Context)> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -270,7 +269,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
+            ImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -278,7 +277,7 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all skills.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetSkillsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetSkillsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -288,7 +287,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -327,7 +326,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByIds(
+    public async Task<(IImmutableValueSet<Skill> Value, MessageContext Context)> GetSkillsByIds(
         IEnumerable<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -343,7 +342,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
+            ImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -355,7 +354,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Skill> Value, MessageContext Context)> GetSkillsByPage(
+    public async Task<(IImmutableValueSet<Skill> Value, MessageContext Context)> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -372,7 +371,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
+            ImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -386,7 +385,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Specialization> Value, MessageContext Context)> GetSpecializations(
+    public async Task<(IImmutableValueSet<Specialization> Value, MessageContext Context)> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -401,7 +400,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
+            ImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -409,7 +408,7 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all specializations.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetSpecializationsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetSpecializationsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -419,7 +418,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -458,7 +457,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Specialization> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<Specialization> Value, MessageContext Context)>
         GetSpecializationsByIds(
             IEnumerable<int> specializationIds,
             Language? language = default,
@@ -475,7 +474,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
+            ImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -487,7 +486,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Specialization> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<Specialization> Value, MessageContext Context)>
         GetSpecializationsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -505,7 +504,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
+            ImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -519,7 +518,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Trait> Value, MessageContext Context)> GetTraits(
+    public async Task<(IImmutableValueSet<Trait> Value, MessageContext Context)> GetTraits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -534,7 +533,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
+            ImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -542,7 +541,7 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all traits.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetTraitsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetTraitsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -552,7 +551,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -591,7 +590,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByIds(
+    public async Task<(IImmutableValueSet<Trait> Value, MessageContext Context)> GetTraitsByIds(
         IEnumerable<int> traitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -607,7 +606,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
+            ImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -619,7 +618,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Trait> Value, MessageContext Context)> GetTraitsByPage(
+    public async Task<(IImmutableValueSet<Trait> Value, MessageContext Context)> GetTraitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -636,7 +635,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
+            ImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -648,7 +647,7 @@ public sealed class BuildsClient
     /// <summary>Retrieves the IDs of all Revenant legends.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetLegendsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetLegendsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -658,7 +657,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -692,7 +691,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
+    public async Task<(IImmutableValueSet<Legend> Value, MessageContext Context)> GetLegendsByIds(
         IEnumerable<string> legendIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -706,7 +705,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
+            ImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -717,7 +716,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
+    public async Task<(IImmutableValueSet<Legend> Value, MessageContext Context)> GetLegendsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -732,7 +731,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
+            ImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -741,7 +740,7 @@ public sealed class BuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Legend> Value, MessageContext Context)> GetLegends(
+    public async Task<(IImmutableValueSet<Legend> Value, MessageContext Context)> GetLegends(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -754,7 +753,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
+            ImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }

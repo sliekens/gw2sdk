@@ -10,7 +10,7 @@ public class CharacterNames(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<string> actual, MessageContext context) = await sut.Hero.Account.GetCharactersIndex(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, MessageContext context) = await sut.Hero.Account.GetCharactersIndex(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
         string expected = TestConfiguration.TestCharacter.Name;

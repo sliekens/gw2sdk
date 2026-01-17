@@ -24,16 +24,16 @@ public sealed record AccountSummary
     public required int WorldId { get; init; }
 
     /// <summary>The IDs of the guilds that the account is a member of (in any role).</summary>
-    public required IReadOnlyCollection<string> GuildIds { get; init; }
+    public required IImmutableValueList<string> GuildIds { get; init; }
 
     /// <summary>The IDs of the guilds that the account is the leader of. Requires the 'guilds' scope.</summary>
-    public required IReadOnlyCollection<string>? LeaderOfGuildIds { get; init; }
+    public required IImmutableValueList<string>? LeaderOfGuildIds { get; init; }
 
     /// <summary>The date and time when the account was created.</summary>
     public required DateTimeOffset Created { get; init; }
 
     /// <summary>Indicates what content can be accessed with this account.</summary>
-    public required IReadOnlyCollection<Extensible<ProductName>> Access { get; init; }
+    public required IImmutableValueList<Extensible<ProductName>> Access { get; init; }
 
     /// <summary>Indicates if the account has unlocked the commander tag.</summary>
     public required bool Commander { get; init; }

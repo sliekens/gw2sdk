@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class MailCarriersClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMailCarriers(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedMailCarriers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +37,7 @@ public sealed class MailCarriersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -52,7 +51,7 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriers(
+    public async Task<(IImmutableValueSet<MailCarrier> Value, MessageContext Context)> GetMailCarriers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -67,7 +66,7 @@ public sealed class MailCarriersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
+            ImmutableValueSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
             return (value, response.Context);
         }
     }
@@ -75,7 +74,7 @@ public sealed class MailCarriersClient
     /// <summary>Retrieves the IDs of all mail carriers.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetMailCarriersIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetMailCarriersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -85,7 +84,7 @@ public sealed class MailCarriersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -123,7 +122,7 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
+    public async Task<(IImmutableValueSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByIds(
         IEnumerable<int> mailCarrierIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -139,7 +138,7 @@ public sealed class MailCarriersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
+            ImmutableValueSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
             return (value, response.Context);
         }
     }
@@ -151,7 +150,7 @@ public sealed class MailCarriersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByPage(
+    public async Task<(IImmutableValueSet<MailCarrier> Value, MessageContext Context)> GetMailCarriersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -168,7 +167,7 @@ public sealed class MailCarriersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
+            ImmutableValueSet<MailCarrier> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMailCarrier());
             return (value, response.Context);
         }
     }

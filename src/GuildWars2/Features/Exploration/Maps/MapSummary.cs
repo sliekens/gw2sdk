@@ -25,7 +25,7 @@ public sealed record MapSummary
     public required Extensible<MapKind> Kind { get; init; }
 
     /// <summary>The floors of the map.</summary>
-    public required IReadOnlyCollection<int> Floors { get; init; }
+    public required IImmutableValueList<int> Floors { get; init; }
 
     /// <summary>The region ID, or null for certain instance maps.</summary>
     public required int? RegionId { get; init; }

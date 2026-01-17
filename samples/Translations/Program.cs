@@ -1,6 +1,7 @@
 using System.Globalization;
 
 using GuildWars2;
+using GuildWars2.Collections;
 using GuildWars2.Hero.Equipment.Mounts;
 
 // For demonstration, pretend the user has selected German as the preferred language
@@ -10,7 +11,7 @@ using HttpClient httpClient = new();
 Gw2Client gw2 = new(httpClient);
 
 // Use the preferred language by passing 'Language.CurrentUICulture'
-HashSet<Mount> mounts = await gw2.Hero.Equipment.Mounts.GetMounts(Language.CurrentUICulture).ValueOnly().ConfigureAwait(false);
+IImmutableValueSet<Mount> mounts = await gw2.Hero.Equipment.Mounts.GetMounts(Language.CurrentUICulture).ValueOnly().ConfigureAwait(false);
 PrintMountNames("CurrentUICulture (German)", mounts);
 
 // Alternatively you can force a specific language

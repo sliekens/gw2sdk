@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -28,7 +27,7 @@ public sealed class WardrobeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedSkins(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -39,7 +38,7 @@ public sealed class WardrobeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -51,7 +50,7 @@ public sealed class WardrobeClient
     /// <summary>Retrieves the IDs of all skins.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetSkinsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetSkinsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -61,7 +60,7 @@ public sealed class WardrobeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -100,7 +99,7 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByIds(
+    public async Task<(IImmutableValueSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByIds(
         IEnumerable<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -116,7 +115,7 @@ public sealed class WardrobeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EquipmentSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEquipmentSkin());
+            ImmutableValueSet<EquipmentSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEquipmentSkin());
             return (value, response.Context);
         }
     }
@@ -128,7 +127,7 @@ public sealed class WardrobeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByPage(
+    public async Task<(IImmutableValueSet<EquipmentSkin> Value, MessageContext Context)> GetSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -145,7 +144,7 @@ public sealed class WardrobeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EquipmentSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEquipmentSkin());
+            ImmutableValueSet<EquipmentSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEquipmentSkin());
             return (value, response.Context);
         }
     }
@@ -183,7 +182,7 @@ public sealed class WardrobeClient
             CancellationToken cancellationToken
         )
         {
-            (HashSet<EquipmentSkin> values, MessageContext context) = await GetSkinsByIds(
+            (IImmutableValueSet<EquipmentSkin> values, MessageContext context) = await GetSkinsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
@@ -211,7 +210,7 @@ public sealed class WardrobeClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        (HashSet<int> value, _) = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
+        (IImmutableValueSet<int> value, _) = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
         IAsyncEnumerable<(EquipmentSkin Value, MessageContext Context)> producer = GetSkinsBulk(
             value,
             language,

@@ -10,7 +10,7 @@ public class MapChestsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<string> ids = ["auric_basin_heros_choice_chest", "crystal_oasis_heros_choice_chest", "domain_of_vabbi_heros_choice_chest"];
-        (HashSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MapChest> actual, MessageContext context) = await sut.Pve.MapChests.GetMapChestsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

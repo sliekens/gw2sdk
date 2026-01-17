@@ -9,7 +9,7 @@ public class Logos(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogos(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Logo> actual, MessageContext context) = await sut.Logos.GetLogos(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

@@ -11,7 +11,7 @@ public class UnlockedMounts(Gw2Client sut)
     public async Task Unlocked_mounts_can_be_found()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<Extensible<MountName>> actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Extensible<MountName>> actual, _) = await sut.Hero.Equipment.Mounts.GetUnlockedMounts(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         foreach (Extensible<MountName> entry in actual)
         {

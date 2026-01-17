@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -23,7 +22,7 @@ public sealed class WorldBossesClient
     /// <summary>Retrieves the IDs of all world bosses.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetWorldBosses(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetWorldBosses(
         CancellationToken cancellationToken = default
     )
     {
@@ -33,7 +32,7 @@ public sealed class WorldBossesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -43,7 +42,7 @@ public sealed class WorldBossesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetDefeatedWorldBosses(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -54,7 +53,7 @@ public sealed class WorldBossesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }

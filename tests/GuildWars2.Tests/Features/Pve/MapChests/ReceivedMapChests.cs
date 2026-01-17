@@ -10,7 +10,7 @@ public class ReceivedMapChests(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<string> actual, _) = await sut.Pve.MapChests.GetReceivedMapChests(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, _) = await sut.Pve.MapChests.GetReceivedMapChests(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         // Can be empty if you haven't done any map metas today
         // The best we can do is verify that there are no unexpected map chests
         foreach (string chest in actual)

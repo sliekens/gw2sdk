@@ -12,7 +12,7 @@ public class PurchasedAstralRewards(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<PurchasedAstralReward> actual, MessageContext context) = await sut.WizardsVault.GetPurchasedAstralRewards(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<PurchasedAstralReward> actual, MessageContext context) = await sut.WizardsVault.GetPurchasedAstralRewards(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));

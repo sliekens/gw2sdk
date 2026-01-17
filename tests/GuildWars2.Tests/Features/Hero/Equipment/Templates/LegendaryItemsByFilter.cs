@@ -10,7 +10,7 @@ public class LegendaryItemsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [83162, 93105, 80111];
-        (HashSet<LegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<LegendaryItem> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetLegendaryItemsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
         await Assert.That(context.ResultTotal > ids.Count).IsTrue();
         await Assert.That(actual.Count).IsEqualTo(ids.Count);

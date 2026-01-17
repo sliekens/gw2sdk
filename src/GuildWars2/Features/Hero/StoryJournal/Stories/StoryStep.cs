@@ -17,5 +17,5 @@ public sealed record StoryStep
     public required int StoryId { get; init; }
 
     /// <summary>The objectives to complete in order to progress through the story step.</summary>
-    public required IReadOnlyList<Objective> Objectives { get; init; }
+    public required IImmutableValueList<Objective> Objectives { get; init; }
 }

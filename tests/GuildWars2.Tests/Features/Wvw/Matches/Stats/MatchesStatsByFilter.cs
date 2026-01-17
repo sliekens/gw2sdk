@@ -10,7 +10,7 @@ public class MatchesStatsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<string> ids = ["1-1", "1-2", "1-3"];
-        (HashSet<MatchStats> actual, MessageContext context) = await sut.Wvw.GetMatchesStatsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MatchStats> actual, MessageContext context) = await sut.Wvw.GetMatchesStatsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

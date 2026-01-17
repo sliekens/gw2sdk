@@ -10,7 +10,7 @@ public class NoveltiesByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [1, 2, 3];
-        (HashSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Novelty> actual, MessageContext context) = await sut.Hero.Equipment.Novelties.GetNoveltiesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
         await Assert.That(context.ResultTotal > ids.Count).IsTrue();
         await Assert.That(actual.Count).IsEqualTo(ids.Count);

@@ -9,18 +9,14 @@ public interface ICombatEquipment
     /// attribute's multiplier, then add the result to the attribute's base value.</summary>
     /// <remarks>The formula is: attribute_adjustment * multiplier + value.</remarks>
     double AttributeAdjustment { get; }
-
     /// <summary>The ID of the item's attribute combination, used for items with fixed stats. This property is not used for
     /// items with selectable stats.</summary>
     int? AttributeCombinationId { get; }
-
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
-    IReadOnlyList<int> StatChoices { get; }
-
+    IImmutableValueList<int> StatChoices { get; }
     /// <summary>The effective stats of the item.</summary>
-    IDictionary<Extensible<AttributeName>, int> Attributes { get; }
-
+    IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; }
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     Buff? Buff { get; }
 }

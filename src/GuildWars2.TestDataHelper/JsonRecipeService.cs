@@ -1,27 +1,28 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.Crafting.Recipes;
 
 namespace GuildWars2.TestDataHelper;
 
 internal sealed class JsonRecipeService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonRecipes(IProgress<BulkProgress> progress)
+    public async Task<IImmutableValueSet<string>> GetAllJsonRecipes(IProgress<BulkProgress> progress)
     {
-        HashSet<int> ids = await GetRecipeIds().ConfigureAwait(false);
+        IImmutableValueSet<int> ids = await GetRecipeIds().ConfigureAwait(false);
         SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonRecipesByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;
         }
 
-        return entries.Values.ToHashSet();
+        return new ImmutableValueSet<string>(entries.Values);
     }
 
-    private async Task<HashSet<int>> GetRecipeIds()
+    private async Task<IImmutableValueSet<int>> GetRecipeIds()
     {
         RecipesClient recipes = new(http);
-        (HashSet<int> ids, _) = await recipes.GetRecipesIndex().ConfigureAwait(false);
+        (IImmutableValueSet<int> ids, _) = await recipes.GetRecipesIndex().ConfigureAwait(false);
         return ids;
     }
 

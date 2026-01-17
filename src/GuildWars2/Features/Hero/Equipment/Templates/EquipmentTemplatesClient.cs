@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -61,7 +60,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<BoundLegendaryItem> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<BoundLegendaryItem> Value, MessageContext Context)>
         GetBoundLegendaryItems(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -76,7 +75,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<BoundLegendaryItem> value =
+            ImmutableValueSet<BoundLegendaryItem> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBoundLegendaryItem());
             return (value, response.Context);
         }
@@ -93,7 +92,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(IReadOnlyList<int> Value, MessageContext Context)>
+    public async Task<(IImmutableValueList<int> Value, MessageContext Context)>
         GetEquipmentTemplateNumbers(
             string characterName,
             string? accessToken,
@@ -109,7 +108,7 @@ public sealed class EquipmentTemplatesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
+            ImmutableValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -152,7 +151,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EquipmentTemplate> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EquipmentTemplate> Value, MessageContext Context)>
         GetEquipmentTemplates(
             string characterName,
             string? accessToken,
@@ -172,7 +171,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EquipmentTemplate> value =
+            ImmutableValueSet<EquipmentTemplate> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEquipmentTemplate());
             return (value, response.Context);
         }
@@ -216,7 +215,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItems(
+    public async Task<(IImmutableValueSet<LegendaryItem> Value, MessageContext Context)> GetLegendaryItems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -229,7 +228,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
+            ImmutableValueSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -237,7 +236,7 @@ public sealed class EquipmentTemplatesClient
     /// <summary>Retrieves the IDs of all legendary items.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetLegendaryItemsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetLegendaryItemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -247,7 +246,7 @@ public sealed class EquipmentTemplatesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -282,7 +281,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<LegendaryItem> Value, MessageContext Context)>
         GetLegendaryItemsByIds(
             IEnumerable<int> legendaryItemIds,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -297,7 +296,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
+            ImmutableValueSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }
@@ -308,7 +307,7 @@ public sealed class EquipmentTemplatesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<LegendaryItem> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<LegendaryItem> Value, MessageContext Context)>
         GetLegendaryItemsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -324,7 +323,7 @@ public sealed class EquipmentTemplatesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
+            ImmutableValueSet<LegendaryItem> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegendaryItem());
             return (value, response.Context);
         }
     }

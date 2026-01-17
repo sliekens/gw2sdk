@@ -9,7 +9,7 @@ public class Amulets(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Amulet> actual, MessageContext context) = await sut.Pvp.GetAmulets(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

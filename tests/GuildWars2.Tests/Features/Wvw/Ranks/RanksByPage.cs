@@ -10,7 +10,7 @@ public class RanksByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Rank> actual, MessageContext context) = await sut.Wvw.GetRanksByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Rank> actual, MessageContext context) = await sut.Wvw.GetRanksByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

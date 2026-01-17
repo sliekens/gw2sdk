@@ -11,7 +11,7 @@ public sealed record GuildRank
     public required int Order { get; init; }
 
     /// <summary>The permissions assigned to the rank.</summary>
-    public required IReadOnlyList<string> Permissions { get; init; }
+    public required IImmutableValueList<string> Permissions { get; init; }
 
     /// <summary>The URL of the rank icon.</summary>
     public required Uri IconUrl { get; init; }

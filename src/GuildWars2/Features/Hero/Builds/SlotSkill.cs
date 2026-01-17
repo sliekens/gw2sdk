@@ -17,9 +17,9 @@ public record SlotSkill : ActionSkill
 
     /// <summary>If present, the current skill will give the player a bundle that replaces the weapon skills with the skill IDs
     /// in this list.</summary>
-    public required IReadOnlyList<int>? BundleSkillIds { get; init; }
+    public required IImmutableValueList<int>? BundleSkillIds { get; init; }
 
     /// <summary>If present, the skill is divided into subskills with alternate functions. For example Elementalist glyps have
     /// different effects based on the active attunement.</summary>
-    public required IReadOnlyList<Subskill>? SubskillIds { get; init; }
+    public required IImmutableValueList<Subskill>? SubskillIds { get; init; }
 }

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class EmotesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedEmotes(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetUnlockedEmotes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +37,7 @@ public sealed class EmotesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -51,7 +50,7 @@ public sealed class EmotesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotes(
+    public async Task<(IImmutableValueSet<Emote> Value, MessageContext Context)> GetEmotes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -64,7 +63,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
+            ImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -72,7 +71,7 @@ public sealed class EmotesClient
     /// <summary>Retrieves the IDs of all emotes.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetEmotesIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetEmotesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -82,7 +81,7 @@ public sealed class EmotesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -116,7 +115,7 @@ public sealed class EmotesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByIds(
+    public async Task<(IImmutableValueSet<Emote> Value, MessageContext Context)> GetEmotesByIds(
         IEnumerable<string> emoteIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -130,7 +129,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
+            ImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -141,7 +140,7 @@ public sealed class EmotesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Emote> Value, MessageContext Context)> GetEmotesByPage(
+    public async Task<(IImmutableValueSet<Emote> Value, MessageContext Context)> GetEmotesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -156,7 +155,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
+            ImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }

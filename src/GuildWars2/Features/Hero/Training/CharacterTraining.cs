@@ -5,5 +5,5 @@ namespace GuildWars2.Hero.Training;
 public sealed record CharacterTraining
 {
     /// <summary>The character's training tracks.</summary>
-    public required IReadOnlyList<TrainingProgress> Training { get; init; }
+    public required IImmutableValueList<TrainingProgress> Training { get; init; }
 }

@@ -14,7 +14,7 @@ public class Characters(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<Character> actual, MessageContext context) = await sut.Hero.Account.GetCharacters(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Character> actual, MessageContext context) = await sut.Hero.Account.GetCharacters(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context)
             .Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));

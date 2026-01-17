@@ -28,17 +28,13 @@ public record Recipe
     public required TimeSpan TimeToCraft { get; init; }
 
     /// <summary>The crafting disciplines that can use this recipe.</summary>
-    public required IReadOnlyCollection<Extensible<CraftingDisciplineName>> Disciplines
-    {
-        get;
-        init;
-    }
+    public required IImmutableValueList<Extensible<CraftingDisciplineName>> Disciplines { get; init; }
 
     /// <summary>Contains various modifiers.</summary>
     public required RecipeFlags Flags { get; init; }
 
     /// <summary>The crafting ingredients required to craft the recipe.</summary>
-    public required IReadOnlyList<Ingredient> Ingredients { get; init; }
+    public required IImmutableValueList<Ingredient> Ingredients { get; init; }
 
 #pragma warning disable CA1721 // Property names should not match get methods
     /// <summary>The chat code of the recipe. This can be used to link the recipe in the chat, but also in guild or squad

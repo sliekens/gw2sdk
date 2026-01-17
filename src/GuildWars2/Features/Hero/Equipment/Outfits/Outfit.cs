@@ -19,7 +19,7 @@ public sealed record Outfit
     public required Uri IconUrl { get; init; }
 
     /// <summary>The IDs of the items that unlock the outfit when consumed.</summary>
-    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
+    public required IImmutableValueList<int> UnlockItemIds { get; init; }
 
 #pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this outfit.</summary>

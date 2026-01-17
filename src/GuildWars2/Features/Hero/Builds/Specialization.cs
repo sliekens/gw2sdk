@@ -17,10 +17,10 @@ public sealed record Specialization
     public required bool Elite { get; init; }
 
     /// <summary>The IDs of the traits which are always active.</summary>
-    public required IReadOnlyList<int> MinorTraitIds { get; init; }
+    public required IImmutableValueList<int> MinorTraitIds { get; init; }
 
     /// <summary>The IDs of the traits which can be selected.</summary>
-    public required IReadOnlyList<int> MajorTraitIds { get; init; }
+    public required IImmutableValueList<int> MajorTraitIds { get; init; }
 
     /// <summary>The ID of the trait which lets the player wield an elite specialization weapon.</summary>
     /// <remarks>Only <see cref="Elite" /> specializations have weapon traits.</remarks>

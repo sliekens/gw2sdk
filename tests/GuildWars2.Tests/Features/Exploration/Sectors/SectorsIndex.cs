@@ -11,7 +11,7 @@ public class SectorsIndex(Gw2Client sut)
     [Arguments(1, 0, 1, 28)]
     public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
-        (HashSet<int> actual, MessageContext context) = await sut.Exploration.GetSectorsIndex(continentId, floorId, regionId, mapId, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<int> actual, MessageContext context) = await sut.Exploration.GetSectorsIndex(continentId, floorId, regionId, mapId, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
         await Assert.That(actual).IsNotEmpty();

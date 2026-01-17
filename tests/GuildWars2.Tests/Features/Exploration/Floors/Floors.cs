@@ -24,7 +24,7 @@ public class Floors(Gw2Client sut)
     [Arguments(2)]
     public async Task Can_be_listed(int continentId)
     {
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context)
             .Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
@@ -144,7 +144,7 @@ public class Floors(Gw2Client sut)
                                 .And.Member(m => m.Coordinates, m => m.IsNotEqualTo(PointF.Empty));
                         }
 
-                        foreach (GodShrine godShrine in map.GodShrines ?? [])
+                        foreach (GodShrine godShrine in map.GodShrines ?? Enumerable.Empty<GodShrine>())
                         {
                             await Assert.That(godShrine)
                                 .Member(g => g.Id, m => m.IsGreaterThan(0))

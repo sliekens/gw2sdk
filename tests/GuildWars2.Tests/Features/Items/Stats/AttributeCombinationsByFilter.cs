@@ -10,7 +10,7 @@ public class AttributeCombinationsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [161, 559, 1566];
-        (HashSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinationsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AttributeCombination> actual, MessageContext context) = await sut.Items.GetAttributeCombinationsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(ids.Count);
         using (Assert.Multiple())
         {

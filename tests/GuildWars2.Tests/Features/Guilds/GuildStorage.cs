@@ -15,7 +15,7 @@ public class GuildStorage(Gw2Client sut)
         (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string guildId in account.LeaderOfGuildIds!)
         {
-            (List<GuildStorageSlot> actual, _) = await sut.Guilds.GetGuildStorage(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+            (IImmutableValueList<GuildStorageSlot> actual, _) = await sut.Guilds.GetGuildStorage(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
             await Assert.That(actual).IsNotNull();
         }
     }

@@ -13,7 +13,7 @@ public class RecipesByIngredient(Gw2Client sut)
         //   but that doesn't seem to apply for recipes search by input/output item
         // There are 800+ recipes that require a vision crystal
         const int visionCrystal = 46746;
-        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemId(visionCrystal, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual.Count).IsGreaterThan(200);
         await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);

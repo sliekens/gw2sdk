@@ -14,7 +14,7 @@ public class EquipmentTemplates(Gw2Client sut)
     {
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<EquipmentTemplate> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplates(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<EquipmentTemplate> actual, MessageContext context) = await sut.Hero.Equipment.Templates.GetEquipmentTemplates(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context).Member(c => c.PageSize, pageSize => pageSize.IsEqualTo(50))
             .And.Member(c => c.PageTotal, pageTotal => pageTotal.IsEqualTo(1))

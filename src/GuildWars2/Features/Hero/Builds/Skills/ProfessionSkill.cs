@@ -11,5 +11,5 @@ public sealed record ProfessionSkill : ActionSkill
 
     /// <summary>If present, the current skill will transform the player and replace the weapon skills with the skill IDs in
     /// this list.</summary>
-    public required IReadOnlyList<int>? TransformSkills { get; init; }
+    public required IImmutableValueList<int>? TransformSkills { get; init; }
 }

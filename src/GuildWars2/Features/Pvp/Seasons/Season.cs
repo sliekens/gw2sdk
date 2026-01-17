@@ -24,12 +24,12 @@ public sealed record Season
     /// played a role in matchmaking, only players in the same division could be matched together. Pips-based matchmaking was
     /// replaced by a skill rating system in season five (details in <see cref="Ranks" />), and pips are now a purely
     /// reward-based system.</remarks>
-    public required IReadOnlyList<Division> Divisions { get; init; }
+    public required IImmutableValueList<Division> Divisions { get; init; }
 
     /// <summary>The skill ranks and skill rating requirements for each rank.</summary>
     /// <remarks>This skill rating system was introduced in season five, it is <c>null</c> for earlier seasons. The first 4
     /// seasons used a pips-based system (see <see cref="Divisions" />) instead of skill rating.</remarks>
-    public required IReadOnlyList<SkillBadge>? Ranks { get; init; }
+    public required IImmutableValueList<SkillBadge>? Ranks { get; init; }
 
     /// <summary>The season's leaderboards.</summary>
     public required LeaderboardGroup Leaderboards { get; init; }

@@ -8,5 +8,5 @@ public sealed record Raid
     public required string Id { get; init; }
 
     /// <summary>The raid wings. Each raid consists of one or more wings, which can be entered and completed independently. </summary>
-    public required IReadOnlyList<RaidWing> Wings { get; init; }
+    public required IImmutableValueList<RaidWing> Wings { get; init; }
 }

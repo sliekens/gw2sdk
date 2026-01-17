@@ -15,7 +15,7 @@ public sealed record Decoration
     public required string Description { get; init; }
 
     /// <summary>The category IDs associated with the decoration.</summary>
-    public required IReadOnlyList<int> CategoryIds { get; init; }
+    public required IImmutableValueList<int> CategoryIds { get; init; }
 
     /// <summary>The maximum number of this decoration that can be owned.</summary>
     public required int MaxCount { get; init; }

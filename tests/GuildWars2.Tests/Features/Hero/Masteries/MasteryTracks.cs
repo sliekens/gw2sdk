@@ -10,7 +10,7 @@ public class MasteryTracks(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MasteryTrack> actual, MessageContext context) = await sut.Hero.Masteries.GetMasteryTracks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
 
         using (Assert.Multiple())

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<World> Value, MessageContext Context)> GetWorlds(
+    public async Task<(IImmutableValueSet<World> Value, MessageContext Context)> GetWorlds(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -42,7 +41,7 @@ public sealed class WorldsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<World> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetWorld());
+            ImmutableValueSet<World> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetWorld());
             return (value, response.Context);
         }
     }
@@ -50,7 +49,7 @@ public sealed class WorldsClient
     /// <summary>Retrieves the IDs of all worlds.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetWorldsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetWorldsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -60,7 +59,7 @@ public sealed class WorldsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -98,7 +97,7 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByIds(
+    public async Task<(IImmutableValueSet<World> Value, MessageContext Context)> GetWorldsByIds(
         IEnumerable<int> worldIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -114,7 +113,7 @@ public sealed class WorldsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<World> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetWorld());
+            ImmutableValueSet<World> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetWorld());
             return (value, response.Context);
         }
     }
@@ -126,7 +125,7 @@ public sealed class WorldsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<World> Value, MessageContext Context)> GetWorldsByPage(
+    public async Task<(IImmutableValueSet<World> Value, MessageContext Context)> GetWorldsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -143,7 +142,7 @@ public sealed class WorldsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<World> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetWorld());
+            ImmutableValueSet<World> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetWorld());
             return (value, response.Context);
         }
     }

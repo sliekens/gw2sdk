@@ -10,13 +10,13 @@ public interface IUpgradable
     int? SecondarySuffixItemId { get; }
 
     /// <summary>The upgrade slots of the item.</summary>
-    IReadOnlyList<int?> UpgradeSlots { get; }
+    IImmutableValueList<int?> UpgradeSlots { get; }
 
     /// <summary>The number of upgrade slots available on the item.</summary>
     int UpgradeSlotCount { get; }
 
     /// <summary>The infusion slots of the item (only available on ascended and legendary items).</summary>
-    IReadOnlyList<InfusionSlot> InfusionSlots { get; }
+    IImmutableValueList<InfusionSlot> InfusionSlots { get; }
 
     /// <summary>The number of infusion slots available on the item.</summary>
     int InfusionSlotCount { get; }

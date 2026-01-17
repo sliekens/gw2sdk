@@ -8,7 +8,7 @@ public class FilesIndex(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<string> actual, MessageContext context) = await sut.Files.GetFilesIndex(TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, MessageContext context) = await sut.Files.GetFilesIndex(TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));
         await Assert.That(actual).IsNotEmpty();

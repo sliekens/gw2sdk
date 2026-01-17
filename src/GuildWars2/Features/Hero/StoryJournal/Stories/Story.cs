@@ -23,13 +23,13 @@ public sealed record Story
     public required int Level { get; init; }
 
     /// <summary>The races that can play this story.</summary>
-    public required IReadOnlyCollection<Extensible<RaceName>> Races { get; init; }
+    public required IImmutableValueList<Extensible<RaceName>> Races { get; init; }
 
     /// <summary>The display order of the story in the story journal.</summary>
     public required int Order { get; init; }
 
     /// <summary>The chapters of the story, only applicable to the personal story (My Story in the story journal).</summary>
-    public required IReadOnlyList<Chapter> Chapters { get; init; }
+    public required IImmutableValueList<Chapter> Chapters { get; init; }
 
     /// <summary>Contains various modifiers for the story.</summary>
     public required StoryFlags Flags { get; init; }

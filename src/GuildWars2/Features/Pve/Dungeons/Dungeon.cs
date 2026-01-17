@@ -8,5 +8,5 @@ public sealed record Dungeon
     public required string Id { get; init; }
 
     /// <summary>The paths of the dungeon which can be selected at the start of the dungeon.</summary>
-    public required IReadOnlyCollection<DungeonPath> Paths { get; init; }
+    public required IImmutableValueList<DungeonPath> Paths { get; init; }
 }

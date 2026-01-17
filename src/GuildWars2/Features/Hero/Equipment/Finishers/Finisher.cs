@@ -14,7 +14,7 @@ public sealed record Finisher
     public required string LockedText { get; init; }
 
     /// <summary>The IDs of the items that unlock the finisher when consumed.</summary>
-    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
+    public required IImmutableValueList<int> UnlockItemIds { get; init; }
 
     /// <summary>The display order of the finisher in the equipment panel.</summary>
     public required int Order { get; init; }

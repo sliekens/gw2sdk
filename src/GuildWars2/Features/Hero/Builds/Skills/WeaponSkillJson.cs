@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero.Training;
 using GuildWars2.Json;
 
@@ -135,7 +134,7 @@ internal static class WeaponSkillJson
             }
         }
 
-        ValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in values) =>
+        ImmutableValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in values) =>
             values.GetList(static (in value) => value.GetEnum<ProfessionName>())
         );
         string iconString = icon.Map(static (in value) => value.GetString()) ?? "";

@@ -11,7 +11,7 @@ public class ProfessionsByName(Gw2Client sut)
     public async Task Can_be_filtered_by_name()
     {
         HashSet<ProfessionName> names = [ProfessionName.Mesmer, ProfessionName.Necromancer, ProfessionName.Revenant];
-        (HashSet<Profession> actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Profession> actual, _) = await sut.Hero.Training.GetProfessionsByNames(names, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Contains(found => found.Id == ProfessionName.Mesmer);
         await Assert.That(actual).Contains(found => found.Id == ProfessionName.Necromancer);
         await Assert.That(actual).Contains(found => found.Id == ProfessionName.Revenant);

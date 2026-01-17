@@ -23,5 +23,5 @@ public sealed record Rank
     public required int MaxRank { get; init; }
 
     /// <summary>The rank levels and the rank points required to gain a level within this rank.</summary>
-    public required IReadOnlyCollection<Level> Levels { get; init; }
+    public required IImmutableValueList<Level> Levels { get; init; }
 }

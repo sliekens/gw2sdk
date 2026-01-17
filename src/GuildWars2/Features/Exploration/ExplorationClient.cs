@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
 using GuildWars2.Exploration.Hearts;
@@ -35,7 +34,7 @@ public sealed class ExplorationClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetCompletedHeroChallenges(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetCompletedHeroChallenges(
         string characterName,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -50,7 +49,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -64,7 +63,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Continent> Value, MessageContext Context)> GetContinents(
+    public async Task<(IImmutableValueSet<Continent> Value, MessageContext Context)> GetContinents(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -79,7 +78,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Continent> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetContinent());
+            ImmutableValueSet<Continent> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetContinent());
             return (value, response.Context);
         }
     }
@@ -87,7 +86,7 @@ public sealed class ExplorationClient
     /// <summary>Retrieves the IDs of all continents.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetContinentsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetContinentsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -97,7 +96,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -135,7 +134,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
+    public async Task<(IImmutableValueSet<Continent> Value, MessageContext Context)> GetContinentsByIds(
         IEnumerable<int> continentIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -151,7 +150,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Continent> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetContinent());
+            ImmutableValueSet<Continent> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetContinent());
             return (value, response.Context);
         }
     }
@@ -163,7 +162,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
+    public async Task<(IImmutableValueSet<Continent> Value, MessageContext Context)> GetContinentsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -180,7 +179,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Continent> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetContinent());
+            ImmutableValueSet<Continent> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetContinent());
             return (value, response.Context);
         }
     }
@@ -195,7 +194,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Floor> Value, MessageContext Context)> GetFloors(
+    public async Task<(IImmutableValueSet<Floor> Value, MessageContext Context)> GetFloors(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -211,7 +210,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Floor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFloor());
+            ImmutableValueSet<Floor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFloor());
             return (value, response.Context);
         }
     }
@@ -220,7 +219,7 @@ public sealed class ExplorationClient
     /// <param name="continentId">The continent ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetFloorsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetFloorsIndex(
         int continentId,
         CancellationToken cancellationToken = default
     )
@@ -231,7 +230,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -272,7 +271,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
+    public async Task<(IImmutableValueSet<Floor> Value, MessageContext Context)> GetFloorsByIds(
         int continentId,
         IEnumerable<int> floorIds,
         Language? language = default,
@@ -289,7 +288,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Floor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFloor());
+            ImmutableValueSet<Floor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFloor());
             return (value, response.Context);
         }
     }
@@ -302,7 +301,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
+    public async Task<(IImmutableValueSet<Floor> Value, MessageContext Context)> GetFloorsByPage(
         int continentId,
         int pageIndex,
         int? pageSize = default,
@@ -320,7 +319,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Floor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFloor());
+            ImmutableValueSet<Floor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFloor());
             return (value, response.Context);
         }
     }
@@ -336,7 +335,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Region> Value, MessageContext Context)> GetRegions(
+    public async Task<(IImmutableValueSet<Region> Value, MessageContext Context)> GetRegions(
         int continentId,
         int floorId,
         Language? language = default,
@@ -354,7 +353,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Region> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRegion());
+            ImmutableValueSet<Region> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRegion());
             return (value, response.Context);
         }
     }
@@ -364,7 +363,7 @@ public sealed class ExplorationClient
     /// <param name="floorId">The floor ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetRegionsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetRegionsIndex(
         int continentId,
         int floorId,
         CancellationToken cancellationToken = default
@@ -377,7 +376,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -422,7 +421,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByIds(
+    public async Task<(IImmutableValueSet<Region> Value, MessageContext Context)> GetRegionsByIds(
         int continentId,
         int floorId,
         IEnumerable<int> regionIds,
@@ -441,7 +440,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Region> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRegion());
+            ImmutableValueSet<Region> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRegion());
             return (value, response.Context);
         }
     }
@@ -455,7 +454,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Region> Value, MessageContext Context)> GetRegionsByPage(
+    public async Task<(IImmutableValueSet<Region> Value, MessageContext Context)> GetRegionsByPage(
         int continentId,
         int floorId,
         int pageIndex,
@@ -475,7 +474,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Region> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRegion());
+            ImmutableValueSet<Region> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRegion());
             return (value, response.Context);
         }
     }
@@ -492,7 +491,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Map> Value, MessageContext Context)> GetMaps(
+    public async Task<(IImmutableValueSet<Map> Value, MessageContext Context)> GetMaps(
         int continentId,
         int floorId,
         int regionId,
@@ -512,7 +511,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Map> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMap());
+            ImmutableValueSet<Map> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMap());
             return (value, response.Context);
         }
     }
@@ -523,7 +522,7 @@ public sealed class ExplorationClient
     /// <param name="regionId">The region ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetMapsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -538,7 +537,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -587,7 +586,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByIds(
+    public async Task<(IImmutableValueSet<Map> Value, MessageContext Context)> GetMapsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -608,7 +607,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Map> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMap());
+            ImmutableValueSet<Map> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMap());
             return (value, response.Context);
         }
     }
@@ -623,7 +622,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Map> Value, MessageContext Context)> GetMapsByPage(
+    public async Task<(IImmutableValueSet<Map> Value, MessageContext Context)> GetMapsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -645,7 +644,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Map> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMap());
+            ImmutableValueSet<Map> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMap());
             return (value, response.Context);
         }
     }
@@ -663,7 +662,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterest(
+    public async Task<(IImmutableValueSet<PointOfInterest> Value, MessageContext Context)> GetPointsOfInterest(
         int continentId,
         int floorId,
         int regionId,
@@ -684,7 +683,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<PointOfInterest> value =
+            ImmutableValueSet<PointOfInterest> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetPointOfInterest());
             return (value, response.Context);
         }
@@ -697,7 +696,7 @@ public sealed class ExplorationClient
     /// <param name="mapId">The map ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetPointsOfInterestIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -713,7 +712,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -765,7 +764,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<PointOfInterest> Value, MessageContext Context)>
         GetPointsOfInterestByIds(
             int continentId,
             int floorId,
@@ -788,7 +787,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<PointOfInterest> value =
+            ImmutableValueSet<PointOfInterest> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetPointOfInterest());
             return (value, response.Context);
         }
@@ -805,7 +804,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<PointOfInterest> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<PointOfInterest> Value, MessageContext Context)>
         GetPointsOfInterestByPage(
             int continentId,
             int floorId,
@@ -829,7 +828,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<PointOfInterest> value =
+            ImmutableValueSet<PointOfInterest> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetPointOfInterest());
             return (value, response.Context);
         }
@@ -848,7 +847,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Heart> Value, MessageContext Context)> GetHearts(
+    public async Task<(IImmutableValueSet<Heart> Value, MessageContext Context)> GetHearts(
         int continentId,
         int floorId,
         int regionId,
@@ -869,7 +868,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Heart> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetHeart());
+            ImmutableValueSet<Heart> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetHeart());
             return (value, response.Context);
         }
     }
@@ -881,7 +880,7 @@ public sealed class ExplorationClient
     /// <param name="mapId">The map ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetHeartsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetHeartsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -897,7 +896,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -949,7 +948,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
+    public async Task<(IImmutableValueSet<Heart> Value, MessageContext Context)> GetHeartsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -971,7 +970,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Heart> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetHeart());
+            ImmutableValueSet<Heart> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetHeart());
             return (value, response.Context);
         }
     }
@@ -987,7 +986,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
+    public async Task<(IImmutableValueSet<Heart> Value, MessageContext Context)> GetHeartsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -1010,7 +1009,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Heart> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetHeart());
+            ImmutableValueSet<Heart> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetHeart());
             return (value, response.Context);
         }
     }
@@ -1028,7 +1027,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Sector> Value, MessageContext Context)> GetSectors(
+    public async Task<(IImmutableValueSet<Sector> Value, MessageContext Context)> GetSectors(
         int continentId,
         int floorId,
         int regionId,
@@ -1049,7 +1048,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Sector> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSector());
+            ImmutableValueSet<Sector> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSector());
             return (value, response.Context);
         }
     }
@@ -1061,7 +1060,7 @@ public sealed class ExplorationClient
     /// <param name="mapId">The map ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetSectorsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetSectorsIndex(
         int continentId,
         int floorId,
         int regionId,
@@ -1077,7 +1076,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -1129,7 +1128,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
+    public async Task<(IImmutableValueSet<Sector> Value, MessageContext Context)> GetSectorsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -1151,7 +1150,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Sector> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSector());
+            ImmutableValueSet<Sector> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSector());
             return (value, response.Context);
         }
     }
@@ -1167,7 +1166,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
+    public async Task<(IImmutableValueSet<Sector> Value, MessageContext Context)> GetSectorsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -1190,7 +1189,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Sector> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSector());
+            ImmutableValueSet<Sector> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSector());
             return (value, response.Context);
         }
     }
@@ -1204,7 +1203,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummaries(
+    public async Task<(IImmutableValueSet<MapSummary> Value, MessageContext Context)> GetMapSummaries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -1219,7 +1218,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MapSummary> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapSummary());
+            ImmutableValueSet<MapSummary> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapSummary());
             return (value, response.Context);
         }
     }
@@ -1227,7 +1226,7 @@ public sealed class ExplorationClient
     /// <summary>Retrieves the IDs of all maps.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetMapsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetMapsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -1237,7 +1236,7 @@ public sealed class ExplorationClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -1275,7 +1274,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByIds(
+    public async Task<(IImmutableValueSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByIds(
         IEnumerable<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -1291,7 +1290,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MapSummary> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapSummary());
+            ImmutableValueSet<MapSummary> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapSummary());
             return (value, response.Context);
         }
     }
@@ -1303,7 +1302,7 @@ public sealed class ExplorationClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByPage(
+    public async Task<(IImmutableValueSet<MapSummary> Value, MessageContext Context)> GetMapSummariesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -1320,7 +1319,7 @@ public sealed class ExplorationClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MapSummary> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapSummary());
+            ImmutableValueSet<MapSummary> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapSummary());
             return (value, response.Context);
         }
     }

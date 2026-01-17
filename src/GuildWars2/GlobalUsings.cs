@@ -1,7 +1,3 @@
 global using System.Collections.Immutable;
 
 global using GuildWars2.Collections;
-
-#if NETFRAMEWORK
-global using System.Net.Http;
-#endif

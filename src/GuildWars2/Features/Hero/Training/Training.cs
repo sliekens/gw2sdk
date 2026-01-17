@@ -17,5 +17,5 @@ public sealed record Training
 
     /// <summary>The objectives within the training track. The list type is abstract, the derived types are documented in the
     /// Objectives namespace.</summary>
-    public required IReadOnlyList<TrainingObjective> Track { get; init; }
+    public required IImmutableValueList<TrainingObjective> Track { get; init; }
 }

@@ -10,7 +10,7 @@ public class MistChampionsIndex(Gw2Client sut)
     {
         using (Assert.Multiple())
         {
-            (HashSet<string> actual, MessageContext context) = await sut.Pvp.GetMistChampionsIndex(TestContext.Current!.Execution.CancellationToken);
+            (IImmutableValueSet<string> actual, MessageContext context) = await sut.Pvp.GetMistChampionsIndex(TestContext.Current!.Execution.CancellationToken);
             await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
             await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
             await Assert.That(actual).IsNotEmpty();

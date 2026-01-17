@@ -5,5 +5,5 @@ namespace GuildWars2.Hero.StoryJournal.BackgroundStories;
 public sealed record CharacterBackgroundStory
 {
     /// <summary>The IDs of background story answers picked during the character's creation.</summary>
-    public required IReadOnlyList<string> AnswerIds { get; init; }
+    public required IImmutableValueList<string> AnswerIds { get; init; }
 }

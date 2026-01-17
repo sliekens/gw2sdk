@@ -10,7 +10,7 @@ public class UpgradesByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [1, 3, 4];
-        (HashSet<ObjectiveUpgrade> actual, MessageContext context) = await sut.Wvw.GetUpgradesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<ObjectiveUpgrade> actual, MessageContext context) = await sut.Wvw.GetUpgradesByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

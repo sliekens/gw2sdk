@@ -9,7 +9,7 @@ public class Upgrades(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<ObjectiveUpgrade> actual, MessageContext context) = await sut.Wvw.GetUpgrades(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<ObjectiveUpgrade> actual, MessageContext context) = await sut.Wvw.GetUpgrades(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context).Member(c => c.ResultCount, m => m.IsEqualTo(actual.Count));
         await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));

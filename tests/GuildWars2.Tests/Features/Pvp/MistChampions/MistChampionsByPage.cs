@@ -10,7 +10,7 @@ public class MistChampionsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampionByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MistChampion> actual, MessageContext context) = await sut.Pvp.GetMistChampionByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context.Links).IsNotNull();

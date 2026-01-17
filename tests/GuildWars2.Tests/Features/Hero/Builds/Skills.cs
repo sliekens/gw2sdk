@@ -16,7 +16,7 @@ public class Skills(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkills(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Skill> actual, MessageContext context) = await sut.Hero.Builds.GetSkills(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(actual.Count);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
         await Assert.That(actual).IsNotEmpty();

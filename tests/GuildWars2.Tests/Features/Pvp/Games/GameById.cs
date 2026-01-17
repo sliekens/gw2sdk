@@ -12,7 +12,7 @@ public class GameById(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         // No way other way to get a game ID than to list them all first
-        HashSet<string> gamesIndex = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly();
+        IImmutableValueSet<string> gamesIndex = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly();
         string? gameId = gamesIndex.First();
         // Now that we have a game ID, we can get the game
         (Game actual, MessageContext context) = await sut.Pvp.GetGameById(gameId, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);

@@ -10,7 +10,7 @@ public class GuildUpgradesByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<GuildUpgrade> actual, MessageContext context) = await sut.Guilds.GetGuildUpgradesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<GuildUpgrade> actual, MessageContext context) = await sut.Guilds.GetGuildUpgradesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context).Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))

@@ -11,7 +11,7 @@ public class RecipesByIngredientByPage(Gw2Client sut)
     {
         const int visionCrystal = 46746;
         const int pageSize = 3;
-        (HashSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(visionCrystal, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Recipe> actual, MessageContext context) = await sut.Hero.Crafting.Recipes.GetRecipesByIngredientItemIdByPage(visionCrystal, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

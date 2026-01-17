@@ -11,7 +11,7 @@ public class CompletedPaths(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         // Completed paths reset every day, play some dungeons to test this properly
-        (HashSet<string> actual, _) = await sut.Pve.Dungeons.GetCompletedPaths(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, _) = await sut.Pve.Dungeons.GetCompletedPaths(accessToken.Key, TestContext.Current!.Execution.CancellationToken);
         foreach (string entry in actual)
         {
             await Assert.That(ReferenceData.Paths).Contains(entry);

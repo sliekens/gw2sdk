@@ -8,5 +8,5 @@ public sealed record DeliveryBox
     public required Coin Coins { get; init; }
 
     /// <summary>The items in the delivery box.</summary>
-    public required IReadOnlyCollection<DeliveredItem> Items { get; init; }
+    public required IImmutableValueList<DeliveredItem> Items { get; init; }
 }

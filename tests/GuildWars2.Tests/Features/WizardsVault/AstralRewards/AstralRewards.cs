@@ -10,7 +10,7 @@ public class AstralRewards(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewards(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewards(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         using (Assert.Multiple())
         {

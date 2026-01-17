@@ -11,7 +11,7 @@ public class LeaderboardRegions(Gw2Client sut)
     [Arguments("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder")]
     public async Task Can_be_found(string seasonId, string boardId)
     {
-        (HashSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<string> actual, _) = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId, TestContext.Current!.Execution.CancellationToken);
         HashSet<string> expected = ["eu", "na"];
         using (Assert.Multiple())
         {

@@ -21,5 +21,5 @@ public sealed record AchievementGroup
     public required int Order { get; init; }
 
     /// <summary>The achievement categories in this group.</summary>
-    public required IReadOnlyList<int> Categories { get; init; }
+    public required IImmutableValueList<int> Categories { get; init; }
 }

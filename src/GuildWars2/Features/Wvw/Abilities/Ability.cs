@@ -18,5 +18,5 @@ public sealed record Ability
     public required Uri IconUrl { get; init; }
 
     /// <summary>The ranks of the ability, with costs and effects.</summary>
-    public required IReadOnlyList<AbilityRank> Ranks { get; init; }
+    public required IImmutableValueList<AbilityRank> Ranks { get; init; }
 }

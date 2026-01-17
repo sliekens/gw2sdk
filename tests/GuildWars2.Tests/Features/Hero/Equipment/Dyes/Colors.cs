@@ -12,7 +12,7 @@ public class Colors(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColors(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<DyeColor> actual, MessageContext context) = await sut.Hero.Equipment.Dyes.GetColors(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
 
         using (Assert.Multiple())

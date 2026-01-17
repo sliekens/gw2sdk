@@ -1,15 +1,15 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Equipment;
 
 internal static class AttributesJson
 {
-    public static ValueDictionary<Extensible<AttributeName>, int> GetAttributes(this in JsonElement json)
+    public static ImmutableValueDictionary<Extensible<AttributeName>, int> GetAttributes(this in JsonElement json)
     {
-        ValueDictionary<Extensible<AttributeName>, int> result = new(4);
+        ImmutableDictionary<Extensible<AttributeName>, int>.Builder result =
+            ImmutableDictionary.CreateBuilder<Extensible<AttributeName>, int>();
         foreach (JsonProperty member in json.EnumerateObject())
         {
             // Somemetimes the old attribute names (or partial names) are used in the API
@@ -63,6 +63,6 @@ internal static class AttributesJson
             }
         }
 
-        return result;
+        return new ImmutableValueDictionary<Extensible<AttributeName>, int>(result.ToImmutable());
     }
 }

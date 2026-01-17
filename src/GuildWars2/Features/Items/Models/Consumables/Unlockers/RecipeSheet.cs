@@ -17,7 +17,7 @@ public sealed record RecipeSheet : Unlocker
     /// variants all at once. 3. Some recipe sheets unlock variants for multiple disciplines. For instance, some armor recipe
     /// sheets may unlock a recipe for Armorsmith, Leatherworker and Tailor all at once, to produce heavy, medium or light
     /// variants.</remarks>
-    public required IReadOnlyCollection<int> ExtraRecipeIds { get; init; }
+    public required IImmutableValueList<int> ExtraRecipeIds { get; init; }
 
 #pragma warning disable CA1024 // Use properties where appropriate
     /// <summary>Gets a chat link object for this recipe.</summary>

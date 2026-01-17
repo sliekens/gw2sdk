@@ -8,16 +8,16 @@ public sealed record OrderBook
     public required int Id { get; init; }
 
     /// <summary>The bid prices on the demand side.</summary>
-    public required IReadOnlyCollection<OrderBookLine> Demand { get; init; }
+    public required IImmutableValueList<OrderBookLine> Demand { get; init; }
 
     /// <summary>The ask prices on the supply side.</summary>
-    public required IReadOnlyCollection<OrderBookLine> Supply { get; init; }
+    public required IImmutableValueList<OrderBookLine> Supply { get; init; }
 
     /// <summary>The highest bid price on the demand side.</summary>
-    public Coin? BestBid => Demand.FirstOrDefault()?.UnitPrice;
+    public Coin? BestBid => Demand.Count > 0 ? Demand[0].UnitPrice : null;
 
     /// <summary>The lowest ask price on the supply side.</summary>
-    public Coin? BestAsk => Supply.FirstOrDefault()?.UnitPrice;
+    public Coin? BestAsk => Supply.Count > 0 ? Supply[0].UnitPrice : null;
 
     /// <summary>The difference between the lowest ask price on the supply side and the highest bid price on the demand side.</summary>
     public Coin BidAskSpread =>

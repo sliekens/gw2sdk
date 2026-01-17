@@ -25,5 +25,5 @@ public sealed record MasteryTrack
     public required Extensible<MasteryRegionName> Region { get; init; }
 
     /// <summary>The levels of mastery that can be progressed within this mastery track.</summary>
-    public required IReadOnlyList<Mastery> Masteries { get; init; }
+    public required IImmutableValueList<Mastery> Masteries { get; init; }
 }

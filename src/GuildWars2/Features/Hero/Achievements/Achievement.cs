@@ -42,21 +42,21 @@ public record Achievement
 
     /// <summary>Describes the tiers of the achievement. Each tier has a number of things you need to do to complete it and a
     /// number of points awarded.</summary>
-    public required IReadOnlyList<AchievementTier> Tiers { get; init; }
+    public required IImmutableValueList<AchievementTier> Tiers { get; init; }
 
     /// <summary>Describes the rewards for completing this achievement. The list type is abstact, the derived types are
     /// <see cref="CoinsReward" />, <see cref="ItemReward" />, <see cref="MasteryPointReward" /> or <see cref="TitleReward" />.</summary>
-    public required IReadOnlyList<AchievementReward>? Rewards { get; init; }
+    public required IImmutableValueList<AchievementReward>? Rewards { get; init; }
 
     /// <summary>Describes the individual bits of progress that can be made. The list type is abstract. If the current
     /// achievement is a <see cref="CollectionAchievement" /> then the list items are of type <see cref="AchievementItemBit" />
     /// , <see cref="AchievementSkinBit" /> or <see cref="AchievementMiniatureBit" />. For regular achievements, the type is
     /// <see cref="AchievementTextBit" /> which is just a description of what is needed.</summary>
-    public required IReadOnlyList<AchievementBit>? Bits { get; init; }
+    public required IImmutableValueList<AchievementBit>? Bits { get; init; }
 
     /// <summary>A list of achievement IDs which need to be completed before this achievement can be progressed.</summary>
     /// <remarks>Typically contains a single ID or no IDs at all, but this might change.</remarks>
-    public required IReadOnlyList<int> Prerequisites { get; init; }
+    public required IImmutableValueList<int> Prerequisites { get; init; }
 
     /// <summary>The maximum number of achievement points that can be obtained if this is a repeatable achievement. Check
     /// whether the <see cref="Flags" /> contain the <see cref="AchievementFlags.Repeatable" /> flag.</summary>

@@ -39,23 +39,23 @@ public sealed record Map
     public required Rectangle ContinentRectangle { get; init; }
 
     /// <summary>The points of interest on the map. The key is the point of interest ID. The value is the point of interest.</summary>
-    public required Dictionary<int, PointOfInterest> PointsOfInterest { get; init; }
+    public required IImmutableValueDictionary<int, PointOfInterest> PointsOfInterest { get; init; }
 
     /// <summary>The hearts on the map. The key is the heart ID. The value is the heart.</summary>
-    public required Dictionary<int, Heart> Hearts { get; init; }
+    public required IImmutableValueDictionary<int, Heart> Hearts { get; init; }
 
     /// <summary>The hero challenges on the map.</summary>
-    public required IReadOnlyCollection<HeroChallenge> HeroChallenges { get; init; }
+    public required IImmutableValueList<HeroChallenge> HeroChallenges { get; init; }
 
     /// <summary>The sectors on the map. The key is the sector ID. The value is the sector.</summary>
-    public required Dictionary<int, Sector> Sectors { get; init; }
+    public required IImmutableValueDictionary<int, Sector> Sectors { get; init; }
 
     /// <summary>The adventures on the map.</summary>
-    public required IReadOnlyCollection<Adventure> Adventures { get; init; }
+    public required IImmutableValueList<Adventure> Adventures { get; init; }
 
     /// <summary>The mastery insights on the map.</summary>
-    public required IReadOnlyCollection<MasteryInsight> MasteryInsights { get; init; }
+    public required IImmutableValueList<MasteryInsight> MasteryInsights { get; init; }
 
     /// <summary>The god shrines on the map.</summary>
-    public required IReadOnlyCollection<GodShrine>? GodShrines { get; init; }
+    public required IImmutableValueList<GodShrine>? GodShrines { get; init; }
 }

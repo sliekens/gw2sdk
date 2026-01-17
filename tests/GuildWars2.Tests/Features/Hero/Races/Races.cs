@@ -9,7 +9,7 @@ public class Races(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRaces(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Race> actual, MessageContext context) = await sut.Hero.Races.GetRaces(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
     }
 }

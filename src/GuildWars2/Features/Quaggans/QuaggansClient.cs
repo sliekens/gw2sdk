@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -24,7 +23,7 @@ public sealed class QuaggansClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggans(
+    public async Task<(IImmutableValueSet<Quaggan> Value, MessageContext Context)> GetQuaggans(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -37,7 +36,7 @@ public sealed class QuaggansClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
+            ImmutableValueSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
             return (value, response.Context);
         }
     }
@@ -45,7 +44,7 @@ public sealed class QuaggansClient
     /// <summary>Retrieves the IDs of all quaggans.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetQuaggansIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetQuaggansIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -55,7 +54,7 @@ public sealed class QuaggansClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -89,7 +88,7 @@ public sealed class QuaggansClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByIds(
+    public async Task<(IImmutableValueSet<Quaggan> Value, MessageContext Context)> GetQuaggansByIds(
         IEnumerable<string> quagganIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -103,7 +102,7 @@ public sealed class QuaggansClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
+            ImmutableValueSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
             return (value, response.Context);
         }
     }
@@ -114,7 +113,7 @@ public sealed class QuaggansClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Quaggan> Value, MessageContext Context)> GetQuaggansByPage(
+    public async Task<(IImmutableValueSet<Quaggan> Value, MessageContext Context)> GetQuaggansByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -129,7 +128,7 @@ public sealed class QuaggansClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
+            ImmutableValueSet<Quaggan> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetQuaggan());
             return (value, response.Context);
         }
     }

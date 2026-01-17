@@ -14,5 +14,5 @@ public sealed record OwnedCamp : OwnedObjective
     public required int YaksDelivered { get; init; }
 
     /// <summary>The IDs of active guild upgrades.</summary>
-    public required IReadOnlyCollection<int> GuildUpgrades { get; init; }
+    public required IImmutableValueList<int> GuildUpgrades { get; init; }
 }

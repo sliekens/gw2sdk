@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pve.Home.Cats;
@@ -31,7 +30,7 @@ public sealed class HomeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedCats(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedCats(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -42,7 +41,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -56,7 +55,7 @@ public sealed class HomeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetUnlockedNodes(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetUnlockedNodes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -67,7 +66,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -81,7 +80,7 @@ public sealed class HomeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<UnlockedDecoration> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<UnlockedDecoration> Value, MessageContext Context)>
         GetUnlockedDecorations(string? accessToken, CancellationToken cancellationToken = default)
     {
         RequestBuilder requestBuilder = RequestBuilder.HttpGet(
@@ -93,7 +92,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<UnlockedDecoration> value =
+            ImmutableValueSet<UnlockedDecoration> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetUnlockedDecoration());
             return (value, response.Context);
         }
@@ -108,7 +107,7 @@ public sealed class HomeClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetEquippedGlyphs(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetEquippedGlyphs(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -119,7 +118,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -132,7 +131,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Cat> Value, MessageContext Context)> GetCats(
+    public async Task<(IImmutableValueSet<Cat> Value, MessageContext Context)> GetCats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -145,7 +144,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
+            ImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -153,7 +152,7 @@ public sealed class HomeClient
     /// <summary>Retrieves the IDs of all home cats.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetCatsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetCatsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -163,7 +162,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -197,7 +196,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByIds(
+    public async Task<(IImmutableValueSet<Cat> Value, MessageContext Context)> GetCatsByIds(
         IEnumerable<int> catIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -211,7 +210,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
+            ImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -222,7 +221,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Cat> Value, MessageContext Context)> GetCatsByPage(
+    public async Task<(IImmutableValueSet<Cat> Value, MessageContext Context)> GetCatsByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -237,7 +236,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
+            ImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -250,7 +249,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Node> Value, MessageContext Context)> GetNodes(
+    public async Task<(IImmutableValueSet<Node> Value, MessageContext Context)> GetNodes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -263,7 +262,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
+            ImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -271,7 +270,7 @@ public sealed class HomeClient
     /// <summary>Retrieves the IDs of all home gathering nodes.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetNodesIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetNodesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -281,7 +280,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -315,7 +314,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByIds(
+    public async Task<(IImmutableValueSet<Node> Value, MessageContext Context)> GetNodesByIds(
         IEnumerable<string> nodeIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -329,7 +328,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
+            ImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -340,7 +339,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Node> Value, MessageContext Context)> GetNodesByPage(
+    public async Task<(IImmutableValueSet<Node> Value, MessageContext Context)> GetNodesByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -355,7 +354,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
+            ImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -367,7 +366,7 @@ public sealed class HomeClient
     /// <summary>Retrieves the IDs of all homemestead decorations.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetDecorationsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetDecorationsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -377,7 +376,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -415,7 +414,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Decoration> Value, MessageContext Context)> GetDecorationsByIds(
+    public async Task<(IImmutableValueSet<Decoration> Value, MessageContext Context)> GetDecorationsByIds(
         IEnumerable<int> decorationIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -431,7 +430,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
+            ImmutableValueSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -443,7 +442,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Decoration> Value, MessageContext Context)> GetDecorationsByPage(
+    public async Task<(IImmutableValueSet<Decoration> Value, MessageContext Context)> GetDecorationsByPage(
         int pageIndex,
         int? pageSize,
         Language? language = default,
@@ -460,7 +459,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
+            ImmutableValueSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -499,7 +498,7 @@ public sealed class HomeClient
             CancellationToken cancellationToken
         )
         {
-            (HashSet<Decoration> values, MessageContext context) = await GetDecorationsByIds(
+            (IImmutableValueSet<Decoration> values, MessageContext context) = await GetDecorationsByIds(
                     chunk,
                     language,
                     missingMemberBehavior,
@@ -527,7 +526,7 @@ public sealed class HomeClient
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
-        (HashSet<int> value, _) = await GetDecorationsIndex(cancellationToken).ConfigureAwait(false);
+        (IImmutableValueSet<int> value, _) = await GetDecorationsIndex(cancellationToken).ConfigureAwait(false);
         IAsyncEnumerable<(Decoration Value, MessageContext Context)> producer = GetDecorationsBulk(
             value,
             language,
@@ -552,7 +551,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<DecorationCategory> Value, MessageContext Context)>
         GetDecorationCategories(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -568,7 +567,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<DecorationCategory> value =
+            ImmutableValueSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -577,7 +576,7 @@ public sealed class HomeClient
     /// <summary>Retrieves the IDs of all homestead decoration categories.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetDecorationCategoriesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetDecorationCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -587,7 +586,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -625,7 +624,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<DecorationCategory> Value, MessageContext Context)>
         GetDecorationCategoriesByIds(
             IEnumerable<int> categoryIds,
             Language? language = default,
@@ -642,7 +641,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<DecorationCategory> value =
+            ImmutableValueSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -655,7 +654,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DecorationCategory> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<DecorationCategory> Value, MessageContext Context)>
         GetDecorationCategoriesByPage(
             int pageIndex,
             int? pageSize,
@@ -673,7 +672,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<DecorationCategory> value =
+            ImmutableValueSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -687,7 +686,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Glyph> Value, MessageContext Context)> GetGlyphs(
+    public async Task<(IImmutableValueSet<Glyph> Value, MessageContext Context)> GetGlyphs(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -700,7 +699,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
+            ImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -708,7 +707,7 @@ public sealed class HomeClient
     /// <summary>Retrieves the IDs of all homestead glyphs.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetGlyphsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetGlyphsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -718,7 +717,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -752,7 +751,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Glyph> Value, MessageContext Context)> GetGlyphsByIds(
+    public async Task<(IImmutableValueSet<Glyph> Value, MessageContext Context)> GetGlyphsByIds(
         IEnumerable<string> glyphIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -766,7 +765,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
+            ImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -777,7 +776,7 @@ public sealed class HomeClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Glyph> Value, MessageContext Context)> GetGlyphsByPage(
+    public async Task<(IImmutableValueSet<Glyph> Value, MessageContext Context)> GetGlyphsByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -792,7 +791,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
+            ImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }

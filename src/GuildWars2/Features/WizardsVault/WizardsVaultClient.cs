@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.WizardsVault.AstralRewards;
@@ -59,7 +58,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<PurchasedAstralReward> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<PurchasedAstralReward> Value, MessageContext Context)>
         GetPurchasedAstralRewards(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -76,7 +75,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<PurchasedAstralReward> value =
+            ImmutableValueSet<PurchasedAstralReward> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetPurchasedAstralReward());
             return (value, response.Context);
         }
@@ -178,7 +177,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewards(
+    public async Task<(IImmutableValueSet<AstralReward> Value, MessageContext Context)> GetAstralRewards(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -193,7 +192,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
+            ImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -201,7 +200,7 @@ public sealed class WizardsVaultClient
     /// <summary>Retrieves the IDs of all rewards.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetAstralRewardsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetAstralRewardsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -211,7 +210,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -249,7 +248,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByIds(
+    public async Task<(IImmutableValueSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByIds(
         IEnumerable<int> astralRewardIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -265,7 +264,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
+            ImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -277,7 +276,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByPage(
+    public async Task<(IImmutableValueSet<AstralReward> Value, MessageContext Context)> GetAstralRewardsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -294,7 +293,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
+            ImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -308,7 +307,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectives(
+    public async Task<(IImmutableValueSet<Objective> Value, MessageContext Context)> GetObjectives(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -323,7 +322,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -331,7 +330,7 @@ public sealed class WizardsVaultClient
     /// <summary>Retrieves the IDs of all objectives.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetObjectivesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetObjectivesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -341,7 +340,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -379,7 +378,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
+    public async Task<(IImmutableValueSet<Objective> Value, MessageContext Context)> GetObjectivesByIds(
         IEnumerable<int> objectiveIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -395,7 +394,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -407,7 +406,7 @@ public sealed class WizardsVaultClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
+    public async Task<(IImmutableValueSet<Objective> Value, MessageContext Context)> GetObjectivesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -424,7 +423,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }

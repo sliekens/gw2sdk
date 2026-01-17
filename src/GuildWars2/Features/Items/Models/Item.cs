@@ -32,7 +32,7 @@ public record Item
 
     /// <summary>The game types in which the items can be used.</summary>
     /// <remarks>Can be empty.</remarks>
-    public required IReadOnlyCollection<Extensible<GameType>> GameTypes { get; init; }
+    public required IImmutableValueList<Extensible<GameType>> GameTypes { get; init; }
 
     /// <summary>Contains various modifiers.</summary>
     public required ItemFlags Flags { get; init; }

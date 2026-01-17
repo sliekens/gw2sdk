@@ -13,7 +13,7 @@ public class CharactersByNames(Gw2Client sut)
         TestCharacter character = TestConfiguration.TestCharacter;
         TestCharacter character2 = TestConfiguration.TestCharacter2;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<Character> actual, _) = await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Character> actual, _) = await sut.Hero.Account.GetCharactersByNames([character.Name, character2.Name], accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(2);
 
         await Assert.That(actual.ElementAt(0))

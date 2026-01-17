@@ -12,7 +12,7 @@ public class AccountAchievementsByPage(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int pageSize = 3;
-        (HashSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AccountAchievement> actual, MessageContext context) = await sut.Hero.Achievements.GetAccountAchievementsByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

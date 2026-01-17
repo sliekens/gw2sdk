@@ -4,5 +4,5 @@ namespace GuildWars2.Hero.Banking;
 public sealed record MaterialStorage
 {
     /// <summary>The materials in the material storage.</summary>
-    public required IReadOnlyList<MaterialSlot> Materials { get; init; }
+    public required IImmutableValueList<MaterialSlot> Materials { get; init; }
 }

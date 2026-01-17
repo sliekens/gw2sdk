@@ -9,7 +9,7 @@ public class Ranks(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Rank> actual, MessageContext context) = await sut.Pvp.GetRanks(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

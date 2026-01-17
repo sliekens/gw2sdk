@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -25,7 +24,7 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Race> Value, MessageContext Context)> GetRaces(
+    public async Task<(IImmutableValueSet<Race> Value, MessageContext Context)> GetRaces(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -40,7 +39,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
+            ImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -48,7 +47,7 @@ public sealed class RacesClient
     /// <summary>Retrieves the IDs of all races.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Extensible<RaceName>> Value, MessageContext Context)> GetRacesIndex(
+    public async Task<(IImmutableValueSet<Extensible<RaceName>> Value, MessageContext Context)> GetRacesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -58,7 +57,7 @@ public sealed class RacesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<RaceName>());
+            ImmutableValueSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<RaceName>());
             return (value, response.Context);
         }
     }
@@ -96,7 +95,7 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
+    public Task<(IImmutableValueSet<Race> Value, MessageContext Context)> GetRacesByNames(
         IEnumerable<RaceName> raceNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -117,7 +116,7 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByNames(
+    public async Task<(IImmutableValueSet<Race> Value, MessageContext Context)> GetRacesByNames(
         IEnumerable<Extensible<RaceName>> raceNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -133,7 +132,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
+            ImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -145,7 +144,7 @@ public sealed class RacesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Race> Value, MessageContext Context)> GetRacesByPage(
+    public async Task<(IImmutableValueSet<Race> Value, MessageContext Context)> GetRacesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -162,7 +161,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
+            ImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }

@@ -5,5 +5,5 @@ namespace GuildWars2.WizardsVault.Objectives;
 public sealed record SpecialObjectivesProgress
 {
     /// <summary>The special objectives and the player's progress.</summary>
-    public required IReadOnlyList<ObjectiveProgress> Objectives { get; init; }
+    public required IImmutableValueList<ObjectiveProgress> Objectives { get; init; }
 }

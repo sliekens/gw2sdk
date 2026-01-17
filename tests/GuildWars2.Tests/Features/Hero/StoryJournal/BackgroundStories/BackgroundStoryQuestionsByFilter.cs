@@ -10,7 +10,7 @@ public class BackgroundStoryQuestionsByFilter(Gw2Client sut)
     public async Task Can_be_filtered_by_id()
     {
         HashSet<int> ids = [7, 10, 11];
-        (HashSet<BackgroundStoryQuestion> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<BackgroundStoryQuestion> actual, MessageContext context) = await sut.Hero.StoryJournal.GetBackgroundStoryQuestionsByIds(ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultCount).IsEqualTo(ids.Count);
         await Assert.That(context.ResultTotal > ids.Count).IsTrue();
         await Assert.That(actual.Count).IsEqualTo(ids.Count);

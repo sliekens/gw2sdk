@@ -11,7 +11,7 @@ public class Games(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGames(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Game> actual, MessageContext context) = await sut.Pvp.GetGames(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

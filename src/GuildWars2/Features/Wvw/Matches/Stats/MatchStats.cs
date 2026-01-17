@@ -14,5 +14,5 @@ public sealed record MatchStats
     public required Distribution Deaths { get; init; }
 
     /// <summary>The maps in the match.</summary>
-    public required IReadOnlyCollection<MapSummary> Maps { get; init; }
+    public required IImmutableValueList<MapSummary> Maps { get; init; }
 }

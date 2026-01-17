@@ -12,7 +12,7 @@ public class GamesByPage(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         const int pageSize = 3;
-        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByPage(0, pageSize, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context.Links).IsNotNull();

@@ -5,11 +5,11 @@ namespace GuildWars2.Wvw.Matches;
 public sealed record AllWorlds
 {
     /// <summary>The IDs of worlds playing for the red team.</summary>
-    public required IReadOnlyCollection<int> Red { get; init; }
+    public required IImmutableValueList<int> Red { get; init; }
 
     /// <summary>The IDs of worlds playing for the blue team.</summary>
-    public required IReadOnlyCollection<int> Blue { get; init; }
+    public required IImmutableValueList<int> Blue { get; init; }
 
     /// <summary>The IDs of worlds playing for the green team.</summary>
-    public required IReadOnlyCollection<int> Green { get; init; }
+    public required IImmutableValueList<int> Green { get; init; }
 }

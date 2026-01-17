@@ -16,10 +16,10 @@ public sealed record Map
     public required Distribution Scores { get; init; }
 
     /// <summary>The bonuses in this map and who owns them.</summary>
-    public required IReadOnlyCollection<Bonus> Bonuses { get; init; }
+    public required IImmutableValueList<Bonus> Bonuses { get; init; }
 
     /// <summary>The objectives in this map and who claimed them.</summary>
-    public required IReadOnlyCollection<OwnedObjective> Objectives { get; init; }
+    public required IImmutableValueList<OwnedObjective> Objectives { get; init; }
 
     /// <summary>The deaths distribution of the teams on this map.</summary>
     public required Distribution Deaths { get; init; }

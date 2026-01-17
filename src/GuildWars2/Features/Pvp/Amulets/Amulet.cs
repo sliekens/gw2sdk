@@ -13,9 +13,8 @@ public sealed record Amulet
     public required string Name { get; init; }
 
     /// <summary>The URL of the amulet icon.</summary>
-
     public required Uri IconUrl { get; init; }
 
     /// <summary>The effective attributes of the amulet.</summary>
-    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
+    public required IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 }

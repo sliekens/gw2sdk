@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -26,7 +25,7 @@ internal static class ItemFlagsJson
         bool soulBindOnUse = false;
         bool tonic = false;
         bool unique = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("AccountBindOnUse"))
@@ -122,7 +121,7 @@ internal static class ItemFlagsJson
             Soulbound = soulbindOnAcquire,
             Tonic = tonic,
             Unique = unique,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

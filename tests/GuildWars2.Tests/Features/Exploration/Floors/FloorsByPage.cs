@@ -11,7 +11,7 @@ public class FloorsByPage(Gw2Client sut)
     {
         const int continentId = 1;
         const int pageSize = 3;
-        (HashSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByPage(continentId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloorsByPage(continentId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

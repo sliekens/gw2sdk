@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class DailyCraftingClient
     /// maintain a conversion from the strings to the item IDs to get the item details.</remarks>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetDailyCraftableItems(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetDailyCraftableItems(
         CancellationToken cancellationToken = default
     )
     {
@@ -37,7 +36,7 @@ public sealed class DailyCraftingClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -53,7 +52,7 @@ public sealed class DailyCraftingClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetDailyCraftedItems(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetDailyCraftedItems(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -64,7 +63,7 @@ public sealed class DailyCraftingClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }

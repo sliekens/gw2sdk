@@ -10,7 +10,7 @@ public class CurrenciesByPage(Gw2Client sut)
     public async Task Currencies_can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrenciesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Currency> actual, MessageContext context) = await sut.Hero.Wallet.GetCurrenciesByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

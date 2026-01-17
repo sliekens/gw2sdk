@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Hero.Achievements.Categories;
@@ -11,7 +10,7 @@ internal static class AchievementFlagsJson
     {
         bool specialEvent = false;
         bool pve = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("SpecialEvent"))
@@ -32,7 +31,7 @@ internal static class AchievementFlagsJson
         {
             SpecialEvent = specialEvent,
             PvE = pve,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

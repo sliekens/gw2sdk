@@ -20,5 +20,5 @@ public sealed record Legend
     public required int Elite { get; init; }
 
     /// <summary>The skill IDs of the legend's utility skills.</summary>
-    public required IReadOnlyCollection<int> Utilities { get; init; }
+    public required IImmutableValueList<int> Utilities { get; init; }
 }

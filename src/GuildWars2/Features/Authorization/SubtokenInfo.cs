@@ -10,5 +10,5 @@ public sealed record SubtokenInfo : TokenInfo
     public required DateTimeOffset IssuedAt { get; init; }
 
     /// <summary>The list of allowed URLs which may be accessed with the token. If this is not present, all URLs are allowed.</summary>
-    public required IReadOnlyCollection<Uri>? Urls { get; init; }
+    public required IImmutableValueList<Uri>? Urls { get; init; }
 }

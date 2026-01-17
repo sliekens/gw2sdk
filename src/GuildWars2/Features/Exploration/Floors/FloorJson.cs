@@ -44,8 +44,9 @@ internal static class FloorJson
             Id = id.Map(static (in value) => value.GetInt32()),
             TextureDimensions = textureDimensions.Map(static (in value) => value.GetDimensions()),
             ClampedView = clampedView.Map(static (in value) => value.GetContinentRectangle()),
-            Regions = regions.Map(static (in value) => value.GetMap(static (in entry) => entry.GetRegion())
-                .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
+            Regions = regions.Map(static (in value) => value.GetMap(
+                static key => int.Parse(key, CultureInfo.InvariantCulture),
+                static (in entry) => entry.GetRegion())
             )
         };
     }

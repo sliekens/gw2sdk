@@ -11,7 +11,7 @@ public class Wallet(Gw2Client sut)
     public async Task Can_be_found()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<CurrencyAmount> actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<CurrencyAmount> actual, _) = await sut.Hero.Wallet.GetWallet(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         CurrencyAmount coins = actual.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
         await Assert.That(coinsAmount > 0).IsTrue();

@@ -10,7 +10,7 @@ public class WorldsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<World> actual, MessageContext context) = await sut.Worlds.GetWorldsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {

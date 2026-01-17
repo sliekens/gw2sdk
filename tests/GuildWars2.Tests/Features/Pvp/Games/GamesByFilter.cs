@@ -12,9 +12,9 @@ public class GamesByFilter(Gw2Client sut)
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
         // No way other way to get a game ID than to list them all first
-        HashSet<string> ids = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly();
+        IImmutableValueSet<string> ids = await sut.Pvp.GetGamesIndex(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken).ValueOnly();
         // Now that we have game IDs, we can get the games
-        (HashSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Game> actual, MessageContext context) = await sut.Pvp.GetGamesByIds(ids, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));

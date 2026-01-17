@@ -11,7 +11,7 @@ public class Standings(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<Standing> actual, _) = await sut.Pvp.GetStandings(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Standing> actual, _) = await sut.Pvp.GetStandings(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

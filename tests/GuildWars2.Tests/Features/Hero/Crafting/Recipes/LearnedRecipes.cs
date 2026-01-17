@@ -11,7 +11,7 @@ public class LearnedRecipes(Gw2Client sut)
     {
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<int> actual, _) = await sut.Hero.Crafting.Recipes.GetLearnedRecipes(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<int> actual, _) = await sut.Hero.Crafting.Recipes.GetLearnedRecipes(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         foreach (int id in actual)
         {

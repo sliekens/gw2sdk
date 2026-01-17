@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -28,7 +27,7 @@ public sealed class FinishersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<UnlockedFinisher> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<UnlockedFinisher> Value, MessageContext Context)>
         GetUnlockedFinishers(
             string? accessToken,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -42,7 +41,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<UnlockedFinisher> value =
+            ImmutableValueSet<UnlockedFinisher> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetUnlockedFinisher());
             return (value, response.Context);
         }
@@ -57,7 +56,7 @@ public sealed class FinishersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishers(
+    public async Task<(IImmutableValueSet<Finisher> Value, MessageContext Context)> GetFinishers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -72,7 +71,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
+            ImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -80,7 +79,7 @@ public sealed class FinishersClient
     /// <summary>Retrieves the IDs of all finishers.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetFinishersIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetFinishersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -90,7 +89,7 @@ public sealed class FinishersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -128,7 +127,7 @@ public sealed class FinishersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByIds(
+    public async Task<(IImmutableValueSet<Finisher> Value, MessageContext Context)> GetFinishersByIds(
         IEnumerable<int> finisherIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -144,7 +143,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
+            ImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -156,7 +155,7 @@ public sealed class FinishersClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Finisher> Value, MessageContext Context)> GetFinishersByPage(
+    public async Task<(IImmutableValueSet<Finisher> Value, MessageContext Context)> GetFinishersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -173,7 +172,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
+            ImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }

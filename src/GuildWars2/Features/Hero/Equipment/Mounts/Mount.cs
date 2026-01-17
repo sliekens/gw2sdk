@@ -20,8 +20,8 @@ public sealed record Mount
     public required int DefaultSkinId { get; init; }
 
     /// <summary>The IDs of the mount skins associated with the mount.</summary>
-    public required IReadOnlyCollection<int> SkinIds { get; init; }
+    public required IImmutableValueList<int> SkinIds { get; init; }
 
     /// <summary>The skills that replace the skill bar when the mount is active.</summary>
-    public required IReadOnlyCollection<SkillReference> Skills { get; init; }
+    public required IImmutableValueList<SkillReference> Skills { get; init; }
 }

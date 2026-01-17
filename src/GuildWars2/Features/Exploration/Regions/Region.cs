@@ -21,5 +21,5 @@ public sealed record Region
     public required Rectangle ContinentRectangle { get; init; }
 
     /// <summary>The maps in this region. The key is the map ID. The value is the map.</summary>
-    public required Dictionary<int, Map> Maps { get; init; }
+    public required IImmutableValueDictionary<int, Map> Maps { get; init; }
 }

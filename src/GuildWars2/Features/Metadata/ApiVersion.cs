@@ -7,11 +7,11 @@ namespace GuildWars2.Metadata;
 public sealed record ApiVersion
 {
     /// <summary>The supported languages for this version of the API.</summary>
-    public required IReadOnlyCollection<string> Languages { get; init; }
+    public required IImmutableValueList<string> Languages { get; init; }
 
     /// <summary>The routes available in this version of the API.</summary>
-    public required IReadOnlyCollection<Route> Routes { get; init; }
+    public required IImmutableValueList<Route> Routes { get; init; }
 
     /// <summary>The schema versions available in this version of the API.</summary>
-    public required IReadOnlyCollection<Schema> SchemaVersions { get; init; }
+    public required IImmutableValueList<Schema> SchemaVersions { get; init; }
 }

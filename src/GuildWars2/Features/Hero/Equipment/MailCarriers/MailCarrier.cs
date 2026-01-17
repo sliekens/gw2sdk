@@ -11,7 +11,7 @@ public sealed record MailCarrier
     public required int Id { get; init; }
 
     /// <summary>The IDs of the items that unlock the mail carrier when consumed.</summary>
-    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
+    public required IImmutableValueList<int> UnlockItemIds { get; init; }
 
     /// <summary>The display order of the mail carrier in the equipment panel.</summary>
     public required int Order { get; init; }

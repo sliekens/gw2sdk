@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 internal static class LearnedRecipesJson
 {
-    public static HashSet<int> GetLearnedRecipes(this in JsonElement json)
+    public static IImmutableValueSet<int> GetLearnedRecipes(this in JsonElement json)
     {
         RequiredMember recipes = "recipes";
 

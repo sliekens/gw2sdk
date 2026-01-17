@@ -10,7 +10,7 @@ public class ProfessionNames(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Extensible<ProfessionName>> actual, _) = await sut.Hero.Training.GetProfessionNames(TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Extensible<ProfessionName>> actual, _) = await sut.Hero.Training.GetProfessionNames(TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual.Count).IsEqualTo(Profession.AllProfessions.Count);
         foreach (Extensible<ProfessionName> name in actual)
         {

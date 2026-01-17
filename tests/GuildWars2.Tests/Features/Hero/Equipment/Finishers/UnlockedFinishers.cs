@@ -13,7 +13,7 @@ public class UnlockedFinishers(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<UnlockedFinisher> actual, _) = await sut.Hero.Equipment.Finishers.GetUnlockedFinishers(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<UnlockedFinisher> actual, _) = await sut.Hero.Equipment.Finishers.GetUnlockedFinishers(accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         foreach (UnlockedFinisher entry in actual)
         {

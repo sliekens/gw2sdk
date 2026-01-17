@@ -2,6 +2,7 @@ using System.IO.Compression;
 using System.Text;
 
 using GuildWars2;
+using GuildWars2.Collections;
 using GuildWars2.TestDataHelper;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -64,7 +65,7 @@ try
                 await using (achievementsFile.ConfigureAwait(false))
                 {
                     JsonAchievementService service = app.Services.GetRequiredService<JsonAchievementService>();
-                    ISet<string> documents =
+                    IImmutableValueSet<string> documents =
                         await service.GetAllJsonAchievements(new ProgressAdapter(achievements)).ConfigureAwait(false);
                     foreach (string document in documents)
                     {
@@ -77,7 +78,7 @@ try
                 await using (itemsFile.ConfigureAwait(false))
                 {
                     JsonItemService service = app.Services.GetRequiredService<JsonItemService>();
-                    ISet<string> documents = await service.GetAllJsonItems(new ProgressAdapter(items)).ConfigureAwait(false);
+                    IImmutableValueSet<string> documents = await service.GetAllJsonItems(new ProgressAdapter(items)).ConfigureAwait(false);
                     foreach (string document in documents)
                     {
                         await itemsFile.WriteLineAsync(document).ConfigureAwait(false);
@@ -89,7 +90,7 @@ try
                 await using (recipesFile.ConfigureAwait(false))
                 {
                     JsonRecipeService service = app.Services.GetRequiredService<JsonRecipeService>();
-                    ISet<string> documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes)).ConfigureAwait(false);
+                    IImmutableValueSet<string> documents = await service.GetAllJsonRecipes(new ProgressAdapter(recipes)).ConfigureAwait(false);
                     foreach (string document in documents)
                     {
                         await recipesFile.WriteLineAsync(document).ConfigureAwait(false);
@@ -101,7 +102,7 @@ try
                 await using (skinsFile.ConfigureAwait(false))
                 {
                     JsonSkinService service = app.Services.GetRequiredService<JsonSkinService>();
-                    ISet<string> documents = await service.GetAllJsonSkins(new ProgressAdapter(skins)).ConfigureAwait(false);
+                    IImmutableValueSet<string> documents = await service.GetAllJsonSkins(new ProgressAdapter(skins)).ConfigureAwait(false);
                     foreach (string document in documents)
                     {
                         await skinsFile.WriteLineAsync(document).ConfigureAwait(false);
@@ -113,7 +114,7 @@ try
                 await using (decorationsFile.ConfigureAwait(false))
                 {
                     JsonDecorationsService service = app.Services.GetRequiredService<JsonDecorationsService>();
-                    ISet<string> documents =
+                    IImmutableValueSet<string> documents =
                         await service.GetAllJsonDecorations(new ProgressAdapter(decorations)).ConfigureAwait(false);
                     foreach (string document in documents)
                     {

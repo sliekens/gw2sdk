@@ -12,7 +12,7 @@ public class Builds(Gw2Client sut)
     {
         TestCharacter character = TestConfiguration.TestCharacter;
         ApiKey accessToken = TestConfiguration.ApiKey;
-        (HashSet<BuildTemplate> actual, MessageContext context) = await sut.Hero.Builds.GetBuilds(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<BuildTemplate> actual, MessageContext context) = await sut.Hero.Builds.GetBuilds(character.Name, accessToken.Key, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(50);
         await Assert.That(context.PageTotal).IsEqualTo(1);

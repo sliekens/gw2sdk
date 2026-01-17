@@ -14,7 +14,7 @@ public sealed record EquipmentTemplate
     public required string Name { get; init; }
 
     /// <summary>The selected equipment for the current template.</summary>
-    public required IReadOnlyList<EquipmentItem> Items { get; init; }
+    public required IImmutableValueList<EquipmentItem> Items { get; init; }
 
     /// <summary>The selected PvP equipment for the current template.</summary>
     public required PvpEquipment PvpEquipment { get; init; }

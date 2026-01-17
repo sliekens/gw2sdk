@@ -8,5 +8,5 @@ public sealed record GuildEmblemForeground
     public required int Id { get; init; }
 
     /// <summary>The color IDs of the foreground layers.</summary>
-    public required IReadOnlyList<int> ColorIds { get; init; }
+    public required IImmutableValueList<int> ColorIds { get; init; }
 }

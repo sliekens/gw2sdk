@@ -14,7 +14,7 @@ public class HeartsByPage(Gw2Client sut)
         const int regionId = 1;
         const int mapId = 26;
         const int pageSize = 3;
-        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByPage(continentId, floorId, regionId, mapId, 0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.Links).IsNotNull();
         await Assert.That(context.PageSize).IsEqualTo(pageSize);
         await Assert.That(context.ResultCount).IsEqualTo(pageSize);

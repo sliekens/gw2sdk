@@ -1,27 +1,28 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Hero.Equipment.Wardrobe;
 
 namespace GuildWars2.TestDataHelper;
 
 internal sealed class JsonSkinService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonSkins(IProgress<BulkProgress> progress)
+    public async Task<IImmutableValueSet<string>> GetAllJsonSkins(IProgress<BulkProgress> progress)
     {
-        HashSet<int> ids = await GetSkinIds().ConfigureAwait(false);
+        IImmutableValueSet<int> ids = await GetSkinIds().ConfigureAwait(false);
         SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonSkinsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;
         }
 
-        return entries.Values.ToHashSet();
+        return new ImmutableValueSet<string>(entries.Values);
     }
 
-    private async Task<HashSet<int>> GetSkinIds()
+    private async Task<IImmutableValueSet<int>> GetSkinIds()
     {
         WardrobeClient wardrobe = new(http);
-        (HashSet<int> ids, _) = await wardrobe.GetSkinsIndex().ConfigureAwait(false);
+        (IImmutableValueSet<int> ids, _) = await wardrobe.GetSkinsIndex().ConfigureAwait(false);
         return ids;
     }
 

@@ -10,7 +10,7 @@ public class SeasonsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasonsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Season> actual, MessageContext context) = await sut.Pvp.GetSeasonsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context.Links).IsNotNull();

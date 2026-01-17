@@ -8,5 +8,5 @@ namespace GuildWars2.Hero.Crafting.Disciplines;
 public sealed record LearnedCraftingDisciplines
 {
     /// <summary>The learned crafting disciplines.</summary>
-    public required IReadOnlyList<CraftingDiscipline> Disciplines { get; init; }
+    public required IImmutableValueList<CraftingDiscipline> Disciplines { get; init; }
 }

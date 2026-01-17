@@ -55,12 +55,10 @@ internal static class AccountStatsJson
             PvpRankRollovers = pvpRankRollovers.Map(static (in value) => value.GetInt32()),
             Aggregate = aggregate.Map(static (in value) => value.GetResults()),
             Professions =
-                professions.Map(static (in value) => value.EnumerateObject()
-                    .ToDictionary(
-                        pair => new Extensible<ProfessionName>(pair.Name),
-                        pair => pair.Value.GetResults()
-                    )
-                ),
+                professions.Map(static (in value) => value.GetMap(
+                    static name => new Extensible<ProfessionName>(name),
+                    static (in value) => value.GetResults()
+                )),
             Ladders = ladders.Map(static (in value) => value.GetLadders())
         };
     }

@@ -14,7 +14,7 @@ public record ActionSkill : Skill
     /// <summary>Indicates profession restrictions for this skill. This list can be empty for stolen skills or skills granted
     /// by bundles or transformations. If the skill has a parent skill then its list of profession restrictions should be used
     /// instead of this one. Otherwise, an empty list should be interpreted as no restrictions.</summary>
-    public required IReadOnlyList<Extensible<ProfessionName>> Professions { get; init; }
+    public required IImmutableValueList<Extensible<ProfessionName>> Professions { get; init; }
 
     /// <summary>Indicates which slot this skill may occupy.</summary>
     public required Extensible<SkillSlot> Slot { get; init; }

@@ -42,14 +42,14 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     public required int? AttributeCombinationId { get; init; }
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
+    public required IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
+    public required IImmutableValueList<int> StatChoices { get; init; }
 
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
@@ -58,12 +58,12 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
     public required int? SecondarySuffixItemId { get; init; }
 
     /// <summary>The upgrade slots of the weapon.</summary>
-    public IReadOnlyList<int?> UpgradeSlots =>
+    public IImmutableValueList<int?> UpgradeSlots =>
         this switch
         {
             _ when Flags.NotUpgradeable => [],
             _ when !TwoHanded => [SuffixItemId],
-            _ => [SuffixItemId, SecondarySuffixItemId]
+            _ => new ImmutableValueList<int?>([SuffixItemId, SecondarySuffixItemId])
         };
 
     /// <summary>The number of upgrade slots available on the weapon.</summary>
@@ -76,7 +76,7 @@ public record Weapon : Item, ICombatEquipment, IUpgradable
         };
 
     /// <summary>The infusion slots of the weapon (only available on ascended and legendary items).</summary>
-    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
+    public required IImmutableValueList<InfusionSlot> InfusionSlots { get; init; }
 
     /// <summary>The number of infusion slots available on the weapon.</summary>
     public virtual int InfusionSlotCount => InfusionSlots.Count;

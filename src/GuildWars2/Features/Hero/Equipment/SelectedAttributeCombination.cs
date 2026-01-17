@@ -11,5 +11,5 @@ public sealed record SelectedAttributeCombination
     public required int Id { get; init; }
 
     /// <summary>The effective attributes of the selected combination.</summary>
-    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
+    public required IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 }

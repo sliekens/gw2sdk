@@ -10,7 +10,7 @@ public sealed record MaterialCategory
     public required string Name { get; init; }
 
     /// <summary>The IDs of the items in this category.</summary>
-    public required IReadOnlyList<int> Items { get; init; }
+    public required IImmutableValueList<int> Items { get; init; }
 
     /// <summary>The display order of this category in the material storage.</summary>
     public required int Order { get; init; }

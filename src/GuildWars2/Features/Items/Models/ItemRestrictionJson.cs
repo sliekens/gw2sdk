@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero;
 using GuildWars2.Hero.Accounts;
 using GuildWars2.Hero.Races;
@@ -16,95 +15,95 @@ internal static class ItemRestrictionJson
 {
     public static ItemRestriction GetItemRestriction(this in JsonElement json)
     {
-        ValueList<Extensible<RaceName>>? races = null;
-        ValueList<Extensible<ProfessionName>>? professions = null;
-        ValueList<Extensible<BodyType>>? bodyTypes = null;
-        ValueList<string> other = [];
+        ImmutableList<Extensible<RaceName>>.Builder? races = null;
+        ImmutableList<Extensible<ProfessionName>>.Builder? professions = null;
+        ImmutableList<Extensible<BodyType>>.Builder? bodyTypes = null;
+        ImmutableList<string>.Builder other = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(Asura)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(Asura);
             }
             else if (entry.ValueEquals(nameof(Charr)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(Charr);
             }
             else if (entry.ValueEquals(nameof(Human)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(Human);
             }
             else if (entry.ValueEquals(nameof(Norn)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(Norn);
             }
             else if (entry.ValueEquals(nameof(Sylvari)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(Norn);
             }
             else if (entry.ValueEquals(nameof(Sylvari)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(Norn);
             }
             else if (entry.ValueEquals(nameof(Elementalist)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Elementalist);
             }
             else if (entry.ValueEquals(nameof(Engineer)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Engineer);
             }
             else if (entry.ValueEquals(nameof(Guardian)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Guardian);
             }
             else if (entry.ValueEquals(nameof(Mesmer)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Mesmer);
             }
             else if (entry.ValueEquals(nameof(Necromancer)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Necromancer);
             }
             else if (entry.ValueEquals(nameof(Ranger)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Ranger);
             }
             else if (entry.ValueEquals(nameof(Revenant)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Revenant);
             }
             else if (entry.ValueEquals(nameof(Thief)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Thief);
             }
             else if (entry.ValueEquals(nameof(Warrior)))
             {
-                professions ??= [];
+                professions ??= ImmutableList.CreateBuilder<Extensible<ProfessionName>>();
                 professions.Add(Warrior);
             }
             else if (entry.ValueEquals(nameof(Female)))
             {
-                bodyTypes ??= [];
+                bodyTypes ??= ImmutableList.CreateBuilder<Extensible<BodyType>>();
                 bodyTypes.Add(Female);
             }
             else if (entry.ValueEquals(nameof(Male)))
             {
-                bodyTypes ??= [];
+                bodyTypes ??= ImmutableList.CreateBuilder<Extensible<BodyType>>();
                 bodyTypes.Add(Male);
             }
             else
@@ -119,10 +118,16 @@ internal static class ItemRestrictionJson
 
         return new ItemRestriction
         {
-            Races = races ?? Race.AllRaces,
-            Professions = professions ?? Profession.AllProfessions,
-            BodyTypes = Character.AllBodyTypes,
-            Other = other
+            Races = races is not null
+                ? new ImmutableValueList<Extensible<RaceName>>(races.ToImmutable())
+                : Race.AllRaces,
+            Professions = professions is not null
+                ? new ImmutableValueList<Extensible<ProfessionName>>(professions.ToImmutable())
+                : Profession.AllProfessions,
+            BodyTypes = bodyTypes is not null
+                ? new ImmutableValueList<Extensible<BodyType>>(bodyTypes.ToImmutable())
+                : Character.AllBodyTypes,
+            Other = new ImmutableValueList<string>(other.ToImmutable())
         };
     }
 }

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class MapChestsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetReceivedMapChests(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetReceivedMapChests(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +37,7 @@ public sealed class MapChestsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -50,7 +49,7 @@ public sealed class MapChestsClient
     /// <summary>Retrieves the IDs of all map chests.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetMapChestsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetMapChestsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -60,7 +59,7 @@ public sealed class MapChestsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -94,7 +93,7 @@ public sealed class MapChestsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByIds(
+    public async Task<(IImmutableValueSet<MapChest> Value, MessageContext Context)> GetMapChestsByIds(
         IEnumerable<string> mapChestIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -108,7 +107,7 @@ public sealed class MapChestsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MapChest> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapChest());
+            ImmutableValueSet<MapChest> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapChest());
             return (value, response.Context);
         }
     }
@@ -119,7 +118,7 @@ public sealed class MapChestsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChestsByPage(
+    public async Task<(IImmutableValueSet<MapChest> Value, MessageContext Context)> GetMapChestsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -134,7 +133,7 @@ public sealed class MapChestsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MapChest> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapChest());
+            ImmutableValueSet<MapChest> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapChest());
             return (value, response.Context);
         }
     }
@@ -143,7 +142,7 @@ public sealed class MapChestsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MapChest> Value, MessageContext Context)> GetMapChests(
+    public async Task<(IImmutableValueSet<MapChest> Value, MessageContext Context)> GetMapChests(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -156,7 +155,7 @@ public sealed class MapChestsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MapChest> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapChest());
+            ImmutableValueSet<MapChest> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMapChest());
             return (value, response.Context);
         }
     }

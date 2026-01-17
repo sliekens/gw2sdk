@@ -26,5 +26,5 @@ public sealed record LeaderboardEntry
     public required DateTimeOffset Date { get; init; }
 
     /// <summary>The scores of the player or team.</summary>
-    public required IReadOnlyList<Score> Scores { get; init; }
+    public required IImmutableValueList<Score> Scores { get; init; }
 }

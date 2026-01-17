@@ -17,6 +17,12 @@ public class ImmutableDataTest(AssemblyFixture fixture)
                 bool compliant = !actual.HasSetter || actual.IsInitOnly;
                 await Assert.That(compliant).IsTrue()
                     .Because($"{actual.DeclaringType}.{actual.Name} must be read-only or init-only.");
+
+                if (actual.IsCollection)
+                {
+                    await Assert.That(actual.IsImmutableCollection).IsTrue()
+                        .Because($"{actual.DeclaringType}.{actual.Name} must use an immutable collection interface (e.g., IImmutableValueList<T>, IImmutableValueSet<T>, IImmutableValueDictionary<TKey, TValue>).");
+                }
             }
         }
     }

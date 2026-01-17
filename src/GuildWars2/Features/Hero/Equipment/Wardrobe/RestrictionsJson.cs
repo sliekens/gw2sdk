@@ -1,45 +1,47 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero.Races;
 
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 internal static class RestrictionsJson
 {
-    public static IReadOnlyList<Extensible<RaceName>> GetRestrictions(this in JsonElement json)
+    private static readonly IImmutableValueList<Extensible<RaceName>> AllRaces =
+        new ImmutableValueList<Extensible<RaceName>>(Race.AllRaces);
+
+    public static IImmutableValueList<Extensible<RaceName>> GetRestrictions(this in JsonElement json)
     {
-        ValueList<Extensible<RaceName>>? races = null;
+        ImmutableList<Extensible<RaceName>>.Builder? races = null;
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals(nameof(RaceName.Asura)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(RaceName.Asura);
             }
             else if (entry.ValueEquals(nameof(RaceName.Charr)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(RaceName.Charr);
             }
             else if (entry.ValueEquals(nameof(RaceName.Human)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(RaceName.Human);
             }
             else if (entry.ValueEquals(nameof(RaceName.Norn)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(RaceName.Norn);
             }
             else if (entry.ValueEquals(nameof(RaceName.Sylvari)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(RaceName.Norn);
             }
             else if (entry.ValueEquals(nameof(RaceName.Sylvari)))
             {
-                races ??= [];
+                races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                 races.Add(RaceName.Norn);
             }
             else
@@ -47,12 +49,12 @@ internal static class RestrictionsJson
                 string? restriction = entry.GetString();
                 if (!string.IsNullOrEmpty(restriction))
                 {
-                    races ??= [];
+                    races ??= ImmutableList.CreateBuilder<Extensible<RaceName>>();
                     races.Add(new Extensible<RaceName>(restriction!));
                 }
             }
         }
 
-        return races ?? Race.AllRaces;
+        return races is not null ? new ImmutableValueList<Extensible<RaceName>>(races.ToImmutable()) : AllRaces;
     }
 }

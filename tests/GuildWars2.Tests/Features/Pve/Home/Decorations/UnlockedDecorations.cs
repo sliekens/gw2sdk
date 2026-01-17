@@ -11,7 +11,7 @@ public class UnlockedDecorations(Gw2Client sut)
     public async Task Can_be_listed()
     {
         ApiKey token = TestConfiguration.ApiKey;
-        (HashSet<UnlockedDecoration> actual, _) = await sut.Pve.Home.GetUnlockedDecorations(token.Key, TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<UnlockedDecoration> actual, _) = await sut.Pve.Home.GetUnlockedDecorations(token.Key, TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         foreach (UnlockedDecoration entry in actual)
         {

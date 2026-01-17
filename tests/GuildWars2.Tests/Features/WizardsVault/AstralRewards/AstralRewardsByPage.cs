@@ -10,7 +10,7 @@ public class AstralRewardsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AstralReward> actual, MessageContext context) = await sut.WizardsVault.GetAstralRewardsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).Count().IsEqualTo(pageSize);
         using (Assert.Multiple())
         {

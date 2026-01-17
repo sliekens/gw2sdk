@@ -9,7 +9,7 @@ public class MaterialCategories(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<MaterialCategory> actual, MessageContext context) = await sut.Hero.Bank.GetMaterialCategories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MaterialCategory> actual, MessageContext context) = await sut.Hero.Bank.GetMaterialCategories(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context)
             .Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))

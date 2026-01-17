@@ -10,7 +10,7 @@ public class ItemsByPage(Gw2Client sut)
     public async Task Can_be_filtered_by_page()
     {
         const int pageSize = 3;
-        (HashSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Item> actual, MessageContext context) = await sut.Items.GetItemsByPage(0, pageSize, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.Links!, l => l.IsNotNull())
             .And.Member(c => c.PageSize, ps => ps.IsEqualTo(pageSize))
             .And.Member(c => c.ResultCount, rc => rc.IsEqualTo(pageSize))

@@ -19,7 +19,7 @@ public sealed record Sector
     public required PointF Coordinates { get; init; }
 
     /// <summary>The map coordinates of the polygon corners which indicates the boundaries of the sector.</summary>
-    public required IReadOnlyList<PointF> Boundaries { get; init; }
+    public required IImmutableValueList<PointF> Boundaries { get; init; }
 
     /// <summary>The chat code of the sector's nearest waypoint. This can be used to link the waypoint in the chat, but also in
     /// guild or squad messages.</summary>

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -56,7 +55,7 @@ public sealed class AccountClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Progression> Value, MessageContext Context)> GetProgression(
+    public async Task<(IImmutableValueSet<Progression> Value, MessageContext Context)> GetProgression(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -69,7 +68,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Progression> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProgression());
+            ImmutableValueSet<Progression> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProgression());
             return (value, response.Context);
         }
     }
@@ -144,7 +143,7 @@ public sealed class AccountClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetCharactersIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetCharactersIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -155,7 +154,7 @@ public sealed class AccountClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -194,7 +193,7 @@ public sealed class AccountClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Character> Value, MessageContext Context)> GetCharactersByNames(
+    public async Task<(IImmutableValueSet<Character> Value, MessageContext Context)> GetCharactersByNames(
         IEnumerable<string> characterNames,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -209,7 +208,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
+            ImmutableValueSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }
@@ -220,7 +219,7 @@ public sealed class AccountClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Character> Value, MessageContext Context)> GetCharacters(
+    public async Task<(IImmutableValueSet<Character> Value, MessageContext Context)> GetCharacters(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -234,7 +233,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
+            ImmutableValueSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }

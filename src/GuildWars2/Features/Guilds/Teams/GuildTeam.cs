@@ -8,7 +8,7 @@ public sealed record GuildTeam
     public required int Id { get; init; }
 
     /// <summary>The team members and their role.</summary>
-    public required IReadOnlyList<GuildTeamMember> Members { get; init; }
+    public required IImmutableValueList<GuildTeamMember> Members { get; init; }
 
     /// <summary>The name of the team.</summary>
     public required string Name { get; init; }
@@ -23,8 +23,8 @@ public sealed record GuildTeam
     public required Ladders Ladders { get; init; }
 
     /// <summary>The games played by the team.</summary>
-    public required IReadOnlyList<Game> Games { get; init; }
+    public required IImmutableValueList<Game> Games { get; init; }
 
     /// <summary>The seasons in which the team played.</summary>
-    public required IReadOnlyList<Season> Seasons { get; init; }
+    public required IImmutableValueList<Season> Seasons { get; init; }
 }

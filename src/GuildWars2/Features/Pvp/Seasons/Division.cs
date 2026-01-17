@@ -23,5 +23,5 @@ public sealed record Division
     public required Uri PipIconUrl { get; init; }
 
     /// <summary>The division's tiers.</summary>
-    public required IReadOnlyList<DivisionTier> Tiers { get; init; }
+    public required IImmutableValueList<DivisionTier> Tiers { get; init; }
 }

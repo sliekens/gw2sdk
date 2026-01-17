@@ -9,7 +9,7 @@ public class Cats(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Cat> actual, MessageContext context) = await sut.Pve.Home.GetCats(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Cat> actual, MessageContext context) = await sut.Pve.Home.GetCats(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
         foreach (Cat cat in actual)

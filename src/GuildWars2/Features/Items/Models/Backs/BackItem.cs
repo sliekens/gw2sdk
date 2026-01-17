@@ -21,21 +21,21 @@ public sealed record BackItem : Item, ICombatEquipment, IUpgradable, IInfused, I
     public required int? AttributeCombinationId { get; init; }
 
     /// <summary>The effective stats of the item.</summary>
-    public required IDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
+    public required IImmutableValueDictionary<Extensible<AttributeName>, int> Attributes { get; init; }
 
     /// <summary>The effect which is applied to the player when the item is equipped.</summary>
     public required Buff? Buff { get; init; }
 
     /// <summary>The IDs of the attribute combinations that can be chosen for the item. This property is only used for items
     /// with selectable stats.</summary>
-    public required IReadOnlyList<int> StatChoices { get; init; }
+    public required IImmutableValueList<int> StatChoices { get; init; }
 
     /// <summary>If the current back item can be infused in the Mystic Forge, this collection contains the IDs of the infused
     /// variations of the back item. Each item in the collection represents a different recipe.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradePath> UpgradesInto { get; init; }
+    public required IImmutableValueList<InfusionSlotUpgradePath> UpgradesInto { get; init; }
 
     /// <summary>If the current back item is infused, this collection contains the IDs of possible source items.</summary>
-    public required IReadOnlyCollection<InfusionSlotUpgradeSource> UpgradesFrom { get; init; }
+    public required IImmutableValueList<InfusionSlotUpgradeSource> UpgradesFrom { get; init; }
 
     /// <summary>The ID of the upgrade component in the upgrade slot, if any.</summary>
     public required int? SuffixItemId { get; init; }
@@ -43,13 +43,13 @@ public sealed record BackItem : Item, ICombatEquipment, IUpgradable, IInfused, I
     int? IUpgradable.SecondarySuffixItemId => null;
 
     /// <summary>The upgrade slots of the back item.</summary>
-    public IReadOnlyList<int?> UpgradeSlots =>
+    public IImmutableValueList<int?> UpgradeSlots =>
         this switch
         {
             _ when Flags.NotUpgradeable => [],
             _ when Rarity == Items.Rarity.Ascended => [],
             _ when Rarity == Items.Rarity.Legendary => [],
-            _ => [SuffixItemId]
+            _ => new ImmutableValueList<int?>([SuffixItemId])
         };
 
     /// <summary>The number of upgrade slots available on the back item.</summary>
@@ -63,7 +63,7 @@ public sealed record BackItem : Item, ICombatEquipment, IUpgradable, IInfused, I
         };
 
     /// <summary>The infusion slots of the back item (only available on ascended and legendary items).</summary>
-    public required IReadOnlyList<InfusionSlot> InfusionSlots { get; init; }
+    public required IImmutableValueList<InfusionSlot> InfusionSlots { get; init; }
 
     /// <summary>The number of infusion slots available on the back item.</summary>
     public int InfusionSlotCount => InfusionSlots.Count;

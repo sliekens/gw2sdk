@@ -4,8 +4,8 @@ namespace GuildWars2.Hero.Masteries;
 public sealed record MasteryPointsProgress
 {
     /// <summary>The aggregated totals of mastery points on the account by region.</summary>
-    public required IReadOnlyCollection<MasteryPointsTotal> Totals { get; init; }
+    public required IImmutableValueList<MasteryPointsTotal> Totals { get; init; }
 
     /// <summary>The IDs of mastery points that have been unlocked on the account. This is not the same as the mastery IDs.</summary>
-    public required IReadOnlyCollection<int> Unlocked { get; init; }
+    public required IImmutableValueList<int> Unlocked { get; init; }
 }

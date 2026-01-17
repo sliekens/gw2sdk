@@ -32,8 +32,8 @@ public sealed record Match
     public required Distribution VictoryPoints { get; init; }
 
     /// <summary>The skirmishes in the match.</summary>
-    public required IReadOnlyCollection<Skirmish> Skirmishes { get; init; }
+    public required IImmutableValueList<Skirmish> Skirmishes { get; init; }
 
     /// <summary>The maps in the match.</summary>
-    public required IReadOnlyCollection<Map> Maps { get; init; }
+    public required IImmutableValueList<Map> Maps { get; init; }
 }

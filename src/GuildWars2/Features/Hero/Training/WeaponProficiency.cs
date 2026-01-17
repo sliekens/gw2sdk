@@ -11,5 +11,5 @@ public sealed record WeaponProficiency
     public required WeaponFlags Flags { get; init; }
 
     /// <summary>The skills that occupy the weapon skill slots when the weapon is equipped.</summary>
-    public required IReadOnlyList<WeaponSkill> Skills { get; init; }
+    public required IImmutableValueList<WeaponSkill> Skills { get; init; }
 }

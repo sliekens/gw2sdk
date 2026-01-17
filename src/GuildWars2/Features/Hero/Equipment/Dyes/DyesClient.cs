@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -27,7 +26,7 @@ public sealed class DyesClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedColors(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedColors(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +37,7 @@ public sealed class DyesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -52,7 +51,7 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColors(
+    public async Task<(IImmutableValueSet<DyeColor> Value, MessageContext Context)> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -67,7 +66,7 @@ public sealed class DyesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
+            ImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
             return (value, response.Context);
         }
     }
@@ -75,7 +74,7 @@ public sealed class DyesClient
     /// <summary>Retrieves the IDs of all dye colors.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetColorsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetColorsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -85,7 +84,7 @@ public sealed class DyesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -123,7 +122,7 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByIds(
+    public async Task<(IImmutableValueSet<DyeColor> Value, MessageContext Context)> GetColorsByIds(
         IEnumerable<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -139,7 +138,7 @@ public sealed class DyesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
+            ImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
             return (value, response.Context);
         }
     }
@@ -151,7 +150,7 @@ public sealed class DyesClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<DyeColor> Value, MessageContext Context)> GetColorsByPage(
+    public async Task<(IImmutableValueSet<DyeColor> Value, MessageContext Context)> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -168,7 +167,7 @@ public sealed class DyesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
+            ImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
             return (value, response.Context);
         }
     }

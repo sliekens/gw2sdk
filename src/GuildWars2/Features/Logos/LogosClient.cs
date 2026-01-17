@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -24,7 +23,7 @@ public sealed class LogosClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Logo> Value, MessageContext Context)> GetLogos(
+    public async Task<(IImmutableValueSet<Logo> Value, MessageContext Context)> GetLogos(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -37,7 +36,7 @@ public sealed class LogosClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
+            ImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
             return (value, response.Context);
         }
     }
@@ -45,7 +44,7 @@ public sealed class LogosClient
     /// <summary>Retrieves the IDs of all logos.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetLogosIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetLogosIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -55,7 +54,7 @@ public sealed class LogosClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -89,7 +88,7 @@ public sealed class LogosClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Logo> Value, MessageContext Context)> GetLogosByIds(
+    public async Task<(IImmutableValueSet<Logo> Value, MessageContext Context)> GetLogosByIds(
         IEnumerable<string> logoIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -103,7 +102,7 @@ public sealed class LogosClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
+            ImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
             return (value, response.Context);
         }
     }
@@ -114,7 +113,7 @@ public sealed class LogosClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Logo> Value, MessageContext Context)> GetLogosByPage(
+    public async Task<(IImmutableValueSet<Logo> Value, MessageContext Context)> GetLogosByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -129,7 +128,7 @@ public sealed class LogosClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
+            ImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
             return (value, response.Context);
         }
     }

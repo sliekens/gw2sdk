@@ -14,8 +14,8 @@ public sealed record Season
     public required DateTimeOffset End { get; init; }
 
     /// <summary>The IDs of all Astral Rewards.</summary>
-    public required HashSet<int> AstralRewardIds { get; init; }
+    public required IImmutableValueSet<int> AstralRewardIds { get; init; }
 
     /// <summary>The IDs of all objectives.</summary>
-    public required HashSet<int> ObjectiveIds { get; init; }
+    public required IImmutableValueSet<int> ObjectiveIds { get; init; }
 }

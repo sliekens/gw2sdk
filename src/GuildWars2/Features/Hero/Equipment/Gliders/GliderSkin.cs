@@ -11,7 +11,7 @@ public sealed record GliderSkin
     public required int Id { get; init; }
 
     /// <summary>The IDs of the items that unlock the glider skin when consumed.</summary>
-    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
+    public required IImmutableValueList<int> UnlockItemIds { get; init; }
 
     /// <summary>The display order of the glider skin in the equipment panel.</summary>
     public required int Order { get; init; }
@@ -27,5 +27,5 @@ public sealed record GliderSkin
     public required string Description { get; init; }
 
     /// <summary>The color IDs of the dyes applied by default.</summary>
-    public required IReadOnlyList<int> DefaultDyeColorIds { get; init; }
+    public required IImmutableValueList<int> DefaultDyeColorIds { get; init; }
 }

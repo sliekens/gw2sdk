@@ -36,7 +36,7 @@ public class Skins
             if (actual is ArmorSkin armor)
             {
                 await Assert.That(armor.WeightClass.IsDefined()).IsTrue();
-                foreach (DyeSlot? slot in armor.DyeSlots?.Default ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.Default ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -44,7 +44,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.AsuraFemale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.AsuraFemale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -52,7 +52,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.AsuraMale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.AsuraMale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -60,7 +60,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.CharrFemale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.CharrFemale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -68,7 +68,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.CharrMale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.CharrMale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -76,7 +76,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.HumanFemale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.HumanFemale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -84,7 +84,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.HumanMale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.HumanMale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -92,7 +92,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.NornFemale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.NornFemale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -100,7 +100,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.NornMale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.NornMale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -108,7 +108,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.SylvariFemale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.SylvariFemale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {
@@ -116,7 +116,7 @@ public class Skins
                         await Assert.That(slot.Material.IsDefined()).IsTrue();
                     }
                 }
-                foreach (DyeSlot? slot in armor.DyeSlots?.SylvariMale ?? [])
+                foreach (DyeSlot? slot in armor.DyeSlots?.SylvariMale ?? Enumerable.Empty<DyeSlot?>())
                 {
                     if (slot is not null)
                     {

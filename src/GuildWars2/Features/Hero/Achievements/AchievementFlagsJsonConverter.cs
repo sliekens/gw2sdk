@@ -40,7 +40,7 @@ internal sealed class AchievementFlagsJsonConverter : JsonConverter<AchievementF
         bool permanent = false;
         bool weekly = false;
         bool monthly = false;
-        List<string> other = [];
+        IImmutableValueList<string> other = ImmutableValueList<string>.Empty;
 
         foreach (JsonProperty property in json.EnumerateObject())
         {

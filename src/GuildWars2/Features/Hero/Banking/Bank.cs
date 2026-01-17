@@ -6,5 +6,5 @@ namespace GuildWars2.Hero.Banking;
 public sealed record Bank
 {
     /// <summary>The item slots in the bank. Empty slots are represented as <c>null</c>.</summary>
-    public required IReadOnlyList<ItemSlot?> Items { get; init; }
+    public required IImmutableValueList<ItemSlot?> Items { get; init; }
 }

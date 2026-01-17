@@ -26,5 +26,5 @@ public sealed record MistChampion
     public required Uri UnderlayImageUrl { get; init; }
 
     /// <summary>The Mist Champion's skins.</summary>
-    public required IReadOnlyCollection<MistChampionSkin> Skins { get; init; }
+    public required IImmutableValueList<MistChampionSkin> Skins { get; init; }
 }

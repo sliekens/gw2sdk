@@ -11,5 +11,5 @@ public sealed record LeaderboardSetting
     public required string ScoringId { get; init; }
 
     /// <summary>The leaderboard tiers and details used to calculate the tier of a player or team on the leaderboard.</summary>
-    public required IReadOnlyList<LeaderboardTier> Tiers { get; init; }
+    public required IImmutableValueList<LeaderboardTier> Tiers { get; init; }
 }

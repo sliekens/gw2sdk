@@ -9,8 +9,8 @@ public sealed record Emote
 
     /// <summary>The chat commands that can be used to trigger the emote. This includes translated commands for French, German
     /// and Spanish.</summary>
-    public required IReadOnlyCollection<string> Commands { get; init; }
+    public required IImmutableValueList<string> Commands { get; init; }
 
     /// <summary>The IDs of items that unlock the emote when consumed.</summary>
-    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
+    public required IImmutableValueList<int> UnlockItemIds { get; init; }
 }

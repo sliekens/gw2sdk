@@ -17,18 +17,17 @@ public record Skill
     /// <summary>The list of skill behaviors. For example, if the current skill is a ranged attack, this list will contain a
     /// <see cref="Facts.Range" /> to indicate the maximum range. The list type is abstract, the derived types are documented
     /// in the Facts namespace.</summary>
-    public required IReadOnlyList<Fact>? Facts { get; init; }
+    public required IImmutableValueList<Fact>? Facts { get; init; }
 
     /// <summary>Some specialization traits can alter this skill's <see cref="Facts" />, modifying their behavior or adding new
     /// behaviors. This list contains the overrides that apply when a certain trait is equipped.</summary>
-    public required IReadOnlyList<TraitedFact>? TraitedFacts { get; init; }
+    public required IImmutableValueList<TraitedFact>? TraitedFacts { get; init; }
 
     /// <summary>The description as it appears in the tooltip of the skill.</summary>
     /// <remarks>Can be empty.</remarks>
     public required string Description { get; init; }
 
     /// <summary>The URL of the skill icon.</summary>
-
     public required Uri? IconUrl { get; init; }
 
 #pragma warning disable CA1721 // Property names should not match get methods
@@ -38,7 +37,7 @@ public record Skill
 #pragma warning restore CA1721 // Property names should not match get methods
 
     /// <summary>The skill category as displayed in the tooltip.</summary>
-    public required IReadOnlyList<Extensible<SkillCategoryName>> Categories { get; init; }
+    public required IImmutableValueList<Extensible<SkillCategoryName>> Categories { get; init; }
 
     /// <summary>Contains various modifiers that affect how skills behave.</summary>
     public required SkillFlags SkillFlags { get; init; }

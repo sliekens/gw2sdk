@@ -15,7 +15,7 @@ public class GuildTeams(Gw2Client sut)
         (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string guildId in account.LeaderOfGuildIds!)
         {
-            (List<GuildTeam> actual, _) = await sut.Guilds.GetGuildTeams(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+            (IImmutableValueList<GuildTeam> actual, _) = await sut.Guilds.GetGuildTeams(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
             await Assert.That(actual).IsNotNull();
             using (Assert.Multiple())
             {

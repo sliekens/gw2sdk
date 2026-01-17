@@ -18,5 +18,5 @@ public sealed record Pet
     public required Uri IconUrl { get; init; }
 
     /// <summary>The pet skills.</summary>
-    public required IReadOnlyList<PetSkill> Skills { get; init; }
+    public required IImmutableValueList<PetSkill> Skills { get; init; }
 }

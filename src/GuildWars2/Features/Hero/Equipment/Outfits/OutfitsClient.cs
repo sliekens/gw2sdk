@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -28,7 +27,7 @@ public sealed class OutfitsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedOutfits(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedOutfits(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -39,7 +38,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -53,7 +52,7 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfits(
+    public async Task<(IImmutableValueSet<Outfit> Value, MessageContext Context)> GetOutfits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -68,7 +67,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
+            ImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -76,7 +75,7 @@ public sealed class OutfitsClient
     /// <summary>Retrieves the IDs of all outfits.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetOutfitsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetOutfitsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -86,7 +85,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -124,7 +123,7 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByIds(
+    public async Task<(IImmutableValueSet<Outfit> Value, MessageContext Context)> GetOutfitsByIds(
         IEnumerable<int> outfitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -142,7 +141,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
+            ImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -154,7 +153,7 @@ public sealed class OutfitsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Outfit> Value, MessageContext Context)> GetOutfitsByPage(
+    public async Task<(IImmutableValueSet<Outfit> Value, MessageContext Context)> GetOutfitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -171,7 +170,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
+            ImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -25,7 +24,7 @@ public sealed class PetsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Pet> Value, MessageContext Context)> GetPets(
+    public async Task<(IImmutableValueSet<Pet> Value, MessageContext Context)> GetPets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -40,7 +39,7 @@ public sealed class PetsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
+            ImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
             return (value, response.Context);
         }
     }
@@ -48,7 +47,7 @@ public sealed class PetsClient
     /// <summary>Retrieves the IDs of all pets.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetPetsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetPetsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -58,7 +57,7 @@ public sealed class PetsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -96,7 +95,7 @@ public sealed class PetsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByIds(
+    public async Task<(IImmutableValueSet<Pet> Value, MessageContext Context)> GetPetsByIds(
         IEnumerable<int> petIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -112,7 +111,7 @@ public sealed class PetsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
+            ImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
             return (value, response.Context);
         }
     }
@@ -124,7 +123,7 @@ public sealed class PetsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Pet> Value, MessageContext Context)> GetPetsByPage(
+    public async Task<(IImmutableValueSet<Pet> Value, MessageContext Context)> GetPetsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -141,7 +140,7 @@ public sealed class PetsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
+            ImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
             return (value, response.Context);
         }
     }

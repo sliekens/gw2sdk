@@ -45,11 +45,8 @@ public sealed record BuildTemplateLink : Link
     [DefaultValue(WeaponType.None)]
     public WeaponType Weapon3 { get; init; } = WeaponType.None;
 
-#pragma warning disable CA1819 // Properties should not return arrays
-    // TODO: reconsider collection type
     /// <summary>The skill IDs of weapon skill overrides.</summary>
-    public int[] SkillOverrides { get; init; } = [];
-#pragma warning restore CA1819 // Properties should not return arrays
+    public required IImmutableValueList<int> SkillOverrides { get; init; }
 
     /// <summary>Gets the build represented by this chat link.</summary>
     /// <param name="gw2Client">An API client to fetch the build.</param>
@@ -74,7 +71,7 @@ public sealed record BuildTemplateLink : Link
             )
             .ValueOnly()
             .ConfigureAwait(false);
-        Dictionary<int, Hero.Builds.Specialization> specializations = [];
+        IImmutableDictionary<int, Hero.Builds.Specialization> specializations = ImmutableValueDictionary<int, Hero.Builds.Specialization>.Empty;
         if (SelectedSpecializationIds().Any())
         {
             specializations = await gw2Client.Hero.Builds.GetSpecializationsByIds(
@@ -185,7 +182,7 @@ public sealed record BuildTemplateLink : Link
                 return null;
             }
 
-            (Dictionary<int, Legend> legends, _) = await gw2Client.Hero.Builds
+            (IImmutableDictionary<int, Legend> legends, _) = await gw2Client.Hero.Builds
                 .GetLegends(missingMemberBehavior, cancellationToken)
                 .AsDictionary(static legend => legend.Code)
                 .ConfigureAwait(false);
@@ -284,8 +281,8 @@ public sealed record BuildTemplateLink : Link
             buffer.WriteUInt8(0);
         }
 
-        buffer.WriteUInt8((byte)SkillOverrides.Length);
-        for (int index = 0; index < (byte)SkillOverrides.Length; index++)
+        buffer.WriteUInt8((byte)SkillOverrides.Count);
+        for (int index = 0; index < (byte)SkillOverrides.Count; index++)
         {
             int skillOverride = SkillOverrides[index];
             buffer.WriteInt32(skillOverride);
@@ -458,7 +455,7 @@ public sealed record BuildTemplateLink : Link
         WeaponType weapon1 = WeaponType.None;
         WeaponType weapon2 = WeaponType.None;
         WeaponType weapon3 = WeaponType.None;
-        int[]? skillOverrides = null;
+        IImmutableValueList<int> skillOverrides = ImmutableValueList<int>.Empty;
         if (!buffer.EndOfFile)
         {
             byte weaponCount = buffer.ReadUInt8();
@@ -480,11 +477,16 @@ public sealed record BuildTemplateLink : Link
             }
 
             byte skillOverridesCount = buffer.ReadUInt8();
+            ImmutableList<int>.Builder? skillOverridesList = null;
             for (int i = 0; i < skillOverridesCount; i++)
             {
-                skillOverrides ??= new int[skillOverridesCount];
-                skillOverrides[i] = buffer.ReadInt32();
+                skillOverridesList ??= ImmutableList.CreateBuilder<int>();
+                skillOverridesList.Add(buffer.ReadInt32());
             }
+
+            skillOverrides = skillOverridesList is not null
+                ? [.. skillOverridesList.ToImmutable()]
+                : ImmutableValueList<int>.Empty;
         }
 
         return new BuildTemplateLink
@@ -513,7 +515,7 @@ public sealed record BuildTemplateLink : Link
             Weapon1 = weapon1,
             Weapon2 = weapon2,
             Weapon3 = weapon3,
-            SkillOverrides = skillOverrides ?? []
+            SkillOverrides = skillOverrides
         };
 
         static ProfessionName Profession(int professionId)

@@ -17,5 +17,5 @@ public sealed record SkiffSkin
     public required Uri IconUrl { get; init; }
 
     /// <summary>The dyes applied by default.</summary>
-    public required IReadOnlyList<DyeSlot> DyeSlots { get; init; }
+    public required IImmutableValueList<DyeSlot> DyeSlots { get; init; }
 }

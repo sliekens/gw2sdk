@@ -9,7 +9,7 @@ public class Nodes(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<Node> actual, MessageContext context) = await sut.Pve.Home.GetNodes(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Node> actual, MessageContext context) = await sut.Pve.Home.GetNodes(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(actual).IsNotEmpty();
         await Assert.That(context).Member(c => c.ResultTotal, m => m.IsEqualTo(actual.Count));
         foreach (Node node in actual)

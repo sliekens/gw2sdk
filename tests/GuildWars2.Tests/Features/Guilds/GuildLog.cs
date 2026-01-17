@@ -15,7 +15,7 @@ public class GuildLog(Gw2Client sut)
         (AccountSummary account, _) = await sut.Hero.Account.GetSummary(guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         foreach (string? guildId in account.LeaderOfGuildIds!)
         {
-            (List<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+            (IImmutableValueList<GuildLogEntry> actual, _) = await sut.Guilds.GetGuildLog(guildId, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
             await Assert.That(actual).IsNotEmpty();
             using (Assert.Multiple())
             {
@@ -93,7 +93,7 @@ public class GuildLog(Gw2Client sut)
             if (actual.Count > 3)
             {
                 int skipToken = actual[3].Id;
-                (List<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(guildId, skipToken, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+                (IImmutableValueList<GuildLogEntry> range, _) = await sut.Guilds.GetGuildLog(guildId, skipToken, guildLeader.Token, cancellationToken: TestContext.Current!.Execution.CancellationToken);
                 await Assert.That(range.Count).IsGreaterThanOrEqualTo(3);
                 using (Assert.Multiple())
                 {

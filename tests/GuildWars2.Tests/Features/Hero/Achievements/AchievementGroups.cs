@@ -11,7 +11,7 @@ public class AchievementGroups(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<AchievementGroup> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementGroups(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<AchievementGroup> actual, MessageContext context) = await sut.Hero.Achievements.GetAchievementGroups(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context)
             .Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsEqualTo(actual.Count));

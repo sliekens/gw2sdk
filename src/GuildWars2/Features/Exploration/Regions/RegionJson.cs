@@ -50,8 +50,9 @@ internal static class RegionJson
             LabelCoordinates = labelCoordinates.Map(static (in value) => value.GetCoordinate()),
             ContinentRectangle =
                 continentRectangle.Map(static (in value) => value.GetContinentRectangle()),
-            Maps = maps.Map(static (in value) => value.GetMap(static (in entry) => entry.GetMap())
-                .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
+            Maps = maps.Map(static (in value) => value.GetMap(
+                static key => int.Parse(key, CultureInfo.InvariantCulture),
+                static (in entry) => entry.GetMap())
             )
         };
     }

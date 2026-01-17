@@ -11,7 +11,7 @@ public class MailCarriers(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<MailCarrier> actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<MailCarrier> actual, MessageContext context) = await sut.Hero.Equipment.MailCarriers.GetMailCarriers(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
 
         using (Assert.Multiple())

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Guilds.Bank;
 using GuildWars2.Guilds.Emblems;
 using GuildWars2.Guilds.Logs;
@@ -37,7 +36,7 @@ public sealed class GuildsClient
     /// <param name="name">The name to search for.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetGuildsByName(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetGuildsByName(
         string name,
         CancellationToken cancellationToken = default
     )
@@ -49,7 +48,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -96,7 +95,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildRank> Value, MessageContext Context)> GetGuildRanks(
+    public async Task<(IImmutableValueList<GuildRank> Value, MessageContext Context)> GetGuildRanks(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -110,7 +109,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildRank> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildRank());
+            ImmutableValueList<GuildRank> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildRank());
             return (value, response.Context);
         }
     }
@@ -126,7 +125,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildMember> Value, MessageContext Context)> GetGuildMembers(
+    public async Task<(IImmutableValueList<GuildMember> Value, MessageContext Context)> GetGuildMembers(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -140,7 +139,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildMember> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildMember());
+            ImmutableValueList<GuildMember> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildMember());
             return (value, response.Context);
         }
     }
@@ -156,7 +155,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildTeam> Value, MessageContext Context)> GetGuildTeams(
+    public async Task<(IImmutableValueList<GuildTeam> Value, MessageContext Context)> GetGuildTeams(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -170,7 +169,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTeam());
+            ImmutableValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTeam());
             return (value, response.Context);
         }
     }
@@ -186,7 +185,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildTreasurySlot> Value, MessageContext Context)> GetGuildTreasury(
+    public async Task<(IImmutableValueList<GuildTreasurySlot> Value, MessageContext Context)> GetGuildTreasury(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -200,7 +199,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildTreasurySlot> value =
+            ImmutableValueList<GuildTreasurySlot> value =
                 response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTreasurySlot());
             return (value, response.Context);
         }
@@ -217,7 +216,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildBankTab> Value, MessageContext Context)> GetGuildBank(
+    public async Task<(IImmutableValueList<GuildBankTab> Value, MessageContext Context)> GetGuildBank(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -231,7 +230,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildBankTab());
+            ImmutableValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildBankTab());
             return (value, response.Context);
         }
     }
@@ -247,7 +246,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildStorageSlot> Value, MessageContext Context)> GetGuildStorage(
+    public async Task<(IImmutableValueList<GuildStorageSlot> Value, MessageContext Context)> GetGuildStorage(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -261,7 +260,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildStorageSlot> value =
+            ImmutableValueList<GuildStorageSlot> value =
                 response.Json.RootElement.GetList(static (in entry) => entry.GetGuildStorageSlot());
             return (value, response.Context);
         }
@@ -277,7 +276,7 @@ public sealed class GuildsClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetCompletedGuildUpgrades(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetCompletedGuildUpgrades(
         string guildId,
         string? accessToken,
         CancellationToken cancellationToken = default
@@ -289,7 +288,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -305,7 +304,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public Task<(List<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
+    public Task<(IImmutableValueList<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
         string guildId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -323,7 +322,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(List<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
+    public async Task<(IImmutableValueList<GuildLogEntry> Value, MessageContext Context)> GetGuildLog(
         string guildId,
         int? sinceLogId,
         string? accessToken,
@@ -343,7 +342,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildLogEntry());
+            ImmutableValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildLogEntry());
             return (value, response.Context);
         }
     }
@@ -356,7 +355,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EmblemForeground> Value, MessageContext Context)>
         GetEmblemForegrounds(
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
@@ -370,7 +369,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EmblemForeground> value =
+            ImmutableValueSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -379,7 +378,7 @@ public sealed class GuildsClient
     /// <summary>Retrieves the IDs of all emblem foregrounds.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetEmblemForegroundsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetEmblemForegroundsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -389,7 +388,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -423,7 +422,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EmblemForeground> Value, MessageContext Context)>
         GetEmblemForegroundsByIds(
             IEnumerable<int> emblemForegroundIds,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -438,7 +437,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EmblemForeground> value =
+            ImmutableValueSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -450,7 +449,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EmblemForeground> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EmblemForeground> Value, MessageContext Context)>
         GetEmblemForegroundsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -466,7 +465,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EmblemForeground> value =
+            ImmutableValueSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -480,7 +479,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EmblemBackground> Value, MessageContext Context)>
         GetEmblemBackgrounds(
             MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
@@ -494,7 +493,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EmblemBackground> value =
+            ImmutableValueSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -503,7 +502,7 @@ public sealed class GuildsClient
     /// <summary>Retrieves the IDs of all emblem backgrounds.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetEmblemBackgroundsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetEmblemBackgroundsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -513,7 +512,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -547,7 +546,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EmblemBackground> Value, MessageContext Context)>
         GetEmblemBackgroundsByIds(
             IEnumerable<int> backgroundEmblemIds,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -562,7 +561,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EmblemBackground> value =
+            ImmutableValueSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -574,7 +573,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<EmblemBackground> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<EmblemBackground> Value, MessageContext Context)>
         GetEmblemBackgroundsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -590,7 +589,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<EmblemBackground> value =
+            ImmutableValueSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -605,7 +604,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissions(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
@@ -621,7 +620,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildPermissionSummary> value =
+            ImmutableValueSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -630,7 +629,7 @@ public sealed class GuildsClient
     /// <summary>Retrieves the IDs of all guild permissions.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetGuildPermissionsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetGuildPermissionsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -640,7 +639,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -679,7 +678,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissionsByIds(
             IEnumerable<string> guildPermissionIds,
             Language? language = default,
@@ -696,7 +695,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildPermissionSummary> value =
+            ImmutableValueSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -709,7 +708,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GuildPermissionSummary> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<GuildPermissionSummary> Value, MessageContext Context)>
         GetGuildPermissionsByPage(
             int pageIndex,
             int? pageSize = default,
@@ -727,7 +726,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildPermissionSummary> value =
+            ImmutableValueSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -742,7 +741,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgrades(
+    public async Task<(IImmutableValueSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -757,7 +756,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
+            ImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -765,7 +764,7 @@ public sealed class GuildsClient
     /// <summary>Retrieves the IDs of all guild upgrades.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetGuildUpgradesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetGuildUpgradesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -775,7 +774,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -813,7 +812,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByIds(
+    public async Task<(IImmutableValueSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByIds(
         IEnumerable<int> guildUpgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -829,7 +828,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
+            ImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -841,7 +840,7 @@ public sealed class GuildsClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByPage(
+    public async Task<(IImmutableValueSet<GuildUpgrade> Value, MessageContext Context)> GetGuildUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -858,7 +857,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
+            ImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }

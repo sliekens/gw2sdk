@@ -8,7 +8,7 @@ public class WorldsIndex(Gw2Client sut)
     [Test]
     public async Task Can_be_listed()
     {
-        (HashSet<int> actual, MessageContext context) = await sut.Worlds.GetWorldsIndex(TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<int> actual, MessageContext context) = await sut.Worlds.GetWorldsIndex(TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(actual.Count));

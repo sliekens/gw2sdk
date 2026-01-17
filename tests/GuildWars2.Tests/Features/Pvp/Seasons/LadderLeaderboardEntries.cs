@@ -11,7 +11,7 @@ public class LadderLeaderboardEntries(Gw2Client sut)
     [Arguments("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder", "na")]
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
-        (HashSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<LeaderboardEntry> actual, MessageContext context) = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         using (Assert.Multiple())
         {
             await Assert.That(actual).IsNotEmpty();

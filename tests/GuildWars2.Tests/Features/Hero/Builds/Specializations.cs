@@ -9,7 +9,7 @@ public class Specializations(Gw2Client sut)
     [Test]
     public async Task Specializations_can_be_listed()
     {
-        (HashSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Specialization> actual, MessageContext context) = await sut.Hero.Builds.GetSpecializations(cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context.ResultTotal).IsEqualTo(actual.Count);
         foreach (Specialization specialization in actual)
         {

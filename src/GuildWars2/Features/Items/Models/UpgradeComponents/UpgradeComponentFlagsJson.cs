@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -32,7 +31,7 @@ internal static class UpgradeComponentFlagsJson
         bool trident = false;
         bool trinket = false;
         bool warhorn = false;
-        ValueList<string> others = [];
+        ImmutableList<string>.Builder others = ImmutableList.CreateBuilder<string>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             if (entry.ValueEquals("Axe"))
@@ -158,7 +157,7 @@ internal static class UpgradeComponentFlagsJson
             Trident = trident,
             Trinket = trinket,
             Warhorn = warhorn,
-            Other = others
+            Other = new ImmutableValueList<string>(others.ToImmutable())
         };
     }
 }

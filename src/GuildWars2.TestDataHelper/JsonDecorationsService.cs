@@ -1,27 +1,28 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Pve.Home;
 
 namespace GuildWars2.TestDataHelper;
 
 internal sealed class JsonDecorationsService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonDecorations(IProgress<BulkProgress> progress)
+    public async Task<IImmutableValueSet<string>> GetAllJsonDecorations(IProgress<BulkProgress> progress)
     {
-        HashSet<int> ids = await GetDecorationsIndex().ConfigureAwait(false);
+        IImmutableValueSet<int> ids = await GetDecorationsIndex().ConfigureAwait(false);
         SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonDecorationsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;
         }
 
-        return entries.Values.ToHashSet();
+        return new ImmutableValueSet<string>(entries.Values);
     }
 
-    private async Task<HashSet<int>> GetDecorationsIndex()
+    private async Task<IImmutableValueSet<int>> GetDecorationsIndex()
     {
         HomeClient items = new(http);
-        (HashSet<int> ids, _) = await items.GetDecorationsIndex().ConfigureAwait(false);
+        (IImmutableValueSet<int> ids, _) = await items.GetDecorationsIndex().ConfigureAwait(false);
         return ids;
     }
 

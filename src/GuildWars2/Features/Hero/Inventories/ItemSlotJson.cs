@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero.Equipment;
 using GuildWars2.Json;
 
@@ -85,7 +84,7 @@ internal static class ItemSlotJson
             {
             } ids)
         {
-            ValueList<int>? indices = upgradeSlotIndices.Map(static (in values) =>
+            ImmutableValueList<int>? indices = upgradeSlotIndices.Map(static (in values) =>
                 values.GetList(static (in value) => value.GetInt32())
             )!;
             for (int i = 0; i < ids.Count; i++)

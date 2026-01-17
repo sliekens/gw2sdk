@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Hero;
 using GuildWars2.Json;
 
@@ -8,11 +7,12 @@ namespace GuildWars2.Items;
 
 internal static class InfixUpgradeJson
 {
-    public static ValueDictionary<Extensible<AttributeName>, int> GetAttributes(
+    public static ImmutableValueDictionary<Extensible<AttributeName>, int> GetAttributes(
         this in JsonElement json
     )
     {
-        ValueDictionary<Extensible<AttributeName>, int> attributes = new(json.GetArrayLength());
+        ImmutableDictionary<Extensible<AttributeName>, int>.Builder builder =
+            ImmutableDictionary.CreateBuilder<Extensible<AttributeName>, int>();
         foreach (JsonElement entry in json.EnumerateArray())
         {
             RequiredMember attribute = "attribute";
@@ -35,9 +35,9 @@ internal static class InfixUpgradeJson
 
             Extensible<AttributeName> key = attribute.Map(static (in value) => value.GetAttributeName());
             int value = modifier.Map(static (in value) => value.GetInt32());
-            attributes.Add(key, value);
+            builder.Add(key, value);
         }
 
-        return attributes;
+        return new ImmutableValueDictionary<Extensible<AttributeName>, int>(builder.ToImmutable());
     }
 }

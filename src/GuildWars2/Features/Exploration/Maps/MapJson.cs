@@ -112,23 +112,26 @@ internal static class MapJson
                 continentRectangle.Map(static (in value) => value.GetContinentRectangle()),
             PointsOfInterest =
                 pointsOfInterest.Map(static (in value) =>
-                    value.GetMap(static (in entry) => entry.GetPointOfInterest())
-                        .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
+                    value.GetMap(
+                        static key => int.Parse(key, CultureInfo.InvariantCulture),
+                        static (in entry) => entry.GetPointOfInterest())
                 ),
             GodShrines =
                 godShrines.Map(static (in values) => values.GetList(static (in value) => value.GetGodShrine())
                 ),
             Hearts =
-                tasks.Map(static (in value) => value.GetMap(static (in entry) => entry.GetHeart())
-                    .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
+                tasks.Map(static (in value) => value.GetMap(
+                    static key => int.Parse(key, CultureInfo.InvariantCulture),
+                    static (in entry) => entry.GetHeart())
                 ),
             HeroChallenges =
                 skillChallenges.Map(static (in values) =>
                     values.GetList(static (in value) => value.GetHeroChallenge())
                 ),
             Sectors =
-                sectors.Map(static (in value) => value.GetMap(static (in entry) => entry.GetSector())
-                    .ToDictionary(kvp => int.Parse(kvp.Key, CultureInfo.InvariantCulture), kvp => kvp.Value)
+                sectors.Map(static (in value) => value.GetMap(
+                    static key => int.Parse(key, CultureInfo.InvariantCulture),
+                    static (in entry) => entry.GetSector())
                 ),
             Adventures =
                 adventures.Map(static (in values) => values.GetList(static (in value) => value.GetAdventure())

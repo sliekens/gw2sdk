@@ -10,7 +10,7 @@ public class RecipesByOutputItem(Gw2Client sut)
     public async Task Can_be_found()
     {
         const int ironIngot = 19683;
-        (HashSet<Recipe> actual, _) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemId(ironIngot, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Recipe> actual, _) = await sut.Hero.Crafting.Recipes.GetRecipesByOutputItemId(ironIngot, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         const int ironIngotRecipe = 19;
         await Assert.That(actual).Contains(recipe => recipe.Id == ironIngotRecipe);
     }

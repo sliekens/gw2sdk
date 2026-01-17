@@ -1,27 +1,28 @@
 using System.Text.Json;
 
+using GuildWars2.Collections;
 using GuildWars2.Items;
 
 namespace GuildWars2.TestDataHelper;
 
 internal sealed class JsonItemService(HttpClient http)
 {
-    public async Task<ISet<string>> GetAllJsonItems(IProgress<BulkProgress> progress)
+    public async Task<IImmutableValueSet<string>> GetAllJsonItems(IProgress<BulkProgress> progress)
     {
-        HashSet<int> ids = await GetItemsIndex().ConfigureAwait(false);
+        IImmutableValueSet<int> ids = await GetItemsIndex().ConfigureAwait(false);
         SortedDictionary<int, string> entries = [];
         await foreach ((int id, string entry) in GetJsonItemsByIds(ids, progress).ConfigureAwait(false))
         {
             entries[id] = entry;
         }
 
-        return entries.Values.ToHashSet();
+        return new ImmutableValueSet<string>(entries.Values);
     }
 
-    private async Task<HashSet<int>> GetItemsIndex()
+    private async Task<IImmutableValueSet<int>> GetItemsIndex()
     {
         ItemsClient items = new(http);
-        (HashSet<int> ids, _) = await items.GetItemsIndex().ConfigureAwait(false);
+        (IImmutableValueSet<int> ids, _) = await items.GetItemsIndex().ConfigureAwait(false);
         return ids;
     }
 

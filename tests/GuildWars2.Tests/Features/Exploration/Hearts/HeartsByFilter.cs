@@ -14,7 +14,7 @@ public class HeartsByFilter(Gw2Client sut)
         const int regionId = 1;
         const int mapId = 26;
         HashSet<int> ids = [1, 2, 3];
-        (HashSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByIds(continentId, floorId, regionId, mapId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
+        (IImmutableValueSet<Heart> actual, MessageContext context) = await sut.Exploration.GetHeartsByIds(continentId, floorId, regionId, mapId, ids, cancellationToken: TestContext.Current!.Execution.CancellationToken);
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal, rt => rt.IsNotNull().And.IsGreaterThan(ids.Count));
         await Assert.That(actual).Count().IsEqualTo(ids.Count);

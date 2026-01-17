@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 
@@ -28,7 +27,7 @@ public sealed class WalletClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<CurrencyAmount> Value, MessageContext Context)> GetWallet(
+    public async Task<(IImmutableValueSet<CurrencyAmount> Value, MessageContext Context)> GetWallet(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -41,7 +40,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<CurrencyAmount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrencyAmount());
+            ImmutableValueSet<CurrencyAmount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrencyAmount());
             return (value, response.Context);
         }
     }
@@ -55,7 +54,7 @@ public sealed class WalletClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrencies(
+    public async Task<(IImmutableValueSet<Currency> Value, MessageContext Context)> GetCurrencies(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -70,7 +69,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
+            ImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }
@@ -78,7 +77,7 @@ public sealed class WalletClient
     /// <summary>Retrieves the IDs of all currencies.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetCurrenciesIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetCurrenciesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -88,7 +87,7 @@ public sealed class WalletClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -126,7 +125,7 @@ public sealed class WalletClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
+    public async Task<(IImmutableValueSet<Currency> Value, MessageContext Context)> GetCurrenciesByIds(
         IEnumerable<int> currencyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -142,7 +141,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
+            ImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }
@@ -154,7 +153,7 @@ public sealed class WalletClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Currency> Value, MessageContext Context)> GetCurrenciesByPage(
+    public async Task<(IImmutableValueSet<Currency> Value, MessageContext Context)> GetCurrenciesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -171,7 +170,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
+            ImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }

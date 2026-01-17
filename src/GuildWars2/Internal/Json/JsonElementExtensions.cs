@@ -1,7 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
-
 namespace GuildWars2.Json;
 
 internal static class JsonElementExtensions
@@ -29,27 +27,33 @@ internal static class JsonElementExtensions
             );
     }
 
-    /// <summary>Converts a JSON array to a list.</summary>
+    /// <summary>Converts a JSON array to an immutable list.</summary>
     /// <typeparam name="TValue">The type of values in the list.</typeparam>
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
-    /// <returns>A list containing the converted results.</returns>
-    internal static ValueList<TValue> GetList<TValue>(
+    /// <returns>An immutable list containing the converted results.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor call that wraps ImmutableList<T>.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0306", Justification = "Cannot simplify to collection expression.")]
+    internal static ImmutableValueList<TValue> GetList<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
     {
-        ValueList<TValue> values = new(json.GetArrayLength());
-        JsonElement.ArrayEnumerator enumerator = json.EnumerateArray();
-        while (enumerator.MoveNext())
+        ImmutableList<TValue>.Builder builder = ImmutableList.CreateBuilder<TValue>();
+        foreach (JsonElement element in json.EnumerateArray())
         {
-            values.Add(transform(enumerator.Current));
+            builder.Add(transform(element));
         }
 
-        return values;
+        return new ImmutableValueList<TValue>(builder.ToImmutable());
     }
 
-    internal static ValueList<TValue>? GetNullableList<TValue>(
+    /// <summary>Converts a JSON array to an immutable list, or returns null if the element is null.</summary>
+    /// <typeparam name="TValue">The type of values in the list.</typeparam>
+    /// <param name="json">The array element.</param>
+    /// <param name="transform">A function that converts each item in the array to its destination type.</param>
+    /// <returns>An immutable list containing the converted results, or null if the element is null.</returns>
+    internal static ImmutableValueList<TValue>? GetNullableList<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
@@ -57,59 +61,58 @@ internal static class JsonElementExtensions
         return json.ValueKind == JsonValueKind.Null ? null : json.GetList(transform);
     }
 
-    /// <summary>Converts a JSON array to a set.</summary>
+    /// <summary>Converts a JSON array to an immutable set.</summary>
     /// <typeparam name="TValue">The type of values in the set.</typeparam>
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
-    /// <returns>A set containing the converted results.</returns>
-    internal static ValueHashSet<TValue> GetSet<TValue>(
+    /// <returns>An immutable set containing the converted results.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor call that wraps ImmutableHashSet<T>.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0306", Justification = "Cannot simplify to collection expression.")]
+    internal static ImmutableValueSet<TValue> GetSet<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
     {
-#if NET
-        ValueHashSet<TValue> values = new(json.GetArrayLength());
-#else
-        ValueHashSet<TValue> values = [];
-#endif
-        JsonElement.ArrayEnumerator enumerator = json.EnumerateArray();
-        while (enumerator.MoveNext())
+        ImmutableHashSet<TValue>.Builder builder = ImmutableHashSet.CreateBuilder<TValue>();
+        foreach (JsonElement element in json.EnumerateArray())
         {
-            values.Add(transform(enumerator.Current));
+            builder.Add(transform(element));
         }
 
-        return values;
+        return new ImmutableValueSet<TValue>(builder.ToImmutable());
     }
 
-    internal static ValueDictionary<string, TValue> GetMap<TValue>(
+    internal static ImmutableValueDictionary<string, TValue> GetMap<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
     {
-        ValueDictionary<string, TValue> values = [];
+        ImmutableDictionary<string, TValue>.Builder builder =
+            ImmutableDictionary.CreateBuilder<string, TValue>();
         JsonElement.ObjectEnumerator enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
-            values[enumerator.Current.Name] = transform(enumerator.Current.Value);
+            builder[enumerator.Current.Name] = transform(enumerator.Current.Value);
         }
 
-        return values;
+        return new ImmutableValueDictionary<string, TValue>(builder.ToImmutable());
     }
 
-    internal static ValueDictionary<TKey, TValue> GetMap<TKey, TValue>(
+    internal static ImmutableValueDictionary<TKey, TValue> GetMap<TKey, TValue>(
         this in JsonElement json,
         Func<string, TKey> keySelector,
         JsonTransform<TValue> resultSelector
     ) where TKey : notnull
     {
-        ValueDictionary<TKey, TValue> values = [];
+        ImmutableDictionary<TKey, TValue>.Builder builder =
+            ImmutableDictionary.CreateBuilder<TKey, TValue>();
         JsonElement.ObjectEnumerator enumerator = json.EnumerateObject();
         while (enumerator.MoveNext())
         {
-            values[keySelector(enumerator.Current.Name)] = resultSelector(enumerator.Current.Value);
+            builder[keySelector(enumerator.Current.Name)] = resultSelector(enumerator.Current.Value);
         }
 
-        return values;
+        return new ImmutableValueDictionary<TKey, TValue>(builder.ToImmutable());
     }
 
     internal static Extensible<TEnum> GetEnum<TEnum>(this in JsonElement json)

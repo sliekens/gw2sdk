@@ -11,5 +11,5 @@ public sealed record Skirmish
     public required Distribution Scores { get; init; }
 
     /// <summary>The scores of each team in the skirmish, grouped by map.</summary>
-    public required IReadOnlyCollection<MapScores> MapScores { get; init; }
+    public required IImmutableValueList<MapScores> MapScores { get; init; }
 }

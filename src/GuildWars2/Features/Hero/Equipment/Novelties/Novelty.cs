@@ -23,5 +23,5 @@ public sealed record Novelty
     public required Extensible<NoveltyKind> Slot { get; init; }
 
     /// <summary>The IDs of the items that unlock the novelty when consumed.</summary>
-    public required IReadOnlyCollection<int> UnlockItemIds { get; init; }
+    public required IImmutableValueList<int> UnlockItemIds { get; init; }
 }

@@ -1,6 +1,5 @@
 using System.Text.Json;
 
-using GuildWars2.Collections;
 using GuildWars2.Http;
 using GuildWars2.Json;
 using GuildWars2.Pvp.Amulets;
@@ -33,7 +32,7 @@ public sealed class PvpClient
     /// <param name="seasonId">The season ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetLeaderboardIds(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetLeaderboardIds(
         string seasonId,
         CancellationToken cancellationToken = default
     )
@@ -44,7 +43,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -58,7 +57,7 @@ public sealed class PvpClient
     /// <param name="boardId">The leaderboard ID.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetLeaderboardRegions(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetLeaderboardRegions(
         string seasonId,
         string boardId,
         CancellationToken cancellationToken = default
@@ -71,7 +70,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -89,7 +88,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<LeaderboardEntry> Value, MessageContext Context)>
+    public async Task<(IImmutableValueSet<LeaderboardEntry> Value, MessageContext Context)>
         GetLeaderboardEntries(
             string seasonId,
             string boardId,
@@ -109,7 +108,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<LeaderboardEntry> value =
+            ImmutableValueSet<LeaderboardEntry> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetLeaderboardEntry());
             return (value, response.Context);
         }
@@ -125,7 +124,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Standing> Value, MessageContext Context)> GetStandings(
+    public async Task<(IImmutableValueSet<Standing> Value, MessageContext Context)> GetStandings(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -138,7 +137,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Standing> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStanding());
+            ImmutableValueSet<Standing> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStanding());
             return (value, response.Context);
         }
     }
@@ -180,7 +179,7 @@ public sealed class PvpClient
     /// <param name="accessToken">An API key or subtoken.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetUnlockedMistChampions(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetUnlockedMistChampions(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -191,7 +190,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -205,7 +204,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmulets(
+    public async Task<(IImmutableValueSet<Amulet> Value, MessageContext Context)> GetAmulets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -220,7 +219,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
+            ImmutableValueSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -228,7 +227,7 @@ public sealed class PvpClient
     /// <summary>Retrieves the IDs of all PvP amulets.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetAmuletsIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetAmuletsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -238,7 +237,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -276,7 +275,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByIds(
+    public async Task<(IImmutableValueSet<Amulet> Value, MessageContext Context)> GetAmuletsByIds(
         IEnumerable<int> amuletIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -292,7 +291,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
+            ImmutableValueSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -304,7 +303,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Amulet> Value, MessageContext Context)> GetAmuletsByPage(
+    public async Task<(IImmutableValueSet<Amulet> Value, MessageContext Context)> GetAmuletsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -321,7 +320,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
+            ImmutableValueSet<Amulet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAmulet());
             return (value, response.Context);
         }
     }
@@ -335,7 +334,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampions(
+    public async Task<(IImmutableValueSet<MistChampion> Value, MessageContext Context)> GetMistChampions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -350,7 +349,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
+            ImmutableValueSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -358,7 +357,7 @@ public sealed class PvpClient
     /// <summary>Retrieves the IDs of all Mist Champions.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetMistChampionsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetMistChampionsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -368,7 +367,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -406,7 +405,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionsByIds(
+    public async Task<(IImmutableValueSet<MistChampion> Value, MessageContext Context)> GetMistChampionsByIds(
         IEnumerable<string> mistChampionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -422,7 +421,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
+            ImmutableValueSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -434,7 +433,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<MistChampion> Value, MessageContext Context)> GetMistChampionByPage(
+    public async Task<(IImmutableValueSet<MistChampion> Value, MessageContext Context)> GetMistChampionByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -451,7 +450,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
+            ImmutableValueSet<MistChampion> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMistChampion());
             return (value, response.Context);
         }
     }
@@ -465,7 +464,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Rank> Value, MessageContext Context)> GetRanks(
+    public async Task<(IImmutableValueSet<Rank> Value, MessageContext Context)> GetRanks(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -480,7 +479,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
+            ImmutableValueSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -488,7 +487,7 @@ public sealed class PvpClient
     /// <summary>Retrieves the IDs of all PvP ranks.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<int> Value, MessageContext Context)> GetRanksIndex(
+    public async Task<(IImmutableValueSet<int> Value, MessageContext Context)> GetRanksIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -498,7 +497,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -536,7 +535,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByIds(
+    public async Task<(IImmutableValueSet<Rank> Value, MessageContext Context)> GetRanksByIds(
         IEnumerable<int> rankIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -552,7 +551,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
+            ImmutableValueSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -564,7 +563,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Rank> Value, MessageContext Context)> GetRanksByPage(
+    public async Task<(IImmutableValueSet<Rank> Value, MessageContext Context)> GetRanksByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -581,7 +580,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
+            ImmutableValueSet<Rank> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRank());
             return (value, response.Context);
         }
     }
@@ -595,7 +594,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Season> Value, MessageContext Context)> GetSeasons(
+    public async Task<(IImmutableValueSet<Season> Value, MessageContext Context)> GetSeasons(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -610,7 +609,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
+            ImmutableValueSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -618,7 +617,7 @@ public sealed class PvpClient
     /// <summary>Retrieves the IDs of all PvP League seasons.</summary>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetSeasonsIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetSeasonsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -628,7 +627,7 @@ public sealed class PvpClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -666,7 +665,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
+    public async Task<(IImmutableValueSet<Season> Value, MessageContext Context)> GetSeasonsByIds(
         IEnumerable<string> seasonIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -682,7 +681,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
+            ImmutableValueSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -694,7 +693,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Season> Value, MessageContext Context)> GetSeasonsByPage(
+    public async Task<(IImmutableValueSet<Season> Value, MessageContext Context)> GetSeasonsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -711,7 +710,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
+            ImmutableValueSet<Season> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSeason());
             return (value, response.Context);
         }
     }
@@ -726,7 +725,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Game> Value, MessageContext Context)> GetGames(
+    public async Task<(IImmutableValueSet<Game> Value, MessageContext Context)> GetGames(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -740,7 +739,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
+            ImmutableValueSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
@@ -751,7 +750,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<string> Value, MessageContext Context)> GetGamesIndex(
+    public async Task<(IImmutableValueSet<string> Value, MessageContext Context)> GetGamesIndex(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -764,7 +763,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -801,7 +800,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByIds(
+    public async Task<(IImmutableValueSet<Game> Value, MessageContext Context)> GetGamesByIds(
         IEnumerable<string> gameIds,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -816,7 +815,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
+            ImmutableValueSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
@@ -828,7 +827,7 @@ public sealed class PvpClient
     /// <param name="missingMemberBehavior">The desired behavior when JSON contains unexpected members.</param>
     /// <param name="cancellationToken">A token to cancel the request.</param>
     /// <returns>A task that represents the API request.</returns>
-    public async Task<(HashSet<Game> Value, MessageContext Context)> GetGamesByPage(
+    public async Task<(IImmutableValueSet<Game> Value, MessageContext Context)> GetGamesByPage(
         int pageIndex,
         int? pageSize = default,
         string? accessToken = default,
@@ -844,7 +843,7 @@ public sealed class PvpClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ValueHashSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
+            ImmutableValueSet<Game> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGame());
             return (value, response.Context);
         }
     }
