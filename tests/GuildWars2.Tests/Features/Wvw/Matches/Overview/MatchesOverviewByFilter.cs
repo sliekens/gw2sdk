@@ -16,9 +16,10 @@ public class MatchesOverviewByFilter(Gw2Client sut)
             await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count));
             await Assert.That(context.ResultTotal > ids.Count).IsTrue();
             await Assert.That(actual).Count().IsEqualTo(ids.Count);
-            await Assert.That(actual.ElementAt(0).Id).IsIn(ids);
-            await Assert.That(actual.ElementAt(1).Id).IsIn(ids);
-            await Assert.That(actual.ElementAt(2).Id).IsIn(ids);
+            foreach (string id in ids)
+            {
+                await Assert.That(actual).Contains(found => found.Id == id);
+            }
         }
     }
 }

@@ -14,8 +14,8 @@ public class ItemsByFilter(Gw2Client sut)
         await Assert.That(context).Member(c => c.ResultCount, rc => rc.IsEqualTo(ids.Count))
             .And.Member(c => c.ResultTotal!.Value, rt => rt.IsGreaterThan(ids.Count));
         await Assert.That(actual).Count().IsEqualTo(ids.Count);
-        await Assert.That(actual).Any(item => item.Id == ids.ElementAt(0));
-        await Assert.That(actual).Any(item => item.Id == ids.ElementAt(1));
-        await Assert.That(actual).Any(item => item.Id == ids.ElementAt(2));
+        await Assert.That(actual).Any(item => item.Id == 24);
+        await Assert.That(actual).Any(item => item.Id == 46);
+        await Assert.That(actual).Any(item => item.Id == 56);
     }
 }
