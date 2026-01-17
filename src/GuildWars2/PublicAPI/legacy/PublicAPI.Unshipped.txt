@@ -586,7 +586,17 @@ GuildWars2.Items.Rune.Bonuses.get -> GuildWars2.Collections.IImmutableValueList<
 GuildWars2.Items.ShortBow
 GuildWars2.Items.ShortBow.Equals(GuildWars2.Items.ShortBow? other) -> bool
 GuildWars2.Items.ShortBow.ShortBow() -> void
-GuildWars2.Items.Stats.AttributeCombination.Attributes.get -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Items.Stats.Attribute!>!
+GuildWars2.Items.Stats.AttributeCombination.Attributes.get -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Items.Stats.AttributeValue!>!
+GuildWars2.Items.Stats.AttributeValue
+GuildWars2.Items.Stats.AttributeValue.<Clone>$() -> GuildWars2.Items.Stats.AttributeValue!
+GuildWars2.Items.Stats.AttributeValue.AttributeValue() -> void
+GuildWars2.Items.Stats.AttributeValue.Equals(GuildWars2.Items.Stats.AttributeValue? other) -> bool
+GuildWars2.Items.Stats.AttributeValue.Multiplier.get -> double
+GuildWars2.Items.Stats.AttributeValue.Multiplier.init -> void
+GuildWars2.Items.Stats.AttributeValue.Name.get -> GuildWars2.Extensible<GuildWars2.Hero.AttributeName>
+GuildWars2.Items.Stats.AttributeValue.Name.init -> void
+GuildWars2.Items.Stats.AttributeValue.Value.get -> int
+GuildWars2.Items.Stats.AttributeValue.Value.init -> void
 GuildWars2.Items.Transmutation.SkinIds.get -> GuildWars2.Collections.IImmutableValueList<int>!
 GuildWars2.Items.Trinket.Attributes.get -> GuildWars2.Collections.IImmutableValueDictionary<GuildWars2.Extensible<GuildWars2.Hero.AttributeName>, int>!
 GuildWars2.Items.Trinket.InfusionSlots.get -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Items.InfusionSlot!>!
@@ -854,6 +864,9 @@ override GuildWars2.Items.ShortBow.Equals(object? obj) -> bool
 override GuildWars2.Items.ShortBow.GetHashCode() -> int
 override GuildWars2.Items.ShortBow.ToString() -> string!
 override GuildWars2.Items.ShortBow.TwoHanded.get -> bool
+override GuildWars2.Items.Stats.AttributeValue.Equals(object? obj) -> bool
+override GuildWars2.Items.Stats.AttributeValue.GetHashCode() -> int
+override GuildWars2.Items.Stats.AttributeValue.ToString() -> string!
 override sealed GuildWars2.Guilds.Upgrades.AetheriumUpgrade.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildBankUpgrade.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
 override sealed GuildWars2.Guilds.Upgrades.GuildBoost.Equals(GuildWars2.Guilds.Upgrades.GuildUpgrade? other) -> bool
@@ -927,6 +940,8 @@ static GuildWars2.Items.MiniatureItem.operator !=(GuildWars2.Items.MiniatureItem
 static GuildWars2.Items.MiniatureItem.operator ==(GuildWars2.Items.MiniatureItem? left, GuildWars2.Items.MiniatureItem? right) -> bool
 static GuildWars2.Items.ShortBow.operator !=(GuildWars2.Items.ShortBow? left, GuildWars2.Items.ShortBow? right) -> bool
 static GuildWars2.Items.ShortBow.operator ==(GuildWars2.Items.ShortBow? left, GuildWars2.Items.ShortBow? right) -> bool
+static GuildWars2.Items.Stats.AttributeValue.operator !=(GuildWars2.Items.Stats.AttributeValue? left, GuildWars2.Items.Stats.AttributeValue? right) -> bool
+static GuildWars2.Items.Stats.AttributeValue.operator ==(GuildWars2.Items.Stats.AttributeValue? left, GuildWars2.Items.Stats.AttributeValue? right) -> bool
 static readonly GuildWars2.Authorization.TokenInfo.AllPermissions -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Authorization.Permission>>!
 static readonly GuildWars2.Hero.Accounts.Character.AllBodyTypes -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Hero.BodyType>>!
 static readonly GuildWars2.Hero.Races.Race.AllRaces -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Hero.RaceName>>!

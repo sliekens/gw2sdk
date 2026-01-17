@@ -2,13 +2,9 @@ using GuildWars2.Hero;
 
 namespace GuildWars2.Items.Stats;
 
-// TODO: reconsider naming, as this is not an attribute in the traditional sense
-
-#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
-
 /// <summary>Information about an attribute like Power, to calculate the effective stats of an item.</summary>
 [DataTransferObject]
-public sealed record Attribute
+public sealed record AttributeValue
 {
     /// <summary>The name of the attribute.</summary>
     public required Extensible<AttributeName> Name { get; init; }

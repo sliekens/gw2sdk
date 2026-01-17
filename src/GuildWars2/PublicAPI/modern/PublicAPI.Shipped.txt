@@ -3705,16 +3705,6 @@ GuildWars2.Items.Spear.Spear() -> void
 GuildWars2.Items.Staff
 GuildWars2.Items.Staff.Equals(GuildWars2.Items.Staff? other) -> bool
 GuildWars2.Items.Staff.Staff() -> void
-GuildWars2.Items.Stats.Attribute
-GuildWars2.Items.Stats.Attribute.<Clone>$() -> GuildWars2.Items.Stats.Attribute!
-GuildWars2.Items.Stats.Attribute.Attribute() -> void
-GuildWars2.Items.Stats.Attribute.Equals(GuildWars2.Items.Stats.Attribute? other) -> bool
-GuildWars2.Items.Stats.Attribute.Multiplier.get -> double
-GuildWars2.Items.Stats.Attribute.Multiplier.init -> void
-GuildWars2.Items.Stats.Attribute.Name.get -> GuildWars2.Extensible<GuildWars2.Hero.AttributeName>
-GuildWars2.Items.Stats.Attribute.Name.init -> void
-GuildWars2.Items.Stats.Attribute.Value.get -> int
-GuildWars2.Items.Stats.Attribute.Value.init -> void
 GuildWars2.Items.Stats.AttributeCombination
 GuildWars2.Items.Stats.AttributeCombination.<Clone>$() -> GuildWars2.Items.Stats.AttributeCombination!
 GuildWars2.Items.Stats.AttributeCombination.AttributeCombination() -> void
@@ -6678,9 +6668,6 @@ override GuildWars2.Items.Staff.Equals(object? obj) -> bool
 override GuildWars2.Items.Staff.GetHashCode() -> int
 override GuildWars2.Items.Staff.ToString() -> string!
 override GuildWars2.Items.Staff.TwoHanded.get -> bool
-override GuildWars2.Items.Stats.Attribute.Equals(object? obj) -> bool
-override GuildWars2.Items.Stats.Attribute.GetHashCode() -> int
-override GuildWars2.Items.Stats.Attribute.ToString() -> string!
 override GuildWars2.Items.Stats.AttributeCombination.Equals(object? obj) -> bool
 override GuildWars2.Items.Stats.AttributeCombination.GetHashCode() -> int
 override GuildWars2.Items.Stats.AttributeCombination.ToString() -> string!
@@ -8282,8 +8269,6 @@ static GuildWars2.Items.Spear.operator !=(GuildWars2.Items.Spear? left, GuildWar
 static GuildWars2.Items.Spear.operator ==(GuildWars2.Items.Spear? left, GuildWars2.Items.Spear? right) -> bool
 static GuildWars2.Items.Staff.operator !=(GuildWars2.Items.Staff? left, GuildWars2.Items.Staff? right) -> bool
 static GuildWars2.Items.Staff.operator ==(GuildWars2.Items.Staff? left, GuildWars2.Items.Staff? right) -> bool
-static GuildWars2.Items.Stats.Attribute.operator !=(GuildWars2.Items.Stats.Attribute? left, GuildWars2.Items.Stats.Attribute? right) -> bool
-static GuildWars2.Items.Stats.Attribute.operator ==(GuildWars2.Items.Stats.Attribute? left, GuildWars2.Items.Stats.Attribute? right) -> bool
 static GuildWars2.Items.Stats.AttributeCombination.operator !=(GuildWars2.Items.Stats.AttributeCombination? left, GuildWars2.Items.Stats.AttributeCombination? right) -> bool
 static GuildWars2.Items.Stats.AttributeCombination.operator ==(GuildWars2.Items.Stats.AttributeCombination? left, GuildWars2.Items.Stats.AttributeCombination? right) -> bool
 static GuildWars2.Items.StorageExpander.operator !=(GuildWars2.Items.StorageExpander? left, GuildWars2.Items.StorageExpander? right) -> bool
