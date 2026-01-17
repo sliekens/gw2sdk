@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace GuildWars2.Chat;
 
 /// <summary>Represents an item (stack) chat link.</summary>
@@ -7,6 +9,7 @@ public sealed record ItemLink : Link
     public required int ItemId { get; init; }
 
     /// <summary>The number of items in the stack.</summary>
+    [DefaultValue(1)]
     public int Count { get; init; } = 1;
 
     /// <summary>The skin ID of the item if the item is transmuted, or <c>null</c> if the default skin is applied.</summary>

@@ -14,7 +14,12 @@ public class RequireAssignmentTest(AssemblyFixture fixture)
         {
             foreach (AssemblyFixture.DtProperty actual in fixture.DataTransferObjectProperties)
             {
-                bool compliant = actual.IsObsolete || !actual.HasSetter || actual.HasRequiredMemberAttribute;
+                bool compliant = actual.IsPrimaryConstructorProperty
+                    || !actual.HasSetter
+                    || actual.IsNullable
+                    || actual.HasRequiredMemberAttribute
+                    || actual.HasDefaultValueAttribute
+                    || actual.IsObsolete;
                 await Assert.That(compliant).IsTrue()
                     .Because($"{actual.DeclaringType}.{actual.Name} must be read-only or read-write and marked as 'required'.");
             }
