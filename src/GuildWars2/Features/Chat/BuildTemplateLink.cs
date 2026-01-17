@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Training;
@@ -32,13 +34,16 @@ public sealed record BuildTemplateLink : Link
     public Legends? Legends { get; init; }
 
     /// <summary>The first kind of weapon used in this build.</summary>
-    public WeaponType Weapon1 { get; init; }
+    [DefaultValue(WeaponType.None)]
+    public WeaponType Weapon1 { get; init; } = WeaponType.None;
 
     /// <summary>The second kind of weapon used in this build.</summary>
-    public WeaponType Weapon2 { get; init; }
+    [DefaultValue(WeaponType.None)]
+    public WeaponType Weapon2 { get; init; } = WeaponType.None;
 
     /// <summary>The third kind of weapon used in this build.</summary>
-    public WeaponType Weapon3 { get; init; }
+    [DefaultValue(WeaponType.None)]
+    public WeaponType Weapon3 { get; init; } = WeaponType.None;
 
 #pragma warning disable CA1819 // Properties should not return arrays
     // TODO: reconsider collection type
