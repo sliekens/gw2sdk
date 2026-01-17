@@ -253,23 +253,26 @@ public sealed record BuildTemplateLink : Link
             buffer.Padding(16);
         }
 
-        if (Weapon3 != WeaponType.None)
+        ushort weapon1 = Weapon(Weapon1);
+        ushort weapon2 = Weapon(Weapon2);
+        ushort weapon3 = Weapon(Weapon3);
+        if (weapon3 != 0)
         {
             buffer.WriteUInt8(3);
-            buffer.WriteUInt16(Weapon(Weapon1));
-            buffer.WriteUInt16(Weapon(Weapon2));
-            buffer.WriteUInt16(Weapon(Weapon3));
+            buffer.WriteUInt16(weapon1);
+            buffer.WriteUInt16(weapon2);
+            buffer.WriteUInt16(weapon3);
         }
-        else if (Weapon2 != WeaponType.None)
+        else if (weapon2 != 0)
         {
             buffer.WriteUInt8(2);
-            buffer.WriteUInt16(Weapon(Weapon1));
-            buffer.WriteUInt16(Weapon(Weapon2));
+            buffer.WriteUInt16(weapon1);
+            buffer.WriteUInt16(weapon2);
         }
-        else if (Weapon1 != WeaponType.None)
+        else if (weapon1 != 0)
         {
             buffer.WriteUInt8(1);
-            buffer.WriteUInt16(Weapon(Weapon1));
+            buffer.WriteUInt16(weapon1);
         }
         else
         {

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>The weapon types.</summary>
-[DefaultValue(None)]
+[DefaultValue(Unknown)]
 [JsonConverter(typeof(WeaponTypeJsonConverter))]
 public enum WeaponType
 {
