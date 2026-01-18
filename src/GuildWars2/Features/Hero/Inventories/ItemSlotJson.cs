@@ -84,7 +84,7 @@ internal static class ItemSlotJson
             {
             } ids)
         {
-            ImmutableValueList<int>? indices = upgradeSlotIndices.Map(static (in values) =>
+            IImmutableValueList<int>? indices = upgradeSlotIndices.Map(static (in values) =>
                 values.GetList(static (in value) => value.GetInt32())
             )!;
             for (int i = 0; i < ids.Count; i++)

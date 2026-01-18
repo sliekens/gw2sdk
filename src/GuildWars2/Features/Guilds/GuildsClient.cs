@@ -48,7 +48,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -109,7 +109,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildRank> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildRank());
+            IImmutableValueList<GuildRank> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildRank());
             return (value, response.Context);
         }
     }
@@ -139,7 +139,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildMember> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildMember());
+            IImmutableValueList<GuildMember> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildMember());
             return (value, response.Context);
         }
     }
@@ -169,7 +169,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTeam());
+            IImmutableValueList<GuildTeam> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTeam());
             return (value, response.Context);
         }
     }
@@ -199,7 +199,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildTreasurySlot> value =
+            IImmutableValueList<GuildTreasurySlot> value =
                 response.Json.RootElement.GetList(static (in entry) => entry.GetGuildTreasurySlot());
             return (value, response.Context);
         }
@@ -230,7 +230,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildBankTab());
+            IImmutableValueList<GuildBankTab> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildBankTab());
             return (value, response.Context);
         }
     }
@@ -260,7 +260,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildStorageSlot> value =
+            IImmutableValueList<GuildStorageSlot> value =
                 response.Json.RootElement.GetList(static (in entry) => entry.GetGuildStorageSlot());
             return (value, response.Context);
         }
@@ -288,7 +288,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -342,7 +342,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildLogEntry());
+            IImmutableValueList<GuildLogEntry> value = response.Json.RootElement.GetList(static (in entry) => entry.GetGuildLogEntry());
             return (value, response.Context);
         }
     }
@@ -369,7 +369,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<EmblemForeground> value =
+            IImmutableValueSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -388,7 +388,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -437,7 +437,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<EmblemForeground> value =
+            IImmutableValueSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -465,7 +465,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<EmblemForeground> value =
+            IImmutableValueSet<EmblemForeground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemForeground());
             return (value, response.Context);
         }
@@ -493,7 +493,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<EmblemBackground> value =
+            IImmutableValueSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -512,7 +512,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -561,7 +561,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<EmblemBackground> value =
+            IImmutableValueSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -589,7 +589,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<EmblemBackground> value =
+            IImmutableValueSet<EmblemBackground> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEmblemBackground());
             return (value, response.Context);
         }
@@ -620,7 +620,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<GuildPermissionSummary> value =
+            IImmutableValueSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -639,7 +639,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -695,7 +695,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<GuildPermissionSummary> value =
+            IImmutableValueSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -726,7 +726,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<GuildPermissionSummary> value =
+            IImmutableValueSet<GuildPermissionSummary> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildPermissionSummary());
             return (value, response.Context);
         }
@@ -756,7 +756,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
+            IImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -774,7 +774,7 @@ public sealed class GuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -828,7 +828,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
+            IImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }
@@ -857,7 +857,7 @@ public sealed class GuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
+            IImmutableValueSet<GuildUpgrade> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGuildUpgrade());
             return (value, response.Context);
         }
     }

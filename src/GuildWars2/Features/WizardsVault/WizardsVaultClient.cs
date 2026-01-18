@@ -75,7 +75,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<PurchasedAstralReward> value =
+            IImmutableValueSet<PurchasedAstralReward> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetPurchasedAstralReward());
             return (value, response.Context);
         }
@@ -192,7 +192,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
+            IImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -210,7 +210,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -264,7 +264,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
+            IImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -293,7 +293,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
+            IImmutableValueSet<AstralReward> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAstralReward());
             return (value, response.Context);
         }
     }
@@ -322,7 +322,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            IImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -340,7 +340,7 @@ public sealed class WizardsVaultClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -394,7 +394,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            IImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }
@@ -423,7 +423,7 @@ public sealed class WizardsVaultClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
+            IImmutableValueSet<Objective> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetObjective());
             return (value, response.Context);
         }
     }

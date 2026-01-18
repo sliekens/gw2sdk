@@ -39,7 +39,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
+            IImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -57,7 +57,7 @@ public sealed class RacesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<RaceName>());
+            IImmutableValueSet<Extensible<RaceName>> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<RaceName>());
             return (value, response.Context);
         }
     }
@@ -132,7 +132,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
+            IImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }
@@ -161,7 +161,7 @@ public sealed class RacesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
+            IImmutableValueSet<Race> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetRace());
             return (value, response.Context);
         }
     }

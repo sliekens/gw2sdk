@@ -36,7 +36,7 @@ public sealed class FilesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
+            IImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
             return (value, response.Context);
         }
     }
@@ -54,7 +54,7 @@ public sealed class FilesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -102,7 +102,7 @@ public sealed class FilesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
+            IImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
             return (value, response.Context);
         }
     }
@@ -128,7 +128,7 @@ public sealed class FilesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
+            IImmutableValueSet<Asset> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAsset());
             return (value, response.Context);
         }
     }

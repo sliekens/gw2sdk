@@ -36,7 +36,7 @@ public sealed class ItemsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -91,7 +91,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
+            IImmutableValueSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
             return (value, response.Context);
         }
     }
@@ -120,7 +120,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
+            IImmutableValueSet<Item> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItem());
             return (value, response.Context);
         }
     }
@@ -219,7 +219,7 @@ public sealed class ItemsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -245,7 +245,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AttributeCombination> value =
+            IImmutableValueSet<AttributeCombination> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
@@ -302,7 +302,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AttributeCombination> value =
+            IImmutableValueSet<AttributeCombination> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }
@@ -333,7 +333,7 @@ public sealed class ItemsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AttributeCombination> value =
+            IImmutableValueSet<AttributeCombination> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAttributeCombination());
             return (value, response.Context);
         }

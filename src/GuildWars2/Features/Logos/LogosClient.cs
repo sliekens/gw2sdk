@@ -36,7 +36,7 @@ public sealed class LogosClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
+            IImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
             return (value, response.Context);
         }
     }
@@ -54,7 +54,7 @@ public sealed class LogosClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -102,7 +102,7 @@ public sealed class LogosClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
+            IImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
             return (value, response.Context);
         }
     }
@@ -128,7 +128,7 @@ public sealed class LogosClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
+            IImmutableValueSet<Logo> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLogo());
             return (value, response.Context);
         }
     }

@@ -41,7 +41,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -63,7 +63,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -118,7 +118,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Achievement> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievement());
+            IImmutableValueSet<Achievement> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -147,7 +147,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Achievement> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievement());
+            IImmutableValueSet<Achievement> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievement());
             return (value, response.Context);
         }
     }
@@ -284,7 +284,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AccountAchievement> value =
+            IImmutableValueSet<AccountAchievement> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
@@ -310,7 +310,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AccountAchievement> value =
+            IImmutableValueSet<AccountAchievement> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
@@ -341,7 +341,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AccountAchievement> value =
+            IImmutableValueSet<AccountAchievement> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAccountAchievement());
             return (value, response.Context);
         }
@@ -372,7 +372,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AchievementCategory> value =
+            IImmutableValueSet<AchievementCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
@@ -391,7 +391,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -447,7 +447,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AchievementCategory> value =
+            IImmutableValueSet<AchievementCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
@@ -478,7 +478,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AchievementCategory> value =
+            IImmutableValueSet<AchievementCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementCategory());
             return (value, response.Context);
         }
@@ -509,7 +509,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AchievementGroup> value =
+            IImmutableValueSet<AchievementGroup> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
@@ -528,7 +528,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -583,7 +583,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AchievementGroup> value =
+            IImmutableValueSet<AchievementGroup> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
@@ -614,7 +614,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<AchievementGroup> value =
+            IImmutableValueSet<AchievementGroup> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetAchievementGroup());
             return (value, response.Context);
         }
@@ -644,7 +644,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
+            IImmutableValueSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -662,7 +662,7 @@ public sealed class AchievementsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -716,7 +716,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
+            IImmutableValueSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }
@@ -745,7 +745,7 @@ public sealed class AchievementsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
+            IImmutableValueSet<Title> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTitle());
             return (value, response.Context);
         }
     }

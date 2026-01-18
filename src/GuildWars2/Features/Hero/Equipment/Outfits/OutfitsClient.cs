@@ -38,7 +38,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -67,7 +67,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
+            IImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -85,7 +85,7 @@ public sealed class OutfitsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -141,7 +141,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
+            IImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }
@@ -170,7 +170,7 @@ public sealed class OutfitsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
+            IImmutableValueSet<Outfit> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOutfit());
             return (value, response.Context);
         }
     }

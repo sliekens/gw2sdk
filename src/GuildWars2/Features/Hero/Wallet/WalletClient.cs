@@ -40,7 +40,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<CurrencyAmount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrencyAmount());
+            IImmutableValueSet<CurrencyAmount> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrencyAmount());
             return (value, response.Context);
         }
     }
@@ -69,7 +69,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
+            IImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }
@@ -87,7 +87,7 @@ public sealed class WalletClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -141,7 +141,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
+            IImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }
@@ -170,7 +170,7 @@ public sealed class WalletClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
+            IImmutableValueSet<Currency> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCurrency());
             return (value, response.Context);
         }
     }

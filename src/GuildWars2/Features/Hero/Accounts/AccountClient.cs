@@ -68,7 +68,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Progression> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProgression());
+            IImmutableValueSet<Progression> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProgression());
             return (value, response.Context);
         }
     }
@@ -154,7 +154,7 @@ public sealed class AccountClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -208,7 +208,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
+            IImmutableValueSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }
@@ -233,7 +233,7 @@ public sealed class AccountClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
+            IImmutableValueSet<Character> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCharacter());
             return (value, response.Context);
         }
     }

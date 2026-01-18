@@ -32,9 +32,7 @@ internal static class JsonElementExtensions
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>An immutable list containing the converted results.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor call that wraps ImmutableList<T>.")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0306", Justification = "Cannot simplify to collection expression.")]
-    internal static ImmutableValueList<TValue> GetList<TValue>(
+    internal static IImmutableValueList<TValue> GetList<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
@@ -53,7 +51,7 @@ internal static class JsonElementExtensions
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>An immutable list containing the converted results, or null if the element is null.</returns>
-    internal static ImmutableValueList<TValue>? GetNullableList<TValue>(
+    internal static IImmutableValueList<TValue>? GetNullableList<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
@@ -66,9 +64,8 @@ internal static class JsonElementExtensions
     /// <param name="json">The array element.</param>
     /// <param name="transform">A function that converts each item in the array to its destination type.</param>
     /// <returns>An immutable set containing the converted results.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor call that wraps ImmutableHashSet<T>.")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0306", Justification = "Cannot simplify to collection expression.")]
-    internal static ImmutableValueSet<TValue> GetSet<TValue>(
+    internal static IImmutableValueSet<TValue> GetSet<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
@@ -82,7 +79,7 @@ internal static class JsonElementExtensions
         return new ImmutableValueSet<TValue>(builder.ToImmutable());
     }
 
-    internal static ImmutableValueDictionary<string, TValue> GetMap<TValue>(
+    internal static IImmutableValueDictionary<string, TValue> GetMap<TValue>(
         this in JsonElement json,
         JsonTransform<TValue> transform
     )
@@ -98,7 +95,7 @@ internal static class JsonElementExtensions
         return new ImmutableValueDictionary<string, TValue>(builder.ToImmutable());
     }
 
-    internal static ImmutableValueDictionary<TKey, TValue> GetMap<TKey, TValue>(
+    internal static IImmutableValueDictionary<TKey, TValue> GetMap<TKey, TValue>(
         this in JsonElement json,
         Func<string, TKey> keySelector,
         JsonTransform<TValue> resultSelector

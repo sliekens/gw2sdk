@@ -37,7 +37,7 @@ public sealed class SkiffsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -66,7 +66,7 @@ public sealed class SkiffsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<SkiffSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkiffSkin());
+            IImmutableValueSet<SkiffSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkiffSkin());
             return (value, response.Context);
         }
     }
@@ -84,7 +84,7 @@ public sealed class SkiffsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -138,7 +138,7 @@ public sealed class SkiffsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<SkiffSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkiffSkin());
+            IImmutableValueSet<SkiffSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkiffSkin());
             return (value, response.Context);
         }
     }
@@ -167,7 +167,7 @@ public sealed class SkiffsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<SkiffSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkiffSkin());
+            IImmutableValueSet<SkiffSkin> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkiffSkin());
             return (value, response.Context);
         }
     }

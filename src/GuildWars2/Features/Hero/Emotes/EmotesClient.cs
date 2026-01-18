@@ -37,7 +37,7 @@ public sealed class EmotesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -63,7 +63,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
+            IImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -81,7 +81,7 @@ public sealed class EmotesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -129,7 +129,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
+            IImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }
@@ -155,7 +155,7 @@ public sealed class EmotesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
+            IImmutableValueSet<Emote> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetEmote());
             return (value, response.Context);
         }
     }

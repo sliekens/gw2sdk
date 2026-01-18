@@ -105,7 +105,7 @@ internal static class LockedSkillJson
             }
         }
 
-        ImmutableValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in values) =>
+        IImmutableValueList<Extensible<ProfessionName>> professionRestrictions = professions.Map(static (in values) =>
             values.GetList(static (in value) => value.GetEnum<ProfessionName>())
         );
         string iconString = icon.Map(static (in value) => value.GetString()) ?? "";

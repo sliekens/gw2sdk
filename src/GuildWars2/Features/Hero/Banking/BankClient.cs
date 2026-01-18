@@ -96,7 +96,7 @@ public sealed class BankClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<MaterialCategory> value =
+            IImmutableValueSet<MaterialCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
@@ -115,7 +115,7 @@ public sealed class BankClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -171,7 +171,7 @@ public sealed class BankClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<MaterialCategory> value =
+            IImmutableValueSet<MaterialCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }
@@ -202,7 +202,7 @@ public sealed class BankClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<MaterialCategory> value =
+            IImmutableValueSet<MaterialCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMaterialCategory());
             return (value, response.Context);
         }

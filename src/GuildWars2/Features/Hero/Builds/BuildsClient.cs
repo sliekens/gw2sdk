@@ -38,7 +38,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
+            IImmutableValueList<int> value = response.Json.RootElement.GetList(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -90,7 +90,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
+            IImmutableValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -117,7 +117,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
+            IImmutableValueList<Build> value = response.Json.RootElement.GetList(static (in entry) => entry.GetBuild());
             return (value, response.Context);
         }
     }
@@ -148,7 +148,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -210,7 +210,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BuildTemplate> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetBuildTemplate());
+            IImmutableValueSet<BuildTemplate> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetBuildTemplate());
             return (value, response.Context);
         }
     }
@@ -269,7 +269,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
+            IImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -287,7 +287,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -342,7 +342,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
+            IImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -371,7 +371,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
+            IImmutableValueSet<Skill> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSkill());
             return (value, response.Context);
         }
     }
@@ -400,7 +400,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
+            IImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -418,7 +418,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -474,7 +474,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
+            IImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -504,7 +504,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
+            IImmutableValueSet<Specialization> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetSpecialization());
             return (value, response.Context);
         }
     }
@@ -533,7 +533,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
+            IImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -551,7 +551,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -606,7 +606,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
+            IImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -635,7 +635,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
+            IImmutableValueSet<Trait> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTrait());
             return (value, response.Context);
         }
     }
@@ -657,7 +657,7 @@ public sealed class BuildsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -705,7 +705,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
+            IImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -731,7 +731,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
+            IImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }
@@ -753,7 +753,7 @@ public sealed class BuildsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
+            IImmutableValueSet<Legend> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetLegend());
             return (value, response.Context);
         }
     }

@@ -41,7 +41,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -66,7 +66,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -92,7 +92,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<UnlockedDecoration> value =
+            IImmutableValueSet<UnlockedDecoration> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetUnlockedDecoration());
             return (value, response.Context);
         }
@@ -118,7 +118,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -144,7 +144,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
+            IImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -162,7 +162,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -210,7 +210,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
+            IImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -236,7 +236,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
+            IImmutableValueSet<Cat> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetCat());
             return (value, response.Context);
         }
     }
@@ -262,7 +262,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
+            IImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -280,7 +280,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -328,7 +328,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
+            IImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -354,7 +354,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
+            IImmutableValueSet<Node> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetNode());
             return (value, response.Context);
         }
     }
@@ -376,7 +376,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -430,7 +430,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
+            IImmutableValueSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -459,7 +459,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
+            IImmutableValueSet<Decoration> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDecoration());
             return (value, response.Context);
         }
     }
@@ -567,7 +567,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<DecorationCategory> value =
+            IImmutableValueSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -586,7 +586,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -641,7 +641,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<DecorationCategory> value =
+            IImmutableValueSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -672,7 +672,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<DecorationCategory> value =
+            IImmutableValueSet<DecorationCategory> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetDecorationCategory());
             return (value, response.Context);
         }
@@ -699,7 +699,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
+            IImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -717,7 +717,7 @@ public sealed class HomeClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -765,7 +765,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
+            IImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }
@@ -791,7 +791,7 @@ public sealed class HomeClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
+            IImmutableValueSet<Glyph> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetGlyph());
             return (value, response.Context);
         }
     }

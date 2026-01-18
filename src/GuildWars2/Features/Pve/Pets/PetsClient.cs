@@ -39,7 +39,7 @@ public sealed class PetsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
+            IImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
             return (value, response.Context);
         }
     }
@@ -57,7 +57,7 @@ public sealed class PetsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -111,7 +111,7 @@ public sealed class PetsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
+            IImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
             return (value, response.Context);
         }
     }
@@ -140,7 +140,7 @@ public sealed class PetsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
+            IImmutableValueSet<Pet> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetPet());
             return (value, response.Context);
         }
     }

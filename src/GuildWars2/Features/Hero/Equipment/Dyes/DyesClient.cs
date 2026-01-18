@@ -37,7 +37,7 @@ public sealed class DyesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -66,7 +66,7 @@ public sealed class DyesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
+            IImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
             return (value, response.Context);
         }
     }
@@ -84,7 +84,7 @@ public sealed class DyesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -138,7 +138,7 @@ public sealed class DyesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
+            IImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
             return (value, response.Context);
         }
     }
@@ -167,7 +167,7 @@ public sealed class DyesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
+            IImmutableValueSet<DyeColor> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDyeColor());
             return (value, response.Context);
         }
     }

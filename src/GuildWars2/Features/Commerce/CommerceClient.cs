@@ -68,7 +68,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -117,7 +117,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItemPrice());
+            IImmutableValueSet<ItemPrice> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetItemPrice());
             return (value, response.Context);
         }
     }
@@ -208,7 +208,7 @@ public sealed class CommerceClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -257,7 +257,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<OrderBook> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrderBook());
+            IImmutableValueSet<OrderBook> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrderBook());
             return (value, response.Context);
         }
     }
@@ -414,7 +414,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
+            IImmutableValueSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -446,7 +446,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
+            IImmutableValueSet<Order> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetOrder());
             return (value, response.Context);
         }
     }
@@ -478,7 +478,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
+            IImmutableValueSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }
@@ -510,7 +510,7 @@ public sealed class CommerceClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
+            IImmutableValueSet<Transaction> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetTransaction());
             return (value, response.Context);
         }
     }

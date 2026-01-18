@@ -37,7 +37,7 @@ public sealed class DungeonsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -59,7 +59,7 @@ public sealed class DungeonsClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -107,7 +107,7 @@ public sealed class DungeonsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
+            IImmutableValueSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
             return (value, response.Context);
         }
     }
@@ -133,7 +133,7 @@ public sealed class DungeonsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
+            IImmutableValueSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
             return (value, response.Context);
         }
     }
@@ -155,7 +155,7 @@ public sealed class DungeonsClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
+            IImmutableValueSet<Dungeon> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetDungeon());
             return (value, response.Context);
         }
     }

@@ -41,7 +41,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<UnlockedFinisher> value =
+            IImmutableValueSet<UnlockedFinisher> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetUnlockedFinisher());
             return (value, response.Context);
         }
@@ -71,7 +71,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
+            IImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -89,7 +89,7 @@ public sealed class FinishersClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -143,7 +143,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
+            IImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }
@@ -172,7 +172,7 @@ public sealed class FinishersClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
+            IImmutableValueSet<Finisher> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetFinisher());
             return (value, response.Context);
         }
     }

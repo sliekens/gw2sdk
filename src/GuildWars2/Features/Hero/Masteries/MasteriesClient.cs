@@ -41,7 +41,7 @@ public sealed class MasteriesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<MasteryTrackProgress> value =
+            IImmutableValueSet<MasteryTrackProgress> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrackProgress());
             return (value, response.Context);
         }
@@ -100,7 +100,7 @@ public sealed class MasteriesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
+            IImmutableValueSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
             return (value, response.Context);
         }
     }
@@ -118,7 +118,7 @@ public sealed class MasteriesClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -172,7 +172,7 @@ public sealed class MasteriesClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
+            IImmutableValueSet<MasteryTrack> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetMasteryTrack());
             return (value, response.Context);
         }
     }

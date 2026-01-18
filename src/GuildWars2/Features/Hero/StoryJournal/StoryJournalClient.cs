@@ -78,7 +78,7 @@ public sealed class StoryJournalClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -108,7 +108,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BackgroundStoryQuestion> value =
+            IImmutableValueSet<BackgroundStoryQuestion> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
@@ -127,7 +127,7 @@ public sealed class StoryJournalClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -183,7 +183,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BackgroundStoryQuestion> value =
+            IImmutableValueSet<BackgroundStoryQuestion> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
@@ -215,7 +215,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BackgroundStoryQuestion> value =
+            IImmutableValueSet<BackgroundStoryQuestion> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBackgroundStoryQuestion()
                 );
             return (value, response.Context);
@@ -247,7 +247,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BackgroundStoryAnswer> value =
+            IImmutableValueSet<BackgroundStoryAnswer> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
@@ -265,7 +265,7 @@ public sealed class StoryJournalClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -321,7 +321,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BackgroundStoryAnswer> value =
+            IImmutableValueSet<BackgroundStoryAnswer> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
@@ -352,7 +352,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<BackgroundStoryAnswer> value =
+            IImmutableValueSet<BackgroundStoryAnswer> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetBackgroundStoryAnswer());
             return (value, response.Context);
         }
@@ -382,7 +382,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Story> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStory());
+            IImmutableValueSet<Story> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStory());
             return (value, response.Context);
         }
     }
@@ -400,7 +400,7 @@ public sealed class StoryJournalClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -454,7 +454,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Story> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStory());
+            IImmutableValueSet<Story> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStory());
             return (value, response.Context);
         }
     }
@@ -483,7 +483,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Story> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStory());
+            IImmutableValueSet<Story> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStory());
             return (value, response.Context);
         }
     }
@@ -512,7 +512,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Storyline> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryline());
+            IImmutableValueSet<Storyline> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryline());
             return (value, response.Context);
         }
     }
@@ -530,7 +530,7 @@ public sealed class StoryJournalClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
+            IImmutableValueSet<string> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStringRequired());
             return (value, response.Context);
         }
     }
@@ -584,7 +584,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Storyline> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryline());
+            IImmutableValueSet<Storyline> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryline());
             return (value, response.Context);
         }
     }
@@ -613,7 +613,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Storyline> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryline());
+            IImmutableValueSet<Storyline> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryline());
             return (value, response.Context);
         }
     }
@@ -642,7 +642,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<StoryStep> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryStep());
+            IImmutableValueSet<StoryStep> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryStep());
             return (value, response.Context);
         }
     }
@@ -660,7 +660,7 @@ public sealed class StoryJournalClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
+            IImmutableValueSet<int> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetInt32());
             return (value, response.Context);
         }
     }
@@ -714,7 +714,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<StoryStep> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryStep());
+            IImmutableValueSet<StoryStep> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryStep());
             return (value, response.Context);
         }
     }
@@ -743,7 +743,7 @@ public sealed class StoryJournalClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<StoryStep> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryStep());
+            IImmutableValueSet<StoryStep> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetStoryStep());
             return (value, response.Context);
         }
     }

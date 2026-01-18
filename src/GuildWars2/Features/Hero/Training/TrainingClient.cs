@@ -73,7 +73,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
+            IImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -90,7 +90,7 @@ public sealed class TrainingClient
             .ConfigureAwait(false);
         using (response.Json)
         {
-            ImmutableValueSet<Extensible<ProfessionName>> value =
+            IImmutableValueSet<Extensible<ProfessionName>> value =
                 response.Json.RootElement.GetSet(static (in entry) => entry.GetEnum<ProfessionName>());
             return (value, response.Context);
         }
@@ -166,7 +166,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
+            IImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
@@ -195,7 +195,7 @@ public sealed class TrainingClient
         using (response.Json)
         {
             JsonOptions.MissingMemberBehavior = missingMemberBehavior;
-            ImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
+            IImmutableValueSet<Profession> value = response.Json.RootElement.GetSet(static (in entry) => entry.GetProfession());
             return (value, response.Context);
         }
     }
