@@ -262,4 +262,43 @@ public sealed class ImmutableValueDictionary<TKey, TValue> : IImmutableValueDict
     }
 
     #endregion Explicit IImmutableDictionary<TKey, TValue> implementation
+
+    #region Explicit IImmutableValueDictionary<TKey, TValue> implementation
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.Add(TKey key, TValue value)
+    {
+        return Add(key, value);
+    }
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
+    {
+        return AddRange(pairs);
+    }
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.Clear()
+    {
+        return Clear();
+    }
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.Remove(TKey key)
+    {
+        return Remove(key);
+    }
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.RemoveRange(IEnumerable<TKey> keys)
+    {
+        return RemoveRange(keys);
+    }
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.SetItem(TKey key, TValue value)
+    {
+        return SetItem(key, value);
+    }
+
+    IImmutableValueDictionary<TKey, TValue> IImmutableValueDictionary<TKey, TValue>.SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items)
+    {
+        return SetItems(items);
+    }
+
+    #endregion Explicit IImmutableValueDictionary<TKey, TValue> implementation
 }

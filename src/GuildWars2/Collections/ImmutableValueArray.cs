@@ -347,4 +347,68 @@ public sealed class ImmutableValueArray<T> : IImmutableValueArray<T>
     }
 
     #endregion Explicit IImmutableList<T> implementation
+
+    #region Explicit IImmutableValueArray<T> implementation
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.Add(T value)
+    {
+        return Add(value);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.AddRange(IEnumerable<T> items)
+    {
+        return AddRange(items);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.Clear()
+    {
+        return Clear();
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.Insert(int index, T element)
+    {
+        return Insert(index, element);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.InsertRange(int index, IEnumerable<T> items)
+    {
+        return InsertRange(index, items);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.Remove(T value, IEqualityComparer<T>? equalityComparer)
+    {
+        return Remove(value, equalityComparer);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveAll(Predicate<T> match)
+    {
+        return RemoveAll(match);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveAt(int index)
+    {
+        return RemoveAt(index);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
+    {
+        return RemoveRange(items, equalityComparer);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveRange(int index, int count)
+    {
+        return RemoveRange(index, count);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
+    {
+        return Replace(oldValue, newValue, equalityComparer);
+    }
+
+    IImmutableValueArray<T> IImmutableValueArray<T>.SetItem(int index, T value)
+    {
+        return SetItem(index, value);
+    }
+
+    #endregion Explicit IImmutableValueArray<T> implementation
 }

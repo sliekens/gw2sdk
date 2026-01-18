@@ -289,4 +289,43 @@ public sealed class ImmutableValueSet<T> : IImmutableValueSet<T>
     }
 
     #endregion Explicit IImmutableSet<T> implementation
+
+    #region Explicit IImmutableValueSet<T> implementation
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.Add(T value)
+    {
+        return Add(value);
+    }
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.Clear()
+    {
+        return Clear();
+    }
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.Except(IEnumerable<T> other)
+    {
+        return Except(other);
+    }
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.Intersect(IEnumerable<T> other)
+    {
+        return Intersect(other);
+    }
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.Remove(T value)
+    {
+        return Remove(value);
+    }
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.SymmetricExcept(IEnumerable<T> other)
+    {
+        return SymmetricExcept(other);
+    }
+
+    IImmutableValueSet<T> IImmutableValueSet<T>.Union(IEnumerable<T> other)
+    {
+        return Union(other);
+    }
+
+    #endregion Explicit IImmutableValueSet<T> implementation
 }

@@ -344,4 +344,79 @@ public class ImmutableValueSetTest
 
         await Assert.That(fromExpression).IsEqualTo(fromConstructor);
     }
+
+    [Test]
+    public async Task Interface_Add_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2, 3]);
+
+        IImmutableValueSet<int> result = set.Add(4);
+
+        await Assert.That(result.Contains(4)).IsTrue();
+    }
+
+    [Test]
+    public async Task Interface_Remove_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2, 3]);
+
+        IImmutableValueSet<int> result = set.Remove(2);
+
+        await Assert.That(result.Contains(2)).IsFalse();
+    }
+
+    [Test]
+    public async Task Interface_Clear_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2, 3]);
+
+        IImmutableValueSet<int> result = set.Clear();
+
+        await Assert.That(result.Count).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task Interface_Except_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2, 3]);
+
+        IImmutableValueSet<int> result = set.Except([2]);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+        await Assert.That(result.Contains(2)).IsFalse();
+    }
+
+    [Test]
+    public async Task Interface_Intersect_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2, 3]);
+
+        IImmutableValueSet<int> result = set.Intersect([2, 3, 4]);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+        await Assert.That(result.Contains(2)).IsTrue();
+        await Assert.That(result.Contains(3)).IsTrue();
+    }
+
+    [Test]
+    public async Task Interface_Union_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2]);
+
+        IImmutableValueSet<int> result = set.Union([3, 4]);
+
+        await Assert.That(result.Count).IsEqualTo(4);
+    }
+
+    [Test]
+    public async Task Interface_SymmetricExcept_returns_IImmutableValueSet()
+    {
+        IImmutableValueSet<int> set = new ImmutableValueSet<int>([1, 2, 3]);
+
+        IImmutableValueSet<int> result = set.SymmetricExcept([2, 3, 4]);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+        await Assert.That(result.Contains(1)).IsTrue();
+        await Assert.That(result.Contains(4)).IsTrue();
+    }
 }

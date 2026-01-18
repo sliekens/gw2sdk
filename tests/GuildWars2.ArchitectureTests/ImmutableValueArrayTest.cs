@@ -353,4 +353,127 @@ public class ImmutableValueArrayTest
 
         await Assert.That(fromExpression).IsEqualTo(fromConstructor);
     }
+
+    [Test]
+    public async Task Interface_Add_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3]);
+
+        IImmutableValueArray<int> result = array.Add(4);
+
+        await Assert.That(result.Count).IsEqualTo(4);
+        await Assert.That(result[3]).IsEqualTo(4);
+    }
+
+    [Test]
+    public async Task Interface_AddRange_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2]);
+
+        IImmutableValueArray<int> result = array.AddRange([3, 4]);
+
+        await Assert.That(result.Count).IsEqualTo(4);
+    }
+
+    [Test]
+    public async Task Interface_Clear_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3]);
+
+        IImmutableValueArray<int> result = array.Clear();
+
+        await Assert.That(result.Count).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task Interface_Insert_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 3]);
+
+        IImmutableValueArray<int> result = array.Insert(1, 2);
+
+        await Assert.That(result.Count).IsEqualTo(3);
+        await Assert.That(result[1]).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Interface_InsertRange_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 4]);
+
+        IImmutableValueArray<int> result = array.InsertRange(1, [2, 3]);
+
+        await Assert.That(result.Count).IsEqualTo(4);
+    }
+
+    [Test]
+    public async Task Interface_Remove_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3]);
+
+        IImmutableValueArray<int> result = array.Remove(2, null);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Interface_RemoveAt_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3]);
+
+        IImmutableValueArray<int> result = array.RemoveAt(1);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+        await Assert.That(result[1]).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Interface_RemoveAll_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3, 4]);
+
+        IImmutableValueArray<int> result = array.RemoveAll(x => x % 2 == 0);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Interface_RemoveRange_by_items_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3, 4]);
+
+        IImmutableValueArray<int> result = array.RemoveRange([2, 3], null);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Interface_RemoveRange_by_index_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3, 4]);
+
+        IImmutableValueArray<int> result = array.RemoveRange(1, 2);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Interface_Replace_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3]);
+
+        IImmutableValueArray<int> result = array.Replace(2, 99, null);
+
+        await Assert.That(result[1]).IsEqualTo(99);
+    }
+
+    [Test]
+    public async Task Interface_SetItem_returns_IImmutableValueArray()
+    {
+        IImmutableValueArray<int> array = new ImmutableValueArray<int>([1, 2, 3]);
+
+        IImmutableValueArray<int> result = array.SetItem(1, 99);
+
+        await Assert.That(result[1]).IsEqualTo(99);
+    }
 }

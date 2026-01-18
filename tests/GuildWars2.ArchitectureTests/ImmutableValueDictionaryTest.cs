@@ -307,4 +307,78 @@ public class ImmutableValueDictionaryTest
 
         await Assert.That(result).Count().IsEqualTo(2);
     }
+
+    [Test]
+    public async Task Interface_Add_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1 });
+
+        IImmutableValueDictionary<string, int> result = dict.Add("b", 2);
+
+        await Assert.That(result.Count).IsEqualTo(2);
+        await Assert.That(result["b"]).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Interface_AddRange_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1 });
+
+        IImmutableValueDictionary<string, int> result = dict.AddRange(new Dictionary<string, int> { ["b"] = 2, ["c"] = 3 });
+
+        await Assert.That(result.Count).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Interface_Clear_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+
+        IImmutableValueDictionary<string, int> result = dict.Clear();
+
+        await Assert.That(result.Count).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task Interface_Remove_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+
+        IImmutableValueDictionary<string, int> result = dict.Remove("a");
+
+        await Assert.That(result.Count).IsEqualTo(1);
+        await Assert.That(result.ContainsKey("a")).IsFalse();
+    }
+
+    [Test]
+    public async Task Interface_RemoveRange_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2, ["c"] = 3 });
+
+        IImmutableValueDictionary<string, int> result = dict.RemoveRange(["a", "b"]);
+
+        await Assert.That(result.Count).IsEqualTo(1);
+        await Assert.That(result.ContainsKey("c")).IsTrue();
+    }
+
+    [Test]
+    public async Task Interface_SetItem_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1 });
+
+        IImmutableValueDictionary<string, int> result = dict.SetItem("a", 99);
+
+        await Assert.That(result["a"]).IsEqualTo(99);
+    }
+
+    [Test]
+    public async Task Interface_SetItems_returns_IImmutableValueDictionary()
+    {
+        IImmutableValueDictionary<string, int> dict = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+
+        IImmutableValueDictionary<string, int> result = dict.SetItems(new Dictionary<string, int> { ["a"] = 10, ["b"] = 20 });
+
+        await Assert.That(result["a"]).IsEqualTo(10);
+        await Assert.That(result["b"]).IsEqualTo(20);
+    }
 }

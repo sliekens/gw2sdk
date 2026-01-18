@@ -3,9 +3,47 @@ GuildWars2.Authorization.SubtokenInfo.Urls.get -> GuildWars2.Collections.IImmuta
 GuildWars2.Authorization.TokenInfo.Permissions.get -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Authorization.Permission>>!
 GuildWars2.Chat.BuildTemplateLink.SkillOverrides.get -> GuildWars2.Collections.IImmutableValueList<int>!
 GuildWars2.Collections.IImmutableValueArray<T>
+GuildWars2.Collections.IImmutableValueArray<T>.Add(T value) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.AddRange(System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.Clear() -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.Insert(int index, T element) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.InsertRange(int index, System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.Remove(T value, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.RemoveAll(System.Predicate<T>! match) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.RemoveAt(int index) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.RemoveRange(int index, int count) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>! items, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.IImmutableValueArray<T>!
+GuildWars2.Collections.IImmutableValueArray<T>.SetItem(int index, T value) -> GuildWars2.Collections.IImmutableValueArray<T>!
 GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.Add(TKey key, TValue value) -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.AddRange(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! pairs) -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.Clear() -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.Remove(TKey key) -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.RemoveRange(System.Collections.Generic.IEnumerable<TKey>! keys) -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.SetItem(TKey key, TValue value) -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
+GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>.SetItems(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! items) -> GuildWars2.Collections.IImmutableValueDictionary<TKey, TValue>!
 GuildWars2.Collections.IImmutableValueList<T>
+GuildWars2.Collections.IImmutableValueList<T>.Add(T value) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.AddRange(System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.Clear() -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.Insert(int index, T element) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.InsertRange(int index, System.Collections.Generic.IEnumerable<T>! items) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.Remove(T value, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.RemoveAll(System.Predicate<T>! match) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.RemoveAt(int index) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.RemoveRange(int index, int count) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>! items, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.IImmutableValueList<T>!
+GuildWars2.Collections.IImmutableValueList<T>.SetItem(int index, T value) -> GuildWars2.Collections.IImmutableValueList<T>!
 GuildWars2.Collections.IImmutableValueSet<T>
+GuildWars2.Collections.IImmutableValueSet<T>.Add(T value) -> GuildWars2.Collections.IImmutableValueSet<T>!
+GuildWars2.Collections.IImmutableValueSet<T>.Clear() -> GuildWars2.Collections.IImmutableValueSet<T>!
+GuildWars2.Collections.IImmutableValueSet<T>.Except(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.IImmutableValueSet<T>!
+GuildWars2.Collections.IImmutableValueSet<T>.Intersect(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.IImmutableValueSet<T>!
+GuildWars2.Collections.IImmutableValueSet<T>.Remove(T value) -> GuildWars2.Collections.IImmutableValueSet<T>!
+GuildWars2.Collections.IImmutableValueSet<T>.SymmetricExcept(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.IImmutableValueSet<T>!
+GuildWars2.Collections.IImmutableValueSet<T>.Union(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.IImmutableValueSet<T>!
 GuildWars2.Collections.ImmutableValueArray
 GuildWars2.Collections.ImmutableValueArray<T>
 GuildWars2.Collections.ImmutableValueArray<T>.Add(T value) -> GuildWars2.Collections.ImmutableValueArray<T>!
