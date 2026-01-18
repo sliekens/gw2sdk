@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Collections;
 
 /// <summary>Represents an immutable dictionary with value semantics for equality comparison.</summary>
@@ -10,6 +12,7 @@ namespace GuildWars2.Collections;
 /// <para>C# does not support return type covariance on interface implementations directly,
 /// so member shadowing with the <c>new</c> keyword is used to achieve the same effect.</para>
 /// </remarks>
+[JsonConverter(typeof(ImmutableValueDictionaryJsonConverterFactory))]
 public interface IImmutableValueDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>, IEquatable<IImmutableValueDictionary<TKey, TValue>>
     where TKey : notnull
 {

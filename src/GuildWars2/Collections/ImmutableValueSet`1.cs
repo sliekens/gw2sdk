@@ -2,6 +2,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Collections;
 
@@ -9,6 +10,7 @@ namespace GuildWars2.Collections;
 /// <typeparam name="T">The type of elements in the set.</typeparam>
 [CollectionBuilder(typeof(ImmutableValueSet), nameof(ImmutableValueSet.Create))]
 [DebuggerDisplay("Count = {Count}")]
+[JsonConverter(typeof(ImmutableValueSetJsonConverter))]
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableHashSet<T>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
 [SuppressMessage("Style", "IDE0303", Justification = "Cannot simplify to collection expression.")]

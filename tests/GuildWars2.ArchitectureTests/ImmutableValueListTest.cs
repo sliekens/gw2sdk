@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 using GuildWars2.Collections;
 
 namespace GuildWars2.ArchitectureTests;
@@ -386,5 +388,27 @@ public class ImmutableValueListTest
         IImmutableValueList<int> result = list.SetItem(1, 99);
 
         await Assert.That(result[1]).IsEqualTo(99);
+    }
+
+    [Test]
+    public async Task Json_roundtrip_serialization_preserves_elements()
+    {
+        ImmutableValueList<int> original = [1, 2, 3];
+
+        string json = JsonSerializer.Serialize(original);
+        ImmutableValueList<int>? deserialized = JsonSerializer.Deserialize<ImmutableValueList<int>>(json);
+
+        await Assert.That(deserialized).IsEqualTo(original);
+    }
+
+    [Test]
+    public async Task Interface_json_roundtrip_serialization_preserves_elements()
+    {
+        IImmutableValueList<int> original = new ImmutableValueList<int>([1, 2, 3]);
+
+        string json = JsonSerializer.Serialize(original);
+        IImmutableValueList<int>? deserialized = JsonSerializer.Deserialize<IImmutableValueList<int>>(json);
+
+        await Assert.That(deserialized).IsEquivalentTo([1, 2, 3]);
     }
 }

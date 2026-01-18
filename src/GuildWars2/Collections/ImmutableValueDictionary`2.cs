@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Collections;
 
@@ -8,6 +9,7 @@ namespace GuildWars2.Collections;
 /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
 [DebuggerDisplay("Count = {Count}")]
+[JsonConverter(typeof(ImmutableValueDictionaryJsonConverter))]
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableDictionary<TKey, TValue>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
 [SuppressMessage("Style", "IDE0303", Justification = "Cannot simplify to collection expression.")]

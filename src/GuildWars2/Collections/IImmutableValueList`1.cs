@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace GuildWars2.Collections;
 
@@ -12,6 +13,7 @@ namespace GuildWars2.Collections;
 /// so member shadowing with the <c>new</c> keyword is used to achieve the same effect.</para>
 /// </remarks>
 [CollectionBuilder(typeof(ImmutableValueList), nameof(ImmutableValueList.Create))]
+[JsonConverter(typeof(ImmutableValueListJsonConverterFactory))]
 public interface IImmutableValueList<T> : IImmutableList<T>, IEquatable<IImmutableValueList<T>>
 {
     /// <inheritdoc cref="IImmutableList{T}.Add"/>

@@ -56,6 +56,8 @@ GuildWars2.Collections.ImmutableValueArray<T>.RemoveRange(System.Collections.Gen
 GuildWars2.Collections.ImmutableValueArray<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ImmutableValueArray<T>!
 GuildWars2.Collections.ImmutableValueArray<T>.SetItem(int index, T value) -> GuildWars2.Collections.ImmutableValueArray<T>!
 GuildWars2.Collections.ImmutableValueArray<T>.this[int index].get -> T
+GuildWars2.Collections.ImmutableValueArrayJsonConverterFactory
+GuildWars2.Collections.ImmutableValueArrayJsonConverterFactory.ImmutableValueArrayJsonConverterFactory() -> void
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.Add(TKey key, TValue value) -> GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>!
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.AddRange(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>! pairs) -> GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>!
@@ -76,6 +78,10 @@ GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.this[TKey key].get
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.TryGetKey(TKey equalKey, out TKey actualKey) -> bool
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value) -> bool
 GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.Values.get -> System.Collections.Generic.IEnumerable<TValue>!
+GuildWars2.Collections.ImmutableValueDictionaryJsonConverter
+GuildWars2.Collections.ImmutableValueDictionaryJsonConverter.ImmutableValueDictionaryJsonConverter() -> void
+GuildWars2.Collections.ImmutableValueDictionaryJsonConverterFactory
+GuildWars2.Collections.ImmutableValueDictionaryJsonConverterFactory.ImmutableValueDictionaryJsonConverterFactory() -> void
 GuildWars2.Collections.ImmutableValueList
 GuildWars2.Collections.ImmutableValueList<T>
 GuildWars2.Collections.ImmutableValueList<T>.Add(T value) -> GuildWars2.Collections.ImmutableValueList<T>!
@@ -98,6 +104,10 @@ GuildWars2.Collections.ImmutableValueList<T>.RemoveRange(System.Collections.Gene
 GuildWars2.Collections.ImmutableValueList<T>.Replace(T oldValue, T newValue, System.Collections.Generic.IEqualityComparer<T>? equalityComparer) -> GuildWars2.Collections.ImmutableValueList<T>!
 GuildWars2.Collections.ImmutableValueList<T>.SetItem(int index, T value) -> GuildWars2.Collections.ImmutableValueList<T>!
 GuildWars2.Collections.ImmutableValueList<T>.this[int index].get -> T
+GuildWars2.Collections.ImmutableValueListJsonConverter
+GuildWars2.Collections.ImmutableValueListJsonConverter.ImmutableValueListJsonConverter() -> void
+GuildWars2.Collections.ImmutableValueListJsonConverterFactory
+GuildWars2.Collections.ImmutableValueListJsonConverterFactory.ImmutableValueListJsonConverterFactory() -> void
 GuildWars2.Collections.ImmutableValueSet
 GuildWars2.Collections.ImmutableValueSet<T>
 GuildWars2.Collections.ImmutableValueSet<T>.Add(T value) -> GuildWars2.Collections.ImmutableValueSet<T>!
@@ -120,6 +130,10 @@ GuildWars2.Collections.ImmutableValueSet<T>.SetEquals(System.Collections.Generic
 GuildWars2.Collections.ImmutableValueSet<T>.SymmetricExcept(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.ImmutableValueSet<T>!
 GuildWars2.Collections.ImmutableValueSet<T>.TryGetValue(T equalValue, out T actualValue) -> bool
 GuildWars2.Collections.ImmutableValueSet<T>.Union(System.Collections.Generic.IEnumerable<T>! other) -> GuildWars2.Collections.ImmutableValueSet<T>!
+GuildWars2.Collections.ImmutableValueSetJsonConverter
+GuildWars2.Collections.ImmutableValueSetJsonConverter.ImmutableValueSetJsonConverter() -> void
+GuildWars2.Collections.ImmutableValueSetJsonConverterFactory
+GuildWars2.Collections.ImmutableValueSetJsonConverterFactory.ImmutableValueSetJsonConverterFactory() -> void
 GuildWars2.Commerce.CommerceClient.GetBuyOrders(int pageIndex, int? pageSize, string? accessToken, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<GuildWars2.Commerce.Transactions.Order!>! Value, GuildWars2.MessageContext! Context)>!
 GuildWars2.Commerce.CommerceClient.GetItemPricesByIds(System.Collections.Generic.IEnumerable<int>! itemIds, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<GuildWars2.Commerce.Prices.ItemPrice!>! Value, GuildWars2.MessageContext! Context)>!
 GuildWars2.Commerce.CommerceClient.GetItemPricesIndex(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<int>! Value, GuildWars2.MessageContext! Context)>!
@@ -811,12 +825,26 @@ GuildWars2.Wvw.WvwClient.GetUpgradesIndex(System.Threading.CancellationToken can
 GuildWars2.Wvw.WvwClient.GetWvwGuilds(GuildWars2.Worlds.WorldRegion region, GuildWars2.MissingMemberBehavior missingMemberBehavior = GuildWars2.MissingMemberBehavior.Error, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<(GuildWars2.Collections.IImmutableValueSet<GuildWars2.Wvw.Guilds.WvwGuild!>! Value, GuildWars2.MessageContext! Context)>!
 override GuildWars2.Collections.ImmutableValueArray<T>.Equals(object? obj) -> bool
 override GuildWars2.Collections.ImmutableValueArray<T>.GetHashCode() -> int
+override GuildWars2.Collections.ImmutableValueArrayJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueArrayJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 override GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.Equals(object? obj) -> bool
 override GuildWars2.Collections.ImmutableValueDictionary<TKey, TValue>.GetHashCode() -> int
+override GuildWars2.Collections.ImmutableValueDictionaryJsonConverter.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueDictionaryJsonConverter.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
+override GuildWars2.Collections.ImmutableValueDictionaryJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueDictionaryJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 override GuildWars2.Collections.ImmutableValueList<T>.Equals(object? obj) -> bool
 override GuildWars2.Collections.ImmutableValueList<T>.GetHashCode() -> int
+override GuildWars2.Collections.ImmutableValueListJsonConverter.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueListJsonConverter.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
+override GuildWars2.Collections.ImmutableValueListJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueListJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 override GuildWars2.Collections.ImmutableValueSet<T>.Equals(object? obj) -> bool
 override GuildWars2.Collections.ImmutableValueSet<T>.GetHashCode() -> int
+override GuildWars2.Collections.ImmutableValueSetJsonConverter.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueSetJsonConverter.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
+override GuildWars2.Collections.ImmutableValueSetJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.Collections.ImmutableValueSetJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 override GuildWars2.Guilds.Upgrades.AetheriumUpgrade.<Clone>$() -> GuildWars2.Guilds.Upgrades.GuildUpgrade!
 override GuildWars2.Guilds.Upgrades.AetheriumUpgrade.Equals(object? obj) -> bool
 override GuildWars2.Guilds.Upgrades.AetheriumUpgrade.GetHashCode() -> int
