@@ -20,7 +20,6 @@ public class Ranks(Gw2Client sut)
                 await Assert.That(entry.Id).IsGreaterThan(0);
                 await Assert.That(entry.Name).IsNotEmpty();
                 await Assert.That(entry.IconUrl).IsNotNull();
-                // Assert.NotEmpty(entry.IconHref); // Obsolete, replaced by IconUrl
                 await Assert.That(entry.Levels).IsNotEmpty();
             }
         }
