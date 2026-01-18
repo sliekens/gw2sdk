@@ -1,10 +1,15 @@
+<div align="center">
+
 # GW2SDK
 
-[![NuGet][nuget-vpre-badge]][nuget]
+[![NuGet][nuget-v-badge]][nuget]
+[![NuGet pre-release][nuget-vpre-badge]][nuget-pre]
 [![codecov][codecov-badge]][codecov]
 [![Continuous Integration][ci-badge]][actions]
 
-A .NET code library for interacting with the Guild Wars 2 API and game client.
+*A .NET library for the Guild Wars 2 API and game client.*
+
+</div>
 
 ## Quick navigation
 
@@ -93,8 +98,8 @@ the lightest machine and don't exceed 15GB disk usage. This codespace weighs aro
 [actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
 [api]:https://wiki.guildwars2.com/wiki/API:Main
 [chatlinks]:https://wiki.guildwars2.com/wiki/Chat_link_format
-[ci-badge]:https://github.com/sliekens/gw2sdk/actions/workflows/ci.yml/badge.svg
-[codecov-badge]:https://codecov.io/gh/sliekens/gw2sdk/branch/main/graph/badge.svg?token=2ZTDBRWWLR
+[ci-badge]:https://img.shields.io/github/actions/workflow/status/sliekens/gw2sdk/ci.yml?style=for-the-badge&logo=github&label=CI
+[codecov-badge]:https://img.shields.io/codecov/c/github/sliekens/gw2sdk?style=for-the-badge&logo=codecov&logoColor=white
 [codecov]:https://codecov.io/gh/sliekens/gw2sdk
 [gitpod-badge]:https://gitpod.io/button/open-in-gitpod.svg
 [codeanywhere-badge]:https://codeanywhere.com/img/open-in-codeanywhere-btn.svg
@@ -107,8 +112,10 @@ the lightest machine and don't exceed 15GB disk usage. This codespace weighs aro
 [mumblelink]:https://wiki.guildwars2.com/wiki/API:MumbleLink
 [new-discussion]:https://github.com/sliekens/gw2sdk/discussions/new/choose
 [new-issue]:https://github.com/sliekens/gw2sdk/issues/new
-[nuget-vpre-badge]:https://img.shields.io/nuget/vpre/GW2SDK
+[nuget-v-badge]:https://img.shields.io/nuget/v/GW2SDK?style=for-the-badge&logo=nuget&logoColor=white
+[nuget-vpre-badge]:https://img.shields.io/nuget/vpre/GW2SDK?style=for-the-badge&logo=nuget&logoColor=white&label=nuget%20pre
 [nuget]:https://www.nuget.org/packages/GW2SDK/
+[nuget-pre]:https://www.nuget.org/packages/GW2SDK/absoluteLatest 
 [usage]:https://sliekens.github.io/gw2sdk/guide/getting-started/usage
 [documentation]:https://sliekens.github.io/gw2sdk/
 [wiki]:https://github.com/sliekens/gw2sdk/wiki
