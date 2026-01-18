@@ -30,12 +30,9 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         return new MountSkin
         {
             Id = root.GetProperty("id").GetInt32(),
-            Name = root.GetProperty("name").GetStringRequired(), // Type or member is obsolete
+            Name = root.GetProperty("name").GetStringRequired(),
             IconUrl = new Uri(iconString, UriKind.RelativeOrAbsolute),
             DyeSlots = root.GetProperty("dye_slots").GetList(DyeSlotJsonConverter.Read)!,
-#pragma warning disable CS0618 // Type or member is obsolete
-            Mount = root.GetProperty("mount").GetStringRequired(),
-#pragma warning restore CS0618 // Type or member is obsolete
             MountId = mountId
         };
     }
@@ -57,9 +54,6 @@ internal sealed class MountSkinJsonConverter : JsonConverter<MountSkin>
         }
 
         writer.WriteEndArray();
-#pragma warning disable CS0618 // Type or member is obsolete
-        writer.WriteString("mount", value.Mount.ToString());
-#pragma warning restore CS0618 // Type or member is obsolete
         writer.WriteString("mount_id", value.MountId.ToString());
         writer.WriteEndObject();
     }

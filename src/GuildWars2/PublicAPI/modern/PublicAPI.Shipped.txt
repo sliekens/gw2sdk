@@ -2452,8 +2452,6 @@ GuildWars2.Hero.Equipment.Mounts.MountSkin.IconUrl.get -> System.Uri!
 GuildWars2.Hero.Equipment.Mounts.MountSkin.IconUrl.init -> void
 GuildWars2.Hero.Equipment.Mounts.MountSkin.Id.get -> int
 GuildWars2.Hero.Equipment.Mounts.MountSkin.Id.init -> void
-GuildWars2.Hero.Equipment.Mounts.MountSkin.Mount.get -> GuildWars2.Extensible<GuildWars2.Hero.Equipment.Mounts.MountName>
-GuildWars2.Hero.Equipment.Mounts.MountSkin.Mount.init -> void
 GuildWars2.Hero.Equipment.Mounts.MountSkin.MountSkin() -> void
 GuildWars2.Hero.Equipment.Mounts.MountSkin.Name.get -> string!
 GuildWars2.Hero.Equipment.Mounts.MountSkin.Name.init -> void

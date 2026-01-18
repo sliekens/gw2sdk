@@ -35,10 +35,6 @@ public class MountSkins(Gw2Client sut)
                         await Assert.That(slot.ColorId).IsGreaterThan(0);
                     }
                 }
-#pragma warning disable CS0618 // Type or member is obsolete
-                await Assert.That(entry.Mount.IsDefined()).IsTrue();
-#pragma warning restore CS0618 // Type or member is obsolete
-
 #if NET
                 string json = JsonSerializer.Serialize(entry, Common.TestJsonContext.Default.MountSkin);
                 MountSkin? roundtrip = JsonSerializer.Deserialize(json, Common.TestJsonContext.Default.MountSkin);

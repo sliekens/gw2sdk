@@ -3006,7 +3006,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.get_Mount</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_IconHref(System.String)</Target>
+    <Left>lib/net10.0/GuildWars2.dll</Left>
+    <Right>lib/net10.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_Mount(GuildWars2.Extensible{GuildWars2.Hero.Equipment.Mounts.MountName})</Target>
     <Left>lib/net10.0/GuildWars2.dll</Left>
     <Right>lib/net10.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -7997,7 +8011,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.get_Mount</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_IconHref(System.String)</Target>
+    <Left>lib/net462/GuildWars2.dll</Left>
+    <Right>lib/net462/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_Mount(GuildWars2.Extensible{GuildWars2.Hero.Equipment.Mounts.MountName})</Target>
     <Left>lib/net462/GuildWars2.dll</Left>
     <Right>lib/net462/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -12988,7 +13016,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.get_Mount</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_IconHref(System.String)</Target>
+    <Left>lib/net8.0/GuildWars2.dll</Left>
+    <Right>lib/net8.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_Mount(GuildWars2.Extensible{GuildWars2.Hero.Equipment.Mounts.MountName})</Target>
     <Left>lib/net8.0/GuildWars2.dll</Left>
     <Right>lib/net8.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17979,7 +18021,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.get_Mount</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_IconHref(System.String)</Target>
+    <Left>lib/net9.0/GuildWars2.dll</Left>
+    <Right>lib/net9.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_Mount(GuildWars2.Extensible{GuildWars2.Hero.Equipment.Mounts.MountName})</Target>
     <Left>lib/net9.0/GuildWars2.dll</Left>
     <Right>lib/net9.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -22970,7 +23026,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.get_Mount</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_IconHref(System.String)</Target>
+    <Left>lib/netstandard2.0/GuildWars2.dll</Left>
+    <Right>lib/netstandard2.0/GuildWars2.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:GuildWars2.Hero.Equipment.Mounts.MountSkin.set_Mount(GuildWars2.Extensible{GuildWars2.Hero.Equipment.Mounts.MountName})</Target>
     <Left>lib/netstandard2.0/GuildWars2.dll</Left>
     <Right>lib/netstandard2.0/GuildWars2.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
