@@ -38,6 +38,10 @@ New to the project? Start here:
 
 - [[TargetFrameworkIdentifier]] - Understanding target frameworks
 
+### Project Maintenance
+
+- [[Release process]] - Plan for creating new releases
+
 ## Quick Links
 
 - [GitHub Repository](https://github.com/sliekens/gw2sdk)
