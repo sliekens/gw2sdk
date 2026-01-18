@@ -1,4 +1,7 @@
+using System.Text.Json;
+
 using GuildWars2.Collections;
+using GuildWars2.Hero;
 
 namespace GuildWars2.ArchitectureTests;
 
@@ -380,5 +383,19 @@ public class ImmutableValueDictionaryTest
 
         await Assert.That(result["a"]).IsEqualTo(10);
         await Assert.That(result["b"]).IsEqualTo(20);
+    }
+
+    [Test]
+    public async Task Can_deserialize_json_object_with_extensible_enum_keys()
+    {
+        const string json = """{"Toughness":239,"HealingPower":171,"Concentration":171}""";
+
+        ImmutableValueDictionary<Extensible<AttributeName>, int>? result =
+            JsonSerializer.Deserialize<ImmutableValueDictionary<Extensible<AttributeName>, int>>(json);
+
+        await Assert.That(result).IsNotNull();
+        await Assert.That(result![AttributeName.Toughness]).IsEqualTo(239);
+        await Assert.That(result[AttributeName.HealingPower]).IsEqualTo(171);
+        await Assert.That(result[AttributeName.Concentration]).IsEqualTo(171);
     }
 }
