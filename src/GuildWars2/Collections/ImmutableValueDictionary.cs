@@ -30,7 +30,12 @@ public sealed class ImmutableValueDictionary<TKey, TValue> : IImmutableValueDict
     /// <param name="collection">The collection whose elements are copied to the new dictionary.</param>
     public ImmutableValueDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
     {
-        items = ImmutableDictionary.CreateRange(collection);
+        items = collection switch
+        {
+            ImmutableDictionary<TKey, TValue> immutableDictionary => immutableDictionary,
+            ImmutableValueDictionary<TKey, TValue> valueDictionary => valueDictionary.items,
+            _ => ImmutableDictionary.CreateRange(collection)
+        };
     }
 
     private ImmutableValueDictionary(ImmutableDictionary<TKey, TValue> items)

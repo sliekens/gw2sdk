@@ -50,7 +50,12 @@ public sealed class ImmutableValueSet<T> : IImmutableValueSet<T>
     /// <param name="collection">The collection whose elements are copied to the new set.</param>
     public ImmutableValueSet(IEnumerable<T> collection)
     {
-        items = ImmutableHashSet.CreateRange(collection);
+        items = collection switch
+        {
+            ImmutableHashSet<T> immutableHashSet => immutableHashSet,
+            ImmutableValueSet<T> valueSet => valueSet.items,
+            _ => ImmutableHashSet.CreateRange(collection)
+        };
     }
 
     private ImmutableValueSet(ImmutableHashSet<T> items)

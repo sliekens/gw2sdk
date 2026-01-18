@@ -51,7 +51,12 @@ public sealed class ImmutableValueArray<T> : IImmutableValueList<T>, IEquatable<
     /// <param name="collection">The collection whose elements are copied to the new array.</param>
     public ImmutableValueArray(IEnumerable<T> collection)
     {
-        items = ImmutableArray.CreateRange(collection);
+        items = collection switch
+        {
+            ImmutableArray<T> immutableArray => immutableArray,
+            ImmutableValueArray<T> valueArray => valueArray.items,
+            _ => ImmutableArray.CreateRange(collection)
+        };
     }
 
 #if NET

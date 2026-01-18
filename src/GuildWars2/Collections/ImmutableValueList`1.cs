@@ -50,7 +50,12 @@ public sealed class ImmutableValueList<T> : IImmutableValueList<T>
     /// <param name="collection">The collection whose elements are copied to the new list.</param>
     public ImmutableValueList(IEnumerable<T> collection)
     {
-        items = ImmutableList.CreateRange(collection);
+        items = collection switch
+        {
+            ImmutableList<T> immutableList => immutableList,
+            ImmutableValueList<T> valueList => valueList.items,
+            _ => ImmutableList.CreateRange(collection)
+        };
     }
 
     private ImmutableValueList(ImmutableList<T> items)
