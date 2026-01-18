@@ -37,13 +37,13 @@ internal static class JsonElementExtensions
         JsonTransform<TValue> transform
     )
     {
-        ImmutableList<TValue>.Builder builder = ImmutableList.CreateBuilder<TValue>();
+        ImmutableArray<TValue>.Builder builder = ImmutableArray.CreateBuilder<TValue>();
         foreach (JsonElement element in json.EnumerateArray())
         {
             builder.Add(transform(element));
         }
 
-        return new ImmutableValueList<TValue>(builder.ToImmutable());
+        return new ImmutableValueArray<TValue>(builder.ToImmutable());
     }
 
     /// <summary>Converts a JSON array to an immutable list, or returns null if the element is null.</summary>
