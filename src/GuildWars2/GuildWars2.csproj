@@ -123,6 +123,9 @@
     <PackageReference Include="System.Collections.Immutable" VersionOverride="6.0.0" />
     <PackageReference Include="System.Text.Json" VersionOverride="6.0.11" />
     <PackageReference Include="Microsoft.Bcl.HashCode" VersionOverride="6.0.0" />
+
+    <!-- System.Memory 4.5.4 is transitively included by System.Text.Json but 4.5.5 is required for Polyfill -->
+    <PackageReference Include="System.Memory" VersionOverride="4.5.5" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
