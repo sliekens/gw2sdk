@@ -79,10 +79,10 @@ Check the [wiki] for contributor guidelines and the [documentation] site for use
 [![Open in Codeanywhere][codeanywhere-badge]](https://app.codeanywhere.com/#https://github.com/sliekens/gw2sdk)
 [![Open in Gitpod][gitpod-badge]](https://gitpod.io/#https://github.com/sliekens/gw2sdk)
 
+</details>
+
 > [!TIP]
 > GitHub Codespaces offers ~60 free hours/month.
-
-</details>
 
 ## 📚 Resources
 
