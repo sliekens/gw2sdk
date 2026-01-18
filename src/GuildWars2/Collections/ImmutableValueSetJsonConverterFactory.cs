@@ -48,12 +48,10 @@ public sealed class ImmutableValueSetJsonConverterFactory : JsonConverterFactory
     {
         ThrowHelper.ThrowIfNull(typeToConvert);
         Type elementType = typeToConvert.GetGenericArguments()[0];
-        Type bclInterfaceType = typeof(IImmutableSet<>).MakeGenericType(elementType);
-        Type concreteType = typeof(ImmutableValueSet<>).MakeGenericType(elementType);
-        return new Converter(bclInterfaceType, concreteType);
+        return (JsonConverter)Activator.CreateInstance(typeof(Converter<>).MakeGenericType(elementType))!;
     }
 
-    private sealed class Converter(Type bclInterfaceType, Type collectionType) : JsonConverter<object>
+    private sealed class Converter<T> : JsonConverter<IImmutableValueSet<T>>
     {
         [UnconditionalSuppressMessage(
             "AOT",
@@ -65,9 +63,9 @@ public sealed class ImmutableValueSetJsonConverterFactory : JsonConverterFactory
             "IL2026",
             Justification = "IImmutableSet<T> serialization is supported by System.Text.Json."
         )]
-        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IImmutableValueSet<T> value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value, bclInterfaceType, options);
+            JsonSerializer.Serialize<IImmutableSet<T>>(writer, value, options);
         }
 
         [UnconditionalSuppressMessage(
@@ -80,25 +78,10 @@ public sealed class ImmutableValueSetJsonConverterFactory : JsonConverterFactory
             "IL2026",
             Justification = "IImmutableSet<T> deserialization is supported by System.Text.Json."
         )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2067",
-            Justification = "The collection type has a constructor accepting IEnumerable<T>."
-        )]
-        public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override IImmutableValueSet<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            object? set = JsonSerializer.Deserialize(ref reader, bclInterfaceType, options);
-            if (set is null)
-            {
-                return null;
-            }
-
-            return Activator.CreateInstance(collectionType, [set]);
-        }
-
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return true;
+            IImmutableSet<T>? set = JsonSerializer.Deserialize<IImmutableSet<T>>(ref reader, options);
+            return set is null ? null : [.. set];
         }
     }
 }

@@ -48,11 +48,10 @@ public sealed class ImmutableValueListJsonConverter : JsonConverterFactory
     {
         ThrowHelper.ThrowIfNull(typeToConvert);
         Type elementType = typeToConvert.GetGenericArguments()[0];
-        Type bclInterfaceType = typeof(IImmutableList<>).MakeGenericType(elementType);
-        return new Converter(bclInterfaceType, typeToConvert);
+        return (JsonConverter)Activator.CreateInstance(typeof(Converter<>).MakeGenericType(elementType))!;
     }
 
-    private sealed class Converter(Type bclInterfaceType, Type collectionType) : JsonConverter<object>
+    private sealed class Converter<T> : JsonConverter<ImmutableValueList<T>>
     {
         [UnconditionalSuppressMessage(
             "AOT",
@@ -64,9 +63,9 @@ public sealed class ImmutableValueListJsonConverter : JsonConverterFactory
             "IL2026",
             Justification = "IImmutableList<T> serialization is supported by System.Text.Json."
         )]
-        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, ImmutableValueList<T> value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value, bclInterfaceType, options);
+            JsonSerializer.Serialize<IImmutableList<T>>(writer, value, options);
         }
 
         [UnconditionalSuppressMessage(
@@ -79,25 +78,10 @@ public sealed class ImmutableValueListJsonConverter : JsonConverterFactory
             "IL2026",
             Justification = "IImmutableList<T> deserialization is supported by System.Text.Json."
         )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2067",
-            Justification = "The collection type has a constructor accepting IEnumerable<T>."
-        )]
-        public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ImmutableValueList<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            object? list = JsonSerializer.Deserialize(ref reader, bclInterfaceType, options);
-            if (list is null)
-            {
-                return null;
-            }
-
-            return Activator.CreateInstance(collectionType, [list]);
-        }
-
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return true;
+            IImmutableList<T>? list = JsonSerializer.Deserialize<IImmutableList<T>>(ref reader, options);
+            return list is null ? null : [.. list];
         }
     }
 }

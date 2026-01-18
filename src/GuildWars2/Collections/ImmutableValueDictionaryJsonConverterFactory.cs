@@ -50,12 +50,11 @@ public sealed class ImmutableValueDictionaryJsonConverterFactory : JsonConverter
         Type[] typeArguments = typeToConvert.GetGenericArguments();
         Type keyType = typeArguments[0];
         Type valueType = typeArguments[1];
-        Type bclInterfaceType = typeof(IImmutableDictionary<,>).MakeGenericType(keyType, valueType);
-        Type concreteType = typeof(ImmutableValueDictionary<,>).MakeGenericType(keyType, valueType);
-        return new Converter(bclInterfaceType, concreteType);
+        return (JsonConverter)Activator.CreateInstance(typeof(Converter<,>).MakeGenericType(keyType, valueType))!;
     }
 
-    private sealed class Converter(Type bclInterfaceType, Type collectionType) : JsonConverter<object>
+    private sealed class Converter<TKey, TValue> : JsonConverter<IImmutableValueDictionary<TKey, TValue>>
+        where TKey : notnull
     {
         [UnconditionalSuppressMessage(
             "AOT",
@@ -67,9 +66,9 @@ public sealed class ImmutableValueDictionaryJsonConverterFactory : JsonConverter
             "IL2026",
             Justification = "IImmutableDictionary<TKey,TValue> serialization is supported by System.Text.Json."
         )]
-        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IImmutableValueDictionary<TKey, TValue> value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value, bclInterfaceType, options);
+            JsonSerializer.Serialize<IImmutableDictionary<TKey, TValue>>(writer, value, options);
         }
 
         [UnconditionalSuppressMessage(
@@ -82,25 +81,10 @@ public sealed class ImmutableValueDictionaryJsonConverterFactory : JsonConverter
             "IL2026",
             Justification = "IImmutableDictionary<TKey,TValue> deserialization is supported by System.Text.Json."
         )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2067",
-            Justification = "The collection type has a constructor accepting IEnumerable<KeyValuePair<TKey,TValue>>."
-        )]
-        public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override IImmutableValueDictionary<TKey, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            object? dictionary = JsonSerializer.Deserialize(ref reader, bclInterfaceType, options);
-            if (dictionary is null)
-            {
-                return null;
-            }
-
-            return Activator.CreateInstance(collectionType, [dictionary]);
-        }
-
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return true;
+            IImmutableDictionary<TKey, TValue>? dictionary = JsonSerializer.Deserialize<IImmutableDictionary<TKey, TValue>>(ref reader, options);
+            return dictionary is null ? null : new ImmutableValueDictionary<TKey, TValue>(dictionary);
         }
     }
 }

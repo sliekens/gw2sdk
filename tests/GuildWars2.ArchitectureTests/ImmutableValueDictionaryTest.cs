@@ -386,16 +386,60 @@ public class ImmutableValueDictionaryTest
     }
 
     [Test]
+    public async Task Json_roundtrip_serialization_preserves_elements()
+    {
+        ImmutableValueDictionary<string, int> original = new(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+
+        string json = JsonSerializer.Serialize(original);
+        ImmutableValueDictionary<string, int>? deserialized = JsonSerializer.Deserialize<ImmutableValueDictionary<string, int>>(json);
+
+        await Assert.That(deserialized).IsEqualTo(original);
+    }
+
+    [Test]
+    public async Task Interface_json_roundtrip_serialization_preserves_elements()
+    {
+        IImmutableValueDictionary<string, int> original = new ImmutableValueDictionary<string, int>(new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 });
+
+        string json = JsonSerializer.Serialize(original);
+        IImmutableValueDictionary<string, int>? deserialized = JsonSerializer.Deserialize<IImmutableValueDictionary<string, int>>(json);
+
+        await Assert.That(deserialized).IsNotNull();
+        await Assert.That(deserialized!["a"]).IsEqualTo(1);
+        await Assert.That(deserialized["b"]).IsEqualTo(2);
+    }
+
+    [Test]
     public async Task Can_deserialize_json_object_with_extensible_enum_keys()
     {
         const string json = """{"Toughness":239,"HealingPower":171,"Concentration":171}""";
 
-        ImmutableValueDictionary<Extensible<AttributeName>, int>? result =
-            JsonSerializer.Deserialize<ImmutableValueDictionary<Extensible<AttributeName>, int>>(json);
+        IImmutableValueDictionary<Extensible<AttributeName>, int>? result =
+            JsonSerializer.Deserialize<IImmutableValueDictionary<Extensible<AttributeName>, int>>(json);
 
         await Assert.That(result).IsNotNull();
         await Assert.That(result![AttributeName.Toughness]).IsEqualTo(239);
         await Assert.That(result[AttributeName.HealingPower]).IsEqualTo(171);
         await Assert.That(result[AttributeName.Concentration]).IsEqualTo(171);
+    }
+
+    [Test]
+    public async Task Can_serialize_dictionary_with_extensible_enum_keys()
+    {
+        IImmutableValueDictionary<Extensible<AttributeName>, int> sut =
+            new ImmutableValueDictionary<Extensible<AttributeName>, int>(
+                new Dictionary<Extensible<AttributeName>, int>
+                {
+                    [AttributeName.Toughness] = 239,
+                    [AttributeName.HealingPower] = 171,
+                    [AttributeName.Concentration] = 171,
+                }
+            );
+
+        string json = JsonSerializer.Serialize(sut);
+        ImmutableValueDictionary<Extensible<AttributeName>, int>? deserialized =
+            JsonSerializer.Deserialize<ImmutableValueDictionary<Extensible<AttributeName>, int>>(json);
+
+        await Assert.That(deserialized).IsEqualTo(sut);
     }
 }
