@@ -93,6 +93,5 @@ internal static class TraitJson
                 ),
             Skills = skills.Map(static (in values) => values.GetList(static (in value) => value.GetSkill()))
         };
-#pragma warning restore CS0618
     }
 }

@@ -106,6 +106,5 @@ internal static class PrefixedBuffJson
             Description = description.Map(static (in value) => value.GetString()) ?? "",
             ApplyCount = applyCount.Map(static (in value) => value.GetInt32())
         };
-#pragma warning restore CS0618
     }
 }
