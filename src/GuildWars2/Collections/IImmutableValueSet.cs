@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace GuildWars2.Collections;
 
 /// <summary>Represents an immutable set with value semantics for equality comparison.</summary>
@@ -9,6 +11,7 @@ namespace GuildWars2.Collections;
 /// <para>C# does not support return type covariance on interface implementations directly,
 /// so member shadowing with the <c>new</c> keyword is used to achieve the same effect.</para>
 /// </remarks>
+[CollectionBuilder(typeof(ImmutableValueSet), nameof(ImmutableValueSet.Create))]
 public interface IImmutableValueSet<T> : IImmutableSet<T>, IEquatable<IImmutableValueSet<T>>
 {
     /// <inheritdoc cref="IImmutableSet{T}.Add"/>

@@ -7,6 +7,14 @@ public class ImmutableValueListTest
     private sealed record SampleRecord(ImmutableValueList<int> Numbers);
 
     [Test]
+    public async Task Interface_supports_collection_expression()
+    {
+        IImmutableValueList<int> list = [1, 2, 3];
+
+        await Assert.That(list).IsEquivalentTo([1, 2, 3]);
+    }
+
+    [Test]
     public async Task Empty_list_has_zero_count()
     {
         ImmutableValueList<int> list = [];

@@ -7,6 +7,14 @@ public class ImmutableValueSetTest
     private sealed record SampleRecord(ImmutableValueSet<int> Numbers);
 
     [Test]
+    public async Task Interface_supports_collection_expression()
+    {
+        IImmutableValueSet<int> set = [1, 2, 3];
+
+        await Assert.That(set).IsEquivalentTo([1, 2, 3]);
+    }
+
+    [Test]
     public async Task Empty_set_has_zero_count()
     {
         ImmutableValueSet<int> set = [];

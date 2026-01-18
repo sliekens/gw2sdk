@@ -7,6 +7,14 @@ public class ImmutableValueArrayTest
     private sealed record SampleRecord(ImmutableValueArray<int> Numbers);
 
     [Test]
+    public async Task Interface_supports_collection_expression()
+    {
+        IImmutableValueArray<int> array = [1, 2, 3];
+
+        await Assert.That(array).IsEquivalentTo([1, 2, 3]);
+    }
+
+    [Test]
     public async Task Empty_array_has_zero_length()
     {
         ImmutableValueArray<int> array = [];
