@@ -1,26 +1,31 @@
 # Translations
 
-Some API methods return localized data, and you can pass a `Language` object to
-control the language of the text returned by the API. English is used if you don't
-specify any language, or if the specified language is not supported.
+Many API methods return localized text. Pass a `Language` object to control the response language.
 
-Currently the supported languages are:
+---
 
-- English (default)
-- Spanish
-- German
-- French
-- Chinese
+## 🌐 Supported Languages
 
-In .NET, you typically set `CultureInfo.CurrentUICulture` to the user's preferred
-language. However, GW2SDK does not use this setting. Instead, you should pass a
-`Language` object to the API methods that support it. You can use the
-`Language.CurrentUICulture` static property to get the current UI culture as a
-`Language` object.
+| Language | Code |
+|----------|------|
+| English | `en` (default) |
+| Spanish | `es` |
+| German | `de` |
+| French | `fr` |
+| Chinese | `zh` |
+
+> [!NOTE]
+> GW2SDK does **not** use `CultureInfo.CurrentUICulture`. You must pass `Language` explicitly.
+
+---
+
+## 📝 Example
+
+Use `Language.CurrentUICulture` to match the user's system language:
 
 [!code-csharp[](~/samples/Translations/Program.cs)]
 
-Output
+### Output
 
 ``` text
 CurrentUICulture (German)

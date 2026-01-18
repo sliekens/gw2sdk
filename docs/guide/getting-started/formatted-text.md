@@ -1,38 +1,39 @@
-# Formatted text
+# Formatted Text
 
-The game client uses a custom markup language to format text. The language is similar
-to HTML, but with a few differences. The game client uses this language to format
-text in various tooltips, player titles, and other user interfaces.
+Guild Wars 2 uses a custom markup language for tooltips, titles, and other UI text.
 
-For example:
+## 📝 Example
 
+**Input:**
 ```text
 Double-click to apply to an unused infusion slot. Adds a festive glow.
 <c=@Warning>Warning!</c>
 <c=@Flavor>Captain's Council recommends avoiding direct contact with this substance.</c>
 ```
 
-Which is rendered as:
-
+**Rendered:**
 > Double-click to apply to an unused infusion slot. Adds a festive glow.  
 > <span style="color: #ff0000">Warning!</span>  
-> <span style="color: #99dddd">Captain's Council recommends avoiding direct
-contact with this substance.</span>
+> <span style="color: #99dddd">Captain's Council recommends avoiding direct contact with this substance.</span>
 
-## Converting formatted text to other formats
+---
 
-GW2SDK provides a parser for the game's markup format, and formatters to convert
-it to other formats:
+## 🔄 Converting Markup
 
-- `MarkupTextConverter` converts formatted text to plain text, stripping all formatting.
-- `MarkupHtmlConverter` converts formatted text to HTML, preserving the formatting.
+GW2SDK provides converters for the game's markup format:
 
-A convenient `MarkupConverter` class is provided to work with both formatters.
+| Converter | Output |
+|-----------|--------|
+| `MarkupTextConverter` | Plain text (strips formatting) |
+| `MarkupHtmlConverter` | HTML with inline styles |
+| `MarkupConverter` | Convenience wrapper for both |
 
-Alternatively, you can build a custom formatter for your UI framework using the
-`MarkupLexer` and `MarkupParser` classes.
+> [!TIP]
+> Build custom formatters with `MarkupLexer` and `MarkupParser` for your UI framework.
 
-### Converting formatted text to plain text
+---
+
+### To Plain Text
 
 ```csharp
 using GuildWars2.Markup;

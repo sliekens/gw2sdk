@@ -1,19 +1,18 @@
-# Basic usage
+# Basic Usage
 
-The entry point for API access is `GuildWars2.Gw2Client`. It has a single
-dependency on `System.Net.Http.HttpClient` which you must provide from your
-application code.
+## 🚀 Quick Start
+
+The entry point is `Gw2Client`, which requires an `HttpClient`:
 
 ```csharp
 using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 ```
 
-The class consists of logical groups containing related sets of APIs. For example,
-all APIs pertaining to the trading post are grouped into `Gw2Client.Commerce`.
+The client organizes APIs into logical groups. For example, trading post APIs are in `Gw2Client.Commerce`.
 
 <details>
-<summary>Click to reveal the complete list of API sets</summary>
+<summary>📚 Click to see all API groups</summary>
 
 - `Gw2Client.Commerce`: Provides query methods for Black Lion Trading Company services.
 - `Gw2Client.Exploration`: Provides query methods for maps and map features.
@@ -103,66 +102,54 @@ all APIs pertaining to the trading post are grouped into `Gw2Client.Commerce`.
 
 </details>
 
-## The programming model
+---
 
-The query methods on the `Gw2Client` return `Task` objects that you can use to
-await the result. The result is a tuple which contains 2 items:
+## 🔄 The Programming Model
 
-1. The response value, converted to a strongly-typed object
-2. A `MessageContext` object which contains HTTP response message headers
+Query methods return a tuple with two items:
+
+| Item | Description |
+|------|-------------|
+| **Value** | The response data as a strongly-typed object |
+| **MessageContext** | HTTP metadata (headers, caching info) |
 
 ```csharp
 var (quaggans, context) = await gw2.Quaggans.GetQuaggans();
 ```
 
-The first item of the tuple contains the requested data. The second `MessageContext`
-object contains metadata from HTTP response headers. Advanced programs might use
-it to access caching-related response headers.
+Don't need the metadata? Use the discard operator or `ValueOnly()`:
 
-For simple programs, use the discard operator `_`.
-
-``` csharp
-// Discard the MessageContext if you don't need it
+```csharp
+// Option 1: Discard
 var (quaggans, _) = await gw2.Quaggans.GetQuaggans();
-```
 
-You can also use the `ValueOnly()` extension method to discard the `MessageContext`
-object. This is just a convenience method.
-
-``` csharp
+// Option 2: Extension method
 var quaggans = await gw2.Quaggans.GetQuaggans().ValueOnly();
 ```
 
-## Cross-referencing data from multiple sources
+---
 
-The API returns highly normalized data, which means that you often need to make
-multiple requests to get all the data you need. For example, to print a table of
-trading post items with their best buy and sell offers, you need to make a request
-to the item prices API and then cross-reference it with the item details API to
-get the item names. This is a common pattern in the Guild Wars 2 API.
+## 🔗 Cross-Referencing Data
 
-There is a helper method `AsDictionary()` that you can use to make cross-referencing
-easier in some cases.
+The API returns normalized data, so you often need multiple requests. Use `AsDictionary()` for easy lookups:
 
-``` csharp
-// Create a dictionary of maps keyed by their ID (and discard the MessageContext)
+```csharp
+// Create a map lookup by ID
 var maps = await gw2.Exploration.GetMapSummaries()
     .AsDictionary(static map => map.Id)
     .ValueOnly();
 
-// Now you can easily access maps by their ID
+// Quick access by ID
 MapSummary queensdale = maps[15];
 ```
 
-## Example: print a list of tradable items
+---
 
-This sample illustrates the following concepts:
+## 📝 Example: Trading Post Items
 
-1. How to use the `Gw2Client` to access the item prices API with `GetItemPricesBulk`
-2. How to use the `Id` property to access the item details API with `GetItemById`
-
-(For simplicity, `GetItemById` is called inside the loop, but it is not recommended
-as it is an example of N+1 selects.)
+This example shows:
+1. Using `GetItemPricesBulk` to fetch prices
+2. Cross-referencing with `GetItemById` for item names
 
 [!code-csharp[](~/samples/BasicUsage/Program.cs)]
 

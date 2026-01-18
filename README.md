@@ -9,90 +9,99 @@
 
 *A .NET library for the Guild Wars 2 API and game client.*
 
+[Introduction][introduction] · [Installation][installation] · [Usage][usage] · [API Docs][api-docs] · [API Keys][applications]
+
 </div>
 
-## Quick navigation
+---
 
-- [Introduction] to features in the SDK
-- [Installation] instructions for NuGet packages
-- [Basic usage][usage] example for working with the SDK
-- [API documentation][api-docs] for the SDK
-- [API key management][applications] for the Guild Wars 2 API
+## ✨ Features
 
-To give feedback:
+| | |
+|---|---|
+| ⚡ **High Performance** | Low-allocation JSON with System.Text.Json |
+| 🔄 **Async First** | Stream data from both the API and game client |
+| 🎯 **Type Safe** | Full nullability annotations for C# 8.0+ |
+| 🧩 **Pure C#** | No native dependencies |
+| 🌍 **Cross-Platform** | Runs anywhere .NET runs |
+| 🚀 **AOT Ready** | Supports ahead-of-time compilation |
+| 📜 **MIT License** | Free and open source |
 
-- [GitHub Issues][new-issue] for bug reports and feature requests
-- [GitHub Discussions][new-discussion] for other feedback or questions
+## ⚡ Quick Start
 
-## Features
+```csharp
+using var httpClient = new HttpClient();
+var gw2 = new Gw2Client(httpClient);
 
-The SDK provides an interface to the Guild Wars 2 API and game client. It is designed
-to be easy to use and to provide a high level of performance.
+// Get today's daily achievements
+var dailies = await gw2.Hero.Achievements.GetDailyAchievements();
 
-It provides the following features and benefits:
+// Get trading post prices
+var prices = await gw2.Commerce.GetItemPriceById(19721); // Glob of Ectoplasm
+Console.WriteLine($"Buy: {prices.Value.BestBid}, Sell: {prices.Value.BestAsk}");
+```
 
-- Asynchronous methods to query the API
-- Asynchronous methods to stream data from the game client
-- High performance, low-allocation JSON conversions with System.Text.Json
-- Type safety and nullability annotations for C# 8.0+
-- Pure C# implementation, no native dependencies
-- Cross-platform support
-- AOT compilation support
-- Free and open source under the MIT license
+## 📦 Platform Support
 
-## Platform support
+GW2SDK targets .NET Standard 2.0, supporting modern and legacy runtimes:
 
-GW2SDK is compiled for .NET Standard 2.0 so it supports a wide range of platforms:
+| Platform | Version |
+|----------|---------|
+| .NET | 8.0+ |
+| .NET Framework | 4.6.2+ |
+| Mono | 5.4+ |
+| Xamarin.iOS | 10.14+ |
+| Xamarin.Mac | 3.8+ |
+| Xamarin.Android | 8.0+ |
+| UWP | 10.0.16299+ |
+| Unity | 2018.1+ |
 
-- .NET Core 2.0+
-- .NET Framework 4.6.2+
-- Mono 5.4+
-- Xamarin.iOS 10.14+
-- Xamarin.Mac 3.8+
-- Xamarin.Android 8.0+
-- Universal Windows Platform 10.0.16299+
-- Unity 2018.1+
+> **Note:** Game client integration (MumbleLink) requires Windows. Wine compatibility is untested.
 
-Retrieving information from the game client is only supported on Windows due to
-the use of named memory-mapped files. It might work in Wine, but it has not been
-tested.
+## 🤝 Contributing
 
-## Contributing
+Check the [wiki] for contributor guidelines and the [documentation] site for user guides.
 
-The [wiki] contains information for contributors. The _docs_ directory contains
-user-facing articles which are used to build the [documentation] site.
-
-You are welcome to create an [issue][new-issue] if you find something is missing
-or broken, or a [discussion][new-discussion] for other feedback, questions or ideas.
-
-You are also welcome to propose changes directly with a pull request.
-
-- Small changes can be made with the free [github.dev] editor or the cloud editors
-  below.
-- A Dev Container definition is provided for larger changes.
-  GitHub Codespaces and Codeanywhere can use this definition to create a development
-  environment in your browser. Gitpod does not seem to support Dev Containers yet.
+<div align="center">
 
 [![Open in GitHub Codespaces][codespaces-badge]](https://codespaces.new/sliekens/gw2sdk)
 
-(Light usage of Codespaces is [free]*, up to around 60 hours per month if you choose
-the lightest machine and don't exceed 15GB disk usage. This codespace weighs around
-2.84GB.)
+</div>
+
+**Other ways to contribute:**
+- 🐛 [Report a bug][new-issue] or 💡 [request a feature][new-issue]
+- 💬 [Start a discussion][new-discussion] for questions or feedback
+- ✏️ [Quick edit][github.dev] typos directly in your browser
+
+<details>
+<summary>More cloud development options</summary>
 
 [![Open in Codeanywhere][codeanywhere-badge]](https://app.codeanywhere.com/#https://github.com/sliekens/gw2sdk)
-
 [![Open in Gitpod][gitpod-badge]](https://gitpod.io/#https://github.com/sliekens/gw2sdk)
 
-## Additional resources
+> [!TIP]
+> GitHub Codespaces offers ~60 free hours/month.
 
-- [Codecov][codecov] contains test coverage reports
-- [Guild Wars 2 wiki: API][api] contains API endpoint documentation
-- [Guild Wars 2 wiki: chat link format][chatlinks] contains the format of chat links
-- [Guild Wars 2 wiki: MumbleLink format][mumblelink] contains the format of the
-  MumbleLink structure
-- <https://api.guildwars2.com/v2> contains an overview of API endpoints
-- <https://api.guildwars2.com/v2.json?v=latest> contains API endpoints, schema versions
-  and changelog in machine-readable format
+</details>
+
+## 📚 Resources
+
+| Resource | Description |
+|----------|-------------|
+| [Codecov][codecov] | Test coverage reports |
+| [GW2 Wiki: API][api] | Official API documentation |
+| [GW2 Wiki: Chat Links][chatlinks] | Chat link format specification |
+| [GW2 Wiki: MumbleLink][mumblelink] | MumbleLink structure format |
+| [API Explorer](https://api.guildwars2.com/v2) | Browse available endpoints |
+| [API Schema](https://api.guildwars2.com/v2.json?v=latest) | Machine-readable endpoint data |
+
+---
+
+<div align="center">
+
+Made with ❤️ for the Guild Wars 2 community
+
+</div>
 
 [//]:# (add links to the section below)
 [actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22

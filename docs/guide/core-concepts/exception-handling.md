@@ -1,19 +1,20 @@
-# Exception handling
+# Exception Handling
 
-If a total request failure occurs (such as DNS resolution errors), the `Gw2Client`
-throws `HttpRequestException`, which is the same behavior as if you used `HttpClient`
-directly.
+## 🔴 Exception Types
 
-If the request is successful, but the response cannot be used, the `Gw2Client`
-throws `BadResponseException`. This can happen when the API returns a 4xx or 5xx
-status code, or when the response is not in the expected format (such as HTML instead
-of JSON). `BadResponseException` is a subclass of `HttpRequestException`, so you
-don't need to catch it separately, unless you need to handle specific HTTP statuses
-like `429 Too Many Requests`.
+| Exception | When It's Thrown |
+|-----------|------------------|
+| `HttpRequestException` | Network failures (DNS errors, connection timeouts) |
+| `BadResponseException` | API returns 4xx/5xx status or unexpected format (HTML instead of JSON) |
 
-The following example demonstrates which exceptions you might need to catch:
+> [!NOTE]
+> `BadResponseException` extends `HttpRequestException`, so you can catch both with a single handler—unless you need to handle specific status codes like `429`.
 
-``` csharp
+---
+
+## 📝 Example
+
+```csharp
 using System;
 using System.Net;
 using System.Net.Http;
@@ -22,20 +23,21 @@ using GuildWars2.Http;
 
 using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
+
 try
 {
     var (quaggans, context) = await gw2.Quaggans.GetQuaggans();
 }
-catch (BadResponseException badResponse) when (badResponse.StatusCode == HttpStatusCode.TooManyRequests)
+catch (BadResponseException ex) when (ex.StatusCode == HttpStatusCode.TooManyRequests)
 {
-    Console.WriteLine("Too many requests");
+    Console.WriteLine("Rate limited - try again later");
 }
-catch (BadResponseException badResponse)
+catch (BadResponseException ex)
 {
-    Console.WriteLine("API returned an unusable response: " + badResponse.Message);
+    Console.WriteLine($"API error: {ex.Message}");
 }
-catch (HttpRequestException httpRequestException)
+catch (HttpRequestException ex)
 {
-    Console.WriteLine("General request failure: " + httpRequestException.Message);
+    Console.WriteLine($"Network error: {ex.Message}");
 }
 ```

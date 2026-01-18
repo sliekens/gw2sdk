@@ -1,65 +1,67 @@
-# Usage limits
+# Usage Limits
 
-However unfortunate, the API is not unlimited. There is a rate limit that applies to all API requests, which is designed to prevent abuse and ensure fair and stable performance for all users.
+The Guild Wars 2 API has rate limits to ensure fair access for all users.
 
-The rate limit for the Guild Wars 2 API is officially 600 requests per minute. However the community has discovered that the actual limit is only about 300 requests per minute. This means that if you make more than 300 requests in one minute from the same IP address, you will receive an error response with the status code 429 (Too Many Requests) and a message saying "too many requests"
+---
 
-The API rate limits are applied per IP address, not per account or application. This means that if you have multiple applications or devices using the same IP address, they will share the same rate limit.
+## 📊 Rate Limit Details
 
-## How to deal with the API rate limits?
+| | |
+|---|---|
+| **Official limit** | 600 requests/minute |
+| **Actual limit** | ~300 requests/minute (community-discovered) |
+| **Scope** | Per IP address (shared across all apps/devices) |
+| **Error response** | HTTP `429 Too Many Requests` |
 
-The best way to deal with the API rate limits is to avoid hitting them in the first place. Here are some tips on how to optimize your API usage and reduce the number of requests:
+---
 
-- Use caching
-- Use batching
-- use throttling
+## 🛡️ Avoiding Rate Limits
 
-### Caching
+### 1️⃣ Caching
 
-You should cache any data that is static or rarely changes, such as items, recipes, maps, etc. and only redownload them from the API when your cache becomes stale. You can use various tools and libraries to implement caching in your application, such as a MemoryCache or a distributed cache like Redis.
+Cache static or rarely-changing data (items, recipes, maps) and refresh only when stale.
 
-The Guild Wars 2 API primarily uses the `Last-Modified` or `Expires` headers to indicate the age or freshness of the data. You can use these headers to determine when to refresh your cache. At the time of writing, there is no good caching library for .NET that supports these headers, so you will have to implement your own caching logic.
-
-### Batching
-
-Batching is a technique that allows you to combine multiple requests into one single request, by using comma-separated values in the query parameters. This can reduce the number of requests. For example, instead of making 10 requests to get 10 different items by their IDs, you can make one request with all 10 IDs in the query parameter: /v2/items?ids=1,2,3,...,10
-
-GW2SDK supports batching by allowing you to pass multiple IDs to the `GetItemsByIds` method. For example, instead of calling `GetItemById(1)` 10 times, you can call `GetItemsByIds(new[] { 1, 2, 3, ..., 10 })` once.
-
-> [!WARNING]
-> There is a hard limit of 200 IDs per request. If you pass more than 200 IDs, you will receive an `ArgumentException` with a message saying "too many ids".
+| Tool | Use Case |
+|------|----------|
+| `MemoryCache` | Single-instance apps |
+| Redis | Distributed systems |
 
 > [!TIP]
-> Methods for bulk expansion are provided which can be used with more than 200 IDs.
-> 
-> For example, you can use `Gw2Client.Items.GetItemsBulk(Enumerable.Range(1, 1000).ToList())` to get 1000 items by their ids. This will fan out into 5 requests, each with 200 IDs, which will be executed in parallel. The result is an `IAsyncEnumerable<Item>` which you can iterate with `await foreach`
+> Check `Last-Modified` and `Expires` headers to determine freshness.
 
-### Throttling
+### 2️⃣ Batching
 
-Throttling is a technique that limits the rate at which you make requests to the API. For example, instead of making 10 requests per second, you can make 1 request per second. You can implement throttling using various methods, such as timers, queues, or libraries.
+Combine multiple requests into one using comma-separated IDs:
 
-## What happens if you hit the API rate limits?
+```csharp
+// ❌ 10 requests
+for (int i = 1; i <= 10; i++)
+    await gw2.Items.GetItemById(i);
 
-If you hit the API rate limits, you will receive a `BadResponseException` with a message saying "too many requests" and its `StatusCode` property set to `429`.
+// ✅ 1 request
+await gw2.Items.GetItemsByIds([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+```
 
-This means that you have exceeded your allowed number of requests. You should temporarily stop making any further requests. Unfortunately, there is no way to know exactly how many requests are available to you at any given time, so you will have to guess based on your previous usage patterns.
+> [!WARNING]
+> **Hard limit:** 200 IDs per request. Exceeding this throws `ArgumentException`.
 
-## How to handle the API rate limit errors?
+> [!TIP]
+> Need more than 200? Use bulk methods like `GetItemsBulk()` which automatically fan out into parallel requests and return `IAsyncEnumerable<T>`.
 
-GW2SDK does not by default handle API rate limit errors, because rate limit handling is a complex topic that depends on the specific application and use case.
+### 3️⃣ Throttling
 
-If you encounter a Too Many Requests error, you should handle it gracefully in your application. Here are some suggestions on how to do that:
+Limit your request rate using timers, queues, or rate-limiting libraries.
 
-### Interactive applications
+---
 
-User apps, websites, chat bots, command line tools etc.:
+## 🚨 Handling Rate Limit Errors
 
-- Show an appropriate message to the user, informing them that the data is temporarily unavailable and asking them to try again later.
-- You can also provide alternative options or fallback data, such as cached data or default values, to keep the user engaged and satisfied.
+When rate limited, you receive `BadResponseException` with `StatusCode = 429`.
 
-### Non-interactive applications
+| App Type | Recommendation |
+|----------|----------------|
+| **Interactive** (UI, bots, CLI) | Show a friendly message, use cached/fallback data |
+| **Background** (jobs, queues) | Retry with exponential backoff, log for analysis |
 
-background jobs, message queue handlers, etc.:
-
-- Retry the request after a reasonable delay. You can use a backoff strategy to increase the delay between retries, to avoid hitting the rate limit again.
-- Monitor and log the rate limit errors, and analyze them to identify the root cause and possible solutions.
+> [!NOTE]
+> GW2SDK doesn't auto-retry rate limits—handling depends on your use case. See [Resiliency](resiliency.md) for Polly integration.

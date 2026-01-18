@@ -1,45 +1,51 @@
 # Installation
 
-The recommended way to install the Guild Wars 2 SDK is to use the [NuGet package][nuget].
-You can install the package from the command line using the .NET CLI.
+## 📦 From NuGet (Recommended)
 
-``` sh
+Install the stable release from [NuGet][nuget]:
+
+```sh
 dotnet add package GW2SDK
 ```
 
-## Development packages
+---
 
-You can install development packages from GitHub from [here][packages]. These packages
-are updated on every commit to the main branch and versioned by number of git commits
-since the last release. (Format: 1.0.0-preview.0.123)
+## 🧪 Development Packages
 
-First create a personal access token [here][tokens] with the _read:packages_ scope.
-Then run the following command.
+Preview builds are available from [GitHub Packages][packages], updated on every commit to `main`.
 
-``` sh
+> Version format: `1.0.0-preview.0.123` (commits since last release)
+
+### Setup
+
+1. Create a [personal access token][tokens] with the `read:packages` scope
+2. Add the package source:
+
+```sh
 dotnet nuget add source https://nuget.pkg.github.com/sliekens/index.json \
     --name sliekens \
     --username <USERNAME> --password <TOKEN>
 ```
 
-Replace `USERNAME` with the name of your user account on GitHub.
-Replace `TOKEN` with your personal access token.
+### Token Storage
 
-By default, your token is stored in encrypted format in your user directory.
+Your token is encrypted and stored in:
 
-- Windows: `%appdata%\NuGet\NuGet.Config`
-- Mac/Linux: `~/.config/NuGet/NuGet.Config` or `~/.nuget/NuGet/NuGet.Config`
-  (varies by OS distribution)
+| Platform | Location |
+|----------|----------|
+| Windows | `%appdata%\NuGet\NuGet.Config` |
+| Mac/Linux | `~/.config/NuGet/NuGet.Config` or `~/.nuget/NuGet/NuGet.Config` |
 
-Encryption is not supported on every platform. If you get an error, try the
-command again with `--store-password-in-clear-text`.
+> [!TIP]
+> If encryption fails on your platform, add `--store-password-in-clear-text` to the command.
 
-## Uninstalling development packages
+---
 
-To stop using development packages, you can remove the NuGet source from your
-machine. This will remove the source and your token.
+## 🗑️ Removing Development Packages
 
-``` sh
+To stop using preview builds:
+
+```sh
 dotnet nuget remove source sliekens
 ```
 

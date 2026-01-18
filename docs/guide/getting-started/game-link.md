@@ -1,65 +1,50 @@
-# Game link
+# Game Link
 
-The game client provides the following realtime information about the player:
-
-- The player's character name, [race], [profession], and [specialization].
-- The player's [world] ID.
-- Whether the player is in a competitive game type (PvP, WvW).
-- The player's team color in a competitive game.
-- Whether the player is in combat.
-- Whether the player is the leader of a squad.
-- The player's mount (while using a mount).
-- The player's current map ID and map type
-- The player's coordinates and orientation.
-- The camera's coordinates, orientation and vertical field of view.
-
-It also provides information about UI elements:
-
-- The UI size setting (Small, Normal, Large, Larger).
-- The width and height of the in-game compass.
-- The compass/world map zoom factor.
-- Whether the world map is open.
-- Whether the compass is docked at the top or bottom.
-- Whether rotation is enabled for the compass, and the current rotation.
-- Whether a textbox has focus.
-
-Last but not least, some metadata about the game:
-
-- The server IP address (same as typing /ip in the game).
-- The shard ID (its purpose is currently unknown).
-- The instance ID (seems unused).
-- The build number of the game client.
-- The process ID of the game client.
-- Whether the game client has focus.
+The game client exposes realtime data via MumbleLink, a shared memory protocol.
 
 > [!NOTE]
-> The GameLink is not a hack nor a cheat, it's a supported feature of the game client.
-> It is an implementation of the MumbleLink protocol, which is used by the Mumble voice chat software.
-> Technically, the game periodically writes all this information to a memory-mapped file,
-> which we then read on a configureable refresh interval.
+> This is **not** a hack—it's an officially supported feature used by Mumble voice chat.
 
-## Basic usage
+---
 
-The entry point for accessing game client information is `GuildWars2.GameLink`.
-This class implements `IObservable` so you should be familiar with the
-publisher-subscriber model. The general usage pattern is to open the GameLink,
-subscribe to it, and then wait for updates.
+## 🎮 Available Data
 
-I recommend to use the Reactive Extensions
-([System.Reactive][Rx]) library to subscribe to the GameLink. Rx is a powerful
-library that makes it easy to work with asynchronous data streams.
+### Player Information
 
-To use the GameLink, pass an observer to `GameLink.Subscribe()`. An observer is
-a class that implements `IObserver<GameTick>`, or an `Action<GameTick>` when
-using Rx. The GameLink will then start pushing GameTicks to the observer (with
-configurable intervals). Each GameTick corresponds to a single update from the
-game client and it's usually updated on every frame. You can use
-`GameLink.Open(TimeSpan)` with a refresh interval of your choice if you need less
-frequent updates.
+| Data | Description |
+|------|-------------|
+| Identity | Character name, [race], [profession], [specialization] |
+| [World] ID | Home server |
+| Game Mode | PvE, PvP, or WvW (with team color) |
+| Status | In combat, squad leader, current mount |
+| Location | Map ID, coordinates, orientation |
 
-The game client (Gw2-64.exe) must be running for the GameLink to work.
+### Camera & UI
 
-``` csharp
+| Data | Description |
+|------|-------------|
+| Camera | Position, orientation, field of view |
+| Compass | Size, rotation, docked position |
+| Map | Open/closed state, zoom level |
+| UI | Size setting, textbox focus state |
+
+### Metadata
+
+| Data | Description |
+|------|-------------|
+| Server | IP address, shard ID, build number |
+| Process | Game client PID, focus state |
+
+---
+
+## 🚀 Basic Usage
+
+`GameLink` implements `IObservable<GameTick>`, so use the publisher-subscriber pattern.
+
+> [!TIP]
+> Install [System.Reactive][Rx] for a better experience with observables.
+
+```csharp
 using System;
 using GuildWars2;
 
@@ -83,43 +68,34 @@ gameLink.Subscribe(
 );
 ```
 
-## Multiple game clients
+---
 
-The default name of the memory-mapped file is `MumbleLink` but it can be changed
-with a command line flag, which is useful if you need to run multiple game clients
-and use the GameLink with each running instance.
+## 🔀 Multiple Game Clients
 
-``` cmd
+The default memory-mapped file is `MumbleLink`. For multiple instances, use a custom name:
+
+```cmd
 gw2-64.exe -mumble OtherLink
 ```
 
-Now you must pass the same name to `GameLink.Open()`.
-
-``` csharp
+```csharp
 var link = GameLink.Open(name: "OtherLink");
 ```
 
-(Side note: `-mumble 0` disables MumbleLink output.)
+> [!TIP]
+> Use `-mumble 0` to disable MumbleLink entirely.
 
-## Example
+---
 
-Here is an example observer that prints all available information to the console.
-You can download and run this example from the [samples directory](https://github.com/sliekens/gw2sdk/tree/main/samples/Mumble).
+## 📝 Complete Example
 
-It illustrates the following concepts:
+A full example is available in the [samples directory](https://github.com/sliekens/gw2sdk/tree/main/samples/Mumble).
 
-- How to check if the GameLink is supported on the current platform
-- How to subscribe to the `GameLink` with Rx
-- How to use the `GameTick` properties to get the player's current map, specialization, etc.
-- How to use the `Gw2Client` to cross-reference information from the game client with API data
-- How to check if the player is in combat, typing, looking at the map, etc.
-
-The example consists of a few classes:
-
-- `GameListener` is the observer that prints the game client information to the console.
-- `ReferenceData` contains the API data that is used to cross-reference the game client information.
-- `DataService` is a helper class that fetches the API data.
-- `Program` is the entry point that wires everything together.
+**Features demonstrated:**
+- Platform compatibility check
+- Rx subscription
+- Cross-referencing with API data
+- Player state detection (combat, typing, map open)
 
 ### GameListener.cs
 [!code-csharp[](~/samples/Mumble/GameListener.cs)]
