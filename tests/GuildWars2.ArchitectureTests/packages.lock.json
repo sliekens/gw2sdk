@@ -37,16 +37,16 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[1.11.64, )",
-        "resolved": "1.11.64",
-        "contentHash": "XAXJSYAdZTvc1OiapsU8YUhsnssxEyKmJ//puPEri8TwVFW8PChp0aw9DyGTZoYXA8J0KutmvG5GtRsAnYDn3Q==",
+        "requested": "[1.12.3, )",
+        "resolved": "1.12.3",
+        "contentHash": "hLf4lLdu11aK4h5EhMhcRtT364MqpFBaDtrREiW8eE3Cy5GzIeSghM8YM52DF5MPdv+otN1lItd8ldB8GYm84g==",
         "dependencies": {
           "Microsoft.Testing.Extensions.CodeCoverage": "18.3.2",
           "Microsoft.Testing.Extensions.Telemetry": "2.0.2",
           "Microsoft.Testing.Extensions.TrxReport": "2.0.2",
           "System.Threading.Tasks.Extensions": "4.6.3",
-          "TUnit.Assertions": "1.11.64",
-          "TUnit.Engine": "1.11.64"
+          "TUnit.Assertions": "1.12.3",
+          "TUnit.Engine": "1.12.3"
         }
       },
       "EnumerableAsyncProcessor": {
@@ -262,8 +262,8 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "1.11.64",
-        "contentHash": "NuNdpTIck8eTPoVElBqo4H8lSACh3MMcOPisZqjwi5OGnbykuyYCYhReCQQMjejjmeLhOukWLsLCwriNl1AZlA==",
+        "resolved": "1.12.3",
+        "contentHash": "IukJgaDGuKJwzOYLSRp5229DRnZ2ICQOpEd/MI7mH4dmOcfaMjLc3i4clH7qamuIIrcS3/JHsG9o3EyCcm4GAA==",
         "dependencies": {
           "System.Collections.Immutable": "9.0.0",
           "System.Text.Json": "9.0.0",
@@ -272,8 +272,8 @@
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "1.11.64",
-        "contentHash": "VyiPlVu3Ukf8dp3gmvdWW1HIapE7/jF/2xZDbsTl4NU+yXuYRtecZRkgLlcLjVN5Ba4nSzpBrchYOUBfDCtmDw==",
+        "resolved": "1.12.3",
+        "contentHash": "GRfjnozy8uYfP7tBN403eTzDhnQU060Nxwcw2gAE4Szp4mRDDlners0ZxtcQv3Tv6tcv62rjbSyI2GGOZUIiYg==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Collections.Immutable": "9.0.0",
@@ -283,8 +283,8 @@
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "1.11.64",
-        "contentHash": "4EkIDQYCUx+5mrFIisqW7/8w8Kj3IsZ9/8+k8smJM686xEe+3OH6S4VE90EUGL93pRqcBZZq4BJq/vrQnS/5Iw==",
+        "resolved": "1.12.3",
+        "contentHash": "+KsgyrurZZDEi7nXZihzDa5IDhSM6aN+cYhCtwJ1YOL5jTOaT2tUResMRqjUAP+HfatTwK9OHXWYr/a0F/qpIg==",
         "dependencies": {
           "EnumerableAsyncProcessor": "3.8.4",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.0.2",
@@ -292,7 +292,7 @@
           "Microsoft.Testing.Platform.MSBuild": "2.0.2",
           "System.Threading.Channels": "9.0.0",
           "System.Threading.Tasks.Extensions": "4.6.3",
-          "TUnit.Core": "1.11.64"
+          "TUnit.Core": "1.12.3"
         }
       },
       "guildwars2.tests.common": {
@@ -338,15 +338,15 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[1.11.64, )",
-        "resolved": "1.11.64",
-        "contentHash": "XAXJSYAdZTvc1OiapsU8YUhsnssxEyKmJ//puPEri8TwVFW8PChp0aw9DyGTZoYXA8J0KutmvG5GtRsAnYDn3Q==",
+        "requested": "[1.12.3, )",
+        "resolved": "1.12.3",
+        "contentHash": "hLf4lLdu11aK4h5EhMhcRtT364MqpFBaDtrREiW8eE3Cy5GzIeSghM8YM52DF5MPdv+otN1lItd8ldB8GYm84g==",
         "dependencies": {
           "Microsoft.Testing.Extensions.CodeCoverage": "18.3.2",
           "Microsoft.Testing.Extensions.Telemetry": "2.0.2",
           "Microsoft.Testing.Extensions.TrxReport": "2.0.2",
-          "TUnit.Assertions": "1.11.64",
-          "TUnit.Engine": "1.11.64"
+          "TUnit.Assertions": "1.12.3",
+          "TUnit.Engine": "1.12.3"
         }
       },
       "EnumerableAsyncProcessor": {
@@ -410,24 +410,24 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "1.11.64",
-        "contentHash": "NuNdpTIck8eTPoVElBqo4H8lSACh3MMcOPisZqjwi5OGnbykuyYCYhReCQQMjejjmeLhOukWLsLCwriNl1AZlA=="
+        "resolved": "1.12.3",
+        "contentHash": "IukJgaDGuKJwzOYLSRp5229DRnZ2ICQOpEd/MI7mH4dmOcfaMjLc3i4clH7qamuIIrcS3/JHsG9o3EyCcm4GAA=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "1.11.64",
-        "contentHash": "VyiPlVu3Ukf8dp3gmvdWW1HIapE7/jF/2xZDbsTl4NU+yXuYRtecZRkgLlcLjVN5Ba4nSzpBrchYOUBfDCtmDw=="
+        "resolved": "1.12.3",
+        "contentHash": "GRfjnozy8uYfP7tBN403eTzDhnQU060Nxwcw2gAE4Szp4mRDDlners0ZxtcQv3Tv6tcv62rjbSyI2GGOZUIiYg=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "1.11.64",
-        "contentHash": "4EkIDQYCUx+5mrFIisqW7/8w8Kj3IsZ9/8+k8smJM686xEe+3OH6S4VE90EUGL93pRqcBZZq4BJq/vrQnS/5Iw==",
+        "resolved": "1.12.3",
+        "contentHash": "+KsgyrurZZDEi7nXZihzDa5IDhSM6aN+cYhCtwJ1YOL5jTOaT2tUResMRqjUAP+HfatTwK9OHXWYr/a0F/qpIg==",
         "dependencies": {
           "EnumerableAsyncProcessor": "3.8.4",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.0.2",
           "Microsoft.Testing.Platform": "2.0.2",
           "Microsoft.Testing.Platform.MSBuild": "2.0.2",
-          "TUnit.Core": "1.11.64"
+          "TUnit.Core": "1.12.3"
         }
       },
       "guildwars2.tests.common": {
