@@ -13,7 +13,7 @@ namespace GuildWars2.Collections;
 [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify constructor calls that wrap ImmutableArray<T>.")]
 [SuppressMessage("Style", "IDE0301", Justification = "Cannot simplify to collection expression.")]
 [SuppressMessage("Style", "IDE0303", Justification = "Cannot simplify to collection expression.")]
-public sealed class ImmutableValueArray<T> : IImmutableValueArray<T>
+public sealed class ImmutableValueArray<T> : IImmutableValueList<T>, IEquatable<ImmutableValueArray<T>>
 {
     /// <summary>Gets an empty <see cref="ImmutableValueArray{T}"/>.</summary>
     [SuppressMessage("Design", "CA1000", Justification = "Follows BCL pattern for immutable collections.")]
@@ -217,10 +217,28 @@ public sealed class ImmutableValueArray<T> : IImmutableValueArray<T>
         return Empty;
     }
 
-    /// <summary>Determines whether the current <see cref="ImmutableValueArray{T}"/> is equal to another <see cref="IImmutableValueArray{T}"/> based on value semantics.</summary>
-    /// <param name="other">The other <see cref="IImmutableValueArray{T}"/> to compare with this instance.</param>
+    /// <summary>Determines whether the current <see cref="ImmutableValueArray{T}"/> is equal to another <see cref="ImmutableValueArray{T}"/> based on value semantics.</summary>
+    /// <param name="other">The other <see cref="ImmutableValueArray{T}"/> to compare with this instance.</param>
     /// <returns><c>true</c> if the arrays are equal by value; otherwise, <c>false</c>.</returns>
-    public bool Equals(IImmutableValueArray<T>? other)
+    public bool Equals(ImmutableValueArray<T>? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return items.SequenceEqual(other);
+    }
+
+    /// <summary>Determines whether the current <see cref="ImmutableValueArray{T}"/> is equal to another <see cref="IImmutableValueList{T}"/> based on value semantics.</summary>
+    /// <param name="other">The other <see cref="IImmutableValueList{T}"/> to compare with this instance.</param>
+    /// <returns><c>true</c> if the collections are equal by value; otherwise, <c>false</c>.</returns>
+    public bool Equals(IImmutableValueList<T>? other)
     {
         if (other is null)
         {
@@ -238,7 +256,7 @@ public sealed class ImmutableValueArray<T> : IImmutableValueArray<T>
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || (obj is IImmutableValueArray<T> other && Equals(other));
+        return ReferenceEquals(this, obj) || (obj is ImmutableValueArray<T> other && Equals(other));
     }
 
     /// <summary>Returns a hash code based on the values of the items in the array.</summary>
@@ -348,67 +366,67 @@ public sealed class ImmutableValueArray<T> : IImmutableValueArray<T>
 
     #endregion Explicit IImmutableList<T> implementation
 
-    #region Explicit IImmutableValueArray<T> implementation
+    #region Explicit IImmutableValueList<T> implementation
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.Add(T value)
+    IImmutableValueList<T> IImmutableValueList<T>.Add(T value)
     {
         return Add(value);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.AddRange(IEnumerable<T> items)
+    IImmutableValueList<T> IImmutableValueList<T>.AddRange(IEnumerable<T> items)
     {
         return AddRange(items);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.Clear()
+    IImmutableValueList<T> IImmutableValueList<T>.Clear()
     {
         return Clear();
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.Insert(int index, T element)
+    IImmutableValueList<T> IImmutableValueList<T>.Insert(int index, T element)
     {
         return Insert(index, element);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.InsertRange(int index, IEnumerable<T> items)
+    IImmutableValueList<T> IImmutableValueList<T>.InsertRange(int index, IEnumerable<T> items)
     {
         return InsertRange(index, items);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.Remove(T value, IEqualityComparer<T>? equalityComparer)
+    IImmutableValueList<T> IImmutableValueList<T>.Remove(T value, IEqualityComparer<T>? equalityComparer)
     {
         return Remove(value, equalityComparer);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveAll(Predicate<T> match)
+    IImmutableValueList<T> IImmutableValueList<T>.RemoveAll(Predicate<T> match)
     {
         return RemoveAll(match);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveAt(int index)
+    IImmutableValueList<T> IImmutableValueList<T>.RemoveAt(int index)
     {
         return RemoveAt(index);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
+    IImmutableValueList<T> IImmutableValueList<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T>? equalityComparer)
     {
         return RemoveRange(items, equalityComparer);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.RemoveRange(int index, int count)
+    IImmutableValueList<T> IImmutableValueList<T>.RemoveRange(int index, int count)
     {
         return RemoveRange(index, count);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
+    IImmutableValueList<T> IImmutableValueList<T>.Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer)
     {
         return Replace(oldValue, newValue, equalityComparer);
     }
 
-    IImmutableValueArray<T> IImmutableValueArray<T>.SetItem(int index, T value)
+    IImmutableValueList<T> IImmutableValueList<T>.SetItem(int index, T value)
     {
         return SetItem(index, value);
     }
 
-    #endregion Explicit IImmutableValueArray<T> implementation
+    #endregion Explicit IImmutableValueList<T> implementation
 }
