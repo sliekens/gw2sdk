@@ -43,7 +43,7 @@ var input = "Double-click to apply to an unused infusion slot. Adds a festive gl
     + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
     + " substance.</c>";
 
-var plainText = MarkupConverter.ToPlainText(input);
+string plainText = MarkupConverter.ToPlainText(input);
 Console.WriteLine(plainText);
 ```
 
@@ -63,7 +63,7 @@ var input = "Double-click to apply to an unused infusion slot. Adds a festive gl
     + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
     + " substance.</c>";
 
-var html = MarkupConverter.ToHtml(input);
+string html = MarkupConverter.ToHtml(input);
 Console.WriteLine(html);
 ```
 
@@ -81,17 +81,18 @@ Optionally, you can override the default colors. Start by cloning the default
 color map, and then modify the values:
 
 ```csharp
-var input = "Double-click to apply to an unused infusion slot. Adds a festive glow."
-    + "\n<c=@Warning>Warning!</c>"
-    + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
-    + " substance.</c>";
+string input = """
+    Double-click to apply to an unused infusion slot. Adds a festive glow.
+    <c=@Warning>Warning!</c>
+    <c=@Flavor>Captain's Council recommends avoiding direct contact with this substance.</c>
+    """;
 
-var colorMap = new Dictionary<string, string>(MarkupColorName.DefaultColorMap)
+Dictionary<string, string> colorMap = new(MarkupColorName.DefaultColorMap)
 {
     [MarkupColorName.Flavor] = "hotpink"
 };
 
-var html = MarkupConverter.ToHtml(input, colorMap);
+string html = MarkupConverter.ToHtml(input, colorMap);
 Console.WriteLine(html);
 ```
 
@@ -110,113 +111,11 @@ markup language, and then convert the syntax tree to the desired format.
 For example, to convert the markup language to the markup language used by
 [Spectre.Console](https://spectreconsole.net/markup):
 
-```csharp
-using System.Text;
-using GuildWars2.Markup;
-using Spectre.Console;
-
-public class SpectreMarkupConverter
-{
-    // This is the entry point for the conversion.
-    // Input: The ROOT node of the syntax tree.
-    // Output: the formatted text that can be understood by your UI framework.
-    //   In this Spectre.Console example, the return type is a string,
-    //   but it could also be an object like System.Windows.Media.FormattedText.
-    public string Convert(RootNode root)
-    {
-        var builder = new StringBuilder();
-        foreach (var node in root.Children)
-        {
-            builder.Append(ConvertNode(node));
-        }
-
-        return builder.ToString();
-    }
-
-    // This method converts a single node in the syntax tree to the desired format.
-    // Input: the CURRENT node encountered while traversing the syntax tree.
-    // Output: the formatted text that can be understood by your UI framework.
-    //   In this Spectre.Console example, the return type is a string,
-    //   but it could also be an object like System.Windows.Media.FormattedText.
-    private string ConvertNode(MarkupNode node)
-    {
-        // MarkupNode is the base type for all nodes in the syntax tree.
-        // Use a switch statement to convert each type of node to the desired format.
-        // You could also use pattern matching with C# 9.
-        switch (node.Type)
-        {
-            // TextNode is just a plain text node, no formatting.
-            case MarkupNodeType.Text:
-                var text = (TextNode)node;
-                return Markup.Escape(text.Text);
-
-            // LineBreakNode represents a line break, covers both \n and <br>
-            case MarkupNodeType.LineBreak:
-                return Environment.NewLine;
-            
-            // ColoredTextNode represents text with a color like <c=#ff000>text</c>
-            // or <c=@warning>text</c>
-            case MarkupNodeType.ColoredText:
-                var coloredText = (ColoredTextNode)node;
-                var builder = new StringBuilder();
-                foreach (var child in coloredText.Children)
-                {
-                    builder.Append(ConvertNode(child));
-                }
-
-                var content = builder.ToString();
-                if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
-                {
-                    var colorCode = coloredText.Color;
-                    return $"[{colorCode}]{content}[/]";
-                }
-                else if (ColorMap.TryGetValue(coloredText.Color, out var colorCode))
-                {
-                    return $"[{colorCode}]{content}[/]";
-                }
-                else
-                {
-                    return content;
-                }
-
-            default:
-                return "";
-        }
-    }
-
-    // A map of color names to hexadecimal RGB values.
-    // Note that the color names are case-insensitive.
-    private static readonly IReadOnlyDictionary<string, string> ColorMap
-        = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            [MarkupColorName.Flavor] = "#99dddd",
-            [MarkupColorName.Reminder] = "#aaaaaa",
-            [MarkupColorName.AbilityType] = "#ffee88",
-            [MarkupColorName.Warning] = "#ff0000",
-            [MarkupColorName.Task] = "#ffcc55",
-        };
-}
-
-```
+[!code-csharp[](~/samples/SpectreMarkup/SpectreMarkupConverter.cs)]
 
 Usage:
 
-```csharp
-// Set up the lexer, parser, and converter.
-var lexer = new MarkupLexer();
-var parser = new MarkupParser();
-var converter = new SpectreMarkupConverter();
-
-// Tokenize the input
-var input = "... (markup text)";
-var tokens = lexer.Tokenize(input);
-
-// Convert the tokens to a syntax tree
-var syntax = parser.Parse(tokens);
-
-// Convert the syntax tree to the desired format
-var output = converter.Convert(syntax);
-```
+[!code-csharp[](~/samples/SpectreMarkup/Program.cs)]
 
 ## Language reference
 
