@@ -38,10 +38,11 @@ GW2SDK provides converters for the game's markup format:
 ```csharp
 using GuildWars2.Markup;
 
-var input = "Double-click to apply to an unused infusion slot. Adds a festive glow."
-    + "\n<c=@Warning>Warning!</c>"
-    + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
-    + " substance.</c>";
+string input = """
+    Double-click to apply to an unused infusion slot. Adds a festive glow.
+    <c=@Warning>Warning!</c>
+    <c=@Flavor>Captain's Council recommends avoiding direct contact with this substance.</c>
+    """;
 
 string plainText = MarkupConverter.ToPlainText(input);
 Console.WriteLine(plainText);
@@ -58,10 +59,11 @@ Captain's Council recommends avoiding direct contact with this substance
 ### Converting formatted text to HTML
 
 ```csharp
-var input = "Double-click to apply to an unused infusion slot. Adds a festive glow."
-    + "\n<c=@Warning>Warning!</c>"
-    + "\n<c=@Flavor>Captain's Council recommends avoiding direct contact with this"
-    + " substance.</c>";
+string input = """
+    Double-click to apply to an unused infusion slot. Adds a festive glow.
+    <c=@Warning>Warning!</c>
+    <c=@Flavor>Captain's Council recommends avoiding direct contact with this substance.</c>
+    """;
 
 string html = MarkupConverter.ToHtml(input);
 Console.WriteLine(html);
