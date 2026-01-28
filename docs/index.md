@@ -1,3 +1,3 @@
 ---
-redirect_url: guide
+redirect_url: guide/index.html
 ---
