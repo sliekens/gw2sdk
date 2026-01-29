@@ -131,36 +131,39 @@ Usage:
 
 ## Language reference
 
-The markup language is quite simple, it only supports a few tags:
 
-- `c`: Changes the color of the text. The color is specified by a color name or
-  a hexadecimal RGB value.
-  For example, `<c=@Warning>Warning!</c>` renders as:
-  > <span style="color: #ff0000">Warning!</span>
-  >
-  A hexadecimal RGB value can be used instead of a color name. For example,
-  `<c=#f8c56e>Attention</c>` renders as:
-  > <span style="color: #f8c56e">Attention</span>
-  >
-- `br`: Inserts a line break. For example, `Line 1<br>Line 2` renders as:
-  > Line 1  
-  > Line 2
-- `\n`: is sometimes used instead of `br` to insert a line break. For example,
-  `Line 1\nLine 2` renders as:
-  > Line 1  
-  > Line 2
+The markup language supports a few simple tags, summarized below:
 
-Differences compared to HTML:
+| Tag      | Usage Example                        | Rendered Output                                         | Notes                                                      |
+|----------|--------------------------------------|---------------------------------------------------------|------------------------------------------------------------|
+| `<c>`    | `<c=@Warning>Warning!</c>`           | <span style="color: #ff0000">Warning!</span>            | Changes text color by name or hex value. E.g. `<c=#f8c56e>Text</c>`. |
+| `<br>`   | `Line 1<br>Line 2`                   | Line 1<br>Line 2                                        | Inserts a line break.                                      |
+| `\n`     | `Line 1\nLine 2`                     | Line 1<br>Line 2                                        | Sometimes used for line breaks.                            |
 
-Tags and attributes
+---
 
-- HTML supports tags with attributes like `<span style="color: red">text</span>`.
-- GW2 uses a simplified tag system with a single attribute name and value.
-  For example, `<c=@warning>text</c>`.
+### Tag examples
 
-Whitespace
+`<c=@Warning>Warning!</c>` renders as:
+> <span style="color: #ff0000">Warning!</span>
 
-- HTML collapses whitespace, including line breaks `\n`, into a single space, unless
-  a `<pre>` tag is used.
-- GW2 preserves whitespace, including line breaks `\n`. The provided `MarkupHtmlConverter`
-  replace line breaks with `<br>` tags to replicate this behavior.
+A hexadecimal RGB value can be used instead of a color name:
+`<c=#f8c56e>Attention</c>` renders as:
+> <span style="color: #f8c56e">Attention</span>
+
+`Line 1<br>Line 2` renders as:
+> Line 1  
+> Line 2
+
+`Line 1\nLine 2` renders as:
+> Line 1  
+> Line 2
+
+---
+
+### Differences compared to HTML
+
+| Aspect            | HTML Example / Behavior                                                                 | GW2 Markup Example / Behavior                                                      |
+|-------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| Tags & Attributes | `<span style="color: red">text</span>` (tags with multiple attributes)                | `<c=@warning>text</c>` (single tag, single attribute name and value)               |
+| Whitespace       | Collapses whitespace and line breaks (`\n`) into a single space, unless in `<pre>`      | Preserves whitespace and line breaks (`\n`). The provided `MarkupHtmlConverter` replaces line breaks with `<br>` tags to replicate this behavior. |
