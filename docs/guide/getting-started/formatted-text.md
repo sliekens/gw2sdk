@@ -77,6 +77,10 @@ Double-click to apply to an unused infusion slot. Adds a festive glow.<br>
 Council recommends avoiding direct contact with this substance.</span>
 ```
 
+> Double-click to apply to an unused infusion slot. Adds a festive glow.<br>
+<span style="color: #ff0000">Warning!</span><br><span style="color: #99dddd">Captain's
+Council recommends avoiding direct contact with this substance.</span>
+
 #### Overriding default colors
 
 Optionally, you can override the default colors. Start by cloning the default
@@ -98,7 +102,13 @@ string html = MarkupConverter.ToHtml(input, colorMap);
 Console.WriteLine(html);
 ```
 
-Output (rendered in HTML):
+Output:
+
+``` html
+Double-click to apply to an unused infusion slot. Adds a festive glow.<br>
+<span style="color: #ff0000">Warning!</span><br><span style="color: hotpink">
+Captain's Council recommends avoiding direct contact with this substance.</span>
+```
 
 > Double-click to apply to an unused infusion slot. Adds a festive glow.<br>
 <span style="color: #ff0000">Warning!</span><br><span style="color: hotpink">
