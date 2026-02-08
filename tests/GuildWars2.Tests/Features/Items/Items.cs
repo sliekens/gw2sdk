@@ -131,6 +131,7 @@ public class Items
                                 case OutfitUnlocker:
                                 case SharedInventorySlot:
                                 case StorageExpander:
+                                case FashionTemplateExpansion:
                                     break;
                                 default:
                                     if (unlocker.GetType() != typeof(Unlocker))

@@ -88,6 +88,8 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                     return SharedInventorySlotJsonConverter.Read(json);
                 case StorageExpanderJsonConverter.DiscriminatorValue:
                     return StorageExpanderJsonConverter.Read(json);
+                case FashionTemplateExpansionJsonConverter.DiscriminatorValue:
+                    return FashionTemplateExpansionJsonConverter.Read(json);
                 default:
                     break;
             }
@@ -165,6 +167,9 @@ internal sealed class UnlockerJsonConverter : JsonConverter<Unlocker>
                 break;
             case StorageExpander storageExpander:
                 StorageExpanderJsonConverter.Write(writer, storageExpander);
+                break;
+            case FashionTemplateExpansion fashionTemplateExpansion:
+                FashionTemplateExpansionJsonConverter.Write(writer, fashionTemplateExpansion);
                 break;
             default:
                 writer.WriteStartObject();
