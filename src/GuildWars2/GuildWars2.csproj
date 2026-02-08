@@ -53,7 +53,7 @@
   <!-- MinVer -->
   <PropertyGroup>
     <MinVerTagPrefix>v</MinVerTagPrefix>
-    <MinVerMinimumMajorMinor>3.0</MinVerMinimumMajorMinor>
+    <MinVerMinimumMajorMinor>3.1</MinVerMinimumMajorMinor>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
   </PropertyGroup>
 

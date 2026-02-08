@@ -9756,3 +9756,14 @@ static readonly GuildWars2.Authorization.TokenInfo.AllPermissions -> GuildWars2.
 static readonly GuildWars2.Hero.Accounts.Character.AllBodyTypes -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Hero.BodyType>>!
 static readonly GuildWars2.Hero.Races.Race.AllRaces -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Hero.RaceName>>!
 static readonly GuildWars2.Hero.Training.Profession.AllProfessions -> GuildWars2.Collections.IImmutableValueList<GuildWars2.Extensible<GuildWars2.Hero.ProfessionName>>!
+GuildWars2.Items.FashionTemplateExpansion
+GuildWars2.Items.FashionTemplateExpansion.Equals(GuildWars2.Items.FashionTemplateExpansion? other) -> bool
+GuildWars2.Items.FashionTemplateExpansion.FashionTemplateExpansion() -> void
+override GuildWars2.Items.FashionTemplateExpansion.<Clone>$() -> GuildWars2.Items.Item!
+override GuildWars2.Items.FashionTemplateExpansion.Equals(object? obj) -> bool
+override GuildWars2.Items.FashionTemplateExpansion.GetHashCode() -> int
+override GuildWars2.Items.FashionTemplateExpansion.ToString() -> string!
+override sealed GuildWars2.Items.FashionTemplateExpansion.Equals(GuildWars2.Items.Unlocker? other) -> bool
+static GuildWars2.Items.FashionTemplateExpansion.operator !=(GuildWars2.Items.FashionTemplateExpansion? left, GuildWars2.Items.FashionTemplateExpansion? right) -> bool
+static GuildWars2.Items.FashionTemplateExpansion.operator ==(GuildWars2.Items.FashionTemplateExpansion? left, GuildWars2.Items.FashionTemplateExpansion? right) -> bool
+static GuildWars2.Markup.MarkupColorName.Info.get -> string!
