@@ -1,1 +1,2 @@
 #nullable enable
+static GuildWars2.Markup.MarkupColorName.Info.get -> string!
