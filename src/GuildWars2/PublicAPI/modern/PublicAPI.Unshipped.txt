@@ -1,1 +1,3 @@
 #nullable enable
+static GuildWars2.Markup.MarkupColorName.Event.get -> string!
+static GuildWars2.Markup.MarkupColorName.Quest.get -> string!

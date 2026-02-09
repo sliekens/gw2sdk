@@ -11,23 +11,31 @@ public static class MarkupColorName
     /// <list type="bullet">
     ///   <item>
     ///     <term>@abilitytype</term>
-    ///     <description>#ffee88 (light yellow)</description>
+    ///     <description>#ffec8c (light yellow)</description>
     ///   </item>
     ///   <item>
     ///     <term>@flavor</term>
-    ///     <description>#99dddd (aqua)</description>
+    ///     <description>#9be8e4 (aqua)</description>
     ///   </item>
     ///   <item>
     ///     <term>@reminder</term>
-    ///     <description>#aaaaaa (gray)</description>
+    ///     <description>#b0b0b0 (gray)</description>
+    ///   </item>
+    ///   <item>
+    ///     <term>@quest</term>
+    ///     <description>#00ff00 (green)</description>
     ///   </item>
     ///   <item>
     ///     <term>@task</term>
-    ///     <description>#ffcc55 (gold)</description>
+    ///     <description>#ffc957 (gold)</description>
     ///   </item>
     ///   <item>
     ///     <term>@warning</term>
-    ///     <description>#ff0000 (red)</description>
+    ///     <description>#ed0002 (red)</description>
+    ///   </item>
+    ///   <item>
+    ///     <term>@event</term>
+    ///     <description>#cc6633 (orange)</description>
     ///   </item>
     ///   <item>
     ///     <term>@info</term>
@@ -39,11 +47,13 @@ public static class MarkupColorName
         new ReadOnlyDictionary<string, string>(
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                [AbilityType] = "#ffee88",
-                [Flavor] = "#99eedd",
-                [Reminder] = "#aaaaaa",
-                [Task] = "#ffcc55",
-                [Warning] = "#ff0000",
+                [AbilityType] = "#ffec8c",
+                [Flavor] = "#9be8e4",
+                [Reminder] = "#b0b0b0",
+                [Quest] = "#00ff00",
+                [Task] = "#ffc957",
+                [Warning] = "#ed0002",
+                [Event] = "#cc6633",
                 [Info] = "#ffffff"
             }
         );
@@ -65,6 +75,12 @@ public static class MarkupColorName
 
     /// <summary>The color for info text. Color used in game: White.</summary>
     public static string Info => "@info";
+
+    /// <summary>The color for quest text. Color used in game: Green.</summary>
+    public static string Quest => "@quest";
+
+    /// <summary>The color for event text. Color used in game: Orange.</summary>
+    public static string Event => "@event";
 
     /// <summary>Determines whether the specified color name is defined.</summary>
     /// <remarks>The name should include the leading '@' symbol, e.g. '@flavor'.</remarks>
