@@ -9772,3 +9772,5 @@ override sealed GuildWars2.Items.FashionTemplateExpansion.Equals(GuildWars2.Item
 static GuildWars2.Items.FashionTemplateExpansion.operator !=(GuildWars2.Items.FashionTemplateExpansion? left, GuildWars2.Items.FashionTemplateExpansion? right) -> bool
 static GuildWars2.Items.FashionTemplateExpansion.operator ==(GuildWars2.Items.FashionTemplateExpansion? left, GuildWars2.Items.FashionTemplateExpansion? right) -> bool
 static GuildWars2.Markup.MarkupColorName.Info.get -> string!
+static GuildWars2.Markup.MarkupColorName.Event.get -> string!
+static GuildWars2.Markup.MarkupColorName.Quest.get -> string!
