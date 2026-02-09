@@ -9,7 +9,7 @@ public class MarkupHtmlConverterTest
     {
         string input = "This is <c=@flavor>flavor</c> text and this is <c=#ff0000>inline styled</c> text.";
         string actual = MarkupConverter.ToHtml(input);
-        await Assert.That(actual).IsEqualTo("This is <span style=\"color: #99eedd\">flavor</span> text and this is <span style=\"color: #ff0000\">inline styled</span> text.");
+        await Assert.That(actual).IsEqualTo("This is <span style=\"color: #9be8e4\">flavor</span> text and this is <span style=\"color: #ff0000\">inline styled</span> text.");
     }
 
     [Test]
