@@ -7,6 +7,8 @@
     <TargetFrameworks>net10.0;net481</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+    <UseCurrentRuntimeIdentifier>false</UseCurrentRuntimeIdentifier>
     <!-- https://github.com/microsoft/codecoverage/issues/196 -->
     <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
   </PropertyGroup>
