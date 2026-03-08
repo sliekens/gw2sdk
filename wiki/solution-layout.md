@@ -23,7 +23,6 @@ The solution is structured as follows:
 ├── .github
 ├── .vscode
 ├── .devcontainer
-├── .specify
 ├── global.json
 ├── Directory.Build.props
 ├── Directory.Build.targets
@@ -91,10 +90,6 @@ The **samples** folder contains a few sample projects which demonstrate how to
 use the library. You can run them to see how the library works. Some samples
 like [Basic usage](https://sliekens.github.io/gw2sdk/guide/usage.html) are used
 in the user documentation.
-
-The **.specify** folder contains AI-assisted development configuration and
-prompts for the Specify tool, including constitutional AI guidelines and
-agent templates.
 
 The **.github** folder contains GitHub-specific files, such as the issue
 templates and the workflow definitions for GitHub Actions.

@@ -23,7 +23,6 @@ New to the project? Start here:
 
 - [[EditorConfig and GlobalConfig|editorconfig-and-globalconfig]] - Code style and analyzer configuration
 - [[TUnit test projects]] - Testing framework and test organization
-- [[Spec development]] - Process for implementing new API features
 
 ### Project Structure
 
@@ -55,5 +54,4 @@ Before making changes:
 
 1. Review the [[Project goals]] to align with project principles
 2. Check the [[EditorConfig and GlobalConfig|editorconfig-and-globalconfig]] to understand code standards
-3. Follow the [[Spec development]] process for new features
-4. Ensure tests pass using the [[TUnit test projects|tunit-test-projects]] framework
+3. Ensure tests pass using the [[TUnit test projects|tunit-test-projects]] framework

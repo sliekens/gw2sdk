@@ -9,7 +9,6 @@
 ### Development
 - [[Solution layout]]
 - [[EditorConfig and GlobalConfig|editorconfig-and-globalconfig]]
-- [[Spec development]]
 - [[TUnit test projects]]
 
 ### Reference
