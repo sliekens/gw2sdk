@@ -12,8 +12,7 @@
   },
   "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget /home/vscode/.microsoft",
   "postCreateCommand": {
-    "alias ll": "echo \"alias ll='ls -lah'\" >> ~/.bashrc",
-    "alias httprepl": "echo \"alias httprepl='dotnet httprepl https://api.guildwars2.com'\" >> ~/.bashrc"
+    "alias ll": "echo \"alias ll='ls -lah'\" >> ~/.bashrc"
   },
   "postStartCommand": {
     "copilot-cli": "npm install -g @github/copilot",

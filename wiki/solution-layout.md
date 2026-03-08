@@ -170,5 +170,5 @@ The **GuildWars2** project has the following development dependencies:
   the Git commit history.
 - **Roslynator** is used to analyze the code and provide suggestions for
   improvements.
-- **HttpRepl** (dotnet httprepl) is used to explore the API.
+- **PowerShell** is used by **Invoke-Api.ps1** to explore the API.
 - **Docfx** is used to generate the user documentation.
