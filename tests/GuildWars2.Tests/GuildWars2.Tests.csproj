@@ -28,6 +28,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="System.Interactive" />
+    <PackageReference Include="System.Linq.AsyncEnumerable" />
     <PackageReference Include="TUnit" />
   </ItemGroup>
 
