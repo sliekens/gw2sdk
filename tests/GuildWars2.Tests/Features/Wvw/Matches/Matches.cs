@@ -43,10 +43,7 @@ public class Matches(Gw2Client sut)
                     if (objective is not OwnedSpawn and not OwnedMercenary and not OwnedRuins)
                     {
                         await Assert.That(objective.PointsCapture > 0).IsTrue();
-                        // Temporary assertion for a live API regression: $.maps[*].objectives[*].points_tick is
-                        // currently 0 even for scoring objectives such as Camp, Tower, Keep, and Castle.
-                        // This should fail once the API starts returning real per-tick scores again.
-                        await Assert.That(objective.PointsTick).IsEqualTo(0);
+                        await Assert.That(objective.PointsTick > 0).IsTrue();
                     }
                 }
             }
