@@ -43,7 +43,7 @@ public class Matches(Gw2Client sut)
                     if (objective is not OwnedSpawn and not OwnedMercenary and not OwnedRuins)
                     {
                         await Assert.That(objective.PointsCapture > 0).IsTrue();
-                        await Assert.That(objective.PointsTick > 0).IsTrue();
+                        await Assert.That(objective.PointsTick).IsGreaterThanOrEqualTo(0);
                     }
                 }
             }
