@@ -1,1 +1,11 @@
 #nullable enable
+GuildWars2.Hero.Builds.Facts.BuffArray
+GuildWars2.Hero.Builds.Facts.BuffArray.BuffArray() -> void
+GuildWars2.Hero.Builds.Facts.BuffArray.Equals(GuildWars2.Hero.Builds.Facts.BuffArray? other) -> bool
+override GuildWars2.Hero.Builds.Facts.BuffArray.<Clone>$() -> GuildWars2.Hero.Builds.Fact!
+override GuildWars2.Hero.Builds.Facts.BuffArray.Equals(object? obj) -> bool
+override GuildWars2.Hero.Builds.Facts.BuffArray.GetHashCode() -> int
+override GuildWars2.Hero.Builds.Facts.BuffArray.ToString() -> string!
+override sealed GuildWars2.Hero.Builds.Facts.BuffArray.Equals(GuildWars2.Hero.Builds.Fact? other) -> bool
+static GuildWars2.Hero.Builds.Facts.BuffArray.operator !=(GuildWars2.Hero.Builds.Facts.BuffArray? left, GuildWars2.Hero.Builds.Facts.BuffArray? right) -> bool
+static GuildWars2.Hero.Builds.Facts.BuffArray.operator ==(GuildWars2.Hero.Builds.Facts.BuffArray? left, GuildWars2.Hero.Builds.Facts.BuffArray? right) -> bool

@@ -20,6 +20,8 @@ internal static class FactJson
                     return json.GetAttributeAdjustment(out requiresTrait, out overrides);
                 case "Buff":
                     return json.GetBuff(out requiresTrait, out overrides);
+                case "BuffArray":
+                    return json.GetBuffArray(out requiresTrait, out overrides);
                 case "BuffConversion": // Traits only it seems
                     return json.GetAttributeConversion(out requiresTrait, out overrides);
                 case "ComboField":
