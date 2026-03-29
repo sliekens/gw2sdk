@@ -3,21 +3,21 @@
   "isRoot": true,
   "tools": {
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.5.1",
+      "version": "5.5.4",
       "commands": [
         "reportgenerator"
       ],
       "rollForward": false
     },
     "dotnet-outdated-tool": {
-      "version": "4.6.9",
+      "version": "4.7.1",
       "commands": [
         "dotnet-outdated"
       ],
       "rollForward": true
     },
     "docfx": {
-      "version": "2.78.4",
+      "version": "2.78.5",
       "commands": [
         "docfx"
       ],

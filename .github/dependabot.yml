@@ -5,18 +5,10 @@ updates:
     schedule:
       interval: daily
     groups:
-      microsoft:
+      nuget-dependencies:
         applies-to: version-updates
         patterns:
-          - "Microsoft.*"
-          - "System.*"
-        update-types:
-          - minor
-          - patch
-      spectre:
-        applies-to: version-updates
-        patterns:
-          - "Spectre.*"
+          - "*"
         update-types:
           - minor
           - patch
