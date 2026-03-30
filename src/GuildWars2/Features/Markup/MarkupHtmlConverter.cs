@@ -62,11 +62,7 @@ public static class MarkupHtmlConverter
                 }
 
                 string content = builder.ToString();
-#if NET
                 if (coloredText.Color.StartsWith('#'))
-#else
-                if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))
-#endif
                 {
                     return $"<span style=\"color: {coloredText.Color}\">{content}</span>";
                 }
