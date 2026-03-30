@@ -1,7 +1,5 @@
 using System.Runtime.CompilerServices;
 
-using GuildWars2.Tasks;
-
 namespace GuildWars2;
 
 /// <summary>Provides a method to retrieve bulk data from the Guild Wars 2 API.</summary>
@@ -107,17 +105,14 @@ public static class BulkQuery
                     }
                 }
             )];
-        foreach (Task<Task<IReadOnlyCollection<TValue>>> bucket in tasks.Interleave())
+        await foreach (Task<IReadOnlyCollection<TValue>> task in Task.WhenEach(tasks).ConfigureAwait(false))
         {
-            Task<IReadOnlyCollection<TValue>> task = await bucket.ConfigureAwait(false);
-#pragma warning disable CA1849 // Call async methods when in an async method
-            foreach (TValue value in task.Result)
+            foreach (TValue value in await task.ConfigureAwait(false))
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 progress?.Report(new BulkProgress(resultTotal, ++resultCount));
                 yield return value;
             }
-#pragma warning restore CA1849 // Call async methods when in an async method
         }
 
         static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)
