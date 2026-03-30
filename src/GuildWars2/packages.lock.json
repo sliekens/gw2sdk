@@ -37,9 +37,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.22.0, )",
-        "resolved": "9.22.0",
-        "contentHash": "kmELvtpt6ziHRHYHcMygLNElwdBGRIJN1jAIv5GVxCcAhECnmJEP6L9zIIividSt9tXl2DNoMcRqgOUS36rEZQ=="
+        "requested": "[9.23.0, )",
+        "resolved": "9.23.0",
+        "contentHash": "YOADCfBR/n7iZrI7RNsAl+XQuC7SPR7gtNiOAw9VkKbHtc7rWHhHWYVsaxA2mP6qmm2+C++BJsX3X9Q0ZP8GBQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -178,9 +178,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.22.0, )",
-        "resolved": "9.22.0",
-        "contentHash": "kmELvtpt6ziHRHYHcMygLNElwdBGRIJN1jAIv5GVxCcAhECnmJEP6L9zIIividSt9tXl2DNoMcRqgOUS36rEZQ=="
+        "requested": "[9.23.0, )",
+        "resolved": "9.23.0",
+        "contentHash": "YOADCfBR/n7iZrI7RNsAl+XQuC7SPR7gtNiOAw9VkKbHtc7rWHhHWYVsaxA2mP6qmm2+C++BJsX3X9Q0ZP8GBQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -298,9 +298,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.22.0, )",
-        "resolved": "9.22.0",
-        "contentHash": "kmELvtpt6ziHRHYHcMygLNElwdBGRIJN1jAIv5GVxCcAhECnmJEP6L9zIIividSt9tXl2DNoMcRqgOUS36rEZQ=="
+        "requested": "[9.23.0, )",
+        "resolved": "9.23.0",
+        "contentHash": "YOADCfBR/n7iZrI7RNsAl+XQuC7SPR7gtNiOAw9VkKbHtc7rWHhHWYVsaxA2mP6qmm2+C++BJsX3X9Q0ZP8GBQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -336,9 +336,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.22.0, )",
-        "resolved": "9.22.0",
-        "contentHash": "kmELvtpt6ziHRHYHcMygLNElwdBGRIJN1jAIv5GVxCcAhECnmJEP6L9zIIividSt9tXl2DNoMcRqgOUS36rEZQ=="
+        "requested": "[9.23.0, )",
+        "resolved": "9.23.0",
+        "contentHash": "YOADCfBR/n7iZrI7RNsAl+XQuC7SPR7gtNiOAw9VkKbHtc7rWHhHWYVsaxA2mP6qmm2+C++BJsX3X9Q0ZP8GBQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -374,9 +374,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.22.0, )",
-        "resolved": "9.22.0",
-        "contentHash": "kmELvtpt6ziHRHYHcMygLNElwdBGRIJN1jAIv5GVxCcAhECnmJEP6L9zIIividSt9tXl2DNoMcRqgOUS36rEZQ=="
+        "requested": "[9.23.0, )",
+        "resolved": "9.23.0",
+        "contentHash": "YOADCfBR/n7iZrI7RNsAl+XQuC7SPR7gtNiOAw9VkKbHtc7rWHhHWYVsaxA2mP6qmm2+C++BJsX3X9Q0ZP8GBQ=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
