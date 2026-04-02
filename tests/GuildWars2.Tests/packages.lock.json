@@ -112,12 +112,6 @@
         "resolved": "7.0.0",
         "contentHash": "XEVxb2gKsXF9qkfvGo/yb6OMMEDc+GvB+bn+ricQ3K9gx+khYf8+ipzf1caNEkcFIjC/+iX30MWGtf+hhZLuQw=="
       },
-      "System.Linq.AsyncEnumerable": {
-        "type": "Direct",
-        "requested": "[10.0.5, )",
-        "resolved": "10.0.5",
-        "contentHash": "00y94lP/SeWF5VMb8GlG3iwLyl7abEofwN+Bke1LKEkvsB8dEtr/pDtn4EWQYkvg49UwGJN+JSCE1gKhPIT0cQ=="
-      },
       "TUnit": {
         "type": "Direct",
         "requested": "[1.24.18, )",
