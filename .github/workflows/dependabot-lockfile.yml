@@ -1,0 +1,38 @@
+name: Fix Dependabot Lock Files
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  fix-lock-files:
+    name: Fix Lock Files
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    container:
+      image: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          filter: tree:0
+
+      - name: Regenerate lock files
+        run: dotnet restore --force-evaluate
+
+      - name: Commit and push any changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Lock files are up to date, nothing to commit."
+          else
+            git add --all -- '*.lock.json'
+            git commit -m "Regenerate lock files"
+            git push
+          fi
