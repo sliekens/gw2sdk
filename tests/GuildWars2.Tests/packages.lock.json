@@ -102,9 +102,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[9.24.0, )",
-        "resolved": "9.24.0",
-        "contentHash": "fuc6Od4lAp7VbtQG9lWuJFgw+tpdj5uQWUgarYRkzdm/Jbq/YTqPSrX3mrvE8aM25u/j5IX+wFBxxhg/Rvmkkw=="
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "HX4+jlB3OTAn+CiNLzuen/I7jgYLfNxDTsX3A7Ij285WYEbNwXPh1haHgeDinDum+m/pviBb8idK4JNUz1qS0Q=="
       },
       "System.Interactive": {
         "type": "Direct",
