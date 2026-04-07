@@ -105,7 +105,7 @@ public static class BulkQuery
                     }
                 }
             )];
-        await foreach (Task<IReadOnlyCollection<TValue>> task in Task.WhenEach(tasks, cancellationToken).ConfigureAwait(false))
+        await foreach (Task<IReadOnlyCollection<TValue>> task in Task.WhenEach(tasks).WithCancellation(cancellationToken).ConfigureAwait(false))
         {
             foreach (TValue value in await task.ConfigureAwait(false))
             {
