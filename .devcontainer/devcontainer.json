@@ -8,7 +8,7 @@
       "version": "22",
       "pnpmVersion": "none"
     },
-    "./features/github-cli": {}
+    "ghcr.io/sliekens/devcontainer-features/github-cli": {}
   },
   "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget /home/vscode/.microsoft",
   "postCreateCommand": {
