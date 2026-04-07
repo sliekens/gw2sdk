@@ -7,7 +7,7 @@ on:
 jobs:
   fix-lock-files:
     name: Fix Lock Files
-    if: github.actor == 'dependabot[bot]' || startsWith(github.head_ref, 'deps/')
+    if: github.actor == 'dependabot[bot]' || (startsWith(github.head_ref, 'deps/') && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
     permissions:
       contents: write
