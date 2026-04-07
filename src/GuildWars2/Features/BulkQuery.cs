@@ -105,7 +105,11 @@ public static class BulkQuery
                     }
                 }
             )];
+
+#pragma warning disable CA2016 // CA2016: Forward the 'cancellationToken' parameter
+        // False analyzer positive: Task.WhenEach does not accept a CancellationToken, so we must use WithCancellation
         await foreach (Task<IReadOnlyCollection<TValue>> task in Task.WhenEach(tasks).WithCancellation(cancellationToken).ConfigureAwait(false))
+#pragma warning restore CA2016
         {
             foreach (TValue value in await task.ConfigureAwait(false))
             {
