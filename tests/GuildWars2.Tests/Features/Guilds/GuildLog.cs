@@ -64,7 +64,7 @@ public class GuildLog(Gw2Client sut)
                         case InviteDeclined inviteDeclined:
                             await Assert.That(inviteDeclined)
                                 .Member(i => i.User, user => user.IsNotEmpty())
-                                .And.Member(i => i.DeclinedBy, declinedBy => declinedBy.IsNotEmpty());
+                                .And.Member(i => i.DeclinedBy, declinedBy => declinedBy.IsNotNull());
                             break;
                         case RankChange rankChange:
                             await Assert.That(rankChange)
