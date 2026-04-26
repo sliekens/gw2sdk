@@ -108,9 +108,9 @@
       },
       "System.Interactive": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "XEVxb2gKsXF9qkfvGo/yb6OMMEDc+GvB+bn+ricQ3K9gx+khYf8+ipzf1caNEkcFIjC/+iX30MWGtf+hhZLuQw=="
+        "requested": "[7.0.1, )",
+        "resolved": "7.0.1",
+        "contentHash": "vEENib2HoklfDY4jwHsV+dz75uiztQakJh38u/nfDKmX3db2+Kin2i1VkZ/fEG2FAOv1qQPJ7E1aZovMZg1Paw=="
       },
       "TUnit": {
         "type": "Direct",
