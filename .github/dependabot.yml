@@ -13,10 +13,6 @@ updates:
           - major
           - minor
           - patch
-  - package-ecosystem: dotnet-sdk
-    directory: /
-    schedule:
-      interval: daily
   - package-ecosystem: devcontainers
     directory: /
     schedule:
