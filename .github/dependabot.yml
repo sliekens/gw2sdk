@@ -17,6 +17,15 @@ updates:
     directory: /
     schedule:
       interval: daily
+    groups:
+      devcontainer-features:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - major
+          - minor
+          - patch
   - package-ecosystem: github-actions
     directory: /
     schedule:
