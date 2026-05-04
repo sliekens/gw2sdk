@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/powershell:2": {},
     "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
-    "ghcr.io/devcontainers/features/node:1": {
+    "ghcr.io/devcontainers/features/node:2": {
       "version": "22",
       "pnpmVersion": "none"
     },
