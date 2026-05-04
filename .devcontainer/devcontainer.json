@@ -2,7 +2,7 @@
   "name": "GW2SDK",
   "image": "ghcr.io/sliekens/gw2sdk/devcontainer",
   "features": {
-    "ghcr.io/devcontainers/features/powershell:1": {},
+    "ghcr.io/devcontainers/features/powershell:2": {},
     "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22",
