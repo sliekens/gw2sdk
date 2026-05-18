@@ -64,8 +64,7 @@
         }
       },
       "SixLabors.ImageSharp": {
-        "type": "Direct",
-        "requested": "[4.0.0, )",
+        "type": "Transitive",
         "resolved": "4.0.0",
         "contentHash": "6Ft5sclM1t5bY+P0SsLLGwXIAgmDASFFD9hD0tlEcfFCU8Yj9nR7ZzaqCL/p+SIfqoe8jLKFHD7LFPRJPGXZ5w==",
         "dependencies": {
