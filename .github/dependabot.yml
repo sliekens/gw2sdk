@@ -31,10 +31,10 @@ updates:
     schedule:
       interval: daily
     groups:
-      official-actions:
+      github-actions:
         applies-to: version-updates
         patterns:
-          - "actions/*"
+          - "*"
         update-types:
           - major
           - minor
