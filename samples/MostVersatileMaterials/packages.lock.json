@@ -63,14 +63,6 @@
           "Microsoft.Extensions.Resilience": "10.6.0"
         }
       },
-      "SixLabors.ImageSharp": {
-        "type": "Transitive",
-        "resolved": "4.0.0",
-        "contentHash": "6Ft5sclM1t5bY+P0SsLLGwXIAgmDASFFD9hD0tlEcfFCU8Yj9nR7ZzaqCL/p+SIfqoe8jLKFHD7LFPRJPGXZ5w==",
-        "dependencies": {
-          "System.IO.Hashing": "8.0.0"
-        }
-      },
       "Spectre.Console": {
         "type": "Direct",
         "requested": "[0.55.2, )",
@@ -475,6 +467,15 @@
         "requested": "[8.6.6, )",
         "resolved": "8.6.6",
         "contentHash": "lCBL9mmhF9TZxHG3beVRkyjlLohkIC464xIAq7J7Y59C+z42hmsdUaeCKl2SIAYertOUU5TeBXyQDLDQGIKePQ=="
+      },
+      "SixLabors.ImageSharp": {
+        "type": "CentralTransitive",
+        "requested": "[4.0.0, )",
+        "resolved": "4.0.0",
+        "contentHash": "6Ft5sclM1t5bY+P0SsLLGwXIAgmDASFFD9hD0tlEcfFCU8Yj9nR7ZzaqCL/p+SIfqoe8jLKFHD7LFPRJPGXZ5w==",
+        "dependencies": {
+          "System.IO.Hashing": "8.0.0"
+        }
       }
     }
   }
