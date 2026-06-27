@@ -15,7 +15,8 @@ internal sealed class ItemCard(HttpClient httpClient)
         {
             Table itemTable = new Table().AddColumn("Icon")
                 .AddColumn("Ingredient")
-                .AddColumn("Description");
+                .AddColumn("Description")
+                .RoundedBorder();
 
             SpectreMarkupConverter converter = new();
             IEnumerable<MarkupToken> tokens = MarkupLexer.Tokenize(item.Description);

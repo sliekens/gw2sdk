@@ -12,7 +12,7 @@ internal sealed class ReleaseNoteTable : IRenderable
     private readonly Table table = new Table()
         .AddColumn("Change")
         .AddColumn("Description")
-        .MinimalBorder();
+        .RoundedBorder();
 
     public Measurement Measure(RenderOptions options, int maxWidth)
     {
