@@ -156,8 +156,8 @@ public class Skins
 #endif
             await Assert.That(roundTrip).IsNotNull()
                 .And.IsOfType(original.GetType())
-                .And.IsEqualTo(original);
-            await Assert.That(roundTrip).IsEqualTo(original);
+                .And.IsEqualTo(original, comparer: EquipmentSkinComparer.Instance);
+            await Assert.That(roundTrip).IsEqualTo(original, comparer: EquipmentSkinComparer.Instance);
         }
     }
 }

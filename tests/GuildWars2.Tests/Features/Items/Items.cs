@@ -380,7 +380,7 @@ public class Items
 #endif
             await Assert.That(roundTrip).IsNotNull()
                 .And.Member(r => r!.GetType(), t => t.IsEqualTo(original.GetType()))
-                .And.IsEqualTo(original);
+                .And.IsEqualTo(original, comparer: ItemComparer.Instance);
         }
     }
 }

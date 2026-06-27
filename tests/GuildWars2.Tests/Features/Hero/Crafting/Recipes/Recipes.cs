@@ -66,7 +66,7 @@ public class Recipes
             Recipe? roundTrip = JsonSerializer.Deserialize<Recipe>(json);
 #endif
             await Assert.That(roundTrip).IsTypeOf<Recipe>();
-            await Assert.That(roundTrip).IsEqualTo(original);
+            await Assert.That(roundTrip).IsEqualTo(original, comparer: RecipeComparer.Instance);
         }
     }
 }
