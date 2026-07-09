@@ -24,6 +24,10 @@ public static class MarkupLexer
         int position = 0;
         MarkupLexerState state = MarkupLexerState.Text;
         int start = 0;
+#if NET9_0_OR_GREATER
+        // Use GetAlternateLookup for span-based lookups to avoid string allocations (NET9+)
+        HashSet<string>.AlternateLookup<ReadOnlySpan<char>> voidLookup = VoidElements.GetAlternateLookup<ReadOnlySpan<char>>();
+#endif
         while (position < memory.Length)
         {
             char current = memory.Span[position];
@@ -71,14 +75,19 @@ public static class MarkupLexer
                         else if (position + 1 < memory.Length && memory.Span[position + 1] == '>')
                         {
                             // Ignore the '/' in '/>'
-                            string tagName = memory.Span[start..position].Trim().ToString();
-                            if (VoidElements.Contains(tagName))
+                            ReadOnlySpan<char> tagNameSpan = memory.Span[start..position].Trim();
+#if NET9_0_OR_GREATER
+                            // Use span-based lookup to avoid string allocation (NET9+)
+                            if (voidLookup.Contains(tagNameSpan))
+#else
+                            if (VoidElements.Contains(tagNameSpan.ToString()))
+#endif
                             {
-                                yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
+                                yield return new MarkupToken(MarkupTokenType.TagVoid, tagNameSpan.ToString());
                             }
                             else
                             {
-                                yield return new MarkupToken(MarkupTokenType.TagStart, tagName);
+                                yield return new MarkupToken(MarkupTokenType.TagStart, tagNameSpan.ToString());
                             }
 
                             state = MarkupLexerState.Text;
@@ -100,14 +109,19 @@ public static class MarkupLexer
                     }
                     else if (current == '>')
                     {
-                        string tagName = memory.Span[start..position].Trim().ToString();
-                        if (VoidElements.Contains(tagName))
+                        ReadOnlySpan<char> tagNameSpan = memory.Span[start..position].Trim();
+#if NET9_0_OR_GREATER
+                        // Use span-based lookup to avoid string allocation (NET9+)
+                        if (voidLookup.Contains(tagNameSpan))
+#else
+                        if (VoidElements.Contains(tagNameSpan.ToString()))
+#endif
                         {
-                            yield return new MarkupToken(MarkupTokenType.TagVoid, tagName);
+                            yield return new MarkupToken(MarkupTokenType.TagVoid, tagNameSpan.ToString());
                         }
                         else
                         {
-                            yield return new MarkupToken(MarkupTokenType.TagStart, tagName);
+                            yield return new MarkupToken(MarkupTokenType.TagStart, tagNameSpan.ToString());
                         }
 
                         state = MarkupLexerState.Text;
