@@ -6,8 +6,8 @@ namespace GuildWars2.Tests.Features.Exploration.Floors;
 public class FloorsIndex(Gw2Client sut)
 {
     [Test]
-    [Arguments(1)]
-    [Arguments(2)]
+    [Arguments("1")]
+    [Arguments("2")]
     public async Task Can_be_listed(int continentId)
     {
         (IImmutableValueSet<int> actual, MessageContext context) = await sut.Exploration.GetFloorsIndex(continentId, TestContext.Current!.Execution.CancellationToken);

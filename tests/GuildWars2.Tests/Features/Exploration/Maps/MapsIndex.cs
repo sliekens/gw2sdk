@@ -6,9 +6,9 @@ namespace GuildWars2.Tests.Features.Exploration.Maps;
 public class MapsIndex(Gw2Client sut)
 {
     [Test]
-    [Arguments(1, 0, 1)]
-    [Arguments(1, 0, 2)]
-    [Arguments(1, 0, 3)]
+    [Arguments("1", "0", "1")]
+    [Arguments("1", "0", "2")]
+    [Arguments("1", "0", "3")]
     public async Task Map_ids_in_a_region_can_be_listed(int continentId, int floorId, int regionId)
     {
         (IImmutableValueSet<int> actual, MessageContext context) = await sut.Exploration.GetMapsIndex(continentId, floorId, regionId, TestContext.Current!.Execution.CancellationToken);

@@ -6,8 +6,8 @@ namespace GuildWars2.Tests.Features.Exploration.Regions;
 public class RegionsIndex(Gw2Client sut)
 {
     [Test]
-    [Arguments(1, 0)]
-    [Arguments(2, 1)]
+    [Arguments("1", "0")]
+    [Arguments("2", "1")]
     public async Task Can_be_listed(int continentId, int floorId)
     {
         (IImmutableValueSet<int> actual, MessageContext context) = await sut.Exploration.GetRegionsIndex(continentId, floorId, TestContext.Current!.Execution.CancellationToken);
