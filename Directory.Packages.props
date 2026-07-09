@@ -10,7 +10,7 @@
     <!-- Microsoft.CodeAnalysis.CSharp: keep in sync with docfx version from dotnet-tools.json
          e.g. https://github.com/dotnet/docfx/blob/v2.78.5/Directory.Packages.props#L38  -->
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[5.0.0]" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.0.0-1.25277.114" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.9" />
@@ -18,7 +18,7 @@
     <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.7.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.8.0" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.9.0" />
     <PackageVersion Include="MinVer" Version="7.0.0" />
     <PackageVersion Include="Pastel" Version="7.0.1" />
     <PackageVersion Include="Polly.Core" Version="8.7.0" />
@@ -31,8 +31,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
     <PackageVersion Include="SixLabors.ImageSharp" Version="4.0.0" />
-    <PackageVersion Include="Spectre.Console" Version="0.57.1" />
-    <PackageVersion Include="Spectre.Console.ImageSharp" Version="0.57.1" />
+    <PackageVersion Include="Spectre.Console" Version="0.57.2" />
+    <PackageVersion Include="Spectre.Console.ImageSharp" Version="0.57.2" />
     <PackageVersion Include="System.Interactive" Version="7.0.1" />
     <PackageVersion Include="System.Linq.Async" Version="7.0.0" />
     <PackageVersion Include="System.Reactive" Version="6.1.0" />
