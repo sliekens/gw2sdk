@@ -55,7 +55,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
         }
 
 #if NET
-        await timer.DisposeAsync().ConfigureAwait(false);
+        await timer.DisposeAsync().AsTask().ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
 #else
         using ManualResetEventSlim callbacksFinished = new(false);
         if (timer.Dispose(callbacksFinished.WaitHandle))
@@ -81,7 +81,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable, IAsyncDisposa
             );
 #pragma warning restore CA1031 // Do not catch general exception types
 
-            await tcs.Task.ConfigureAwait(false);
+            await tcs.Task.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
         }
 #endif
 
