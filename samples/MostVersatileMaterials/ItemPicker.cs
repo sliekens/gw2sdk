@@ -8,7 +8,9 @@ internal static class ItemPicker
 {
     private static string s_lastSearch = "";
 
-    public static Item Prompt(IReadOnlyList<(Item item, int count)> ingredients)
+    public static async Task<Item> PromptAsync(
+        IReadOnlyList<(Item item, int count)> ingredients,
+        CancellationToken cancellationToken = default)
     {
         string choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -18,7 +20,7 @@ internal static class ItemPicker
 
         if (choice == "Search by name")
         {
-            return SearchForItem(ingredients);
+            return await SearchForItemAsync(ingredients, cancellationToken).ConfigureAwait(false);
         }
 
         return AnsiConsole.Prompt(
@@ -32,7 +34,9 @@ internal static class ItemPicker
             .Item1;
     }
 
-    private static Item SearchForItem(IReadOnlyList<(Item item, int count)> ingredients)
+    private static async Task<Item> SearchForItemAsync(
+        IReadOnlyList<(Item item, int count)> ingredients,
+        CancellationToken cancellationToken)
     {
         while (true)
         {
@@ -46,7 +50,12 @@ internal static class ItemPicker
                 searchPrompt.DefaultValue(s_lastSearch).ShowDefaultValue(true);
             }
 
-            string searchTerm = AnsiConsole.Prompt(searchPrompt);
+            // Use CancellationToken support from Spectre.Console 0.55+
+            // This allows programmatic cancellation of the prompt (e.g., via Ctrl+C)
+            string searchTerm = await searchPrompt
+                .ShowAsync(AnsiConsole.Console, cancellationToken)
+                .ConfigureAwait(false);
+
             s_lastSearch = searchTerm;
 
             if (string.IsNullOrWhiteSpace(searchTerm))

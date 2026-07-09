@@ -31,6 +31,13 @@ IHttpClientBuilder gw2ClientBuilder = builder.Services.AddHttpClient<Gw2Client>(
 gw2ClientBuilder.AddStandardResilienceHandler();
 
 IHost app = builder.Build();
+using CancellationTokenSource cts = new();
+Console.CancelKeyPress += (sender, e) =>
+{
+    e.Cancel = true; // Prevent immediate termination
+    cts.Cancel();
+};
+
 try
 {
     Gw2Client gw2 = app.Services.GetRequiredService<Gw2Client>();
@@ -120,7 +127,8 @@ try
 
     do
     {
-        Item ingredient = ItemPicker.Prompt(itemsSortedByNumberOfRecipes);
+        Item ingredient = await ItemPicker.PromptAsync(itemsSortedByNumberOfRecipes, cts.Token)
+            .ConfigureAwait(false);
 
         using HttpClient http = app.Services.GetRequiredService<HttpClient>();
         ItemCard card = new(http);
