@@ -8,7 +8,7 @@ namespace MostVersatileMaterials;
 
 internal sealed class RecipesTable : IRenderable
 {
-    private readonly Table table = new Table().AddColumn("Recipe").AddColumn("Description");
+    private readonly Table table = new Table().AddColumn("Recipe").AddColumn("Description").RoundedBorder();
 
     public Measurement Measure(RenderOptions options, int maxWidth)
     {

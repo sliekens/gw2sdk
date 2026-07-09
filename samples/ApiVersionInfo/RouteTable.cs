@@ -12,7 +12,7 @@ internal sealed class RouteTable(RouteOptions routeOptions) : IRenderable
     private readonly Table table = new Table().AddColumn("Route")
         .AddColumn("Authorization")
         .AddColumn("Localization")
-        .MinimalBorder();
+        .RoundedBorder();
 
     public Measurement Measure(RenderOptions options, int maxWidth)
     {
