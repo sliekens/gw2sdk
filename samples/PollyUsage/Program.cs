@@ -69,10 +69,19 @@ internal sealed class Program
 
         Gw2Client gw2 = app.Services.GetRequiredService<Gw2Client>();
 
+        // Set up graceful cancellation when user presses Ctrl+C
+        using CancellationTokenSource cancellationTokenSource = new();
+        Console.CancelKeyPress += (sender, eventArgs) =>
+        {
+            eventArgs.Cancel = true;
+            cancellationTokenSource.Cancel();
+        };
+
         PrintHeader();
 
         // Get the trading post prices for all items in bulk
-        await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly().ConfigureAwait(false))
+        // TakeUntil stops the sequence gracefully when cancellation is requested
+        await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly().TakeUntil(cancellationTokenSource.Token).ConfigureAwait(false))
         {
             // ItemPrice contains an Id, BestBid, and BestAsk
             // Use the ID to get the item name

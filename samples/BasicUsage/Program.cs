@@ -6,8 +6,17 @@ using GuildWars2.Items;
 using HttpClient httpClient = new();
 Gw2Client gw2 = new(httpClient);
 
+// Set up graceful cancellation when user presses Ctrl+C
+using CancellationTokenSource cancellationTokenSource = new();
+Console.CancelKeyPress += (sender, eventArgs) =>
+{
+    eventArgs.Cancel = true;
+    cancellationTokenSource.Cancel();
+};
+
 // Get the trading post prices for all items in bulk
-await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly().ConfigureAwait(false))
+// TakeUntil stops the sequence gracefully when cancellation is requested
+await foreach (ItemPrice itemPrice in gw2.Commerce.GetItemPricesBulk().ValueOnly().TakeUntil(cancellationTokenSource.Token).ConfigureAwait(false))
 {
     // ItemPrice contains an item ID, BestBid, and BestAsk
     // Use the item ID to get the item details

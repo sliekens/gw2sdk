@@ -12,6 +12,8 @@ const GuildWars2.Hero.Accounts.ProgressionKind.FractalMistAttunement = "fractal_
 const GuildWars2.Hero.Accounts.ProgressionKind.Luck = "luck" -> string!
 const GuildWars2.Hero.Equipment.Dyes.DyeColor.DyeRemoverId = 1 -> int
 const GuildWars2.Http.HttpStatusCodeEx.TooManyRequests = System.Net.HttpStatusCode.TooManyRequests -> System.Net.HttpStatusCode
+GuildWars2.AsyncEnumerableExtensions
+static GuildWars2.AsyncEnumerableExtensions.TakeUntil<T>(this System.Collections.Generic.IAsyncEnumerable<T>! source, System.Threading.CancellationToken cancellationToken) -> System.Collections.Generic.IAsyncEnumerable<T>!
 GuildWars2.Authorization.ApiKeyInfo
 GuildWars2.Authorization.ApiKeyInfo.ApiKeyInfo() -> void
 GuildWars2.Authorization.ApiKeyInfo.Equals(GuildWars2.Authorization.ApiKeyInfo? other) -> bool
