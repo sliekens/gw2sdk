@@ -35,6 +35,7 @@ try
 {
     Gw2Client gw2 = app.Services.GetRequiredService<Gw2Client>();
     ReferenceData referenceData = await AnsiConsole.Progress()
+        .HideCompleted(true)
         .Columns(
             new TaskDescriptionColumn(),
             new ProgressBarColumn(),
@@ -46,6 +47,7 @@ try
             {
                 // Fetch all recipes
                 ProgressTask recipesProgress = ctx.AddTask("Fetching recipes");
+                recipesProgress.Tag = "recipes";
                 List<Recipe> recipes = await gw2.Hero.Crafting.Recipes
                     .GetRecipesBulk(progress: new ProgressTaskUpdater(recipesProgress))
                     .Select(result => result.Value)
@@ -54,6 +56,7 @@ try
 
                 // Fetch all input items
                 ProgressTask inputItemsProgress = ctx.AddTask("Fetching input items");
+                inputItemsProgress.Tag = "input-items";
                 HashSet<int> inputItemIds = [..
                     from recipe in recipes
                     from ingredient in recipe.Ingredients
@@ -71,6 +74,7 @@ try
 
                 // Fetch all output items
                 ProgressTask outputItemsProgress = ctx.AddTask("Fetching output items");
+                outputItemsProgress.Tag = "output-items";
                 HashSet<int> outputItemIds = [..
                     from recipe in recipes
                     select recipe.OutputItemId];

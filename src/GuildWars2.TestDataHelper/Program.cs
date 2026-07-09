@@ -58,9 +58,11 @@ IHost app = appBuilder.Build();
 try
 {
     await AnsiConsole.Progress()
+        .HideCompleted(true)
         .StartAsync(async ctx =>
             {
                 ProgressTask achievements = ctx.AddTask("Downloading achievements.");
+                achievements.Tag = "achievements";
                 StreamWriter achievementsFile = CreateTextCompressed(Path.Combine(outDir, "achievements.jsonl.gz"));
                 await using (achievementsFile.ConfigureAwait(false))
                 {
@@ -74,6 +76,7 @@ try
                 }
 
                 ProgressTask items = ctx.AddTask("Downloading items.");
+                items.Tag = "items";
                 StreamWriter itemsFile = CreateTextCompressed(Path.Combine(outDir, "items.jsonl.gz"));
                 await using (itemsFile.ConfigureAwait(false))
                 {
@@ -86,6 +89,7 @@ try
                 }
 
                 ProgressTask recipes = ctx.AddTask("Downloading recipes.");
+                recipes.Tag = "recipes";
                 StreamWriter recipesFile = CreateTextCompressed(Path.Combine(outDir, "recipes.jsonl.gz"));
                 await using (recipesFile.ConfigureAwait(false))
                 {
@@ -98,6 +102,7 @@ try
                 }
 
                 ProgressTask skins = ctx.AddTask("Downloading skins.");
+                skins.Tag = "skins";
                 StreamWriter skinsFile = CreateTextCompressed(Path.Combine(outDir, "skins.jsonl.gz"));
                 await using (skinsFile.ConfigureAwait(false))
                 {
@@ -110,6 +115,7 @@ try
                 }
 
                 ProgressTask decorations = ctx.AddTask("Downloading decorations.");
+                decorations.Tag = "decorations";
                 StreamWriter decorationsFile = CreateTextCompressed(Path.Combine(outDir, "decorations.jsonl.gz"));
                 await using (decorationsFile.ConfigureAwait(false))
                 {
