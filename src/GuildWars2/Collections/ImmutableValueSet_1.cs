@@ -33,7 +33,7 @@ public sealed class ImmutableValueSet<T> : IImmutableValueSet<T>
             return Empty;
         }
 
-        T[] array = new T[values.Length];
+        T[] array = GC.AllocateUninitializedArray<T>(values.Length);
         values.CopyTo(array);
 #pragma warning disable IDE0306 // Cannot use collection expression in CollectionBuilder method
         return new ImmutableValueSet<T>(array);
