@@ -14,6 +14,7 @@ internal static class ItemPicker
                     .MoreChoicesText("Scroll down for less commonly used ingredients")
                     .AddChoices(ingredients)
                     .UseConverter(item => $"{item.Item1.Name} ({item.Item2} recipes)")
+                    .DefaultValue(ingredients[0])
                     .PageSize(20)
             )
             .Item1;
