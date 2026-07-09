@@ -16,6 +16,7 @@ using Region = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class Floors(Gw2Client sut)
 {

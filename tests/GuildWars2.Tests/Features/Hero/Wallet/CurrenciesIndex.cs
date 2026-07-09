@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Wallet;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class CurrenciesIndex(Gw2Client sut)
 {

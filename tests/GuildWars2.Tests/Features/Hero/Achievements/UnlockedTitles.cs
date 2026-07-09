@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedTitles(Gw2Client sut)
 {

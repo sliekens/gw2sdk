@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class CompletedStorySteps(Gw2Client sut)
 {

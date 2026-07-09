@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class MatchesIndex(Gw2Client sut)
 {

@@ -1,5 +1,6 @@
 namespace GuildWars2.Tests.Features;
 
+[Feature("Features")]
 public class BulkQueryTest
 {
     [Test]

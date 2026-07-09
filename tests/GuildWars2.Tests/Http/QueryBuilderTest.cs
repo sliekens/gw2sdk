@@ -2,6 +2,7 @@ using GuildWars2.Http;
 
 namespace GuildWars2.Tests.Http;
 
+[Feature("Http")]
 public class QueryBuilderTest
 {
     [Test]

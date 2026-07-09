@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Items;
 
+[Feature("Items")]
 [ServiceDataSource]
 public class ItemsByFilter(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Commerce;
 
+[Feature("Commerce")]
 [ServiceDataSource]
 public class DeliveryBox(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Wvw.Abilities;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class Abilities(Gw2Client sut)
 {

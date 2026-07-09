@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class ObjectivesIndex(Gw2Client sut)
 {

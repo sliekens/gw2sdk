@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
+[Feature("Pve")]
 public class Decorations
 {
     [Test]

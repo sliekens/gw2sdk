@@ -4,6 +4,7 @@ using GuildWars2.Wvw.Matches.Scores;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Scores;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class MatchesScores(Gw2Client sut)
 {

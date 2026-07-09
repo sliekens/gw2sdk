@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class CatsByFilter(Gw2Client sut)
 {

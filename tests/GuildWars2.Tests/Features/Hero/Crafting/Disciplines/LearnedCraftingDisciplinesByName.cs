@@ -6,6 +6,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Disciplines;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class LearnedCraftingDisciplinesByName(Gw2Client sut)
 {

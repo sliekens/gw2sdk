@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Races;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class RacesByFilter(Gw2Client sut)
 {

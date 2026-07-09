@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Commerce.Listings;
 
+[Feature("Commerce")]
 [ServiceDataSource]
 public class OrderBooksIndex(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Items.Stats;
 
+[Feature("Items")]
 [ServiceDataSource]
 public class AttributeCombinationById(Gw2Client sut)
 {

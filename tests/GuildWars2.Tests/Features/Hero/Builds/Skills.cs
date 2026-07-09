@@ -10,6 +10,7 @@ using Range = GuildWars2.Hero.Builds.Facts.Range;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class Skills(Gw2Client sut)
 {

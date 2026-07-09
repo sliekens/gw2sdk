@@ -5,6 +5,7 @@ using GuildWars2.Items;
 
 namespace GuildWars2.Tests.Features;
 
+[Feature("Features")]
 public class ExtensibleEnumTest
 {
     [Test]

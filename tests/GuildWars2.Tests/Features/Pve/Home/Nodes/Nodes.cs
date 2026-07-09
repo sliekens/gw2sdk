@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class Nodes(Gw2Client sut)
 {

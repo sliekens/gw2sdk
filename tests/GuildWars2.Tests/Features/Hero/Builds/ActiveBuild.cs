@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class ActiveBuild(Gw2Client sut)
 {

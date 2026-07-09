@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class AbilitiesIndex(Gw2Client sut)
 {

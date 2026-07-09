@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class MailCarriersByFilter(Gw2Client sut)
 {

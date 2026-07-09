@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class HeartsIndex(Gw2Client sut)
 {

@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class ContinentsIndex(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Pets;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class PetById(Gw2Client sut)
 {

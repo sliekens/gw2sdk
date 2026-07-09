@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class CompletedPaths(Gw2Client sut)
 {

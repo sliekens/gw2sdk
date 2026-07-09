@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 
+[Feature("Quaggans")]
 [ServiceDataSource]
 public class QuaggansIndex(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Wvw.Upgrades;
 
 namespace GuildWars2.Tests.Features.Wvw.Upgrades;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class UpgradesByPage(Gw2Client sut)
 {

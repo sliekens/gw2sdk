@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Dungeons;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class DungeonsByPage(Gw2Client sut)
 {

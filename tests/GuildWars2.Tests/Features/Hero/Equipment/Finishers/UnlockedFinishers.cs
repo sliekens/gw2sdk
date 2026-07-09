@@ -6,6 +6,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Finishers;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedFinishers(Gw2Client sut)
 {

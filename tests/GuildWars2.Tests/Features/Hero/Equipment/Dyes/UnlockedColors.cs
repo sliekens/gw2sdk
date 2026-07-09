@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Dyes;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedColors(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class FloorById(Gw2Client sut)
 {

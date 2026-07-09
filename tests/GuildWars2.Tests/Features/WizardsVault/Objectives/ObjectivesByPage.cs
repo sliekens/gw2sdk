@@ -3,6 +3,7 @@ using GuildWars2.WizardsVault.Objectives;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
+[Feature("WizardsVault")]
 [ServiceDataSource]
 public class ObjectivesByPage(Gw2Client sut)
 {

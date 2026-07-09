@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class MapsIndex(Gw2Client sut)
 {

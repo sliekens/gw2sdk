@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.BackgroundStories;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class BackgroundStoryAnswers(Gw2Client sut)
 {

@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Outfits;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class OutfitsIndex(Gw2Client sut)
 {

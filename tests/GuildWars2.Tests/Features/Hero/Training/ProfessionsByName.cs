@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Training;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class ProfessionsByName(Gw2Client sut)
 {

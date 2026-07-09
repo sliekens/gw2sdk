@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class LegendById(Gw2Client sut)
 {

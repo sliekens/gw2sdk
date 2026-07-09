@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
+[Feature("WizardsVault")]
 [ServiceDataSource]
 public class SpecialObjectivesProgress(Gw2Client sut)
 {

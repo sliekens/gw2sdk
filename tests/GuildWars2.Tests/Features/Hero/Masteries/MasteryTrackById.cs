@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Masteries;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class MasteryTrackById(Gw2Client sut)
 {

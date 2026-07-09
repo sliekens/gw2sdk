@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
+[Feature("WizardsVault")]
 [ServiceDataSource]
 public class AstralRewardsIndex(Gw2Client sut)
 {

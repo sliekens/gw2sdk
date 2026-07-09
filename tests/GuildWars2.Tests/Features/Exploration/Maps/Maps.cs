@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class Maps(Gw2Client sut)
 {

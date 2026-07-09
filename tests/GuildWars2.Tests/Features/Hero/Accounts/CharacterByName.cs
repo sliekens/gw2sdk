@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Accounts;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class CharacterByName(Gw2Client sut)
 {

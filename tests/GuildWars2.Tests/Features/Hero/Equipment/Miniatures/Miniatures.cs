@@ -5,6 +5,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Miniatures;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class Miniatures(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class ObjectivesByPage(Gw2Client sut)
 {

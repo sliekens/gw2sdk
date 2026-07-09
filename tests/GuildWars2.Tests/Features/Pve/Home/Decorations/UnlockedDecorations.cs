@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class UnlockedDecorations(Gw2Client sut)
 {

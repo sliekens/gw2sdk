@@ -5,6 +5,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class AchievementGroups(Gw2Client sut)
 {

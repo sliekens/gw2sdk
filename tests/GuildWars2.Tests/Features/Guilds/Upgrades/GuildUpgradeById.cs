@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
+[Feature("Guilds")]
 [ServiceDataSource]
 public class GuildUpgradeById(Gw2Client sut)
 {

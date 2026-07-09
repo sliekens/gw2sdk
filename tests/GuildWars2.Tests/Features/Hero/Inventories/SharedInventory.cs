@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Inventories;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class SharedInventory(Gw2Client sut)
 {

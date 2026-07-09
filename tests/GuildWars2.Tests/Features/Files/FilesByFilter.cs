@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Files;
 
+[Feature("Files")]
 [ServiceDataSource]
 public class FilesByFilter(Gw2Client sut)
 {

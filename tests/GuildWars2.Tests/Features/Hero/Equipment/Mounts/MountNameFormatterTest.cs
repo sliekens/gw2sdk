@@ -2,6 +2,7 @@ using GuildWars2.Hero.Equipment.Mounts;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
+[Feature("Hero")]
 public class MountNameFormatterTest
 {
     [Test]

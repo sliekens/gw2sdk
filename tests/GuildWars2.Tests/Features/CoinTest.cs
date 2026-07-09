@@ -5,6 +5,7 @@ using GuildWars2.Chat;
 
 namespace GuildWars2.Tests.Features;
 
+[Feature("Features")]
 public class CoinTest
 {
     [Test]

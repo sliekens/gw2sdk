@@ -3,6 +3,7 @@ using GuildWars2.Wvw.Ranks;
 
 namespace GuildWars2.Tests.Features.Wvw.Ranks;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class RankById(Gw2Client sut)
 {

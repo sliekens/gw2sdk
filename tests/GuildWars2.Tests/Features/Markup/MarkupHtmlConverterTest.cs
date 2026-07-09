@@ -2,6 +2,7 @@ using GuildWars2.Markup;
 
 namespace GuildWars2.Tests.Features.Markup;
 
+[Feature("Markup")]
 public class MarkupHtmlConverterTest
 {
     [Test]

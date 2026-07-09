@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class LegendaryItemsIndex(Gw2Client sut)
 {

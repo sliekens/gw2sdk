@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Builds;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class StoredBuildsByNumbers(Gw2Client sut)
 {

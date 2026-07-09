@@ -3,6 +3,7 @@ using GuildWars2.Wvw.Matches.Stats;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Stats;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class MatchesStatsByPage(Gw2Client sut)
 {

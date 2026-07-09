@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class AchievementsByFilter(Gw2Client sut)
 {

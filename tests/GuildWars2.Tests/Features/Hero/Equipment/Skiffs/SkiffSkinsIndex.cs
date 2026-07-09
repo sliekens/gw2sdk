@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class SkiffSkinsIndex(Gw2Client sut)
 {

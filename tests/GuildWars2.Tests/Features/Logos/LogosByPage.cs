@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Logos;
 
+[Feature("Logos")]
 [ServiceDataSource]
 public class LogosByPage(Gw2Client sut)
 {

@@ -4,6 +4,7 @@ using GuildWars2.Wvw.Objectives;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class Objectives(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedGliderSkins(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Skiffs;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class SkiffSkinsByFilter(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Commerce.Exchange;
 
+[Feature("Commerce")]
 [ServiceDataSource]
 public class ExchangeGemsToGold(Gw2Client sut)
 {

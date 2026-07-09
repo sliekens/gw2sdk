@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Nodes;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class UnlockedNodes(Gw2Client sut)
 {

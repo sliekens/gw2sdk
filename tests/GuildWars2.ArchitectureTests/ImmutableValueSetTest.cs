@@ -4,6 +4,7 @@ using GuildWars2.Collections;
 
 namespace GuildWars2.ArchitectureTests;
 
+[Feature("Architecture")]
 public class ImmutableValueSetTest
 {
     private sealed record SampleRecord(ImmutableValueSet<int> Numbers);

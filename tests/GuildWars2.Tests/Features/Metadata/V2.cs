@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Metadata;
 
+[Feature("Metadata")]
 [ServiceDataSource]
 public class V2(Gw2Client sut)
 {
