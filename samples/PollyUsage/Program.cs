@@ -119,8 +119,8 @@ internal static class Gw2Resiliency
         UseJitter = true,
         ShouldHandle = static async attempt => attempt.Outcome switch
         {
-            { Exception: OperationCanceledException } => !attempt.Context.CancellationToken
-                .IsCancellationRequested,
+            // Note: as of Polly 8.7.0, OperationCanceledException from caller cancellation is automatically
+            // propagated and will not reach this handler, so no manual IsCancellationRequested check is needed
             { Exception: HttpRequestException } => true,
             { Exception: TimeoutRejectedException } => true,
             { Exception: BrokenCircuitException } => true,
@@ -149,8 +149,8 @@ internal static class Gw2Resiliency
         {
             ShouldHandle = static async attempt => attempt.Outcome switch
             {
-                { Exception: OperationCanceledException } => !attempt.Context.CancellationToken
-                    .IsCancellationRequested,
+                // Note: as of Polly 8.7.0, OperationCanceledException from caller cancellation is automatically
+                // propagated and will not reach this handler, so no manual IsCancellationRequested check is needed
                 { Exception: HttpRequestException } => true,
                 { Exception: TimeoutRejectedException } => true,
                 { Result.StatusCode: RequestTimeout } => true,
