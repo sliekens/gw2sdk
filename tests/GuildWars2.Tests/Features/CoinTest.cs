@@ -9,19 +9,19 @@ namespace GuildWars2.Tests.Features;
 public class CoinTest
 {
     [Test]
-    [Arguments("⸻", 0)]
-    [Arguments("1 copper", 1)]
-    [Arguments("1 silver", 1_00)]
-    [Arguments("1 gold", 1_00_00)]
-    [Arguments("50 copper", 50)]
-    [Arguments("50 silver", 50_00)]
-    [Arguments("50 gold", 50_00_00)]
-    [Arguments("1 silver, 2 copper", 1_02)]
-    [Arguments("1 gold, 2 copper", 1_00_02)]
-    [Arguments("1 gold, 2 silver", 1_02_00)]
-    [Arguments("1 gold, 2 silver, 3 copper", 1_02_03)]
-    [Arguments("214,748 gold, 36 silver, 47 copper", int.MaxValue)]
-    [Arguments("-214,748 gold, -36 silver, -48 copper", int.MinValue)]
+    [Arguments("⸻", "0")]
+    [Arguments("1 copper", "1")]
+    [Arguments("1 silver", "100")]
+    [Arguments("1 gold", "10000")]
+    [Arguments("50 copper", "50")]
+    [Arguments("50 silver", "5000")]
+    [Arguments("50 gold", "500000")]
+    [Arguments("1 silver, 2 copper", "102")]
+    [Arguments("1 gold, 2 copper", "10002")]
+    [Arguments("1 gold, 2 silver", "10200")]
+    [Arguments("1 gold, 2 silver, 3 copper", "10203")]
+    [Arguments("214,748 gold, 36 silver, 47 copper", "2147483647")]
+    [Arguments("-214,748 gold, -36 silver, -48 copper", "-2147483648")]
     public async Task Coins_are_formatted_for_humans(string expected, int amount)
     {
         // Number formatting depends on current culture
@@ -32,12 +32,12 @@ public class CoinTest
     }
 
     [Test]
-    [Arguments(0, 0, 0, 0)]
-    [Arguments(1_00, 0, 1, 0)]
-    [Arguments(1_00_00, 1, 0, 0)]
-    [Arguments(1_00_01, 1, 0, 1)]
-    [Arguments(1_01_01, 1, 1, 1)]
-    [Arguments(99_99_99, 99, 99, 99)]
+    [Arguments("0", "0", "0", "0")]
+    [Arguments("100", "0", "1", "0")]
+    [Arguments("10000", "1", "0", "0")]
+    [Arguments("10001", "1", "0", "1")]
+    [Arguments("10101", "1", "1", "1")]
+    [Arguments("999999", "99", "99", "99")]
     public async Task Coins_can_be_represented_in_gold_silver_and_copper(int amount, int gold, int silver, int copper)
     {
         Coin sut = amount;

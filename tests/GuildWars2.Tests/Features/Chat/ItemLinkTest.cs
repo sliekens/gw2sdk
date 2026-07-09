@@ -8,9 +8,9 @@ namespace GuildWars2.Tests.Features.Chat;
 public class ItemLinkTest
 {
     [Test]
-    [Arguments("[&AgEAWgAA]", 23040, 1, null, null, null)]
-    [Arguments("[&AvpJUgEA]", 86601, 250, null, null, null)]
-    [Arguments("[&AgGoOQHA4AMAAMtlAQA=]", 80296, 1, 992, 91595, null)]
+    [Arguments("[&AgEAWgAA]", "23040", "1", null, null, null)]
+    [Arguments("[&AvpJUgEA]", "86601", "250", null, null, null)]
+    [Arguments("[&AgGoOQHA4AMAAMtlAQA=]", "80296", "1", "992", "91595", null)]
     public async Task Can_marshal_item_links(string chatLink, int itemId, int count, int? skinId, int? suffixItemId, int? secondarySuffixItemId)
     {
         ItemLink sut = ItemLink.Parse(chatLink);

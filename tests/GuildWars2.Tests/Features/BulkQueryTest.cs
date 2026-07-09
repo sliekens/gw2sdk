@@ -4,8 +4,8 @@ namespace GuildWars2.Tests.Features;
 public class BulkQueryTest
 {
     [Test]
-    [Arguments(1000, 10)]
-    [Arguments(150, 200)]
+    [Arguments("1000", "10")]
+    [Arguments("150", "200")]
     public async Task Can_be_cancelled(int resultTotal, int chunkSize)
     {
         // Ensure cancellation works in both scenarios where the query is chunked or not

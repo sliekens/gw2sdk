@@ -21,8 +21,8 @@ namespace GuildWars2.Tests.Features.Exploration.Floors;
 public class Floors(Gw2Client sut)
 {
     [Test]
-    [Arguments(1)]
-    [Arguments(2)]
+    [Arguments("1")]
+    [Arguments("2")]
     public async Task Can_be_listed(int continentId)
     {
         (IImmutableValueSet<Floor> actual, MessageContext context) = await sut.Exploration.GetFloors(continentId, cancellationToken: TestContext.Current!.Execution.CancellationToken);

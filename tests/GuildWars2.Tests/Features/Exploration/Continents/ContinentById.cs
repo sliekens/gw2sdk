@@ -8,8 +8,8 @@ namespace GuildWars2.Tests.Features.Exploration.Continents;
 public class ContinentById(Gw2Client sut)
 {
     [Test]
-    [Arguments(1)]
-    [Arguments(2)]
+    [Arguments("1")]
+    [Arguments("2")]
     public async Task Can_be_found(int id)
     {
         (Continent actual, MessageContext context) = await sut.Exploration.GetContinentById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);

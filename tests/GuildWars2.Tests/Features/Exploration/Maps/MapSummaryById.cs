@@ -8,9 +8,9 @@ namespace GuildWars2.Tests.Features.Exploration.Maps;
 public class MapSummaryById(Gw2Client sut)
 {
     [Test]
-    [Arguments(15)]
-    [Arguments(17)]
-    [Arguments(18)]
+    [Arguments("15")]
+    [Arguments("17")]
+    [Arguments("18")]
     public async Task Can_be_found(int id)
     {
         (MapSummary actual, MessageContext context) = await sut.Exploration.GetMapSummaryById(id, cancellationToken: TestContext.Current!.Execution.CancellationToken);
