@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Emblems;
 
+[Feature("Guilds")]
 [ServiceDataSource]
 public class EmblemBackgroundsIndex(Gw2Client sut)
 {

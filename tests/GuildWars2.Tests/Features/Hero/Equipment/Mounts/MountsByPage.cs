@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class MountsByPage(Gw2Client sut)
 {

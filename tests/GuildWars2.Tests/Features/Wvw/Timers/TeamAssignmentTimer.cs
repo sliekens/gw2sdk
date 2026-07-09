@@ -3,6 +3,7 @@ using GuildWars2.Wvw.Timers;
 
 namespace GuildWars2.Tests.Features.Wvw.Timers;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class TeamAssignmentTimer(Gw2Client sut)
 {

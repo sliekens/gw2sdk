@@ -6,6 +6,7 @@ using Assert = TUnit.Assertions.Assert;
 
 namespace GuildWars2.Tests.Features.Authorization;
 
+[Feature("Authorization")]
 [ServiceDataSource]
 public class Subtoken(Gw2Client sut)
 {

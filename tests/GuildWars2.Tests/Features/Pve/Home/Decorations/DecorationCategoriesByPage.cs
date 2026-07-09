@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Decorations;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class DecorationCategoriesByPage(Gw2Client sut)
 {

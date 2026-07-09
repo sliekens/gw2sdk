@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Novelties;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class NoveltyById(Gw2Client sut)
 {

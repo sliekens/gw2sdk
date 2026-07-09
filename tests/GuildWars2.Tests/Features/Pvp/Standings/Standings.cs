@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pvp.Standings;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class Standings(Gw2Client sut)
 {

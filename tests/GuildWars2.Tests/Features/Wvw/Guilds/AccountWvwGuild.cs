@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Wvw.Guilds;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class AccountWvwGuild(Gw2Client sut)
 {

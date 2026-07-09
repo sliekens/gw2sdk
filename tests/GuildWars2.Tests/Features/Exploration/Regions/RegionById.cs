@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Regions;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class RegionById(Gw2Client sut)
 {

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class ReceivedMapChests(Gw2Client sut)
 {

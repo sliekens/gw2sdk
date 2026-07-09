@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Achievements;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class AchievementCategoriesIndex(Gw2Client sut)
 {

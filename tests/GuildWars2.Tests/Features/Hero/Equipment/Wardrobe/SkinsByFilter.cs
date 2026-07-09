@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class SkinsByFilter(Gw2Client sut)
 {

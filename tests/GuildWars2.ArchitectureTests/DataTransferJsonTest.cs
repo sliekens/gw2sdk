@@ -4,6 +4,7 @@ using GuildWars2.Tests.Common;
 
 namespace GuildWars2.ArchitectureTests;
 
+[Feature("Architecture")]
 [ClassDataSource<AssemblyFixture>(Shared = SharedType.PerTestSession)]
 public class DataTransferJsonTest(AssemblyFixture fixture)
 {

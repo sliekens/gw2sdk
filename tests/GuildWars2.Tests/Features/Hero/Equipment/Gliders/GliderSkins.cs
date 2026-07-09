@@ -6,6 +6,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Gliders;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class GliderSkins(Gw2Client sut)
 {

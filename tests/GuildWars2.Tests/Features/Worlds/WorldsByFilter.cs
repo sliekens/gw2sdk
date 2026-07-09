@@ -3,6 +3,7 @@ using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
+[Feature("Worlds")]
 [ServiceDataSource]
 public class WorldsByFilter(Gw2Client sut)
 {

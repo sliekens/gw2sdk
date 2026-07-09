@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Sectors;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class SectorsByFilter(Gw2Client sut)
 {

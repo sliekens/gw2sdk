@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class UnlockedHeroes(Gw2Client sut)
 {

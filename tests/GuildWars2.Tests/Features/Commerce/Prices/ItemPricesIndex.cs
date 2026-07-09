@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 
+[Feature("Commerce")]
 [ServiceDataSource]
 public class ItemPricesIndex(Gw2Client sut)
 {

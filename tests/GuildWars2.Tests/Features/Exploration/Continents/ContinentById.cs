@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class ContinentById(Gw2Client sut)
 {

@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.MapChests;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class MapChestsIndex(Gw2Client sut)
 {

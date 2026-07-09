@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Wardrobe;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedSkins(Gw2Client sut)
 {

@@ -5,6 +5,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Chat;
 
+[Feature("Chat")]
 [ServiceDataSource]
 public class BuildTemplateLinkTest(Gw2Client gw2)
 {

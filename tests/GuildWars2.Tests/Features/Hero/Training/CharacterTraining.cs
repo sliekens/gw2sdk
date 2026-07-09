@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Training;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class CharacterTraining(Gw2Client sut)
 {

@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Wvw.Upgrades;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class UpgradesIndex(Gw2Client sut)
 {

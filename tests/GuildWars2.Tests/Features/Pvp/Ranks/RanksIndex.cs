@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Ranks;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class RanksIndex(Gw2Client sut)
 {

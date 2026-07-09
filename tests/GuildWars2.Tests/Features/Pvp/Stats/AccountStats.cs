@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pvp.Stats;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class AccountStats(Gw2Client sut)
 {

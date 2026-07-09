@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Logos;
 
+[Feature("Logos")]
 [ServiceDataSource]
 public class LogosIndex(Gw2Client sut)
 {

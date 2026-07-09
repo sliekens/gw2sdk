@@ -8,6 +8,7 @@ using TUnit.Core.Exceptions;
 
 namespace GuildWars2.Tests.Features.Mumble;
 
+[Feature("Mumble")]
 [Explicit]
 public class GameLinkTest
 {

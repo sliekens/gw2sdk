@@ -4,6 +4,7 @@ using Assert = TUnit.Assertions.Assert;
 
 namespace GuildWars2.Tests.Features.Chat;
 
+[Feature("Chat")]
 public class CoinLinkTest
 {
     [Test]

@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.SuperAdventureBox;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class SuperAdventureBoxProgress(Gw2Client sut)
 {

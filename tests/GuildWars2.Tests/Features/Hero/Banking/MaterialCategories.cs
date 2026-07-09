@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class MaterialCategories(Gw2Client sut)
 {

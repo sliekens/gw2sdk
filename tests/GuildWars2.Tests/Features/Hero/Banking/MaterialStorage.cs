@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class MaterialStorage(Gw2Client sut)
 {

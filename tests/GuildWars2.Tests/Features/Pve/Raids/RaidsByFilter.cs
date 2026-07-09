@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class RaidsByFilter(Gw2Client sut)
 {

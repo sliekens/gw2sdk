@@ -5,6 +5,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Guilds;
 
+[Feature("Guilds")]
 [ServiceDataSource]
 public class GuildRanks(Gw2Client sut)
 {

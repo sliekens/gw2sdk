@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.JadeBots;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedJadeBotSkins(Gw2Client sut)
 {

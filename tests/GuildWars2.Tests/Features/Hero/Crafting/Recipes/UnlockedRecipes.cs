@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedRecipes(Gw2Client sut)
 {

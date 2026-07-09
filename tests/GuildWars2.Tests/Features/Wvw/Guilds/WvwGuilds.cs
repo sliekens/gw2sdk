@@ -4,6 +4,7 @@ using GuildWars2.Wvw.Guilds;
 
 namespace GuildWars2.Tests.Features.Wvw.Guilds;
 
+[Feature("WorldVsWorld")]
 [ServiceDataSource]
 public class WvwGuilds(Gw2Client sut)
 {

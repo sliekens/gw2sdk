@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Exploration.HeroChallenges;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class CompletedHeroChallenges(Gw2Client sut)
 {

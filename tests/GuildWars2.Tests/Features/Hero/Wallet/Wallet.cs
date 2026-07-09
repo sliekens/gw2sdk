@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Wallet;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class Wallet(Gw2Client sut)
 {

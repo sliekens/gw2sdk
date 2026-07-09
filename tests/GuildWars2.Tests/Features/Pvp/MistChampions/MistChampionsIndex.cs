@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.MistChampions;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class MistChampionsIndex(Gw2Client sut)
 {

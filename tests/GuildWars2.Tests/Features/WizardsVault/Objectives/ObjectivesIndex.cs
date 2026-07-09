@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Objectives;
 
+[Feature("WizardsVault")]
 [ServiceDataSource]
 public class ObjectivesIndex(Gw2Client sut)
 {

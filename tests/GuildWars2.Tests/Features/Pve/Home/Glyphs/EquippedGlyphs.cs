@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Glyphs;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class EquippedGlyphs(Gw2Client sut)
 {

@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Worlds;
 
+[Feature("Worlds")]
 [ServiceDataSource]
 public class WorldsIndex(Gw2Client sut)
 {

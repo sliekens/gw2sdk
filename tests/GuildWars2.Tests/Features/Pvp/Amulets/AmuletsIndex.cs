@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class AmuletsIndex(Gw2Client sut)
 {

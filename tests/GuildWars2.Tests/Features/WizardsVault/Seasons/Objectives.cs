@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.WizardsVault.Seasons;
 
+[Feature("WizardsVault")]
 [ServiceDataSource]
 public class Season(Gw2Client sut)
 {

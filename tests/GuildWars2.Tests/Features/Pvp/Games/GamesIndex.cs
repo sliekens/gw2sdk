@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pvp.Games;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class GamesIndex(Gw2Client sut)
 {

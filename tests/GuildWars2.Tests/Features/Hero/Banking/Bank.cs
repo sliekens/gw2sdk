@@ -5,6 +5,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Banking;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class Bank(Gw2Client sut)
 {

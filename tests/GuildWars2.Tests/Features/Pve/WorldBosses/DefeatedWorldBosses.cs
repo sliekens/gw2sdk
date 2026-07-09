@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.WorldBosses;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class DefeatedWorldBosses(Gw2Client sut)
 {

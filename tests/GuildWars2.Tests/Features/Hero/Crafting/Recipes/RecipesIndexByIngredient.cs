@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Recipes;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class RecipesIndexByIngredient(Gw2Client sut)
 {

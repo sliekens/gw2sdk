@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Commerce.Transactions;
 
+[Feature("Commerce")]
 [ServiceDataSource]
 public class BuyOrders(Gw2Client sut)
 {

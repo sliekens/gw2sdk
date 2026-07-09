@@ -6,6 +6,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class EquipmentTemplates(Gw2Client sut)
 {

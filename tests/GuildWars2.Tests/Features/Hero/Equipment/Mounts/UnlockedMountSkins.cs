@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedMountSkins(Gw2Client sut)
 {

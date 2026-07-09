@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
+[Feature("Guilds")]
 [ServiceDataSource]
 public class GuildPermissionsIndex(Gw2Client sut)
 {

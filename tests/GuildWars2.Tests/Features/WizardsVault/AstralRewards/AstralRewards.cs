@@ -4,6 +4,7 @@ using GuildWars2.WizardsVault.AstralRewards;
 
 namespace GuildWars2.Tests.Features.WizardsVault.AstralRewards;
 
+[Feature("WizardsVault")]
 [ServiceDataSource]
 public class AstralRewards(Gw2Client sut)
 {

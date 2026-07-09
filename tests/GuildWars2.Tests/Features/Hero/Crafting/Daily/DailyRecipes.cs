@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Crafting.Daily;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class DailyRecipes(Gw2Client sut)
 {

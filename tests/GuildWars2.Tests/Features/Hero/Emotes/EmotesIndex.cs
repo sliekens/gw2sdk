@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Emotes;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class EmotesIndex(Gw2Client sut)
 {

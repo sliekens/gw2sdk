@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Pve.Home.Cats;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class UnlockedCats(Gw2Client sut)
 {

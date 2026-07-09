@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.Dyes;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class ColorsIndex(Gw2Client sut)
 {

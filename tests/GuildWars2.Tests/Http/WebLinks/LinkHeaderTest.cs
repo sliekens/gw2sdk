@@ -2,6 +2,7 @@ using GuildWars2.Http.WebLinks;
 
 namespace GuildWars2.Tests.Http.WebLinks;
 
+[Feature("Http")]
 public class LinkHeaderTest
 {
     [Test]

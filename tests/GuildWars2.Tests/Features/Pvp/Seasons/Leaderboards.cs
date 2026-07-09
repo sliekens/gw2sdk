@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 
+[Feature("Pvp")]
 [ServiceDataSource]
 public class Leaderboards(Gw2Client sut)
 {

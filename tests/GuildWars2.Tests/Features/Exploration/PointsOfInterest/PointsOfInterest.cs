@@ -3,6 +3,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 
+[Feature("Exploration")]
 [ServiceDataSource]
 public class PointsOfInterest(Gw2Client sut)
 {

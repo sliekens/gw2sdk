@@ -4,6 +4,7 @@ using Assert = TUnit.Assertions.Assert;
 
 namespace GuildWars2.Tests.Features.Markup;
 
+[Feature("Markup")]
 public class MarkupParserTest
 {
     [Test]

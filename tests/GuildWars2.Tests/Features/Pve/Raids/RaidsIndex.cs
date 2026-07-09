@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Pve.Raids;
 
+[Feature("Pve")]
 [ServiceDataSource]
 public class RaidsIndex(Gw2Client sut)
 {

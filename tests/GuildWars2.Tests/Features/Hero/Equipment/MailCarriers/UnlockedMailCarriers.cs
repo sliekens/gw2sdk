@@ -4,6 +4,7 @@ using GuildWars2.Tests.TestInfrastructure.Configuration;
 
 namespace GuildWars2.Tests.Features.Hero.Equipment.MailCarriers;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class UnlockedMailCarriers(Gw2Client sut)
 {

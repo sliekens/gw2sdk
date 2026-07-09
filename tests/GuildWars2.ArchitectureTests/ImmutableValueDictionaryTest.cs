@@ -5,6 +5,7 @@ using GuildWars2.Hero;
 
 namespace GuildWars2.ArchitectureTests;
 
+[Feature("Architecture")]
 public class ImmutableValueDictionaryTest
 {
     private sealed record SampleRecord(ImmutableValueDictionary<string, int> Data);

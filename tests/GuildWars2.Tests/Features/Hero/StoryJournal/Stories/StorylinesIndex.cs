@@ -2,6 +2,7 @@ using GuildWars2.Tests.TestInfrastructure.Composition;
 
 namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 
+[Feature("Hero")]
 [ServiceDataSource]
 public class StorylinesIndex(Gw2Client sut)
 {
