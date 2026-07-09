@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Metadata;
 [ServiceDataSource]
 public class V2(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Has_api_metadata()
     {

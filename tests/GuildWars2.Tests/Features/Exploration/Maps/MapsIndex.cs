@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Exploration.Maps;
 [ServiceDataSource]
 public class MapsIndex(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments(1, 0, 1)]
     [Arguments(1, 0, 2)]
@@ -17,6 +18,7 @@ public class MapsIndex(Gw2Client sut)
         await Assert.That(actual).IsNotEmpty();
     }
 
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task All_map_ids_can_be_listed()
     {

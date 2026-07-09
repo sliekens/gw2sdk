@@ -7,6 +7,7 @@ namespace GuildWars2.Tests.Features.Commerce.Transactions;
 [ServiceDataSource]
 public class Sales(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Sales_history_can_be_filtered_by_page()
     {

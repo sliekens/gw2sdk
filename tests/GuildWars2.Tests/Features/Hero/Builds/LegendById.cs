@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Hero.Builds;
 [ServiceDataSource]
 public class LegendById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments("Legend1")]
     [Arguments("Legend2")]

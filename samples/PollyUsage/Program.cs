@@ -128,16 +128,17 @@ internal static class Gw2Resiliency
             { Result.StatusCode: TooManyRequests } => true,
             { Result.StatusCode: InternalServerError } => true,
             { Result.StatusCode: BadGateway } => true,
-            { Result.StatusCode: ServiceUnavailable } => !IsApiNotActive(
-                await GetText(attempt.Outcome)
-            ),
+            { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome)
+                != "API not active",
             { Result.StatusCode: GatewayTimeout } => true,
- 
+
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
-            { Result.IsSuccessStatusCode: false } => IsKnownTransientErrorText(
-                await GetText(attempt.Outcome)
-            ),
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is
+                "endpoint requires authentication"
+                or "unknown error"
+                or "ErrBadData"
+                or "ErrTimeout",
 
             _ => false
         }
@@ -156,18 +157,19 @@ internal static class Gw2Resiliency
                 { Result.StatusCode: TooManyRequests } => true,
                 { Result.StatusCode: InternalServerError } => true,
                 { Result.StatusCode: BadGateway } => true,
-                { Result.StatusCode: ServiceUnavailable } => !IsApiNotActive(
-                   await GetText(attempt.Outcome)
-                ),
+                { Result.StatusCode: ServiceUnavailable } => await GetText(attempt.Outcome)
+                    != "API not active",
                 { Result.StatusCode: GatewayTimeout } => true,
 
                 // Sometimes the API returns weird data, also treat as internal errors
                 {
-                   Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0
+                    Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0
                 } => true,
-                { Result.IsSuccessStatusCode: false } => IsKnownTransientErrorText(
-                   await GetText(attempt.Outcome)
-                ),
+                { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is
+                    "endpoint requires authentication"
+                    or "unknown error"
+                    or "ErrBadData"
+                    or "ErrTimeout",
 
                 _ => false
             }
@@ -191,9 +193,11 @@ internal static class Gw2Resiliency
 
             // Sometimes the API returns weird data, also treat as internal errors
             { Result.IsSuccessStatusCode: false, Result.Content.Headers.ContentLength: 0 } => true,
-            { Result.IsSuccessStatusCode: false } => IsKnownTransientErrorText(
-                await GetText(attempt.Outcome)
-            ),
+            { Result.IsSuccessStatusCode: false } => await GetText(attempt.Outcome) is
+                "endpoint requires authentication"
+                or "unknown error"
+                or "ErrBadData"
+                or "ErrTimeout",
 
             _ => false
         }
@@ -203,30 +207,6 @@ internal static class Gw2Resiliency
     {
         Timeout = TimeSpan.FromSeconds(30)
     };
-
-    private static bool IsKnownTransientErrorText(string? text)
-    {
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            return false;
-        }
-
-        string trimmedText = text.Trim();
-        return trimmedText.Equals("endpoint requires authentication", StringComparison.OrdinalIgnoreCase)
-            || trimmedText.Equals("unknown error", StringComparison.OrdinalIgnoreCase)
-            || trimmedText.Equals("ErrBadData", StringComparison.OrdinalIgnoreCase)
-            || trimmedText.Equals("ErrTimeout", StringComparison.OrdinalIgnoreCase);
-    }
-
-    private static bool IsApiNotActive(string? text)
-    {
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            return false;
-        }
-
-        return text.Trim().Equals("API not active", StringComparison.OrdinalIgnoreCase);
-    }
 
     // Helper method to get the "text" property from the API response
     // because the status code is not always enough to determine the error

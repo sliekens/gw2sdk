@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Exploration.Continents;
 [ServiceDataSource]
 public class ContinentById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments(1)]
     [Arguments(2)]

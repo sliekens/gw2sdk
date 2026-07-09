@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Pvp.Seasons;
 [ServiceDataSource]
 public class LeaderboardRegions(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments("2B2E80D3-0A74-424F-B0EA-E221500B323C", "legendary")]
     [Arguments("2B2E80D3-0A74-424F-B0EA-E221500B323C", "guild")]

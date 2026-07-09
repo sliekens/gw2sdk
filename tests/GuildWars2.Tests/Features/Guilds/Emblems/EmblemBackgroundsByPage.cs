@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Guilds.Emblems;
 [ServiceDataSource]
 public class EmblemBackgroundsByPage(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Background_emblems_can_be_filtered_by_page()
     {

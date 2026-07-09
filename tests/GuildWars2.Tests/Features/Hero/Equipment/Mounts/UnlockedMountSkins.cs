@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Mounts;
 [ServiceDataSource]
 public class UnlockedMountSkins(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Unlocked_mount_skins_can_be_found()
     {

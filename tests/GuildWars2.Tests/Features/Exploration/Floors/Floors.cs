@@ -19,6 +19,7 @@ namespace GuildWars2.Tests.Features.Exploration.Floors;
 [ServiceDataSource]
 public class Floors(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments(1)]
     [Arguments(2)]

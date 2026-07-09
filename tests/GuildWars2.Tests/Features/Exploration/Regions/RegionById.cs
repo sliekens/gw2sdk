@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Exploration.Regions;
 [ServiceDataSource]
 public class RegionById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments(1, 0, 1)]
     [Arguments(1, 0, 2)]

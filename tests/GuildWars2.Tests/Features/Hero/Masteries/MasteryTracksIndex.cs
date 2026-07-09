@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Hero.Masteries;
 [ServiceDataSource]
 public class MasteryTracksIndex(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Masteries_index_Can_be_listed()
     {

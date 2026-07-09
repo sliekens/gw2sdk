@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Exploration.Hearts;
 [ServiceDataSource]
 public class HeartsIndex(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments(1, 0, 1, 26)]
     [Arguments(1, 0, 1, 27)]

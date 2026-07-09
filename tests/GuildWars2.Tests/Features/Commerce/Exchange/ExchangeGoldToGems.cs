@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Commerce.Exchange;
 [ServiceDataSource]
 public class ExchangeGoldToGems(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task You_can_exchange_gold_for_gems()
     {

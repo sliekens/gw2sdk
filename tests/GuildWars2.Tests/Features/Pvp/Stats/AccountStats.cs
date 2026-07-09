@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Pvp.Stats;
 [ServiceDataSource]
 public class AccountStats(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_listed()
     {

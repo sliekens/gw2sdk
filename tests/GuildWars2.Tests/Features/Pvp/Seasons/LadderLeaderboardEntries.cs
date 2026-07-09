@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Pvp.Seasons;
 [ServiceDataSource]
 public class LadderLeaderboardEntries(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder", "eu")]
     [Arguments("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder", "na")]

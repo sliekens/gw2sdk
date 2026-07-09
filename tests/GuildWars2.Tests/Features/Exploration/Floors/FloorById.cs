@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Exploration.Floors;
 [ServiceDataSource]
 public class FloorById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments(1, 0)]
     [Arguments(1, 1)]

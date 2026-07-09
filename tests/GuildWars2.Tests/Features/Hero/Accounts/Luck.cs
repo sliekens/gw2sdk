@@ -7,6 +7,7 @@ namespace GuildWars2.Tests.Features.Hero.Accounts;
 [ServiceDataSource]
 public class Luck(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_found()
     {

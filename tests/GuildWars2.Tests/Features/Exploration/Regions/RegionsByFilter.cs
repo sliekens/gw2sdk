@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Exploration.Regions;
 [ServiceDataSource]
 public class RegionsByFilter(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_filtered_by_id()
     {

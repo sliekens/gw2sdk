@@ -8,6 +8,7 @@ namespace GuildWars2.Tests.Features.Hero.Banking;
 [ServiceDataSource]
 public class Bank(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Contents_can_be_found()
     {

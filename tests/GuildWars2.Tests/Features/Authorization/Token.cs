@@ -9,6 +9,7 @@ namespace GuildWars2.Tests.Features.Authorization;
 [ServiceDataSource]
 public class Token(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Token_has_info()
     {

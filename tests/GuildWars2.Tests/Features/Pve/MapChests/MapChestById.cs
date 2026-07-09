@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Pve.MapChests;
 [ServiceDataSource]
 public class MapChestById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments("auric_basin_heros_choice_chest")]
     [Arguments("crystal_oasis_heros_choice_chest")]

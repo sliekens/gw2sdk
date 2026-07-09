@@ -7,6 +7,7 @@ namespace GuildWars2.Tests.Features.Guilds;
 [ServiceDataSource]
 public class GuildById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_found()
     {
@@ -24,6 +25,7 @@ public class GuildById(Gw2Client sut)
         await Assert.That(actual.MemberCount).IsNull();
     }
 
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_found_when_authenticated()
     {

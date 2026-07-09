@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Hero.Equipment.Templates;
 [ServiceDataSource]
 public class LegendaryItemsIndex(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_listed()
     {

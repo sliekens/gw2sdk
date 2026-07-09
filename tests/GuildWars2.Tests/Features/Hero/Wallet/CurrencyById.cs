@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Hero.Wallet;
 [ServiceDataSource]
 public class CurrencyById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task A_currency_can_be_found_by_id()
     {

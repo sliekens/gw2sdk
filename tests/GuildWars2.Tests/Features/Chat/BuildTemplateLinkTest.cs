@@ -8,6 +8,7 @@ namespace GuildWars2.Tests.Features.Chat;
 [ServiceDataSource]
 public class BuildTemplateLinkTest(Gw2Client gw2)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     [Arguments("[&DQMGOyYvRh4qDyoPhgCGABoblQEQGwcBCRuJAQAAAAAAAAAAAAAAAAAAAAACVQAzAAA=]", ProfessionName.Engineer)]
     [Arguments("[&DQQAAAAAAAB5AHkAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAABIwAA]", ProfessionName.Ranger)]

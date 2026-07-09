@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Guilds.Search;
 [ServiceDataSource]
 public class GuildsByName(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Is_not_empty()
     {

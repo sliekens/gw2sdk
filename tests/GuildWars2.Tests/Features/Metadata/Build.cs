@@ -5,6 +5,7 @@ namespace GuildWars2.Tests.Features.Metadata;
 [ServiceDataSource]
 public class Build(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Current_build_can_be_found()
     {

@@ -9,6 +9,7 @@ namespace GuildWars2.Tests.Features.Hero.Achievements;
 [ServiceDataSource]
 public class Titles(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Titles_can_be_listed()
     {

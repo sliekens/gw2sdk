@@ -6,6 +6,7 @@ namespace GuildWars2.Tests.Features.Hero.StoryJournal.Stories;
 [ServiceDataSource]
 public class StorylineById(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Can_be_found()
     {

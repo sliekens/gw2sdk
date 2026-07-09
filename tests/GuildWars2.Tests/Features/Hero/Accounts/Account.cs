@@ -7,6 +7,7 @@ namespace GuildWars2.Tests.Features.Hero.Accounts;
 [ServiceDataSource]
 public class Account(Gw2Client sut)
 {
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Basic_summary_with_any_access_token()
     {
@@ -28,6 +29,7 @@ public class Account(Gw2Client sut)
         await Assert.That(actual.Wvw.Rank).IsNull();
     }
 
+    [Retry(3, RetryOnExceptionTypes = new[] { typeof(System.Net.Http.HttpRequestException) })]
     [Test]
     public async Task Full_summary_with_high_trust_access_token()
     {
