@@ -22,9 +22,29 @@ Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Fa
 - Avoid per-call / per-iteration allocations; use spans/pooling/stack allocation when it yields a clear benefit.
 - Serialization: `System.Text.Json`; follow existing converter patterns.
 - XML docs: one-line `<summary>` with standalone first sentence; `<remarks>` only when necessary.
-- Tests: xUnit, deterministic, allocation-aware; prefer data-driven theories when clearer.
+- Tests: TUnit (not xUnit), deterministic, allocation-aware; prefer data-driven theories when clearer.
 - No global usings beyond what already exists.
 - Do not add meta notes explaining removed/omitted content unless explicitly instructed; keep diffs and documentation focused on current state.
+
+## Test Infrastructure
+
+The project uses **TUnit** (not xUnit or NUnit) for all tests.
+
+### TUnit-specific patterns
+- `[Test]` on methods, `[ClassDataSource]` / `[ServiceDataSource]` for shared fixtures.
+- `[Retry(n, typeof(ExceptionType))]` — TUnit's **test-runner** retry attribute on test methods in `tests/`. Retries the test method itself on transient failures. This is **completely separate** from Polly.
+- `[Property("Category", "...")]` or a custom `[Feature("...")]` attribute for HTML report categories.
+- Assertions: `await Assert.That(value).IsEqualTo(...)` — fluent async API.
+
+### Disambiguation: TUnit retry vs Polly retry
+The codebase has **two distinct retry mechanisms** — do not confuse them:
+
+| Concept | Where | What it does |
+|---|---|---|
+| TUnit `[Retry]` | `tests/` — on `[Test]` methods | Re-runs a failing **test method** up to N times |
+| Polly retry pipeline | `src/`, `samples/`, `tests/TestInfrastructure/` — `Gw2Resiliency.cs` | Retries **HTTP requests** at the application layer |
+
+When an issue asks to "add retry to integration tests" or "use TUnit retry", changes go **only** in `tests/` on `[Test]` methods. Do **not** modify `Gw2Resiliency.cs` or any Polly strategy.
 
 ## Reviewing existing code
 - Use existing code as style guidance.
