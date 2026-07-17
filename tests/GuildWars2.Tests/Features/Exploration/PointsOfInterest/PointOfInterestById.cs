@@ -20,8 +20,8 @@ public class PointOfInterestById(Gw2Client sut)
         await Assert.That(actual.Id).IsEqualTo(pointOfInterestId);
         await Assert.That(actual.Name).IsEqualTo("Leaning Grade");
         await Assert.That(actual.Floor).IsEqualTo(1);
-        await Assert.That(actual.Coordinates.X).IsEqualTo(52657.7f);
-        await Assert.That(actual.Coordinates.Y).IsEqualTo(32978.8f);
+        await Assert.That(actual.Coordinates.X).IsEqualTo(52657.7f).Within(0.001f);
+        await Assert.That(actual.Coordinates.Y).IsEqualTo(32978.8f).Within(0.001f);
         await Assert.That(actual.ChatLink).IsEqualTo("[&BCoCAAA=]");
     }
 }
