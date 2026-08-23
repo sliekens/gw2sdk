@@ -84,7 +84,9 @@ public sealed class ImmutableValueDictionaryJsonConverter : JsonConverterFactory
         public override ImmutableValueDictionary<TKey, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             IImmutableDictionary<TKey, TValue>? dictionary = JsonSerializer.Deserialize<IImmutableDictionary<TKey, TValue>>(ref reader, options);
+#pragma warning disable IDE0028 // Cannot simplify constructor calls that wrap ImmutableDictionary<TKey, TValue>.
             return dictionary is null ? null : new ImmutableValueDictionary<TKey, TValue>(dictionary);
+#pragma warning restore IDE0028
         }
     }
 }

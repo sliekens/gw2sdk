@@ -28,7 +28,9 @@ internal sealed class JsonElementReaderMethodGenerator : IIncrementalGenerator
         }
 
         // Collect DTO types (classes annotated with DataTransferObjectAttribute) for filtering.
+#pragma warning disable IDE0028 // Cannot simplify initialization with a non-default comparer.
         HashSet<INamedTypeSymbol> dtoTypes = new(SymbolEqualityComparer.Default);
+#pragma warning restore IDE0028
         EnumerateDtoTypes(sdk.GlobalNamespace, dtoTypes);
 
         List<ReaderMethod> readerMethods = [];

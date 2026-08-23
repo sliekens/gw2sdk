@@ -127,7 +127,9 @@ internal sealed class DtPropertyMetadataGenerator : IIncrementalGenerator
 
     private static HashSet<string> GetPrimaryConstructorParameterNames(INamedTypeSymbol type)
     {
+#pragma warning disable IDE0028 // Cannot simplify initialization with a non-default comparer.
         HashSet<string> names = new(StringComparer.Ordinal);
+#pragma warning restore IDE0028
 
         // For records, find the primary constructor (the one with parameters matching synthesized properties)
         // When analyzing metadata (referenced assemblies), DeclaringSyntaxReferences is empty,

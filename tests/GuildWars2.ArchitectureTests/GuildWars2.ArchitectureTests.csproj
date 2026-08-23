@@ -9,6 +9,9 @@
     <Nullable>enable</Nullable>
     <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <UseCurrentRuntimeIdentifier>false</UseCurrentRuntimeIdentifier>
+    <!-- These tests intentionally exercise constructor forms (e.g. new([1, 2, 3]))
+         as distinct from collection expressions, so IDE0028 does not apply. -->
+    <NoWarn>$(NoWarn);IDE0028</NoWarn>
     <!-- https://github.com/microsoft/codecoverage/issues/196 -->
     <!-- <PublishAot>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</PublishAot> -->
   </PropertyGroup>

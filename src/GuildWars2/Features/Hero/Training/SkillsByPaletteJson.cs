@@ -43,6 +43,8 @@ internal static class SkillsByPaletteJson
             builder.Add(left.GetInt32(), right.GetInt32());
         }
 
+#pragma warning disable IDE0028 // Cannot simplify constructor calls that wrap ImmutableDictionary<TKey, TValue>.
         return new ImmutableValueDictionary<int, int>(builder.ToImmutable());
+#pragma warning restore IDE0028
     }
 }
