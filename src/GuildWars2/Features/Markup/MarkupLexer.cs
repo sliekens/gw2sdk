@@ -1,9 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace GuildWars2.Markup;
 
 /// <summary>Represents a lexer for tokenizing markup input.</summary>
 /// <remarks>Initializes a new instance of the <see cref="MarkupLexer"/> class.</remarks>
 public static class MarkupLexer
 {
+    [SuppressMessage("Style", "IDE0028", Justification = "Cannot simplify initialization with a non-default comparer.")]
     private static readonly HashSet<string> VoidElements =
         new(StringComparer.OrdinalIgnoreCase) { "br" };
 

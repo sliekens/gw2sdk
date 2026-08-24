@@ -38,6 +38,8 @@ internal static class InfixUpgradeJson
             builder.Add(key, value);
         }
 
+#pragma warning disable IDE0028 // Cannot simplify constructor calls that wrap ImmutableDictionary<TKey, TValue>.
         return new ImmutableValueDictionary<Extensible<AttributeName>, int>(builder.ToImmutable());
+#pragma warning restore IDE0028
     }
 }
