@@ -125,6 +125,12 @@ internal static class AmuletJson
                     {
                         suffixItemId = detail;
                     }
+                    else if (detail.NameEquals("secondary_suffix_item_id"))
+                    {
+                        // Older schema versions report an (always empty) secondary suffix
+                        // item ID for armor, trinkets and back items. These item types have
+                        // a single upgrade slot, so this value is ignored.
+                    }
                     else if (statChoices.Match(detail))
                     {
                         statChoices = detail;
