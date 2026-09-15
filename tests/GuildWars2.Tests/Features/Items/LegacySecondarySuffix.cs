@@ -18,12 +18,12 @@ public class LegacySecondarySuffix
         using HttpClient httpClient = new(handler);
         Gw2Client sut = new(httpClient);
 
-        var count = 0;
+        int count = 0;
         await foreach ((Item actual, MessageContext _) in sut.Items.GetItemsBulk(cancellationToken: TestContext.Current!.Execution.CancellationToken))
         {
             count++;
             await Assert.That(actual is IUpgradable).IsTrue();
-            var upgradable = (IUpgradable)actual;
+            IUpgradable upgradable = (IUpgradable)actual;
             await Assert.That(upgradable.SecondarySuffixItemId).IsNull();
             await Assert.That(upgradable.UpgradeSlotCount <= 1).IsTrue();
         }
