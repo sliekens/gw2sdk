@@ -30,8 +30,16 @@ public class MasteryTracks(Gw2Client sut)
                     await Assert.That(level.Name).IsNotEmpty();
                     await Assert.That(level.Description).IsNotEmpty();
                     MarkupSyntaxValidator.Validate(level.Description);
-                    // The API returns an empty instruction for Tearing Across Tyria (track 48).
-                    await Assert.That(level.Instruction).IsNotNull();
+                    if (mastery.Id == 48 && level.Name == "Tearing Across Tyria")
+                    {
+                        // The API returns an empty instruction for this mastery.
+                        await Assert.That(level.Instruction).IsNotNull();
+                    }
+                    else
+                    {
+                        await Assert.That(level.Instruction).IsNotEmpty();
+                    }
+
                     MarkupSyntaxValidator.Validate(level.Instruction);
                     await Assert.That(level.IconUrl is null || level.IconUrl.IsAbsoluteUri).IsTrue().Because("Icon URL must be absolute to be a valid icon.");
                     await Assert.That(level.PointCost).IsGreaterThan(0);
