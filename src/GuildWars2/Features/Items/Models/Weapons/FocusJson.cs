@@ -31,7 +31,7 @@ internal static class FocusJson
         OptionalMember infixUpgradeAttributes = "attributes";
         OptionalMember infixUpgradeBuff = "buff";
         NullableMember suffixItemId = "suffix_item_id";
-        NullableMember secondarySuffixItemId = "secondary_suffix_item_id";
+        OptionalMember secondarySuffixItemId = "secondary_suffix_item_id";
         foreach (JsonProperty member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
@@ -205,7 +205,7 @@ internal static class FocusJson
             Attributes = infixUpgradeAttributes.Map(static (in values) => values.GetAttributes()) ?? [],
             Buff = infixUpgradeBuff.Map(static (in value) => value.GetBuff()),
             SuffixItemId = suffixItemId.Map(static (in value) => value.GetInt32()),
-            SecondarySuffixItemId = secondarySuffixItemId.Map(static (in value) => value.GetInt32())
+            SecondarySuffixItemId = secondarySuffixItemId.Map(static (in value) => value.GetSecondarySuffixItemId())
         };
     }
 }

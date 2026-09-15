@@ -135,6 +135,10 @@ internal static class RingJson
                     {
                         suffixItemId = detail;
                     }
+                    else if (detail.NameEquals("secondary_suffix_item_id"))
+                    {
+                        // This item type has no second upgrade slot, so the value is ignored.
+                    }
                     else if (statChoices.Match(detail))
                     {
                         statChoices = detail;
