@@ -143,9 +143,7 @@ internal static class LeggingsJson
                     }
                     else if (detail.NameEquals("secondary_suffix_item_id"))
                     {
-                        // Older schema versions report an (always empty) secondary suffix
-                        // item ID for armor, trinkets and back items. These item types have
-                        // a single upgrade slot, so this value is ignored.
+                        // This item type has no second upgrade slot, so the value is ignored.
                     }
                     else if (statChoices.Match(detail))
                     {
