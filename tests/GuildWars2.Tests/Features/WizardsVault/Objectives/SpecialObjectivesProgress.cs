@@ -15,7 +15,8 @@ public class SpecialObjectivesProgress(Gw2Client sut)
         using (Assert.Multiple())
         {
             await Assert.That(context).IsNotNull();
-            await Assert.That(actual.Objectives).IsNotEmpty();
+            // The API can return an empty list of special objectives for the account.
+            await Assert.That(actual.Objectives).IsNotNull();
             foreach (GuildWars2.WizardsVault.Objectives.ObjectiveProgress objective in actual.Objectives)
             {
                 await Assert.That(objective.Id).IsGreaterThan(0);
