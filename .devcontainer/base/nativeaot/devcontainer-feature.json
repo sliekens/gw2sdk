@@ -1,0 +1,10 @@
+{
+    "id": "nativeaot",
+    "version": "1.0.0",
+    "name": "Native AOT prerequisites",
+    "documentationURL": "https://aka.ms/nativeaot-prerequisites",
+    "description": "clang and zlib, required to publish with Native AOT (aot-test.sh)",
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
