@@ -24,22 +24,11 @@ public sealed class ImmutableValueDictionaryJsonConverterFactory : JsonConverter
     [UnconditionalSuppressMessage(
         "AOT",
         "IL3050",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
-    )]
-    [UnconditionalSuppressMessage(
-        "Trimming",
-        "IL2026",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
-    )]
-    [UnconditionalSuppressMessage(
-        "Trimming",
-        "IL2055",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
-    )]
-    [UnconditionalSuppressMessage(
-        "Trimming",
-        "IL2070",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
+        Justification = "Known limitation, see https://github.com/sliekens/gw2sdk/issues/521. JsonConverterAttribute only"
+            + " provides a Type, so the closed Converter<> must be created at runtime. That works with the JIT and, under"
+            + " Native AOT, for reference-type arguments (shared canonical code). For value-type arguments Native AOT"
+            + " throws NotSupportedException unless the instantiation was compiled ahead of time for another reason."
+            + " Trimming is unaffected: Converter<> is rooted by typeof and has no annotated generic parameters."
     )]
     public override JsonConverter CreateConverter(
         Type typeToConvert,
@@ -56,35 +45,19 @@ public sealed class ImmutableValueDictionaryJsonConverterFactory : JsonConverter
     private sealed class Converter<TKey, TValue> : JsonConverter<IImmutableValueDictionary<TKey, TValue>>
         where TKey : notnull
     {
-        [UnconditionalSuppressMessage(
-            "AOT",
-            "IL3050",
-            Justification = "IImmutableDictionary<TKey,TValue> serialization is supported by System.Text.Json."
-        )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2026",
-            Justification = "IImmutableDictionary<TKey,TValue> serialization is supported by System.Text.Json."
-        )]
         public override void Write(Utf8JsonWriter writer, IImmutableValueDictionary<TKey, TValue> value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize<IImmutableDictionary<TKey, TValue>>(writer, value, options);
+            ImmutableValueCollectionJson.WriteObject(writer, value, options);
         }
 
-        [UnconditionalSuppressMessage(
-            "AOT",
-            "IL3050",
-            Justification = "IImmutableDictionary<TKey,TValue> deserialization is supported by System.Text.Json."
-        )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2026",
-            Justification = "IImmutableDictionary<TKey,TValue> deserialization is supported by System.Text.Json."
-        )]
         public override IImmutableValueDictionary<TKey, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            IImmutableDictionary<TKey, TValue>? dictionary = JsonSerializer.Deserialize<IImmutableDictionary<TKey, TValue>>(ref reader, options);
-            return dictionary is null ? null : new ImmutableValueDictionary<TKey, TValue>(dictionary);
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                return null;
+            }
+
+            return new ImmutableValueDictionary<TKey, TValue>(ImmutableValueCollectionJson.ReadObject<TKey, TValue>(ref reader, options));
         }
     }
 }

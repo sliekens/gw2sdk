@@ -24,22 +24,11 @@ public sealed class ImmutableValueListJsonConverter : JsonConverterFactory
     [UnconditionalSuppressMessage(
         "AOT",
         "IL3050",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
-    )]
-    [UnconditionalSuppressMessage(
-        "Trimming",
-        "IL2026",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
-    )]
-    [UnconditionalSuppressMessage(
-        "Trimming",
-        "IL2055",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
-    )]
-    [UnconditionalSuppressMessage(
-        "Trimming",
-        "IL2070",
-        Justification = "The generic instantiation exists because the call site has a statically-typed member."
+        Justification = "Known limitation, see https://github.com/sliekens/gw2sdk/issues/521. JsonConverterAttribute only"
+            + " provides a Type, so the closed Converter<> must be created at runtime. That works with the JIT and, under"
+            + " Native AOT, for reference-type arguments (shared canonical code). For value-type arguments Native AOT"
+            + " throws NotSupportedException unless the instantiation was compiled ahead of time for another reason."
+            + " Trimming is unaffected: Converter<> is rooted by typeof and has no annotated generic parameters."
     )]
     public override JsonConverter CreateConverter(
         Type typeToConvert,
@@ -53,35 +42,19 @@ public sealed class ImmutableValueListJsonConverter : JsonConverterFactory
 
     private sealed class Converter<T> : JsonConverter<ImmutableValueList<T>>
     {
-        [UnconditionalSuppressMessage(
-            "AOT",
-            "IL3050",
-            Justification = "IImmutableList<T> serialization is supported by System.Text.Json."
-        )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2026",
-            Justification = "IImmutableList<T> serialization is supported by System.Text.Json."
-        )]
         public override void Write(Utf8JsonWriter writer, ImmutableValueList<T> value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize<IImmutableList<T>>(writer, value, options);
+            ImmutableValueCollectionJson.WriteArray(writer, value, options);
         }
 
-        [UnconditionalSuppressMessage(
-            "AOT",
-            "IL3050",
-            Justification = "IImmutableList<T> deserialization is supported by System.Text.Json."
-        )]
-        [UnconditionalSuppressMessage(
-            "Trimming",
-            "IL2026",
-            Justification = "IImmutableList<T> deserialization is supported by System.Text.Json."
-        )]
         public override ImmutableValueList<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            IImmutableList<T>? list = JsonSerializer.Deserialize<IImmutableList<T>>(ref reader, options);
-            return list is null ? null : [.. list];
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                return null;
+            }
+
+            return [.. ImmutableValueCollectionJson.ReadArray<T>(ref reader, options)];
         }
     }
 }
