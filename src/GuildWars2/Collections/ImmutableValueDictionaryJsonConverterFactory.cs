@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+#if NET
+using System.Text.Json.Serialization.Metadata;
+#endif
 
 namespace GuildWars2.Collections;
 
@@ -45,19 +48,27 @@ public sealed class ImmutableValueDictionaryJsonConverterFactory : JsonConverter
     private sealed class Converter<TKey, TValue> : JsonConverter<IImmutableValueDictionary<TKey, TValue>>
         where TKey : notnull
     {
+#if NET
+        private JsonTypeInfo<IImmutableDictionary<TKey, TValue>>? typeInfo;
+#endif
+
         public override void Write(Utf8JsonWriter writer, IImmutableValueDictionary<TKey, TValue> value, JsonSerializerOptions options)
         {
-            ImmutableValueCollectionJson.WriteObject(writer, value, options);
+#if NET
+            JsonSerializer.Serialize(writer, value, ImmutableValueCollectionJson.GetDictionaryTypeInfo(ref typeInfo, options));
+#else
+            JsonSerializer.Serialize<IImmutableDictionary<TKey, TValue>>(writer, value, options);
+#endif
         }
 
         public override IImmutableValueDictionary<TKey, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonTokenType.Null)
-            {
-                return null;
-            }
-
-            return new ImmutableValueDictionary<TKey, TValue>(ImmutableValueCollectionJson.ReadObject<TKey, TValue>(ref reader, options));
+#if NET
+            IImmutableDictionary<TKey, TValue>? dictionary = JsonSerializer.Deserialize(ref reader, ImmutableValueCollectionJson.GetDictionaryTypeInfo(ref typeInfo, options));
+#else
+            IImmutableDictionary<TKey, TValue>? dictionary = JsonSerializer.Deserialize<IImmutableDictionary<TKey, TValue>>(ref reader, options);
+#endif
+            return dictionary is null ? null : new ImmutableValueDictionary<TKey, TValue>(dictionary);
         }
     }
 }

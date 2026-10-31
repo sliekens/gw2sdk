@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+#if NET
+using System.Text.Json.Serialization.Metadata;
+#endif
 
 namespace GuildWars2.Collections;
 
@@ -42,19 +45,27 @@ public sealed class ImmutableValueListJsonConverterFactory : JsonConverterFactor
 
     private sealed class Converter<T> : JsonConverter<IImmutableValueList<T>>
     {
+#if NET
+        private JsonTypeInfo<IImmutableList<T>>? typeInfo;
+#endif
+
         public override void Write(Utf8JsonWriter writer, IImmutableValueList<T> value, JsonSerializerOptions options)
         {
-            ImmutableValueCollectionJson.WriteArray(writer, value, options);
+#if NET
+            JsonSerializer.Serialize(writer, value, ImmutableValueCollectionJson.GetListTypeInfo(ref typeInfo, options));
+#else
+            JsonSerializer.Serialize<IImmutableList<T>>(writer, value, options);
+#endif
         }
 
         public override IImmutableValueList<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonTokenType.Null)
-            {
-                return null;
-            }
-
-            return new ImmutableValueList<T>(ImmutableValueCollectionJson.ReadArray<T>(ref reader, options));
+#if NET
+            IImmutableList<T>? list = JsonSerializer.Deserialize(ref reader, ImmutableValueCollectionJson.GetListTypeInfo(ref typeInfo, options));
+#else
+            IImmutableList<T>? list = JsonSerializer.Deserialize<IImmutableList<T>>(ref reader, options);
+#endif
+            return list is null ? null : [.. list];
         }
     }
 }

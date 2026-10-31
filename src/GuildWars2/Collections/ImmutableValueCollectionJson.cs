@@ -1,196 +1,131 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
 #if NET
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
-#endif
 
 namespace GuildWars2.Collections;
 
-/// <summary>Reads and writes the JSON representation of the immutable value collections by delegating each element (and
-/// dictionary key) to its own converter. Only metadata for the element types is required, so this works with
-/// source-generated <see cref="JsonSerializerContext" /> resolvers as well as with the reflection resolver.</summary>
+/// <summary>Serializes the immutable value collections as the equivalent System.Collections.Immutable interface
+/// (<see cref="IImmutableList{T}" />, <see cref="IImmutableSet{T}" />, <see cref="IImmutableDictionary{TKey, TValue}" />),
+/// so the JSON and all serializer behavior (number handling, reference handling, runtime-type dispatch for
+/// <see cref="object" />, polymorphism, null handling) are exactly what System.Text.Json does for those interfaces.</summary>
+/// <remarks>On .NET the collection metadata is built from the element's <see cref="JsonTypeInfo" /> with
+/// <see cref="JsonMetadataServices" />, so only metadata for the element types is required. This works with
+/// source-generated <see cref="JsonSerializerContext" /> resolvers (with reflection disabled) as well as with the
+/// reflection resolver. See https://github.com/sliekens/gw2sdk/issues/521.</remarks>
 internal static class ImmutableValueCollectionJson
 {
-    public static JsonConverter<T> GetConverter<T>(JsonSerializerOptions options)
+    public static JsonTypeInfo<IImmutableList<T>> GetListTypeInfo<T>(
+        ref JsonTypeInfo<IImmutableList<T>>? cache,
+        JsonSerializerOptions options
+    )
     {
-#if NET
-        // TryGetTypeInfo is trim/AOT-safe: it resolves metadata from the configured resolver
-        // (e.g. a source-generated context) instead of falling back to reflection like GetConverter
+        JsonTypeInfo<IImmutableList<T>>? typeInfo = cache;
+        if (typeInfo is null || !ReferenceEquals(typeInfo.Options, options))
+        {
+            typeInfo = JsonMetadataServices.CreateImmutableEnumerableInfo<IImmutableList<T>, T>(
+                options,
+                new JsonCollectionInfoValues<IImmutableList<T>> { ElementInfo = GetElementTypeInfo<T>(options) },
+                ImmutableList.CreateRange
+            );
+            InheritNumberHandling(typeInfo);
+            cache = typeInfo;
+        }
+
+        return typeInfo;
+    }
+
+    public static JsonTypeInfo<IImmutableSet<T>> GetSetTypeInfo<T>(
+        ref JsonTypeInfo<IImmutableSet<T>>? cache,
+        JsonSerializerOptions options
+    )
+    {
+        JsonTypeInfo<IImmutableSet<T>>? typeInfo = cache;
+        if (typeInfo is null || !ReferenceEquals(typeInfo.Options, options))
+        {
+            typeInfo = JsonMetadataServices.CreateImmutableEnumerableInfo<IImmutableSet<T>, T>(
+                options,
+                new JsonCollectionInfoValues<IImmutableSet<T>> { ElementInfo = GetElementTypeInfo<T>(options) },
+                ImmutableHashSet.CreateRange
+            );
+            InheritNumberHandling(typeInfo);
+            cache = typeInfo;
+        }
+
+        return typeInfo;
+    }
+
+    public static JsonTypeInfo<IImmutableDictionary<TKey, TValue>> GetDictionaryTypeInfo<TKey, TValue>(
+        ref JsonTypeInfo<IImmutableDictionary<TKey, TValue>>? cache,
+        JsonSerializerOptions options
+    )
+        where TKey : notnull
+    {
+        JsonTypeInfo<IImmutableDictionary<TKey, TValue>>? typeInfo = cache;
+        if (typeInfo is null || !ReferenceEquals(typeInfo.Options, options))
+        {
+            typeInfo = JsonMetadataServices.CreateImmutableDictionaryInfo<IImmutableDictionary<TKey, TValue>, TKey, TValue>(
+                options,
+                new JsonCollectionInfoValues<IImmutableDictionary<TKey, TValue>>
+                {
+                    KeyInfo = GetElementTypeInfo<TKey>(options),
+                    ElementInfo = GetElementTypeInfo<TValue>(options)
+                },
+                ImmutableDictionary.CreateRange
+            );
+            InheritNumberHandling(typeInfo);
+            cache = typeInfo;
+        }
+
+        return typeInfo;
+    }
+
+    /// <summary>JsonCollectionInfoValues.NumberHandling is not nullable and defaults to Strict, which would override
+    /// <see cref="JsonSerializerOptions.NumberHandling" />. The reflection resolver leaves it unset (inherit from the
+    /// options), so reset it to match.</summary>
+    /// <param name="typeInfo">The collection metadata, before it is used.</param>
+    private static void InheritNumberHandling(JsonTypeInfo typeInfo)
+    {
+        typeInfo.NumberHandling = null;
+    }
+
+    /// <summary>Gets the metadata for an element (or key) type.</summary>
+    /// <typeparam name="T">The element or key type.</typeparam>
+    /// <param name="options">The options being used for (de)serialization.</param>
+    /// <returns>The metadata for <typeparamref name="T" />.</returns>
+    private static JsonTypeInfo<T> GetElementTypeInfo<T>(JsonSerializerOptions options)
+    {
         if (options.TryGetTypeInfo(typeof(T), out JsonTypeInfo? typeInfo))
         {
-            return (JsonConverter<T>)typeInfo.Converter;
+            return (JsonTypeInfo<T>)typeInfo;
         }
 
         // A source-generated context does not walk into types that have a custom converter (such as these collections),
         // so it may lack metadata for the element type. Consumers can add [JsonSerializable(typeof(T))] for most types,
         // but not for SDK types whose [JsonConverter] is internal (e.g. Coin, Extensible<TEnum>): their generator rejects
-        // those with SYSLIB1220. Honor the element type's own [JsonConverter] attribute, as System.Text.Json would.
-        if (typeof(T).GetCustomAttribute<JsonConverterAttribute>(inherit: false) is { } attribute)
+        // those with SYSLIB1220. Resolve the converter as System.Text.Json would: a converter registered in the options
+        // wins over the type's own [JsonConverter] attribute.
+        JsonConverter? converter = options.Converters.FirstOrDefault(static candidate => candidate.CanConvert(typeof(T)));
+        if (converter is null && typeof(T).GetCustomAttribute<JsonConverterAttribute>(inherit: false) is { } attribute)
         {
-            JsonConverter? converter = attribute.ConverterType is { } converterType
+            converter = attribute.ConverterType is { } converterType
                 ? (JsonConverter?)Activator.CreateInstance(converterType)
                 : attribute.CreateConverter(typeof(T));
-            if (converter is JsonConverterFactory factory)
-            {
-                converter = factory.CreateConverter(typeof(T), options);
-            }
-
-            if (converter is JsonConverter<T> typed)
-            {
-                return typed;
-            }
         }
 
-        // Throws NotSupportedException naming the type that needs [JsonSerializable]
-        return (JsonConverter<T>)options.GetTypeInfo(typeof(T)).Converter;
-#else
-        // JsonSerializerOptions.GetTypeInfo does not exist in System.Text.Json 6.0
-        return (JsonConverter<T>)options.GetConverter(typeof(T));
-#endif
-    }
-
-    public static void WriteArray<T>(
-        Utf8JsonWriter writer,
-        IEnumerable<T> values,
-        JsonSerializerOptions options
-    )
-    {
-        JsonConverter<T> converter = GetConverter<T>(options);
-        writer.WriteStartArray();
-        foreach (T value in values)
+        if (converter is JsonConverterFactory factory)
         {
-            WriteValue(writer, value, converter, options);
+            converter = factory.CreateConverter(typeof(T), options);
         }
 
-        writer.WriteEndArray();
-    }
-
-    public static ImmutableArray<T> ReadArray<T>(
-        ref Utf8JsonReader reader,
-        JsonSerializerOptions options
-    )
-    {
-        if (reader.TokenType != JsonTokenType.StartArray)
+        if (converter is JsonConverter<T>)
         {
-            throw new JsonException(
-                $"Expected {JsonTokenType.StartArray} but got {reader.TokenType}."
-            );
+            return JsonMetadataServices.CreateValueInfo<T>(options, converter);
         }
 
-        JsonConverter<T> converter = GetConverter<T>(options);
-        ImmutableArray<T>.Builder builder = ImmutableArray.CreateBuilder<T>();
-        while (reader.Read())
-        {
-            if (reader.TokenType == JsonTokenType.EndArray)
-            {
-                return builder.ToImmutable();
-            }
-
-            builder.Add(ReadValue(ref reader, converter, options));
-        }
-
-        throw new JsonException("Unexpected end of JSON input.");
-    }
-
-    public static void WriteObject<TKey, TValue>(
-        Utf8JsonWriter writer,
-        IEnumerable<KeyValuePair<TKey, TValue>> pairs,
-        JsonSerializerOptions options
-    )
-        where TKey : notnull
-    {
-        JsonConverter<TKey> keyConverter = GetConverter<TKey>(options);
-        JsonConverter<TValue> valueConverter = GetConverter<TValue>(options);
-        writer.WriteStartObject();
-        foreach (KeyValuePair<TKey, TValue> pair in pairs)
-        {
-            keyConverter.WriteAsPropertyName(writer, pair.Key, options);
-            WriteValue(writer, pair.Value, valueConverter, options);
-        }
-
-        writer.WriteEndObject();
-    }
-
-    public static ImmutableDictionary<TKey, TValue> ReadObject<TKey, TValue>(
-        ref Utf8JsonReader reader,
-        JsonSerializerOptions options
-    )
-        where TKey : notnull
-    {
-        if (reader.TokenType != JsonTokenType.StartObject)
-        {
-            throw new JsonException(
-                $"Expected {JsonTokenType.StartObject} but got {reader.TokenType}."
-            );
-        }
-
-        JsonConverter<TKey> keyConverter = GetConverter<TKey>(options);
-        JsonConverter<TValue> valueConverter = GetConverter<TValue>(options);
-        ImmutableDictionary<TKey, TValue>.Builder builder =
-            ImmutableDictionary.CreateBuilder<TKey, TValue>();
-        while (reader.Read())
-        {
-            if (reader.TokenType == JsonTokenType.EndObject)
-            {
-                return builder.ToImmutable();
-            }
-
-            if (reader.TokenType != JsonTokenType.PropertyName)
-            {
-                throw new JsonException(
-                    $"Expected {JsonTokenType.PropertyName} but got {reader.TokenType}."
-                );
-            }
-
-            TKey key = keyConverter.ReadAsPropertyName(ref reader, typeof(TKey), options);
-            if (!reader.Read())
-            {
-                break;
-            }
-
-            // Last value wins for duplicate keys, matching System.Text.Json's dictionary semantics
-            builder[key] = ReadValue(ref reader, valueConverter, options);
-        }
-
-        throw new JsonException("Unexpected end of JSON input.");
-    }
-
-    private static void WriteValue<T>(
-        Utf8JsonWriter writer,
-        T value,
-        JsonConverter<T> converter,
-        JsonSerializerOptions options
-    )
-    {
-        if (value is null && !converter.HandleNull)
-        {
-            writer.WriteNullValue();
-        }
-        else
-        {
-            converter.Write(writer, value, options);
-        }
-    }
-
-    private static T ReadValue<T>(
-        ref Utf8JsonReader reader,
-        JsonConverter<T> converter,
-        JsonSerializerOptions options
-    )
-    {
-        if (reader.TokenType == JsonTokenType.Null && !converter.HandleNull)
-        {
-            // Same as System.Text.Json: null is the default for reference types and Nullable<T>,
-            // but cannot be converted to a non-nullable value type
-            if (default(T) is not null)
-            {
-                throw new JsonException($"The JSON value could not be converted to {typeof(T)}.");
-            }
-
-            return default!;
-        }
-
-        return converter.Read(ref reader, typeof(T), options)!;
+        // Throws NotSupportedException naming the element type that needs [JsonSerializable]
+        return (JsonTypeInfo<T>)options.GetTypeInfo(typeof(T));
     }
 }
+#endif
