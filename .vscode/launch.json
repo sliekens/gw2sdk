@@ -67,6 +67,17 @@
       }
     },
     {
+      "name": "(samples) MemoryCacheUsage",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/MemoryCacheUsage/MemoryCacheUsage.csproj",
+      "launchConfigurationId": "TargetFramework=;MemoryCacheUsage",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
       "name": "(samples) PollyUsage",
       "type": "dotnet",
       "request": "launch",

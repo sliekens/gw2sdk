@@ -2,6 +2,8 @@
   href: exception-handling.md
 - name: API Usage limits
   href: usage-limits.md
+- name: Caching responses
+  href: caching.md
 - name: Resiliency with Polly
   href: resiliency.md
 - name: HttpClient lifetime

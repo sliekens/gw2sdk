@@ -29,6 +29,8 @@ Cache static or rarely-changing data (items, recipes, maps) and refresh only whe
 > [!TIP]
 > Check `Last-Modified` and `Expires` headers to determine freshness.
 
+See [Caching responses](caching.md) for a worked `IMemoryCache` example.
+
 ### 2️⃣ Batching
 
 Combine multiple requests into one using comma-separated IDs:

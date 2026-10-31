@@ -3,6 +3,7 @@
     <Project Path="samples/ApiVersionInfo/ApiVersionInfo.csproj" />
     <Project Path="samples/BasicUsage/BasicUsage.csproj" />
     <Project Path="samples/HttpClientFactoryUsage/HttpClientFactoryUsage.csproj" />
+    <Project Path="samples/MemoryCacheUsage/MemoryCacheUsage.csproj" />
     <Project Path="samples/MostVersatileMaterials/MostVersatileMaterials.csproj" />
     <Project Path="samples/Mumble/Mumble.csproj" />
     <Project Path="samples/PollyUsage/PollyUsage.csproj" />
