@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- A consumer of the public SDK surface (no InternalsVisibleTo), published with Native AOT and with reflection-based
+       serialization disabled. Run with ./aot-test.ps1, which publishes it and runs the native binary. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <PublishAot>true</PublishAot>
+    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+    <UseCurrentRuntimeIdentifier>false</UseCurrentRuntimeIdentifier>
+    <!-- IDE0028 suggests collection expressions for ImmutableValueDictionary constructors, which have no collection
+         builder; see AGENTS.md (analyzer notes) and the same NoWarn in GuildWars2.ArchitectureTests. -->
+    <NoWarn>$(NoWarn);IDE0028</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\GuildWars2\GuildWars2.csproj" />
+  </ItemGroup>
+
+</Project>

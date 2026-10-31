@@ -96,6 +96,31 @@ jobs:
           name: package
           path: artifacts/package/
 
+  native-aot:
+    name: Native AOT
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+      # root: installs the Native AOT prerequisites when the image does not have them yet
+      options: --user root
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Native AOT prerequisites
+        # The nativeaot devcontainer feature provides these once the image is rebuilt from main
+        run: |
+          if ! command -v clang > /dev/null; then
+            apt-get update -y
+            apt-get install -y --no-install-recommends clang zlib1g-dev
+          fi
+
+      - name: Install dependencies
+        run: dotnet restore tests/GuildWars2.AotTests --locked-mode
+
+      - name: Publish and run with Native AOT
+        run: ./aot-test.sh
+
   deploy-to-github-packages:
     name: Deploy to GitHub Packages
     needs: build

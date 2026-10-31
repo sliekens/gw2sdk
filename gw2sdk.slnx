@@ -23,6 +23,7 @@
     <Project Path="src/GuildWars2.Profiling/GuildWars2.Profiling.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/GuildWars2.AotTests/GuildWars2.AotTests.csproj" />
     <Project Path="tests/GuildWars2.ArchitectureTests/GuildWars2.ArchitectureTests.csproj" />
     <Project Path="tests/GuildWars2.Tests.Common/GuildWars2.Tests.Common.csproj" />
     <Project Path="tests/GuildWars2.Tests/GuildWars2.Tests.csproj" />
