@@ -126,7 +126,7 @@ JsonSerializerOptions writeAsString = new() { TypeInfoResolver = context, Number
 checks.Roundtrip(
     "IImmutableValueList<int> WriteAsString",
     new ImmutableValueList<int>([1]),
-    () => (JsonTypeInfo<IImmutableValueList<int>>)writeAsString.GetTypeInfo(typeof(IImmutableValueList<int>)),
+    () => writeAsString.GetTypeInfo<IImmutableValueList<int>>(),
     """["1"]"""
 );
 

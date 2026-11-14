@@ -12,12 +12,6 @@
         "UnshippedFilePath": "src/GuildWars2/PublicAPI/legacy/PublicAPI.Unshipped.txt"
       }
     },
-    "net8.0": {
-      "PublicAPI": {
-        "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
-        "UnshippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Unshipped.txt"
-      }
-    },
     "net9.0": {
       "PublicAPI": {
         "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
@@ -25,6 +19,12 @@
       }
     },
     "net10.0": {
+      "PublicAPI": {
+        "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
+        "UnshippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Unshipped.txt"
+      }
+    },
+    "net11.0": {
       "PublicAPI": {
         "ShippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Shipped.txt",
         "UnshippedFilePath": "src/GuildWars2/PublicAPI/modern/PublicAPI.Unshipped.txt"

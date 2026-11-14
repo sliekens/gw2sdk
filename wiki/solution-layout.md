@@ -150,9 +150,9 @@ package.
 
 ## Runtime dependencies
 
-The **GuildWars2** project depends on the following projects:
+The **GuildWars2** library targets `net11.0`, `net10.0`, `net9.0`, `netstandard2.0`, and `net462`.
 
-- **System.Text.Json** is used to parse JSON data.
+- **System.Text.Json** parses JSON. `net9.0` and later use the inbox implementation. `netstandard2.0` and `net462` reference package 6.0.11, which stays pinned for broad compatibility, along with `System.Collections.Immutable` 6.0.0, `Microsoft.Bcl.HashCode` 6.0.0, and `System.Memory` 4.5.5. `net462` also references `System.Runtime.InteropServices.RuntimeInformation` 4.3.0.
 
 ## Development dependencies
 

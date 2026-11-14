@@ -70,7 +70,7 @@ internal static class SpectreMarkupConverter
                 }
 
                 string content = builder.ToString();
-                if (coloredText.Color.StartsWith('#'))
+                if (coloredText.Color.StartsWith('#', StringComparison.Ordinal))
                 {
                     string colorCode = coloredText.Color;
                     return $"[{colorCode}]{content}[/]";

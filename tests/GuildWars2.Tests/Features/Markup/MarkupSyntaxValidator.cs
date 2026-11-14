@@ -50,7 +50,9 @@ public static class MarkupSyntaxValidator
         {
             throw new InvalidOperationException("Color is empty");
         }
-#if NET
+#if NET11_0_OR_GREATER
+        if (coloredText.Color.StartsWith('@', StringComparison.Ordinal))
+#elif NET
         if (coloredText.Color.StartsWith('@'))
 #else
         if (coloredText.Color.StartsWith("@", StringComparison.Ordinal))
@@ -64,7 +66,9 @@ public static class MarkupSyntaxValidator
                 }
             }
         }
-#if NET
+#if NET11_0_OR_GREATER
+        else if (coloredText.Color.StartsWith('#', StringComparison.Ordinal))
+#elif NET
         else if (coloredText.Color.StartsWith('#'))
 #else
         else if (coloredText.Color.StartsWith("#", StringComparison.Ordinal))

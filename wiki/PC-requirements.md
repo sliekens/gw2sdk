@@ -15,7 +15,7 @@ Alternatively you can use the command palette (Ctrl+Shift+P) and do _> Dev Conta
 You can ignore this if you use the dev container. Otherwise install the software from the following sections.
 
 - Visual Studio 2022 (17.9+), Visual Studio Code or Rider
-- [.NET 10.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) to build and run the solution
+- [.NET 11.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/11.0) to build and run the solution
   - (Check `global.json` for the exact version needed)
 - Windows
   - [.NET Framework 4.8.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481) to run .NET Framework tests
@@ -23,7 +23,7 @@ You can ignore this if you use the dev container. Otherwise install the software
   - [Mono 6.12](https://www.mono-project.com/download/stable/) to run .NET Framework tests
 
 > [!TIP]
-> You can skip .NET Framework tests by running `dotnet test -f net10.0` (specific TFM) instead of `dotnet test` (all TFMs).
+> You can skip .NET Framework tests by running `dotnet test -f net11.0` (specific TFM) instead of `dotnet test` (all TFMs).
 
 > [!NOTE]
 > To use Visual Studio 2022 effectively, you need to install the .NET Framework 4.8 Developer pack. This is not actually required to compile the code or run the tests, but Visual Studio itself will refuse to load the project without it.
