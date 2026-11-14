@@ -27,8 +27,8 @@ public static class MarkupLexer
         int position = 0;
         MarkupLexerState state = MarkupLexerState.Text;
         int start = 0;
-#if NET9_0_OR_GREATER
-        // Use GetAlternateLookup for span-based lookups to avoid string allocations (NET9+)
+#if NET
+        // GetAlternateLookup is inbox on every modern TFM (net9+). It avoids allocating a string key.
         HashSet<string>.AlternateLookup<ReadOnlySpan<char>> voidLookup = VoidElements.GetAlternateLookup<ReadOnlySpan<char>>();
 #endif
         while (position < memory.Length)
@@ -79,8 +79,7 @@ public static class MarkupLexer
                         {
                             // Ignore the '/' in '/>'
                             ReadOnlySpan<char> tagNameSpan = memory.Span[start..position].Trim();
-#if NET9_0_OR_GREATER
-                            // Use span-based lookup to avoid string allocation (NET9+)
+#if NET
                             if (voidLookup.Contains(tagNameSpan))
 #else
                             if (VoidElements.Contains(tagNameSpan.ToString()))
@@ -113,8 +112,7 @@ public static class MarkupLexer
                     else if (current == '>')
                     {
                         ReadOnlySpan<char> tagNameSpan = memory.Span[start..position].Trim();
-#if NET9_0_OR_GREATER
-                        // Use span-based lookup to avoid string allocation (NET9+)
+#if NET
                         if (voidLookup.Contains(tagNameSpan))
 #else
                         if (VoidElements.Contains(tagNameSpan.ToString()))

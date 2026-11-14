@@ -33,7 +33,7 @@ suppress at the site or project level with a justification instead of rewriting 
 
 ```pwsh
 dotnet build gw2sdk.slnx   # solution format is .slnx
-./test.ps1                 # runs net10.0 tests with coverage; needs `dotnet tool restore` once
+./test.ps1                 # runs net11.0 tests with coverage; needs `dotnet tool restore` once
 ```
 
 Native AOT consumer test (`tests/GuildWars2.AotTests`, not run by `dotnet test`):
@@ -46,6 +46,6 @@ It needs the Native AOT prerequisites (clang and zlib1g-dev on Linux; the `nativ
 Collection element types that must work under Native AOT are rooted by `ImmutableValueCollectionConverterGenerator`
 in `src/GuildWars2.Generators`; each rooted value type adds about 190 KB to consumers' AOT binaries.
 
-Coverage XML lands at `artifacts/bin/GuildWars2.Tests/debug_net10.0/TestResults/coverage.xml`
+Coverage XML lands at `artifacts/bin/GuildWars2.Tests/debug_net11.0/TestResults/coverage.xml`
 (test.ps1 passes an absolute `--coverage-output` so this holds locally and in CI);
 generate the HTML report from there if needed.
