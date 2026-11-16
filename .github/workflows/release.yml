@@ -23,6 +23,9 @@ jobs:
           fetch-depth: 0 # (no history limit)
           filter: tree:0
 
+      - name: Ensure pinned SDK
+        run: bash .github/scripts/ensure-pinned-sdk.sh
+
       - name: Install dependencies
         run: dotnet restore --locked-mode
 

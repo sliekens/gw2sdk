@@ -13,9 +13,9 @@ The SDK version is pinned, never relaxed:
 | --- | --- |
 | `global.json` | Authoritative pin for all local builds (`dotnet --version` resolves here first) |
 | `.devcontainer/base/devcontainer.json` | `ghcr.io/devcontainers/features/dotnet` feature version; builds the `ghcr.io/sliekens/gw2sdk/devcontainer` image |
-| `.github/workflows/ci.yml`, `release.yml`, `gh-pages.yml` | No explicit version — they run inside the devcontainer image above, which is built by `devcontainer.yml` (including the `native-aot` job in `ci.yml`) |
+| `.github/workflows/ci.yml`, `release.yml`, `gh-pages.yml`, `dependabot-lockfile.yml` | No explicit version. They run inside the devcontainer image above, which is built by `devcontainer.yml` (including the `native-aot` job in `ci.yml`). `.github/scripts/ensure-pinned-sdk.sh` installs the exact `global.json` SDK into the job when the resolved SDK is not that version |
 
-So CI gets its SDK transitively from `.devcontainer/base/devcontainer.json`. Bumping `global.json` alone does NOT update CI.
+The image is still the SDK those workflows use. It is rebuilt on the same push that changes `.devcontainer/**`, so the first run can start before the new image is published. The ensure script covers that gap without relaxing the pin. Bumping `global.json` alone does NOT change the image, and a later run still needs the image pin to match.
 
 Also check: `wiki/PC-requirements.md` mentions the required .NET major version (prose only).
 

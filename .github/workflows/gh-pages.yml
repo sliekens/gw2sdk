@@ -35,6 +35,9 @@ jobs:
           fetch-tags: false
           show-progress: false
 
+      - name: Ensure pinned SDK
+        run: bash .github/scripts/ensure-pinned-sdk.sh
+
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
