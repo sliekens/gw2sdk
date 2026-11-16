@@ -62,7 +62,12 @@ public static class MarkupHtmlConverter
                 }
 
                 string content = builder.ToString();
+#if NET11_0_OR_GREATER
+                // StartsWith(char, StringComparison) is net11+. The char-only overload warns CA1307 there.
+                if (coloredText.Color.StartsWith('#', StringComparison.Ordinal))
+#else
                 if (coloredText.Color.StartsWith('#'))
+#endif
                 {
                     return $"<span style=\"color: {coloredText.Color}\">{content}</span>";
                 }

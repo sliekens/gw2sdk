@@ -1,13 +1,13 @@
 # GitHub Copilot Instructions
 
 ## Project Focus
-Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Favor modern APIs over legacy APIs.
+Multi-targeted .NET library. Targets: net11.0, net10.0, net9.0, netstandard2.0, net462. Favor modern APIs over legacy APIs.
 
 ## Core Rules
 - Adapt: ask for clarification; incorporate feedback.
 - Remain critical and objective, provide suggestions based in first principles.
 - Prefer latest C# features; Pollyfill supplies missing constructs for older TFMs.
-- Cross-target: use `#if NET` (net8+), `#if NET9_0_OR_GREATER` only for net9-only features, `#if NETFRAMEWORK` only for APIs absent in .NET Standard. No runtime feature probes.
+- Cross-target: use `#if NET` (net9+, the lowest modern TFM), `#if NET10_0_OR_GREATER` or `#if NET11_0_OR_GREATER` only for APIs missing from an older modern TFM, `#if NETFRAMEWORK` only for APIs absent in .NET Standard. No runtime feature probes.
 - Public API stability: additive changes (extension methods) over breaking changes.
 - Dependencies: add only when explicitly requested.
 - AOT-safe: no dynamic code gen; minimize reflection (none outside generators).
@@ -38,7 +38,7 @@ Multi-targeted .NET library. Targets: net9.0, net8.0, netstandard2.0, net462. Fa
 
 ## Conditional Compilation Examples
 
-Symbols: NET = net8+; NET9_0_OR_GREATER = net9+; NETFRAMEWORK = net462+; else = netstandard2.0.
+Symbols: NET = net9+; NET10_0_OR_GREATER = net10+; NET11_0_OR_GREATER = net11; NETFRAMEWORK = net462+; else = netstandard2.0.
 
 Rules:
 - Add branches only when code actually differs (API gap).
@@ -55,13 +55,13 @@ Modern vs portable:
 #endif
 ```
 
-Full split (net9 feature + net8 alt + framework-only + portable):
+Full split (net11 feature + modern alt + framework-only + portable):
 
 ```csharp
-#if NET9_0_OR_GREATER
-    // Reason: Use net9.0 specific APIs
+#if NET11_0_OR_GREATER
+    // Reason: Use net11.0 specific APIs
 #elif NET
-    // Implementation using net8.0 specific APIs
+    // Implementation using APIs available on every modern TFM (net9+)
 #elif NETFRAMEWORK
     // Implementation using net462 specific APIs
 #else

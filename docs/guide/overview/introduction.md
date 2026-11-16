@@ -38,7 +38,7 @@ GW2SDK targets **.NET Standard 2.0** for broad compatibility:
 
 | Platform | Version |
 |----------|--------|
-| .NET | 8.0+ |
+| .NET | 9.0+ |
 | .NET Framework | 4.6.2+ |
 | Mono | 5.4+ |
 | Xamarin.iOS | 10.14+ |

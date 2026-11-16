@@ -5,9 +5,9 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net462</TargetFrameworks>
-    <TargetFrameworks>$(TargetFrameworks);net8.0</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net9.0</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net10.0</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);net11.0</TargetFrameworks>
     <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))</IsAotCompatible>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
@@ -62,6 +62,13 @@
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageValidationBaselineVersion>3.2.0</PackageValidationBaselineVersion>
   </PropertyGroup>
+
+  <!-- net8.0 was removed. Baseline 3.2.0 still ships that asset. net8.0 apps are no longer
+       a supported target; they would fall back to netstandard2.0, which is not API-compatible
+       with the net8.0 surface (covariant Clone, HttpRequestError constructors). -->
+  <ItemGroup>
+    <PackageValidationBaselineFrameworkToIgnore Include="net8.0" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard' Or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <AdditionalFiles Include="PublicAPI/legacy/PublicAPI.Shipped.txt" />

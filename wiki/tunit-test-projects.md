@@ -92,7 +92,7 @@ Minimal project file (multi-targeting optional). For most new test projects, tar
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net481</TargetFrameworks>
+    <TargetFrameworks>net11.0;net481</TargetFrameworks>
     <OutputType>Exe</OutputType>
    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -157,7 +157,7 @@ The solution already configures central package management (`Directory.Packages.
 ## Checklist for new test projects
 
 - [ ] Directory under `tests/` with correct name.
-- [ ] Project file multi-targets as needed (`net10.0;net481` etc.).
+- [ ] Project file multi-targets as needed (`net11.0;net481` etc.).
 - [ ] References to main SDK project(s).
 - [ ] `TUnit` package reference present (no version, versions are managed centrally).
 - [ ] Optional coverage/report extension packages added.

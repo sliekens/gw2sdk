@@ -124,8 +124,13 @@ internal static class ImmutableValueCollectionJson
             return JsonMetadataServices.CreateValueInfo<T>(options, converter);
         }
 
-        // Throws NotSupportedException naming the element type that needs [JsonSerializable]
+        // Throws NotSupportedException naming the element type that needs [JsonSerializable].
+        // GetTypeInfo<T>() is inbox on net11.0 and avoids the non-generic lookup (CA2263).
+#if NET11_0_OR_GREATER
+        return options.GetTypeInfo<T>();
+#else
         return (JsonTypeInfo<T>)options.GetTypeInfo(typeof(T));
+#endif
     }
 }
 #endif
