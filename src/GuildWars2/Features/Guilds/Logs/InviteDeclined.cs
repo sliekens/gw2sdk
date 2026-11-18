@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a guild invite being declined.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record InviteDeclined : GuildLogEntry
 {
     /// <summary>The ID of the user who sent the invite.</summary>

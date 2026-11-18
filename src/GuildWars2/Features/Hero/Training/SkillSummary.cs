@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 using GuildWars2.Hero.Builds;
 
 namespace GuildWars2.Hero.Training;
@@ -6,6 +8,7 @@ namespace GuildWars2.Hero.Training;
 /// access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record SkillSummary
 {
     /// <summary>The skill ID.</summary>

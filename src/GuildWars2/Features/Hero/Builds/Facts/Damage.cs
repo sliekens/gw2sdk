@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>An amount of damage applied by the skill/trait.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Damage : Fact
 {
     /// <summary>How many times the damage is applied.</summary>

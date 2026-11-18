@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>The base type for slot skills (heal, utility and elite skills) which are activated by the player to perform an
 /// action.</summary>
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record SlotSkill : ActionSkill
 {
     /// <summary>Used for engineer skills to indicate the ID of the associated toolbelt skill.</summary>

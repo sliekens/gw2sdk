@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>Describes a number of something as referenced by the <see cref="Fact.Text" />.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Number : Fact
 {
     /// <summary>The number of something referenced by the <see cref="Fact.Text" />. For example, if the text is "Conditions

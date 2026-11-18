@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a started or ended guild mission.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record GuildMission : GuildLogEntry
 {
     /// <summary>The ID of the user who started the mission.</summary>

@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a change in guild influence.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record InfluenceActivity : GuildLogEntry
 {
     /// <summary>The nature of the influence activity.</summary>

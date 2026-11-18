@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A boon, condition or effect with a precondition.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record PrefixedBuff : Buff
 {
     /// <summary>The URL of the precondition's icon as it appears in the tooltip, before the <see cref="Fact.IconUrl" />.</summary>

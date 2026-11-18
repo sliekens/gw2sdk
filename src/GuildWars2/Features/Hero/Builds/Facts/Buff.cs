@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A boon, condition or effect applied (or removed) by the skill/trait.</summary>
 [Inheritable]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Buff : Fact
 {
     /// <summary>The duration of the effect applied by the skill/trait, or null when the effect is removed by the skill/trait.</summary>

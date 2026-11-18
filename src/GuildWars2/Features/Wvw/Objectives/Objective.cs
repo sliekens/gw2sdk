@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Globalization;
 using System.Numerics;
+using System.Text.Json.Serialization;
 
 using GuildWars2.Chat;
 using GuildWars2.Exploration.Maps;
@@ -11,6 +12,7 @@ namespace GuildWars2.Wvw.Objectives;
 /// more specific type to access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Objective
 {
     /// <summary>The objective ID.</summary>

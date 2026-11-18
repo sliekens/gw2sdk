@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about an upgrade that increases the guild vault's capacity.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record GuildBankUpgrade : GuildUpgrade
 {
     /// <summary>The number of item slots that will be added to the guild vault.</summary>
