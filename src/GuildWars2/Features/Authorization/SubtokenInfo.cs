@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Authorization;
 
 /// <summary>Information about a subtoken.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record SubtokenInfo : TokenInfo
 {
     /// <summary>The absolute expiration date of the subtoken.</summary>

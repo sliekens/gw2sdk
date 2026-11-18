@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a change in guild rank.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record RankChange : GuildLogEntry
 {
     /// <summary>The ID of the user who was promoted or demoted.</summary>

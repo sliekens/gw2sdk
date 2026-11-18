@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Upgrades;
 
 /// <summary>Information about a guild collectible cost for a guild upgrade, for example Favor.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record GuildUpgradeCollectibleCost : GuildUpgradeCost
 {
     /// <summary>The name of the collectible required.</summary>

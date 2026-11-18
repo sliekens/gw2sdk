@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A log entry about a change in the guild message of the day.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record NewMessageOfTheDay : GuildLogEntry
 {
     /// <summary>The ID of the user who changed the message of the day.</summary>

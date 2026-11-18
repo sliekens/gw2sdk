@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Text.Json.Serialization;
 
 using GuildWars2.Chat;
 
@@ -8,6 +9,7 @@ namespace GuildWars2.Exploration.PointsOfInterest;
 /// adventure. This class is the base type. Cast objects of this type to a more specific type to access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record PointOfInterest
 {
     /// <summary>The name as displayed on the map, or an empty string if the point doesn't have a name.</summary>

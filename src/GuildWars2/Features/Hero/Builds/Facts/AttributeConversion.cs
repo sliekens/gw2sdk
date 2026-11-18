@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>An attribute which is converted into another attribute by a trait.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record AttributeConversion : Fact
 {
     /// <summary>How much of the <see cref="Source" /> attribute is converted to the <see cref="Target" /> attribute by the

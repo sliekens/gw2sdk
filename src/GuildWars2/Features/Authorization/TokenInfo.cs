@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Authorization;
 
 /// <summary>Information about the access token. This is a base type, derived types exist for API keys and subtokens. Cast
 /// objects of this type to a more specific type to access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record TokenInfo
 {
     /// <summary>The names of all permissions.</summary>

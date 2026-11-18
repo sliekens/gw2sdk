@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Training.Skills;
 
 /// <summary>A short summary of a profession skill.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ProfessionSkillSummary : SkillSummary
 {
     /// <summary>In case of stolen skills (Thief only), the name of the profession from which it can be stolen.</summary>

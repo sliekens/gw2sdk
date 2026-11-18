@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about the ownership of an objective in World vs. World. This type is the base type for all
 /// objectives. Cast objects of this type to a more specific type to access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record OwnedObjective
 {
     /// <summary>The objective ID.</summary>

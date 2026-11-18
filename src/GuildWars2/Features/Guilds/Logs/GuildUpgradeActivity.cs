@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>A guild upgrade log entry.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record GuildUpgradeActivity : GuildLogEntry
 {
     /// <summary>The user ID who performed the action.</summary>

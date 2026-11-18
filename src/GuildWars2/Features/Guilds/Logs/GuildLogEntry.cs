@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Guilds.Logs;
 
 /// <summary>An entry in the guild's log, used for audit purposes. This class is the base type for all log entries. Cast
 /// objects of this type to a more specific type to access more properties.</summary>
 [DataTransferObject]
 [Inheritable]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record GuildLogEntry
 {
     /// <summary>The log ID. It can be used as a skip token for paginated results.</summary>

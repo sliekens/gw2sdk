@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Skills;
 
 /// <summary>Information about a skill belonging to a profession mechanic.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ProfessionSkill : ActionSkill
 {
     /// <summary>Used for Elementalist skills to indicate which attunement this skill is associated with.</summary>

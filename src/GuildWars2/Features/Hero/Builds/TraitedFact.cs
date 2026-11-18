@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds;
 
 /// <summary>A fact applied by the skill/trait when another trait is active.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record TraitedFact
 {
     /// <summary>The ID of the trait that must be active to benefits from this <see cref="Fact" />.</summary>

@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Wvw.Matches;
 
 /// <summary>Information about the ownership of a camp.</summary>
 [DataTransferObject]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record OwnedCamp : OwnedObjective
 {
     /// <summary>The ID of the guild that claimed the camp.</summary>

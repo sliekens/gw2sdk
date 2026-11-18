@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>A percentage of something as referenced by the <see cref="Fact.Text" />.</summary>
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Percentage : Fact
 {
     /// <summary>The percentage something referenced by the <see cref="Fact.Text" />. For example, if the text is "Health

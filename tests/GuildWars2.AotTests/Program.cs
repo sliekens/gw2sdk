@@ -5,6 +5,7 @@ using System.Text.Json.Serialization.Metadata;
 
 using GuildWars2;
 using GuildWars2.AotTests;
+using GuildWars2.Authorization;
 using GuildWars2.Collections;
 using GuildWars2.Hero;
 using GuildWars2.Hero.Builds;
@@ -46,6 +47,29 @@ checks.Roundtrip(
 
 // SDK value types. Their converters are internal; ModelJsonConverterFactory is the public type a consumer context constructs.
 checks.Roundtrip("Coin", new Coin(1, 2, 3), () => context.Coin, "10203");
+SubtokenInfo subtoken = new()
+{
+    Id = "abc",
+    Name = "n",
+    Permissions = new ImmutableValueList<Extensible<Permission>>([Permission.Account]),
+    ExpiresAt = DateTimeOffset.UnixEpoch,
+    IssuedAt = DateTimeOffset.UnixEpoch,
+    Urls = null
+};
+checks.Expect(
+    "SubtokenInfo as TokenInfo",
+    () =>
+    {
+        string json = JsonSerializer.Serialize<TokenInfo>(subtoken, context.TokenInfo);
+        if (JsonSerializer.Deserialize(json, context.TokenInfo) is not SubtokenInfo read || read != subtoken)
+        {
+            throw new InvalidOperationException("Derived token fields were not preserved.");
+        }
+
+        return json;
+    },
+    """{"$type":"subtoken_info","id":"abc","name":"n","permissions":["Account"],"expires_at":"1970-01-01T00:00:00+00:00","issued_at":"1970-01-01T00:00:00+00:00","urls":null}"""
+);
 checks.Roundtrip("Extensible<WeaponType>", (Extensible<WeaponType>)WeaponType.Staff, () => context.ExtensibleWeaponType, "\"Staff\"");
 checks.Roundtrip("IImmutableValueList<Coin>", new ImmutableValueList<Coin>([new Coin(1, 2, 3)]), () => context.IImmutableValueListCoin, "[10203]");
 checks.Roundtrip("IImmutableValueSet<Coin>", new ImmutableValueSet<Coin>([Coin.Zero]), () => context.IImmutableValueSetCoin, "[0]");
@@ -279,6 +303,8 @@ namespace GuildWars2.AotTests
     [JsonSerializable(typeof(IImmutableValueList<bool>))]
     [JsonSerializable(typeof(IImmutableValueList<Guid>))]
     [JsonSerializable(typeof(IImmutableValueList<DateTimeOffset>))]
+    [JsonSerializable(typeof(TokenInfo))]
+    [JsonSerializable(typeof(SubtokenInfo))]
     [JsonSerializable(typeof(Coin))]
     [JsonSerializable(typeof(Extensible<WeaponType>))]
     [JsonSerializable(typeof(GuildWars2.Items.Item), TypeInfoPropertyName = "SdkItem")]
