@@ -4,5 +4,5 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about a logging axe, which is used to log tree resource nodes to obtain logs.</summary>
 /// <remarks>For the weapon type, see <see cref="Axe" />.</remarks>
-[JsonConverter(typeof(LoggingAxeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record LoggingAxe : GatheringTool;

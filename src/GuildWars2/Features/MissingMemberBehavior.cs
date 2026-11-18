@@ -5,7 +5,7 @@ namespace GuildWars2;
 
 /// <summary>Describes the desired program behavior when a source JSON document does not exactly match the target CLR type.</summary>
 [DefaultValue(Error)]
-[JsonConverter(typeof(MissingMemberBehaviorJsonConverter))]
+[JsonConverter(typeof(ModelJsonConverterFactory))]
 public enum MissingMemberBehavior
 {
     /// <summary>Throws an error for unexpected JSON properties and for polymorphic types when the JSON can't be matched to any

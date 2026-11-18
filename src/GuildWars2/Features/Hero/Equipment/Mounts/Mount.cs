@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>Information about a mount.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(MountJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Mount
 {
     /// <summary>The mount ID.</summary>

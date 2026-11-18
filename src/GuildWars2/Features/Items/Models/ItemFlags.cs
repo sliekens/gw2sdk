@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Modifiers for items.</summary>
-[JsonConverter(typeof(ItemFlagsJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ItemFlags : Flags
 {
     /// <summary>Whether the item becomes account bound when used.</summary>

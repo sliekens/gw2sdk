@@ -9,7 +9,7 @@ namespace GuildWars2.Hero.Achievements;
 /// <summary>Information about an achievement.</summary>
 [Inheritable]
 [DataTransferObject]
-[JsonConverter(typeof(AchievementJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Achievement
 {
     /// <summary>The achievement ID.</summary>

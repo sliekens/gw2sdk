@@ -4,7 +4,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about a miniature item, which can be used to summon the miniature, or consumed to permanently add
 /// the miniature to the account.</summary>
-[JsonConverter(typeof(MiniatureItemJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record MiniatureItem : Item
 {
     /// <summary>The ID of the miniature which is summoned when used.</summary>

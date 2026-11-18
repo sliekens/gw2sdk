@@ -5,7 +5,7 @@ namespace GuildWars2.Worlds;
 
 /// <summary>The world region where a world is located.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(WorldRegionJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum WorldRegion
 {
     /// <summary>The world region is missing or unknown.</summary>

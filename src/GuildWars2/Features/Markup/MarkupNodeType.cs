@@ -5,7 +5,7 @@ namespace GuildWars2.Markup;
 
 /// <summary>Represents the types of nodes that can be encountered in the markup lexer.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(MarkupNodeTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum MarkupNodeType
 {
     /// <summary>No node type.</summary>

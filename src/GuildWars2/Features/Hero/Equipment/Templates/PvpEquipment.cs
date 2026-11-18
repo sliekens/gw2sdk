@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about the equipped PvP amulet, rune, and sigils on the character.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(PvpEquipmentJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record PvpEquipment
 {
     /// <summary>The PvP amulet ID of the selected amulet.</summary>

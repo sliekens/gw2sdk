@@ -7,7 +7,7 @@ namespace GuildWars2.Items;
 /// <summary>Information about a trinket. This type is the base type for all trinkets. Cast objects of this type to a more
 /// specific type to access more properties.</summary>
 [Inheritable]
-[JsonConverter(typeof(TrinketJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Trinket : Item, ICombatEquipment, IUpgradable
 {
     /// <summary>The Attribute Adjustment factor. To calculate the final item stats of the item, multiply this value with an

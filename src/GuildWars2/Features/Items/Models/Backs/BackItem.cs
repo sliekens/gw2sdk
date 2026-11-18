@@ -5,7 +5,7 @@ using GuildWars2.Hero;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a back item.</summary>
-[JsonConverter(typeof(BackItemJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record BackItem : Item, ICombatEquipment, IUpgradable, IInfused, IInfusable
 {
     /// <summary>The default skin ID for the back item. This skin can be unlocked in the wardrobe by binding the item.</summary>

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 /// <summary>The trait slots.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(TraitSlotJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum TraitSlot
 {
     /// <summary>No specific trait slot or unknown trait slot.</summary>

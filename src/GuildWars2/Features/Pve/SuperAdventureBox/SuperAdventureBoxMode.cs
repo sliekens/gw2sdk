@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.SuperAdventureBox;
 
 /// <summary>The difficulty modes of Super Adventure Box zones.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(SuperAdventureBoxModeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum SuperAdventureBoxMode
 {
     /// <summary>No specific mode or unknown mode.</summary>

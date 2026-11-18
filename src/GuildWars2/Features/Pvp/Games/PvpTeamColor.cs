@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Games;
 
 /// <summary>The PvP team colors.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(PvpTeamColorJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum PvpTeamColor
 {
     /// <summary>No specific team or unknown team.</summary>

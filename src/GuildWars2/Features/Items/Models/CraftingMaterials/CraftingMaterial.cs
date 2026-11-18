@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a crafting material.</summary>
-[JsonConverter(typeof(CraftingMaterialJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record CraftingMaterial : Item, IInfusable
 {
     /// <summary>If the current crafting material is used in the Mystic Forge to infuse or attune equipment, this collection

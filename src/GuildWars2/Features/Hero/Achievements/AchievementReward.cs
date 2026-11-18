@@ -6,5 +6,5 @@ namespace GuildWars2.Hero.Achievements;
 /// properties.</summary>
 [Inheritable]
 [DataTransferObject]
-[JsonConverter(typeof(AchievementRewardJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record AchievementReward;

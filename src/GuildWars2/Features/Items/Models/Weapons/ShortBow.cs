@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a short bow.</summary>
-[JsonConverter(typeof(ShortBowJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ShortBow : Weapon
 {
     /// <inheritdoc />

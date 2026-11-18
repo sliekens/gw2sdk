@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about a weapon skin.</summary>
 [Inheritable]
-[JsonConverter(typeof(WeaponSkinJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record WeaponSkin : EquipmentSkin
 {
     /// <summary>The damage type of the weapon skin.</summary>

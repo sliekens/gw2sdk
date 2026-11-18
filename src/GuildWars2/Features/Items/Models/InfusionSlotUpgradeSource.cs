@@ -4,7 +4,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about a source item that is used in a recipe for an infused or attuned item.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(InfusionSlotUpgradeSourceJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record InfusionSlotUpgradeSource
 {
     /// <summary>Indicates whether the item is infused or attuned in this upgrade step.</summary>

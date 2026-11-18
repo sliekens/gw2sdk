@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 /// <summary>The types of infusion slot upgrades.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(InfusionSlotUpgradeKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum InfusionSlotUpgradeKind
 {
     /// <summary>No specific upgrade or unknown upgrade.</summary>

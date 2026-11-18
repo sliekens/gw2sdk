@@ -7,7 +7,7 @@ namespace GuildWars2;
 /// <typeparam name="TEnum">The type of the enum.</typeparam>
 /// <param name="name">The name of the enum value.</param>
 [DebuggerDisplay("{ToString(),nq}")]
-[JsonConverter(typeof(ExtensibleEnumJsonConverterFactory))]
+[JsonConverter(typeof(ModelJsonConverterFactory))]
 public readonly struct Extensible<TEnum>(string name)
     : IComparable<Extensible<TEnum>>, IComparable, IEquatable<Extensible<TEnum>>
     where TEnum : struct, Enum

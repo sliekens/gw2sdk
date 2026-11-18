@@ -1,1 +1,5 @@
 #nullable enable
+GuildWars2.ModelJsonConverterFactory
+GuildWars2.ModelJsonConverterFactory.ModelJsonConverterFactory() -> void
+override GuildWars2.ModelJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
+override GuildWars2.ModelJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!

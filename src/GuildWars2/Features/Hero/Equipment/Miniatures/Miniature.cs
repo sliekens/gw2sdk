@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Miniatures;
 
 /// <summary>Information about a miniature.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(MiniatureJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Miniature
 {
     /// <summary>The miniature ID.</summary>

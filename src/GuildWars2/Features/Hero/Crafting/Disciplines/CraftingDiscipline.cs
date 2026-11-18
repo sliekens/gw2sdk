@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>Information about a character's crafting discipline.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(CraftingDisciplineJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record CraftingDiscipline
 {
     /// <summary>The name of the current crafting discipline.</summary>

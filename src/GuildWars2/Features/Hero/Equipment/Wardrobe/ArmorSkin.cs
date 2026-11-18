@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about an armor skin.</summary>
 [Inheritable]
-[JsonConverter(typeof(ArmorSkinJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record ArmorSkin : EquipmentSkin
 {
     /// <summary>The weight class which indicates which professions can wear this armor skin.</summary>

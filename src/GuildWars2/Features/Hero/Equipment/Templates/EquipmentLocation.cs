@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>The location of an equipment item.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(EquipmentLocationJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum EquipmentLocation
 {
     /// <summary>No specific location or unknown location.</summary>

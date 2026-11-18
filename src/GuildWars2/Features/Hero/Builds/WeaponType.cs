@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 /// <summary>The weapon types.</summary>
 [DefaultValue(Unknown)]
-[JsonConverter(typeof(WeaponTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum WeaponType
 {
     /// <summary>No specific weapon type or unknown weapon type.</summary>

@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Achievements.Titles;
 
 /// <summary>Information about a title which can be obtained from achievements.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(TitleJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Title
 {
     /// <summary>The title ID.</summary>

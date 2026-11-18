@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a bag.</summary>
-[JsonConverter(typeof(BagJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Bag : Item
 {
     /// <summary>Whether the bag is invisible/safe, meaning items in the bag appear do not appear in sell-to-vendor lists or

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Achievements.Rewards;
 
 /// <summary>An item reward for completing an achievement.</summary>
-[JsonConverter(typeof(ItemRewardJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ItemReward : AchievementReward
 {
     /// <summary>The item ID of the reward.</summary>

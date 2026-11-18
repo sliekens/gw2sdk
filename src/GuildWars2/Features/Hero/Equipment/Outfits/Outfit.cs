@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Outfits;
 
 /// <summary>Information about an outfit.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(OutfitJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Outfit
 {
     /// <summary>The outfit ID.</summary>

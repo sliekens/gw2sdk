@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about an upgrade component.</summary>
 [Inheritable]
-[JsonConverter(typeof(UpgradeComponentJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record UpgradeComponent : Item, ICombatEquipment, IInfusable
 {
     /// <summary>Flags that indicate which types of items are compatible with the upgrade.</summary>

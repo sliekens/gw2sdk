@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>The body types of characters.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(BodyTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum BodyType
 {
     /// <summary>No specific body type or unknown body type.</summary>

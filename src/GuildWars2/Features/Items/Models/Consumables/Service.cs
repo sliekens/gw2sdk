@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a consumable which immediately takes effect upon receipt.</summary>
-[JsonConverter(typeof(ServiceJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Service : Consumable
 {
     /// <summary>The effect applied upon receipt.</summary>

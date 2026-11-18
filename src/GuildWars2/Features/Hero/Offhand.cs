@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>The offhands which may be required for a weapon skill.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(OffhandJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum Offhand
 {
     /// <summary>The skill is selected when there is no other skill in the same palette for the current offhand weapon.</summary>

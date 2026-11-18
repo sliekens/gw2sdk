@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Seasons;
 
 /// <summary>The method used to calculate the tier of a player or team on a PvP League leaderboard.</summary>
 [DefaultValue(Rank)]
-[JsonConverter(typeof(LeaderboardTierKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum LeaderboardTierKind
 {
     /// <summary>The player or team rank is used to calculate the tier.</summary>

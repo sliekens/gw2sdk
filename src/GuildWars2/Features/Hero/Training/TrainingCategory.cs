@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Training;
 
 /// <summary>The categories of training.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(TrainingCategoryJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum TrainingCategory
 {
     /// <summary>No specific category or unknown category.</summary>

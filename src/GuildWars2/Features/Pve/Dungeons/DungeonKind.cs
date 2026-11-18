@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Dungeons;
 
 /// <summary>The kind of paths in a dungeon.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(DungeonKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum DungeonKind
 {
     /// <summary>No specific path or unknown path.</summary>

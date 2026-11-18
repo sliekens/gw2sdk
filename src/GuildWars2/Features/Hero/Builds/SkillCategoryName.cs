@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Builds;
 /// <summary>Skills with similar behaviors are grouped into one of these categories. Many traits affect all skills in a
 /// certain category.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(SkillCategoryNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum SkillCategoryName
 {
     /// <summary>No specific skill category or unknown skill category.</summary>

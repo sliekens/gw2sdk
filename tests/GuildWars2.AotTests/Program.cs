@@ -7,6 +7,7 @@ using GuildWars2;
 using GuildWars2.AotTests;
 using GuildWars2.Collections;
 using GuildWars2.Hero;
+using GuildWars2.Hero.Builds;
 using GuildWars2.Hero.Equipment;
 
 // Round-trips the immutable value collections through a source-generated context, with reflection disabled. Under Native
@@ -43,7 +44,9 @@ checks.Roundtrip(
     "[\"1970-01-01T00:00:00+00:00\"]"
 );
 
-// SDK value types, whose converters are internal (a consumer cannot declare them in a context)
+// SDK value types. Their converters are internal; ModelJsonConverterFactory is the public type a consumer context constructs.
+checks.Roundtrip("Coin", new Coin(1, 2, 3), () => context.Coin, "10203");
+checks.Roundtrip("Extensible<WeaponType>", (Extensible<WeaponType>)WeaponType.Staff, () => context.ExtensibleWeaponType, "\"Staff\"");
 checks.Roundtrip("IImmutableValueList<Coin>", new ImmutableValueList<Coin>([new Coin(1, 2, 3)]), () => context.IImmutableValueListCoin, "[10203]");
 checks.Roundtrip("IImmutableValueSet<Coin>", new ImmutableValueSet<Coin>([Coin.Zero]), () => context.IImmutableValueSetCoin, "[0]");
 checks.Roundtrip(
@@ -122,6 +125,19 @@ checks.Roundtrip(
 );
 
 // Options are honored through the nested collection metadata
+// The settings where JsonSerializerOptions.Strict differs from the default. The Strict getter is annotated
+// RequiresDynamicCode, so this Native AOT binary cannot call it. Serialization still uses the source-generated type info.
+JsonSerializerOptions strict = new()
+{
+    TypeInfoResolver = context,
+    AllowDuplicateProperties = false,
+    UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+    RespectNullableAnnotations = true,
+    RespectRequiredConstructorParameters = true
+};
+checks.Roundtrip("Coin (Strict)", new Coin(1, 2, 3), () => strict.GetTypeInfo<Coin>(), "10203");
+_ = context.SdkItem;
+
 JsonSerializerOptions writeAsString = new() { TypeInfoResolver = context, NumberHandling = JsonNumberHandling.WriteAsString | JsonNumberHandling.AllowReadingFromString };
 checks.Roundtrip(
     "IImmutableValueList<int> WriteAsString",
@@ -263,6 +279,9 @@ namespace GuildWars2.AotTests
     [JsonSerializable(typeof(IImmutableValueList<bool>))]
     [JsonSerializable(typeof(IImmutableValueList<Guid>))]
     [JsonSerializable(typeof(IImmutableValueList<DateTimeOffset>))]
+    [JsonSerializable(typeof(Coin))]
+    [JsonSerializable(typeof(Extensible<WeaponType>))]
+    [JsonSerializable(typeof(GuildWars2.Items.Item), TypeInfoPropertyName = "SdkItem")]
     [JsonSerializable(typeof(IImmutableValueList<Coin>))]
     [JsonSerializable(typeof(IImmutableValueSet<Coin>))]
     [JsonSerializable(typeof(IImmutableValueList<Extensible<RaceName>>))]

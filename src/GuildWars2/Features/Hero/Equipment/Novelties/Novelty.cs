@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>Information about a novelty.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(NoveltyJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Novelty
 {
     /// <summary>The novelty ID.</summary>

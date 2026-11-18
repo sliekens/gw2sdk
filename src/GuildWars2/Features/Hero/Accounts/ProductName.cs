@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Accounts;
 
 /// <summary>The names of Guild Wars 2 products.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(ProductNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum ProductName
 {
     /// <summary>Nothing. Zero, zilch, zip, nada, nothing.</summary>

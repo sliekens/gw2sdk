@@ -7,7 +7,7 @@ namespace GuildWars2.Mumble;
 
 /// <summary>The map types.</summary>
 [DefaultValue(AutoRedirect)]
-[JsonConverter(typeof(MapTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 [CLSCompliant(false)]
 public enum MapType : uint
 {

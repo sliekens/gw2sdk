@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Information about achievement progress made on the account.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(AccountAchievementJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record AccountAchievement
 {
     /// <summary>The achievement ID.</summary>

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds;
 
 /// <summary>Transformations related to specializations.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(TransformationJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum Transformation
 {
     /// <summary>No specific transformation or unknown transformation.</summary>

@@ -8,7 +8,7 @@ namespace GuildWars2.Items;
 /// specific type to access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
-[JsonConverter(typeof(ItemJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Item
 {
     /// <summary>The item ID.</summary>

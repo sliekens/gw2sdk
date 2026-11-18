@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Masteries;
 
 /// <summary>The mastery regions.</summary>
 [DefaultValue(Unknown)]
-[JsonConverter(typeof(MasteryRegionNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum MasteryRegionName
 {
     /// <summary>Unknown mastery point region.</summary>

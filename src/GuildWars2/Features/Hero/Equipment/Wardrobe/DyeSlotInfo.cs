@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about the default dyes for a piece of armor.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(DyeSlotInfoJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record DyeSlotInfo
 {
     /// <summary>The default dyes for the armor to use when there are no overrides.</summary>

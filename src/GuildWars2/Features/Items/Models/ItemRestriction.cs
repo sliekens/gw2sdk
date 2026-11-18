@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about which characters can use an item.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(ItemRestrictionJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ItemRestriction
 {
     /// <summary>The race(s) that can use the item.</summary>

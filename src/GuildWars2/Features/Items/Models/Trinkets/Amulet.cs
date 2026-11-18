@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about an amulet.</summary>
-[JsonConverter(typeof(AmuletJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Amulet : Trinket;

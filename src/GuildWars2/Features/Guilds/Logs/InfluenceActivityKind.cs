@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The kinds of changes to guild influence.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(InfluenceActivityKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum InfluenceActivityKind
 {
     /// <summary>No specific activity or unknown activity.</summary>

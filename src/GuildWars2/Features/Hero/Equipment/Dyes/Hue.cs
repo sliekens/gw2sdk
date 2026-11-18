@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>The colors by which dyes are grouped.</summary>
 [DefaultValue(Unspecified)]
-[JsonConverter(typeof(HueJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum Hue
 {
     /// <summary>Dye remover.</summary>

@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>Information about an achievement category.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(AchievementCategoryJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record AchievementCategory
 {
     /// <summary>The achievement category ID.</summary>

@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>A reference to a skill.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(SkillReferenceJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record SkillReference
 {
     /// <summary>The skill ID.</summary>

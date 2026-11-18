@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Crafting;
 
 /// <summary>Information about a guild consumable or decoration ingredient required to craft a guild upgrade.</summary>
-[JsonConverter(typeof(GuildIngredientJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 [DataTransferObject]
 public sealed record GuildIngredient
 {

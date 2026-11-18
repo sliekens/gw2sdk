@@ -7,7 +7,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>Information about a dye color.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(DyeColorJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record DyeColor
 {
     /// <summary>The color ID of Dye Remover.</summary>

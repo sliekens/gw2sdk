@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Information about a coat skin.</summary>
-[JsonConverter(typeof(CoatSkinJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record CoatSkin : ArmorSkin;

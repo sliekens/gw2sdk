@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo finisher that is applied by a skill.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(ComboFinisherNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum ComboFinisherName
 {
     /// <summary>No specific combo finisher or unknown combo finisher.</summary>

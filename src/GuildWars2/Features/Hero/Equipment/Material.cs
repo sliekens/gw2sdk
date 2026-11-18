@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment;
 
 /// <summary>The material of an armor piece, which determines its appearance.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(MaterialJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum Material
 {
     /// <summary>No specific material or unknown material.</summary>

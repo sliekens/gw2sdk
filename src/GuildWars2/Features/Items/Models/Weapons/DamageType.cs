@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 /// <summary>The type of damage dealt by a weapon. It is a purely visual effect and does not affect the damage calculation.</summary>
 [DefaultValue(Physical)]
-[JsonConverter(typeof(DamageTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum DamageType
 {
     /// <summary>The default damage type of most weapons, which does not have a special visual effect.</summary>
