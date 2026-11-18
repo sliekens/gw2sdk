@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about items equipped on the character.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(CharacterEquipmentJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record CharacterEquipment
 {
     /// <summary>All the items equipped by the current character. This includes items from all equipment tabs, not just the

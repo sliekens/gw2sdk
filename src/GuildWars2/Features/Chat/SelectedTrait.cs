@@ -5,7 +5,7 @@ namespace GuildWars2.Chat;
 
 /// <summary>Represents a selected trait.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(SelectedTraitJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum SelectedTrait
 {
     // THE VALUES OF THIS ENUM ARE USED IN THE BINARY FORMAT OF THE LINK

@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>The playable races.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(RaceNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum RaceName
 {
     /// <summary>No specific race or unknown race.</summary>

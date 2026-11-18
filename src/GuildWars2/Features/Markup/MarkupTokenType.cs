@@ -5,7 +5,7 @@ namespace GuildWars2.Markup;
 
 /// <summary>Represents the different types of tokens that can be encountered in the markup processing.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(MarkupTokenTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum MarkupTokenType
 {
     /// <summary>No token type.</summary>

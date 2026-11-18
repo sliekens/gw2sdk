@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about a single item in the character's armory.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(EquipmentItemJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record EquipmentItem
 {
     /// <summary>The item ID.</summary>

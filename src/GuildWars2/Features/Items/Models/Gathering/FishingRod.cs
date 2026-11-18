@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a fishing rod, which is used for fishing activities.</summary>
-[JsonConverter(typeof(FishingRodJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record FishingRod : GatheringTool;

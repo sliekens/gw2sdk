@@ -6,7 +6,7 @@ namespace GuildWars2.Authorization;
 #pragma warning disable CA1711 // Identifiers should not have incorrect suffix
 
 /// <summary>Represents the permissions available for Guild Wars 2 authorization.</summary>
-[JsonConverter(typeof(PermissionJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 [DefaultValue(None)]
 public enum Permission
 {

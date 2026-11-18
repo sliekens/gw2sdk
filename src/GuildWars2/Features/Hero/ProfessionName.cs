@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>The playable professions.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(ProfessionNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum ProfessionName
 {
     /// <summary>No specific profession or unknown profession.</summary>

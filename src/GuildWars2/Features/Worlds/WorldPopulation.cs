@@ -5,7 +5,7 @@ namespace GuildWars2.Worlds;
 
 /// <summary>The population levels of a world in Guild Wars 2.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(WorldPopulationJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum WorldPopulation
 {
     /// <summary>No specific population level or unknown population level.</summary>

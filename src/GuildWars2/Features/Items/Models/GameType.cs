@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 /// <summary>The game types where items can be used.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(GameTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum GameType
 {
     /// <summary>No specific game type or unknown game type.</summary>

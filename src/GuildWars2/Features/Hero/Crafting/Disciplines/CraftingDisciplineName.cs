@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Crafting.Disciplines;
 
 /// <summary>The different crafting disciplines in the game.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(CraftingDisciplineNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum CraftingDisciplineName
 {
     /// <summary>No specific crafting discipline or unknown crafting discipline.</summary>

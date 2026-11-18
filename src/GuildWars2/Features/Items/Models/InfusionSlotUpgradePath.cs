@@ -4,7 +4,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about an upgraded item that gains an extra infusion slot.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(InfusionSlotUpgradePathJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record InfusionSlotUpgradePath
 {
     /// <summary>Indicates whether the item is infused or attuned in this upgrade step.</summary>

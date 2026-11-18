@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Novelties;
 
 /// <summary>The novelty kinds.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(NoveltyKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum NoveltyKind
 {
     /// <summary>No specific novelty kind or unknown novelty kind.</summary>

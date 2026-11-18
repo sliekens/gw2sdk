@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a rune, which is used to upgrade armor.</summary>
-[JsonConverter(typeof(RuneJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Rune : UpgradeComponent
 {
     /// <summary>The bonuses provided by this rune.</summary>

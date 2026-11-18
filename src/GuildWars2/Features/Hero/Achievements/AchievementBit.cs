@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Achievements;
 /// properties.</summary>
 [Inheritable]
 [DataTransferObject]
-[JsonConverter(typeof(AchievementBitJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record AchievementBit
 {
     /// <summary>Describes what the player needs to do to complete this bit. For example if it is an explorer achievement, this

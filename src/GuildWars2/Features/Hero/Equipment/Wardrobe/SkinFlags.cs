@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Equipment.Wardrobe;
 
 /// <summary>Modifiers for skins.</summary>
-[JsonConverter(typeof(SkinFlagsJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record SkinFlags : Flags
 {
     /// <summary>Whether the skin is hidden until it is unlocked.</summary>

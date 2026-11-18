@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a mount adoption or select license.</summary>
-[JsonConverter(typeof(MountLicenseJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record MountLicense : Consumable;

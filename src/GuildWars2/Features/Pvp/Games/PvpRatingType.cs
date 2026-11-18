@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Games;
 
 /// <summary>The PvP game rating types. Player skill is rated differently for each game type.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(PvpRatingTypeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum PvpRatingType
 {
     /// <summary>An unrated game.</summary>

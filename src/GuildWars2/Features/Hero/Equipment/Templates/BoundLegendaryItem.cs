@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about how many legendary items are stored in the legendary armory of the current account.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(BoundLegendaryItemJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record BoundLegendaryItem
 {
     /// <summary>The item id.</summary>

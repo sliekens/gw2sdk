@@ -6,7 +6,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about a transmutation consumable, which unlocks an equipment skin upon receipt. The item can be
 /// consumed to change the appearance of one item without costing a transmutation charge.</summary>
-[JsonConverter(typeof(TransmutationJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Transmutation : Consumable
 {
     /// <summary>The IDs of the equipment skins that are unlocked when this item is received.</summary>

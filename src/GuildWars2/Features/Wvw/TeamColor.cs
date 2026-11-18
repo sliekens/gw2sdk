@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw;
 
 /// <summary>The team colors in World vs. World.</summary>
 [DefaultValue(Neutral)]
-[JsonConverter(typeof(TeamColorJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum TeamColor
 {
     /// <summary>The neutral color (white) for objectives that are not controlled by any team.</summary>

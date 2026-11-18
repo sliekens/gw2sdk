@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.MailCarriers;
 
 /// <summary>Information about a mail carrier.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(MailCarrierJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record MailCarrier
 {
     /// <summary>The mail carrier ID.</summary>

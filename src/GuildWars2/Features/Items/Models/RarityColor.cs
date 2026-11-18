@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>The item rarity colors.</summary>
-[JsonConverter(typeof(RarityJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public static class RarityColor
 {
     /// <summary>Gray items.</summary>

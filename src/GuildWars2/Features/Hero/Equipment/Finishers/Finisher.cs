@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Finishers;
 
 /// <summary>Information about a finisher.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(FinisherJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Finisher
 {
     /// <summary>The finisher ID.</summary>

@@ -4,7 +4,7 @@ namespace GuildWars2.Items;
 
 /// <summary>Information about an effect applied by a consumable.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(EffectJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Effect
 {
     /// <summary>The name of the effect.</summary>

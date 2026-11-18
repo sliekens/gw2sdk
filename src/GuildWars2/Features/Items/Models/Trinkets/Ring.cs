@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a ring.</summary>
-[JsonConverter(typeof(RingJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Ring : Trinket, IInfused, IInfusable
 {
     /// <summary>If the current ring can be infused or attuned in the Mystic Forge, this collection contains the IDs of the

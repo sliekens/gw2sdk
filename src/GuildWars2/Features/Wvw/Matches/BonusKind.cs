@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Matches;
 
 /// <summary>The bonus kinds.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(BonusKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum BonusKind
 {
     /// <summary>No specific bonus or unknown bonus.</summary>

@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The guild upgrade actions.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(GuildUpgradeActionJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum GuildUpgradeAction
 {
     /// <summary>No specific action or unknown action.</summary>

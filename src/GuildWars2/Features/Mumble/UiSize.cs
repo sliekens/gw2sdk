@@ -5,7 +5,7 @@ namespace GuildWars2.Mumble;
 
 /// <summary>The user interface size choices provided by the game client.</summary>
 [DefaultValue(Small)]
-[JsonConverter(typeof(UiSizeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum UiSize
 {
     /// <summary>Smallest user interface size.</summary>

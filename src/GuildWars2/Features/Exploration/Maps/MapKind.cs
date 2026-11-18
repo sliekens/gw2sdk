@@ -5,7 +5,7 @@ namespace GuildWars2.Exploration.Maps;
 
 /// <summary>The kind of maps in Guild Wars 2.</summary>
 [DefaultValue(Unknown)]
-[JsonConverter(typeof(MapKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum MapKind
 {
     /// <summary>An unknown map kind.</summary>

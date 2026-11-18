@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a back item.</summary>
-[JsonConverter(typeof(BackItemRecipeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record BackItemRecipe : Recipe;

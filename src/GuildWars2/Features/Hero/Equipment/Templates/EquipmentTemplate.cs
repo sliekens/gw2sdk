@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>Information about an equipment tab on the character.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(EquipmentTemplateJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record EquipmentTemplate
 {
     /// <summary>The tab number of the current template.</summary>

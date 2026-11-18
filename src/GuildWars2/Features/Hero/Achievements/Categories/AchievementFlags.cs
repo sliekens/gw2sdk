@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Achievements.Categories;
 
 /// <summary>Modifiers for achievements.</summary>
-[JsonConverter(typeof(AchievementFlagsJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record AchievementFlags : Flags
 {
     /// <summary>No modifiers.</summary>

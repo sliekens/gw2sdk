@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a generic consumable.</summary>
-[JsonConverter(typeof(GenericConsumableJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record GenericConsumable : Consumable
 {
     /// <summary>The effect applied when the item is consumed.</summary>

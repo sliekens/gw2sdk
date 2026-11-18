@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Achievements;
 
 /// <summary>Modifiers for achievements.</summary>
-[JsonConverter(typeof(AchievementFlagsJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record AchievementFlags : Flags
 {
     /// <summary>The achievement is a meta-achievements like End of Dragons: Act 1 Mastery. This flag inherits the

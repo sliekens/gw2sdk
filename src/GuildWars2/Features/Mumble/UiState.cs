@@ -8,7 +8,7 @@ namespace GuildWars2.Mumble;
 /// <summary>The user interface states provided by the MumbleLink API as a flags enum.</summary>
 [Flags]
 [DefaultValue(None)]
-[JsonConverter(typeof(UiStateJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 [CLSCompliant(false)]
 public enum UiState : uint
 {

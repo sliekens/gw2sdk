@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Dyes;
 
 /// <summary>Information about how a dye color looks when applied to a material.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(ColorInfoJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record ColorInfo
 {
     /// <summary>The brightness of the color.</summary>

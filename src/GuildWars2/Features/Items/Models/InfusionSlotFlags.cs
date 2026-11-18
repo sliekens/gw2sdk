@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Modifiers for infusion slots.</summary>
-[JsonConverter(typeof(InfusionSlotFlagsJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record InfusionSlotFlags : Flags
 {
     /// <summary>Whether enchrichment can be used in the slot.</summary>

@@ -5,7 +5,7 @@ namespace GuildWars2.Guilds.Logs;
 
 /// <summary>The kinds of guild bank operations.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(GuildBankOperationKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum GuildBankOperationKind
 {
     /// <summary>No specific operation or unknown operation.</summary>

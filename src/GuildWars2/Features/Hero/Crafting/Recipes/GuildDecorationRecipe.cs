@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for crafting a guild decoration.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(GuildDecorationRecipeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record GuildDecorationRecipe : Recipe
 {
     /// <summary>The ingredients from guild storage required to craft the decoration.</summary>

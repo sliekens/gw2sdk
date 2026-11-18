@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Templates;
 
 /// <summary>The equipment slots in which an item can be equipped.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(EquipmentSlotJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum EquipmentSlot
 {
     /// <summary>No specific equipment slot or unknown equipment slot.</summary>

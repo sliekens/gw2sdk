@@ -6,7 +6,7 @@ namespace GuildWars2.Hero.Equipment.JadeBots;
 
 /// <summary>Information about a jade bot skin.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(JadeBotSkinJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record JadeBotSkin
 {
     /// <summary>The jade bot skin ID.</summary>

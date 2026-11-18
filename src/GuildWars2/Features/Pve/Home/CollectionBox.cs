@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Home;
 
 /// <summary>The homestead collection boxes.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(CollectionBoxJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum CollectionBox
 {
     /// <summary>No specific collection box or unknown collection box.</summary>

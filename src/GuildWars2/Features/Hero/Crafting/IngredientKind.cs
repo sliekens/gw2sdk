@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Crafting;
 
 /// <summary>The ingredient kinds used in crafting recipes.</summary>
 [DefaultValue(Item)]
-[JsonConverter(typeof(IngredientKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum IngredientKind
 {
     /// <summary>The ingredient is an item, for example planks.</summary>

@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Hero.Crafting.Recipes;
 
 /// <summary>Information about a recipe for cooking snacks.</summary>
-[JsonConverter(typeof(SnackRecipeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record SnackRecipe : Recipe;

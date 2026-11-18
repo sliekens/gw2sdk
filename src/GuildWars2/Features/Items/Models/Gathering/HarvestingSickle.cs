@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a harvesting sickle, which is used to harvest plant resource nodes to obtain ingredients.</summary>
-[JsonConverter(typeof(HarvestingSickleJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record HarvestingSickle : GatheringTool;

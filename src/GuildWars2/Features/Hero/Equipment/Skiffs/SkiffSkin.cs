@@ -4,7 +4,7 @@ namespace GuildWars2.Hero.Equipment.Skiffs;
 
 /// <summary>Information about a skiff skin.</summary>
 [DataTransferObject]
-[JsonConverter(typeof(SkiffSkinJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record SkiffSkin
 {
     /// <summary>The skiff skin ID.</summary>

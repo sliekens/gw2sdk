@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Builds.Facts;
 
 /// <summary>The combo field (area effect) that is created by a skill.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(ComboFieldNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum ComboFieldName
 {
     /// <summary>No specific combo field or unknown combo field.</summary>

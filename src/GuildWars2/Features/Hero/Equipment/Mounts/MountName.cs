@@ -5,7 +5,7 @@ namespace GuildWars2.Hero.Equipment.Mounts;
 
 /// <summary>The mount types.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(MountNameJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum MountName
 {
     /// <summary>No specific mount or unknown mount.</summary>

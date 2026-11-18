@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>The weight classes of armor.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(WeightClassJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum WeightClass
 {
     /// <summary>No specific weight class or unknown weight class.</summary>

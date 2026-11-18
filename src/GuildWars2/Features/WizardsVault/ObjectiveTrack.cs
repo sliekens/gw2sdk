@@ -5,7 +5,7 @@ namespace GuildWars2.WizardsVault;
 
 /// <summary>The Wizard's Vault objective tracks.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(ObjectiveTrackJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum ObjectiveTrack
 {
     /// <summary>No specific track or unknown track.</summary>

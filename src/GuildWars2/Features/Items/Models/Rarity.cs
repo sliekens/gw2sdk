@@ -5,7 +5,7 @@ namespace GuildWars2.Items;
 
 /// <summary>The item rarities.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(RarityJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum Rarity
 {
     /// <summary>No specific rarity or unknown rarity.</summary>

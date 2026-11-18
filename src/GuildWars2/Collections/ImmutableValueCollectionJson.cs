@@ -102,10 +102,9 @@ internal static class ImmutableValueCollectionJson
         }
 
         // A source-generated context does not walk into types that have a custom converter (such as these collections),
-        // so it may lack metadata for the element type. Consumers can add [JsonSerializable(typeof(T))] for most types,
-        // but not for SDK types whose [JsonConverter] is internal (e.g. Coin, Extensible<TEnum>): their generator rejects
-        // those with SYSLIB1220. Resolve the converter as System.Text.Json would: a converter registered in the options
-        // wins over the type's own [JsonConverter] attribute.
+        // so it may lack metadata for the element type. Resolve the converter as System.Text.Json would: a converter
+        // registered in the options wins over the type's own [JsonConverter] attribute. ModelJsonConverterFactory is
+        // the public type those attributes name, so a consumer context can include the element type directly.
         JsonConverter? converter = options.Converters.FirstOrDefault(static candidate => candidate.CanConvert(typeof(T)));
         if (converter is null && typeof(T).GetCustomAttribute<JsonConverterAttribute>(inherit: false) is { } attribute)
         {

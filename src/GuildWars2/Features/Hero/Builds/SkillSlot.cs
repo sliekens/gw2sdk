@@ -9,7 +9,7 @@ namespace GuildWars2.Hero.Builds;
 
 /// <summary>The skill slots for abilities which can be activated by the player.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(SkillSlotJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum SkillSlot
 {
     /// <summary>No specific skill slot or unknown skill slot.</summary>

@@ -7,7 +7,7 @@ namespace GuildWars2.Items;
 /// <summary>Information about an armor item. This type is the base type for all armor. Cast objects of this type to a more
 /// specific type to access more properties.</summary>
 [Inheritable]
-[JsonConverter(typeof(ArmorJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Armor : Item, ICombatEquipment, IUpgradable
 {
     /// <summary>The default skin ID for the armor. This skin can be unlocked in the wardrobe by binding the item.</summary>

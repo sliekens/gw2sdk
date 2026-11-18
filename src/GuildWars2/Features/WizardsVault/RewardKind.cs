@@ -5,7 +5,7 @@ namespace GuildWars2.WizardsVault;
 
 /// <summary>The kind of rewards available in the Wizard's Vault.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(RewardKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum RewardKind
 {
     /// <summary>No specific reward kind or unknown reward kind.</summary>

@@ -5,7 +5,7 @@ namespace GuildWars2.Pve.Raids;
 
 /// <summary>The kind of raid encounters.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(EncounterKindJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum EncounterKind
 {
     /// <summary>No specific encounter or unknown encounter.</summary>

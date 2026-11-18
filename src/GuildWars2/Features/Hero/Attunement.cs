@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>The attunement of an Elementalist.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(AttunementJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum Attunement
 {
     /// <summary>No specific attunement or unknown attunement.</summary>

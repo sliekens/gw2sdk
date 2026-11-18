@@ -5,7 +5,7 @@ namespace GuildWars2.Hero;
 
 /// <summary>Represents the types of item binding in Guild Wars 2.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(ItemBindingJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum ItemBinding
 {
     /// <summary>The item is not bound and can be traded with other players.</summary>

@@ -3,5 +3,5 @@ using System.Text.Json.Serialization;
 namespace GuildWars2.Items;
 
 /// <summary>Information about a fishing lure, which increases your fishing power.</summary>
-[JsonConverter(typeof(LureJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public sealed record Lure : GatheringTool;

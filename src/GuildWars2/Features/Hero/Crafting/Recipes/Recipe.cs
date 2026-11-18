@@ -9,7 +9,7 @@ namespace GuildWars2.Hero.Crafting.Recipes;
 /// to access more properties.</summary>
 [Inheritable]
 [DataTransferObject]
-[JsonConverter(typeof(RecipeJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public record Recipe
 {
     /// <summary>The recipe ID.</summary>

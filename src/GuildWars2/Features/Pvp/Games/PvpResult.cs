@@ -5,7 +5,7 @@ namespace GuildWars2.Pvp.Games;
 
 /// <summary>The result of a PvP match.</summary>
 [DefaultValue(None)]
-[JsonConverter(typeof(PvpResultJsonConverter))]
+[JsonConverter(typeof(GuildWars2.ModelJsonConverterFactory))]
 public enum PvpResult
 {
     /// <summary>No specific result or unknown result.</summary>
