@@ -184,11 +184,6 @@ public sealed class ModelJsonConverterFactoryGenerator : IIncrementalGenerator
                              return true;
                          }
 
-                         if (PolymorphicModelJson.CanConvert(typeToConvert))
-                         {
-                             return true;
-                         }
-
                  {{canConvert}}
                          return false;
                      }
@@ -201,11 +196,6 @@ public sealed class ModelJsonConverterFactoryGenerator : IIncrementalGenerator
                          {
                              return ExtensibleEnums.CreateConverter(typeToConvert, options)
                                  ?? throw new InvalidOperationException($"No JSON converter is registered for {typeToConvert}.");
-                         }
-
-                         if (PolymorphicModelJson.TryCreate(typeToConvert) is { } polymorphic)
-                         {
-                             return polymorphic;
                          }
 
                  {{create}}
