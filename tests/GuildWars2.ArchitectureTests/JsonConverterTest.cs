@@ -50,10 +50,13 @@ public class JsonConverterTest(AssemblyFixture fixture)
                 await Assert.That(factory.CanConvert(type)).IsTrue().Because(type.ToString());
                 JsonConverter created = factory.CreateConverter(type, options);
                 await Assert.That(created is JsonConverterFactory).IsFalse().Because(type.ToString());
+                await Assert.That(created.CanConvert(type)).IsTrue().Because(type.ToString());
             }
 
             await Assert.That(factory.CanConvert(typeof(Extensible<WeaponType>))).IsTrue();
-            await Assert.That(factory.CreateConverter(typeof(Extensible<WeaponType>), options) is JsonConverterFactory).IsFalse();
+            JsonConverter extensible = factory.CreateConverter(typeof(Extensible<WeaponType>), options);
+            await Assert.That(extensible is JsonConverterFactory).IsFalse();
+            await Assert.That(extensible.CanConvert(typeof(Extensible<WeaponType>))).IsTrue();
         }
     }
 }

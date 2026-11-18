@@ -140,25 +140,6 @@ public sealed class ModelJsonConverterFactoryGenerator : IIncrementalGenerator
     {
         StringBuilder canConvert = new();
         StringBuilder create = new();
-        // RarityColor is a static palette. Its attribute uses the Rarity enum converter, so it is not a JsonConverter<RarityColor>.
-        canConvert.AppendLine(
-            """
-                        if (typeToConvert == typeof(global::GuildWars2.Items.RarityColor))
-                        {
-                            return true;
-                        }
-
-            """
-        );
-        create.AppendLine(
-            """
-                        if (typeToConvert == typeof(global::GuildWars2.Items.RarityColor))
-                        {
-                            return new global::GuildWars2.Items.RarityJsonConverter();
-                        }
-
-            """
-        );
         foreach (KeyValuePair<string, string> entry in converters.OrderBy(static pair => pair.Key, StringComparer.Ordinal))
         {
             canConvert.AppendLine(
